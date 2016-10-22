@@ -1,5 +1,4 @@
 #pragma once
-<<<<<<< HEAD
 #include <vector>
 #include <iostream>
 #include <fstream>
@@ -10,13 +9,8 @@
 #include <Windows.h>
 #include <algorithm>
 #include "Utilities.h"
-=======
-
 #include "User.h"
-#include <vector>
-#include <fstream>
 
->>>>>>> origin/master
 using namespace std;
 
 class Agency
@@ -32,8 +26,14 @@ public:
 	Agency();
 	~Agency();
 
-<<<<<<< HEAD
-=======
+	static Agency* instance()
+	{
+		if (!singleton_instance)
+			singleton_instance = new Agency;
+
+		return singleton_instance;
+	}
+
 	static unsigned int getLastID();		//function that return the lastID of the agency and increments it by 1
 
 	void imprimeUsers();					//function that uses the Users class' operator<< method to
@@ -48,15 +48,6 @@ public:
 	static double getFee() { return maintenaceFee; }
 
 	static void changeFee(double newValue) { maintenaceFee = newValue; }
->>>>>>> origin/master
-
-	static Agency* instance()
-	{
-		if (!singleton_instance)
-			singleton_instance = new Agency;
-
-		return singleton_instance;
-	}
 
 };
 
