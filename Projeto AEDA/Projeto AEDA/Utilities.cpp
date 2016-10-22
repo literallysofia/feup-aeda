@@ -26,6 +26,8 @@ void Utilities::setcolor(int ForgC)
 	return;
 }
 
+
+
 void Utilities::clearScreen() {
 
 	HANDLE                     hStdOut;
@@ -61,5 +63,25 @@ void Utilities::clearScreen() {
 
 	/* Move the cursor home */
 	SetConsoleCursorPosition(hStdOut, homeCoords);
+}
+
+void Utilities::white()
+{
+	setcolor(15);
+}
+
+void Utilities::blue()
+{
+	setcolor(3);
+}
+
+void Utilities::grey()
+{
+	setcolor(7);
+}
+
+void Utilities::red()
+{
+	setcolor(4);
 }
 

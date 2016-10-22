@@ -18,22 +18,76 @@ const HWND hDesktop = GetDesktopWindow();
 HANDLE screen = GetStdHandle(STD_OUTPUT_HANDLE);
 COORD max_size = GetLargestConsoleWindowSize(screen);
 
+
+int welcomeMenu() {
+
+	//Menu - Welcome
+	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
+		<< "|~~~                      "; u.blue(); cout << "ShareIt"; u.white(); cout << "                      ~~~| " << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
+		<< "|                       ";  u.grey(); cout << "::WELCOME::";  u.white(); cout << "                       |" << endl;
+	u.blue(); cout << "-----------------------------------------------------------" << endl;
+	u.grey(); cout << "   Choose one of the following options:\n\n";
+	u.white(); cout << setw(36) << "1. Register\n" << setw(33) << "2. Login\n" << setw(33) << "3. Guest\n";
+	u.blue(); cout << "-----------------------------------------------------------" << endl;  u.white();
+	cout << "|~~~                                ";  u.grey(); cout << "< 0. Close >";  u.white(); cout << "       ~~~|" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl << endl;
+
+	unsigned short int choice;
+	cout << "Type your choice: ";
+	cin >> choice;
+
+	while (cin.fail() || (choice > 3) || (choice < 0))
+	{
+		if (cin.eof())
+		{
+			cin.clear();
+			return 0;
+		}
+
+		cin.clear();
+		cin.ignore(1000, '\n');
+		u.red(); cout << "> Digito invalido!" << endl;
+		u.white(); cout << "Volte a indicar escolha: ";
+		cin >> choice;
+	}
+	return choice;
+}
+
+
+void optionsWelcomeMenu()
+{
+	unsigned short int choice;
+
+	while (choice = welcomeMenu())
+		switch (choice)
+		{
+		case 1:
+			Agency::instance()->registerUser();
+			//TODO register link
+			break;
+		case 2:
+			Agency::instance()->loginUser();
+			//TODO login link
+			break;
+		case 3:
+			//TODO guest link
+			break;
+		case 0:
+			Sleep(5000);
+			exit(0);
+			break;
+		}
+}
+
 int main()
 {
 	//Janela//
 	HWND consoleWindow = GetConsoleWindow();
 	SetWindowPos(consoleWindow, 0, 310, 150, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
 
-	//Menu - Welcome
-	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
-		<< "|~~~                      "; u.setcolor(3); cout << "ShareIt"; u.setcolor(15); cout << "                      ~~~| " << endl
-		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
-		<< "|                        ";  u.setcolor(7); cout << "WELCOME !";  u.setcolor(15); cout << "                        |" << endl;
-	u.setcolor(3); cout << "-----------------------------------------------------------" << endl;
-	u.setcolor(15); cout << setw(52) << "Would you like to get in as User or Guest?\n\n";
-	u.setcolor(7); cout << setw(13) << "Exemplo: ";  u.setcolor(15); cout << "     NOMEDOFICHEIRO.txt" << endl;
-	u.setcolor(3);  cout << "-----------------------------------------------------------" << endl;
-	u.setcolor(15);
+	optionsWelcomeMenu();
+
 
 	return 0;
 }

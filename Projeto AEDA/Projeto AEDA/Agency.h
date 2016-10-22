@@ -18,7 +18,7 @@ class Agency
 private:
 	static Agency* singleton_instance;
 	static unsigned int lastID;			//last ID attributed to a User
-	vector<User *> users;				//vector including all the registred Users of the agency
+	//vector<User *> users;				//vector including all the registred Users of the agency
 	//vector<Trip *> trips;
 	//vector<Transaction>
 	static double maintenaceFee;
@@ -33,6 +33,13 @@ public:
 
 		return singleton_instance;
 	}
+
+	//Menu's
+
+	void registerUser();
+	void loginUser();
+
+	//Functions
 
 	static unsigned int getLastID();		//function that return the lastID of the agency and increments it by 1
 
