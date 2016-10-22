@@ -2,8 +2,8 @@
 
 
 
-User::User()
-{
+User::User(string name, string password) : name(name), ID(Agency::getLastID()){
+	this->password = password;
 }
 
 
