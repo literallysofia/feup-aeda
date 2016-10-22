@@ -1,8 +1,18 @@
 #pragma once
+
+#include "Agency.h"
+#include <string>
+
 class User
 {
+	const string name;
+	const unsigned int ID;
+	string password;
+	vector <User *> buddies;
+
 public:
-	User();
+	User(string name, string password);
 	~User();
+	void addBuddy(User * user) { buddies.push_back(user); }
 };
 
