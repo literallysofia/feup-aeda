@@ -34,6 +34,13 @@ public:
 		return singleton_instance;
 	}
 
+	//Menu's
+
+	void registerUser();
+	void loginUser();
+
+	//Functions
+
 	static unsigned int getLastID();		//function that return the lastID of the agency and increments it by 1
 
 	void imprimeUsers();					//function that uses the Users class' operator<< method to

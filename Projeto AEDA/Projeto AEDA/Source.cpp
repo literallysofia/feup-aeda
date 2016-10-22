@@ -34,7 +34,7 @@ int welcomeMenu() {
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl << endl;
 
 	unsigned short int choice;
-	cout << "Insira a sua escolha: ";
+	cout << "Type your choice: ";
 	cin >> choice;
 
 	while (cin.fail() || (choice > 3) || (choice < 0))
@@ -63,9 +63,11 @@ void optionsWelcomeMenu()
 		switch (choice)
 		{
 		case 1:
+			Agency::instance()->registerUser();
 			//TODO register link
 			break;
 		case 2:
+			Agency::instance()->loginUser();
 			//TODO login link
 			break;
 		case 3:
@@ -84,7 +86,7 @@ int main()
 	HWND consoleWindow = GetConsoleWindow();
 	SetWindowPos(consoleWindow, 0, 310, 150, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
 
-	welcomeMenu();
+	optionsWelcomeMenu();
 
 
 	return 0;
