@@ -1,4 +1,16 @@
 #pragma once
+#include <vector>
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <vector>
+#include <iomanip>
+#include <map>
+#include <Windows.h>
+#include <algorithm>
+#include "Utilities.h"
+using namespace std;
+
 class Agency
 {
 private:
@@ -6,6 +18,7 @@ private:
 public:
 	Agency();
 	~Agency();
+
 
 	static Agency* instance()
 	{
@@ -16,4 +29,5 @@ public:
 	}
 
 };
+
 
