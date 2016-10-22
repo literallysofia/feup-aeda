@@ -2,11 +2,11 @@
 
 
 
-Passenger::Passenger()
+/*Passenger::Passenger()
 {
 }
 
 
 Passenger::~Passenger()
 {
-}
+}*/

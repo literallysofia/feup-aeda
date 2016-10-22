@@ -3,6 +3,8 @@
 #include "Agency.h"
 #include <string>
 
+using namespace std;
+
 class User
 {
 	const string name;

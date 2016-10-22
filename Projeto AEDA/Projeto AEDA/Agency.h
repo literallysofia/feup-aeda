@@ -18,7 +18,7 @@ class Agency
 private:
 	static Agency* singleton_instance;
 	static unsigned int lastID;			//last ID attributed to a User
-	vector<User *> users;				//vector including all the registred Users of the agency
+	//vector<User *> users;				//vector including all the registred Users of the agency
 	//vector<Trip *> trips;
 	//vector<Transaction>
 	static double maintenaceFee;
