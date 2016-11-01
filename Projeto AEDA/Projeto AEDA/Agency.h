@@ -21,7 +21,7 @@ private:
 	//vector<User *> users;				//vector including all the registred Users of the agency
 	//vector<Trip *> trips;
 	//vector<Transaction>
-	static double maintenaceFee;
+	static float maintenaceFee;
 public:
 	Agency();
 	~Agency();
@@ -52,9 +52,11 @@ public:
 
 	void readTrips(std::ifstream & infile);
 
-	static double getFee() { return maintenaceFee; }
+	static float getFee() { return maintenaceFee; }
 
-	static void changeFee(double newValue) { maintenaceFee = newValue; }
+	static void changeFee(float newValue) { maintenaceFee = newValue; }
+
+	float endMonth();
 
 };
 

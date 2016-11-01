@@ -58,3 +58,21 @@ unsigned int Agency::getLastID() {
 	lastID++;
 	return toBeReturned;
 }
+
+/*
+//retorna o total do mes 
+float Agency::endMonth() {
+
+	typename vector<User *>::iterator it;
+	float totalMonth = 0;
+
+	for (it = users.begin(); it != users.end(); it++) {
+
+			totalMonth += (*it)->payment();
+			(*it)->resetTrips();   //só tem efeito nos passenger
+		
+	}
+
+	return totalMonth;
+}
+*/
