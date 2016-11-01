@@ -2,7 +2,7 @@
 
 
 
-User::User(string name, string password) : name(name), ID(Agency::getLastID()){
+User::User(string name, string password): ID(Agency::getLastID()), name(name) {
 	this->password = password;
 }
 

@@ -1,13 +1,9 @@
 #include "Driver.h"
 
-
-
-/*Driver::Driver()
-{
-}
+Driver::Driver(string name, string password): User(name, password) {}
 
 
 Driver::~Driver()
 {
 }
-*/
+
