@@ -16,15 +16,29 @@ Agency::~Agency()
 void Agency::registerUser()
 {
 	ut.clearScreen();
-	string name, password;
+	string type, name, password;
 
 	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
 		<< "|~~~                      "; ut.blue(); cout << "ShareIt"; ut.white(); cout << "                      ~~~| " << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
 		<< "|                      ";  ut.grey(); cout << "Create Account";  ut.white(); cout << "                     |" << endl;
-	ut.blue(); cout << "-----------------------------------------------------------" << endl;
-	ut.grey(); cout << "       > Enter name: "; ut.white(); cin >> name; cout << endl;
-	ut.grey(); cout << "       > Enter password: "; ut.white();  cin >> password; cout << endl;
+	ut.blue(); cout << "-----------------------------------------------------------" << endl; ut.white();
+	cout << "    Types of accounts:\n      - Driver: You need to register your car and host\n      trips. You'll also earn some money.\n      - Passenger: You can only join existing trips.\n\n";
+	ut.grey(); cout << "  > Do you want to register as a Driver? (y/n) "; ut.white(); cin >> type;  cout << endl;
+	ut.grey(); cout << "  > Enter name: "; ut.white(); cin.ignore(); getline(cin, name); cout << endl;
+	ut.grey(); cout << "  > Enter password: "; ut.white();  cin >> password; cout << endl;
+
+	if ((type == "y") || (type == "Y"))
+		//addUser(true, name, password);
+		cout << "ok";
+	else {
+		if ((type == "n") || (type == "N"))
+			//addUser(false, name, password);
+			cout << "okk";
+		else return; //TODO nao pode ser assim lmao
+	}
+
+	//TODO melhorar esta shit
 
 	//TODO adicionar utilizador
 	//TODO sucesso ou nao
@@ -42,23 +56,32 @@ void Agency::loginUser()
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
 		<< "|                          ";  ut.grey(); cout << "Login";  ut.white(); cout << "                          |" << endl;
 	ut.blue(); cout << "-----------------------------------------------------------" << endl;
-	ut.grey(); cout << "       > Enter id or name: "; ut.white(); cin >> output; cout << endl;
+	ut.grey(); cout << "       > Enter id or name: "; ut.white(); cin.ignore(); getline(cin, output); cout << endl;
 	ut.grey(); cout << "       > Enter password: "; ut.white();  cin >> password; cout << endl;
 
 	if (output == "admin")
 		optionsMainMenu_Admin();
-
-	/*if (t.outputName(output))
-	id = stoi(output, nullptr, 10);  //se a opcao for o ID passa de string para int
 	else {
-	if (output == "admin")
-	optionsMainMenu_Admin();
-	/*else {
-	if (validUser(output))
-	//TODO chamar funcao de opcoes do menu inicial de user
-	else //TODO throw a excecao caso o user nao exista??? maybe? ou dar outra oportunidade?
-	}*/
-	//}
+		if (t.outputName(output)) { // se é uma string
+			if (validUser(output) && validPassword(password)) {
+				this->sessionID = findID(output);
+				this->sessionPos = getPos(sessionID);
+				optionsMainMenu_User();
+			}
+			else return;
+		}
+		else {
+			id = stoi(output, nullptr, 10);
+			if (getPos(id) == -1)
+				return; //nao existe woops
+			else {
+				this->sessionID = id;
+				this->sessionPos = getPos(sessionID);
+				optionsMainMenu_User();
+			}
+		}
+	}
+
 	//TODO verificar se existe 
 	//TODO admin ou nao
 	//TODO abrir menu principal
@@ -85,7 +108,7 @@ int Agency::mainMenu_Admin() {
 	cout << "Type your choice: ";
 	cin >> option;
 
-	while (cin.fail() || (option > 6))
+	while (cin.fail() || (option > 6) || (option < 0))
 	{
 		if (cin.eof())
 		{
@@ -94,19 +117,16 @@ int Agency::mainMenu_Admin() {
 		}
 		cin.clear();
 		cin.ignore(1000, '\n');
-		ut.setcolor(4); cout << "> Invalid choice!" << endl;
-		ut.setcolor(15); cout << "Please try again: ";
+		ut.red(); cout << "> Invalid choice!" << endl;
+		ut.white(); cout << "Please try again: ";
 		cin >> option;
 	}
 
-	if ((option >= 0) && (option <= 6))
-	{
-		if (option == 0)
-			//TODO logout();
-			exit(0);
-		return option;
-	}
-	return 0;
+
+	if (option == 0)
+		//TODO logout();
+		exit(0);
+	return option;
 }
 
 void Agency::optionsMainMenu_Admin() {
@@ -134,6 +154,78 @@ void Agency::optionsMainMenu_Admin() {
 			break;
 		}
 	return;
+}
+
+/* MENUS USER */
+
+int Agency::mainMenu_User() {
+
+	ut.clearScreen();
+	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
+		<< "|~~~                      "; ut.blue(); cout << "ShareIt"; ut.white(); cout << "                      ~~~| " << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
+		<< "|~~~                   ";  ut.grey(); cout << "MAIN MENU";  ut.white(); cout << "                  ~~~|" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+	ut.grey(); cout << setw(30) << "You are logged in as: "; ut.white(); cout << Users.at(getPos(sessionID))->getName() << endl;
+	ut.blue(); cout << "-----------------------------------------------------------" << endl; ut.white();
+
+	cout << setw(18) << "1. Account" << setw(30) << "3. Add Buddy" << endl;
+
+	if (Users.at(sessionPos)->car()) { //caso seja driver
+		cout << setw(22) << "2. Create Trip" << setw(24) << "4. Add Car" << endl;
+	}
+	else { // caso seja passenger
+		cout << setw(20) << "2. Join Trip" << setw(28) << "4. smth else" << endl;
+	}
+
+	ut.blue(); cout << "-----------------------------------------------------------" << endl;  ut.white();
+	cout << "|~~~                                ";  ut.grey(); cout << "< 0. Logout >";  ut.white(); cout << "       ~~~|" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl << endl;
+
+	unsigned short int option;
+	cout << "Type your choice: ";
+	cin >> option;
+
+	while (cin.fail() || (option > 4) || (option < 0))
+	{
+		if (cin.eof())
+		{
+			cin.clear();
+			return 0;
+		}
+		cin.clear();
+		cin.ignore(1000, '\n');
+		ut.red(); cout << "> Invalid choice!" << endl;
+		ut.white(); cout << "Please try again: ";
+		cin >> option;
+	}
+
+	//if (option == 0)
+		//TODO logout
+	return option;
+
+}
+
+void Agency::optionsMainMenu_User() {
+
+	unsigned short int option;
+
+	while (option = mainMenu_User())
+		switch (option)
+		{
+		case 1:
+			//TODO mostrar conta do user
+			break;
+		case 2:
+			//TODO se tem carro, criar trip, se nao tem, nao pode, volta atras
+			break;
+		case 3:
+			//TODO quem tem carro pode fazer join?
+			break;
+		case 4:
+			//TODO add buddy
+			break;
+		}
 }
 
 
@@ -281,6 +373,31 @@ bool Agency::validUser(string name) {
 	}
 	return false;
 }
+
+bool Agency::validPassword(string password) {
+	for (unsigned int i = 0; i < Users.size(); i++) {
+		if (password == Users.at(i)->getPassword())
+			return true;
+	}
+	return false;
+}
+
+int Agency::findID(string name) {
+	for (unsigned int i = 0; i < Users.size(); i++) {
+		if (name == Users.at(i)->getName())
+			return Users.at(i)->getID();
+	}
+	return -1;
+}
+
+int Agency::getPos(int id) {
+	for (unsigned int i = 0; i < Users.size(); i++) {
+		if (id == Users.at(i)->getID())
+			return i;
+	}
+	return -1;
+}
+
 vector<User *> Agency::getUsers() {
 	return Users;
 }

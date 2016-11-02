@@ -21,6 +21,8 @@ class Agency
 private:
 	static Agency* singleton_instance;
 
+	int sessionID;
+	int sessionPos;
 	//Global Vectors
 	vector<User *> Users;
 	vector<Trip> Trips;
@@ -54,6 +56,9 @@ public:
 	int mainMenu_Admin();
 	void optionsMainMenu_Admin();
 
+	int mainMenu_User();
+	void optionsMainMenu_User();
+
 	//Ficheiros
 	void extrairUsers();
 	void escreverUsers();
@@ -63,6 +68,9 @@ public:
 	//Functions
 
 	bool validUser(string name);
+	bool validPassword(string password);
+	int findID(string name);
+	int getPos(int id);
 	vector<User *> getUsers();
 	void addUsers(User* u);
 

@@ -37,6 +37,9 @@
     <ClInclude Include="User.h" />
     <ClInclude Include="Utilities.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="Users.txt" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F8A05EB7-9F4C-44EC-B9AD-4C55343CA238}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
