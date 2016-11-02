@@ -54,8 +54,17 @@ public:
 	int mainMenu_Admin();
 	void optionsMainMenu_Admin();
 
+	//Ficheiros
+	void extrairUsers();
+	void escreverUsers();
+	void extrairBuddies();
+	void escreverBuddies();
+
 	//Functions
+
 	bool validUser(string name);
+	vector<User *> getUsers();
+	void addUsers(User* u);
 
 	/*void imprimeUsers();					//function that uses the Users class' operator<< method to
 	//print all agency's users to screen
