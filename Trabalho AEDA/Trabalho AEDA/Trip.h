@@ -8,22 +8,21 @@ using namespace std;
 class Trip
 {
 private:
-	string driver;
+	int driver;
 	vector<string> stops;
 	vector<int> passengers;
-	int availableSeats; //TODO tipos de veiculos? nao sei quandos lugares ha e afins
 						//bool active;
 						//Date startTime;
 						//Date endTime;
 public:
 	Trip();
 	~Trip();
-	Trip(string driver, vector<string> stops);
-	int getPrice() const;
+	Trip(int driver, vector<string> stops);
+	int getDriver() const;
 	vector<string> getStops() const;
 	string getOrigin() const;
 	string getDestination() const;
-	int getAvailableSeats() const;
+	int getPrice() const;
 	//void setAvailableSeats() const;
 
 	//bool getActive();

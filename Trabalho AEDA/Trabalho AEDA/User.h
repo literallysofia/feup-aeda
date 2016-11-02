@@ -37,7 +37,6 @@ private:
 public:
 	Driver(int ID, string name, string password);
 	int getNumSeats() const;		//apenas retorna o numero de lugares dados pelo utilizador,
-									//a sua atualizaçao será feita apenas na struct Trip ao longo da viagem
 	Trip getCurrentTrip() const;		//retorna um objeto da classe Trip
 	void payment();
 	bool car() const ;
