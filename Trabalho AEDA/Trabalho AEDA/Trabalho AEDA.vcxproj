@@ -22,6 +22,7 @@
     <ClCompile Include="Agency.cpp" />
     <ClCompile Include="Guest.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="Stop.cpp" />
     <ClCompile Include="Tools.cpp" />
     <ClCompile Include="Trip.cpp" />
     <ClCompile Include="User.cpp" />
@@ -30,6 +31,7 @@
   <ItemGroup>
     <ClInclude Include="Agency.h" />
     <ClInclude Include="Guest.h" />
+    <ClInclude Include="Stop.h" />
     <ClInclude Include="Tools.h" />
     <ClInclude Include="Trip.h" />
     <ClInclude Include="User.h" />
