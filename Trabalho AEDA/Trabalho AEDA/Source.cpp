@@ -48,8 +48,8 @@ int welcomeMenu() {
 
 		cin.clear();
 		cin.ignore(1000, '\n');
-		u.red(); cout << "> Digito invalido!" << endl;
-		u.white(); cout << "Volte a indicar escolha: ";
+		u.red(); cout << "> Invalid choice!" << endl;
+		u.white(); cout << "Please try again: ";
 		cin >> choice;
 	}
 	return choice;
@@ -64,7 +64,7 @@ void optionsWelcomeMenu()
 		switch (choice)
 		{
 		case 1:
-			//Agency::instance()->registerUser();
+			Agency::instance()->registerUser();
 			//TODO register link
 			break;
 		case 2:
@@ -88,8 +88,11 @@ int main()
 	HWND consoleWindow = GetConsoleWindow();
 	SetWindowPos(consoleWindow, 0, 310, 150, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
 
+	Agency::instance()->extrairUsers();
+
 	optionsWelcomeMenu();
 	
+
 	/*
 	//testar funçoes ficheiros
 
