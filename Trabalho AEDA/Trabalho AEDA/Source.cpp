@@ -83,14 +83,14 @@ void optionsWelcomeMenu()
 
 int main()
 {
-	/*
+	
 	//Janela//
 	HWND consoleWindow = GetConsoleWindow();
 	SetWindowPos(consoleWindow, 0, 310, 150, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
 
 	optionsWelcomeMenu();
-	*/
-
+	
+	/*
 	//testar funçoes ficheiros
 
 	Agency::instance()->extrairUsers();
@@ -106,8 +106,8 @@ int main()
 	User *p2 = new Passenger(3, "test" , "test3");
 	Agency::instance()->addUsers(p2);
 	Agency::instance()->escreverUsers();
-		
-	
 
+	*/
+		
 	return 0;
 }

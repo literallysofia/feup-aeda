@@ -138,7 +138,7 @@ void Agency::optionsMainMenu_Admin() {
 
 
 /*FICHEIROS*/
-//TODO: veiculos disponiveis (lugares disponíveis;itinerário) & historico de viagens(nome do utilizador;proprietário da viatura;ponto de origem;ponto de destino;hora de início;hora de fim;dia)
+//TODO: veiculos disponiveis (id driver;lugares disponíveis;itinerário) & historico de viagens(nome do utilizador;proprietário da viatura;ponto de origem;ponto de destino;hora de início;hora de fim;dia)
 
 //users (id;nome;carro;pass) 
 void Agency::extrairUsers()
