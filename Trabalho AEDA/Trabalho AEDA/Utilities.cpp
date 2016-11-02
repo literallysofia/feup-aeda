@@ -1,9 +1,9 @@
 #include "Utilities.h"
-#include <Windows.h>
 
 Utilities::Utilities()
 {
 }
+
 
 Utilities::~Utilities()
 {
@@ -25,6 +25,8 @@ void Utilities::setcolor(int ForgC)
 	}
 	return;
 }
+
+
 
 void Utilities::clearScreen() {
 
@@ -63,3 +65,22 @@ void Utilities::clearScreen() {
 	SetConsoleCursorPosition(hStdOut, homeCoords);
 }
 
+void Utilities::white()
+{
+	setcolor(15);
+}
+
+void Utilities::blue()
+{
+	setcolor(3);
+}
+
+void Utilities::grey()
+{
+	setcolor(7);
+}
+
+void Utilities::red()
+{
+	setcolor(4);
+}

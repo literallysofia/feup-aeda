@@ -18,10 +18,27 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Agency.cpp" />
+    <ClCompile Include="Guest.cpp" />
+    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="Tools.cpp" />
+    <ClCompile Include="Trip.cpp" />
+    <ClCompile Include="User.cpp" />
+    <ClCompile Include="Utilities.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Agency.h" />
+    <ClInclude Include="Guest.h" />
+    <ClInclude Include="Tools.h" />
+    <ClInclude Include="Trip.h" />
+    <ClInclude Include="User.h" />
+    <ClInclude Include="Utilities.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{4514261E-4F75-4A1B-B774-775B28E904A4}</ProjectGuid>
+    <ProjectGuid>{F8A05EB7-9F4C-44EC-B9AD-4C55343CA238}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>ProjetoAEDA</RootNamespace>
+    <RootNamespace>TrabalhoAEDA</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -145,26 +162,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="Agency.cpp" />
-    <ClCompile Include="Driver.cpp" />
-    <ClCompile Include="Guest.cpp" />
-    <ClCompile Include="Passenger.cpp" />
-    <ClCompile Include="Source.cpp" />
-    <ClCompile Include="User.cpp" />
-    <ClCompile Include="Utilities.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Agency.h" />
-    <ClInclude Include="Driver.h" />
-    <ClInclude Include="Guest.h" />
-    <ClInclude Include="Passenger.h" />
-    <ClInclude Include="User.h" />
-    <ClInclude Include="Utilities.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="Users.txt" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
