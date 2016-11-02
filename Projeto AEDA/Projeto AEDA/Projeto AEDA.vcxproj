@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{4514261E-4F75-4A1B-B774-775B28E904A4}</ProjectGuid>
+    <ProjectGuid>{8ABD38C5-9B95-40A7-98F7-77FE7DFF28F2}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>ProjetoAEDA</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
@@ -146,24 +146,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Agency.cpp" />
-    <ClCompile Include="Driver.cpp" />
-    <ClCompile Include="Guest.cpp" />
-    <ClCompile Include="Passenger.cpp" />
-    <ClCompile Include="Source.cpp" />
-    <ClCompile Include="User.cpp" />
-    <ClCompile Include="Utilities.cpp" />
+    <ClInclude Include="..\..\..\..\..\Desktop\AEDA try\AEDA try\Agency.h" />
+    <ClInclude Include="..\..\..\..\..\Desktop\AEDA try\AEDA try\Guest.h" />
+    <ClInclude Include="..\..\..\..\..\Desktop\AEDA try\AEDA try\Tools.h" />
+    <ClInclude Include="..\..\..\..\..\Desktop\AEDA try\AEDA try\Trip.h" />
+    <ClInclude Include="..\..\..\..\..\Desktop\AEDA try\AEDA try\User.h" />
+    <ClInclude Include="..\..\..\..\..\Desktop\AEDA try\AEDA try\Utilities.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Agency.h" />
-    <ClInclude Include="Driver.h" />
-    <ClInclude Include="Guest.h" />
-    <ClInclude Include="Passenger.h" />
-    <ClInclude Include="User.h" />
-    <ClInclude Include="Utilities.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="Users.txt" />
+    <ClCompile Include="..\..\..\..\..\Desktop\AEDA try\AEDA try\Agency.cpp" />
+    <ClCompile Include="..\..\..\..\..\Desktop\AEDA try\AEDA try\Guest.cpp" />
+    <ClCompile Include="..\..\..\..\..\Desktop\AEDA try\AEDA try\Source.cpp" />
+    <ClCompile Include="..\..\..\..\..\Desktop\AEDA try\AEDA try\Tools.cpp" />
+    <ClCompile Include="..\..\..\..\..\Desktop\AEDA try\AEDA try\Trip.cpp" />
+    <ClCompile Include="..\..\..\..\..\Desktop\AEDA try\AEDA try\User.cpp" />
+    <ClCompile Include="..\..\..\..\..\Desktop\AEDA try\AEDA try\Utilities.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
