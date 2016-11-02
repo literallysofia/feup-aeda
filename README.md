@@ -6,13 +6,13 @@ AEDA1617_2MIEIC1_E
 
 Requisitos Obrigatórios:
 ------------------------
-- [x] Visualização dos Users
-- [x] Visualização do histórico de viagens
-- [x] Ficheiro: Users
-- [x] Ficheiro: Relationships ("buddies")
-- [x] Ficheiro: Trip Record (histórico de viagens realizadas)
+- [ ] Visualização dos Users
+- [ ] Visualização do histórico de viagens
+- [ ] Ficheiro: Users
+- [ ] Ficheiro: Relationships ("buddies")
+- [ ] Ficheiro: Trip Record (histórico de viagens realizadas)
 - [ ] Associar buddies
-
+...
 
 
 File Syntax
