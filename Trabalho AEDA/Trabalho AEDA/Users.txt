@@ -1,0 +1,4 @@
+1;Julieta Frade;1;julieta1
+2;Sofia Silva;0;sofia2
+3;test;0;test3
+3;test;0;test3

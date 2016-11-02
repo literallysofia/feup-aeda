@@ -50,7 +50,7 @@ void Driver::payment()
 	balance -= maintenanceFee;
 }
 
-bool Driver::car()
+bool Driver::car() const
 {
 	return true;
 }
@@ -86,7 +86,7 @@ void Passenger::payment()
 	balance -= (maintenanceFee + numTrips); //TODO metodo de pagamento estupido
 }
 
-bool Passenger::car()
+bool Passenger::car() const
 {
 	return false;
 }

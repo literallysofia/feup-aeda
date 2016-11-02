@@ -8,13 +8,13 @@ using namespace std;
 class User
 {
 protected:
-	const int ID;
+	int ID;
 	const string name;
 	string password;
 	float balance; //saldo disponivel na conta
 	static int maintenanceFee;
 	//vector <User *> buddies;
-	virtual bool car() { return false; };
+	
 public:
 	User(int ID, string name, string password);
 	~User();
@@ -23,7 +23,7 @@ public:
 	string getPassword() const;
 	void deposit(float value);
 	virtual void payment() { return; };
-
+	virtual bool car() const = 0;
 	//void addBuddy(User * user) { buddies.push_back(user); }
 	//vector<User *> getBuddies() const { return buddies; };
 };
@@ -40,7 +40,7 @@ public:
 									//a sua atualizaçao será feita apenas na struct Trip ao longo da viagem
 	Trip getCurrentTrip() const;		//retorna um objeto da classe Trip
 	void payment();
-	bool car();
+	bool car() const ;
 	/*
 	void setNumSeats(unsigned int num) { numSeats = num; };   //é perguntado ao utilizador aquando de inscricao
 	void resetTrips() {};					//nao faz nada se for Driver quando chamada por um iterador
@@ -61,7 +61,7 @@ public:
 	string getLast() const;
 	void setNumTrips();
 	void payment();
-	bool car();
+	bool car() const;
 	void resetTrips(void);
 	//void addTrip(void) { numTrips++; };
 };
