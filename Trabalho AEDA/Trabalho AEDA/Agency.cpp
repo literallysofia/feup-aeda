@@ -2,6 +2,32 @@
 Utilities ut;
 Tools t;
 
+/////////////////////
+// EXCEÇOES /////
+///////////////////
+
+class NonexistentStop
+{
+public:
+	string stop;
+	NonexistentStop(string name) { stop = name; }
+};
+ostream & operator<<(ostream &out, const NonexistentStop &obj)
+{
+	out << "The stop '" << obj.stop << "' does not exist.\n"; return out;
+}
+
+class RepeatedStop
+{
+public:
+	string stop;
+	RepeatedStop(string name) { stop = name; }
+};
+ostream & operator<<(ostream &out, const RepeatedStop &obj)
+{
+	out << "The stop '" << obj.stop << "' was already used.\n"; return out;
+}
+
 Agency::Agency()
 {
 }
@@ -407,6 +433,83 @@ void Agency::addUsers(User * u)
 	Users.push_back(u);
 }
 
+void Agency::addTrip() {
+
+	Trip t;	t.setDriverID(1); t.setID( 1);
+	//Trip t;	t.setDriverID(sessionID); t.setID(Trips.back().getID() + 1);
+	vector<string> stops;
+	string eachStop;
+	int stopNumber = 1;
+
+	cout << "\tAVAILABLE STOPS:\n\n";
+
+	for (size_t i = 0; i < stopsAvailable.size(); i++) {
+		cout << "- " << stopsAvailable[i] << endl;
+	}
+	cout << endl;
+	cout << "Please enter your stops (CTRL + Z to END):\n";
+
+	while (1)
+	{
+		cout << "Stop # " << stopNumber << " : ";
+		cin >> eachStop;
+
+		//enquanto o utilizador nao inserir ctrl+z
+		if (!cin.eof())
+		{
+			try
+			{
+				//se a paragem existe
+				if (checkStop(eachStop)) {	
+					//se a paragem ja foi inserida lança a exceçao
+					if (find(stops.begin(), stops.end(), eachStop) != stops.end()) {
+						throw RepeatedStop(eachStop);
+					}
+					//caso corra tudo bem é adicionada ao vetor
+					else {
+						stops.push_back(eachStop);
+						stopNumber++;
+					}
+				}
+				//se nao existe lança a exceçao
+				else                       
+					throw NonexistentStop(eachStop);
+
+			}
+			catch (const NonexistentStop &e)
+			{
+				cout << e;
+			}
+			catch (const RepeatedStop &e)
+			{
+				cout << e;
+			}
+		}
+		
+		//fim da introduçao das paragens
+		else {
+			cout << "\n\nStops successfully added to your trip.\n\n";
+			t.setStops(stops);
+			Trips.push_back(t);
+			Users.at(sessionPos)->addTrip(t);			//adiciona a viagem criada ao utilizador correspondente
+			break;										//deixa o ciclo 'while'
+		}
+	}
+}
+
+bool Agency::checkStop(string s) {
+
+	bool exists = false;
+
+	for (size_t i = 0; i < stopsAvailable.size(); i++)
+	{
+		if (stopsAvailable[i] == s)
+			exists = true;
+	}
+
+	return exists;
+}
+
 /*
 //retorna o total do mes
 float Agency::endMonth() {
@@ -424,3 +527,5 @@ totalMonth += (*it)->payment();
 return totalMonth;
 }
 */
+
+

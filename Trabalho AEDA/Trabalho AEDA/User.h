@@ -24,6 +24,7 @@ public:
 	void deposit(float value);
 	virtual void payment() { return; };
 	virtual bool car() const = 0;
+	virtual void addTrip(Trip &t) {};
 	//void addBuddy(User * user) { buddies.push_back(user); }
 	//vector<User *> getBuddies() const { return buddies; };
 };
@@ -40,6 +41,7 @@ public:
 	Trip getCurrentTrip() const;		//retorna um objeto da classe Trip
 	void payment();
 	bool car() const ;
+	void addTrip(Trip& t);
 	/*
 	void setNumSeats(unsigned int num) { numSeats = num; };   //é perguntado ao utilizador aquando de inscricao
 	void resetTrips() {};					//nao faz nada se for Driver quando chamada por um iterador
@@ -62,5 +64,5 @@ public:
 	void payment();
 	bool car() const;
 	void resetTrips(void);
-	//void addTrip(void) { numTrips++; };
+	void addTrip(Trip &t) { numTrips++; };
 };

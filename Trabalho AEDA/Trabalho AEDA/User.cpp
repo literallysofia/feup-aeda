@@ -55,6 +55,11 @@ bool Driver::car() const
 	return true;
 }
 
+void Driver::addTrip(Trip &t)
+{
+	currentTrip = t;
+}
+
 /*PASSENGER CLASS*/
 
 Passenger::Passenger(int ID, string name, string password) : User(ID, name, password) {

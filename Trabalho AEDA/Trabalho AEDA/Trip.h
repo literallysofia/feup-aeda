@@ -9,6 +9,7 @@ class Trip
 {
 private:
 	int driver;
+	int ID;
 	vector<string> stops;
 	vector<int> passengers;
 						//bool active;
@@ -19,10 +20,14 @@ public:
 	~Trip();
 	Trip(int driver, vector<string> stops);
 	int getDriver() const;
+	int getID() const;
 	vector<string> getStops() const;
 	string getOrigin() const;
 	string getDestination() const;
 	int getPrice() const;
+	void setDriverID(int driverID);
+	void setID(int id);
+	void setStops(vector<string> &vec);
 	//void setAvailableSeats() const;
 
 	//bool getActive();

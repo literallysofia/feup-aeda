@@ -20,9 +20,29 @@ int Trip::getDriver() const
 	return driver;
 }
 
+int Trip::getID() const
+{
+	return ID;
+}
+
 int Trip::getPrice() const
 {
-	return stops.size(); //TODO trip price
+	return (int)stops.size(); //TODO trip price
+}
+
+void Trip::setDriverID(int driverID)
+{
+	driver = driverID;
+}
+
+void Trip::setID(int id)
+{
+	ID = id;
+}
+
+void Trip::setStops(vector<string>& vec)
+{
+	stops = vec;
 }
 
 vector<string> Trip::getStops() const
