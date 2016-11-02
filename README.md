@@ -71,6 +71,12 @@ Agency h/cpp:
 = addUser =
 > adiciona um novo objeto User ao vetor Users
 
+= checkStop =
+> recebe uma string e verifica se ela pertence ao vetor de paragens disponiveis, retorna false se nao existir
+
+= addTrip = 
+> adiciona uma trip ao vetor sob o User que está logado na aplicação
+
 User h/cpp:
 ----------
 > tem classes derivadas: Driver, Passenger
