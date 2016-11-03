@@ -12,6 +12,7 @@ private:
 	int ID;
 	vector<string> stops;
 	vector<int> passengers;
+	int seatsAvailable;
 						//bool active;
 						//Date startTime;
 						//Date endTime;
@@ -28,7 +29,10 @@ public:
 	void setDriverID(int driverID);
 	void setID(int id);
 	void setStops(vector<string> &vec);
-	//void setAvailableSeats() const;
+	void addPassenger(int passengerID);
+	vector<int> getPassengers() const;
+	void setAvailableSeats(int num);
+	int getNumSeats() const;
 
 	//bool getActive();
 	//Date getStartingTime();

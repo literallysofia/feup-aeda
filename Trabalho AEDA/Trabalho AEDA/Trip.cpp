@@ -45,6 +45,27 @@ void Trip::setStops(vector<string>& vec)
 	stops = vec;
 }
 
+void Trip::addPassenger(int passengerID)
+{
+	passengers.push_back(passengerID);
+}
+
+vector<int> Trip::getPassengers() const
+{
+	return passengers;
+}
+
+void Trip::setAvailableSeats(int num)
+{
+	seatsAvailable = num;
+}
+
+int Trip::getNumSeats() const
+{
+	return seatsAvailable;
+}
+
+
 vector<string> Trip::getStops() const
 {
 	return stops;

@@ -26,6 +26,7 @@ private:
 	//Global Vectors
 	vector<User *> Users;
 	vector<Trip> Trips;
+	vector<Guest *> Guests;
 	vector<string> stopsAvailable = { "a","b","c" };
 	//vector<Transaction> Transactions;
 
@@ -76,6 +77,8 @@ public:
 	void addTrip();
 
 	bool checkStop(string s);
+
+	void runTrip(int tripID);
 
 	/*void imprimeUsers();					//function that uses the Users class' operator<< method to
 	//print all agency's users to screen

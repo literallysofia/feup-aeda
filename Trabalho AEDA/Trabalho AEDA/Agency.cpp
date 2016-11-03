@@ -488,7 +488,13 @@ void Agency::addTrip() {
 		
 		//fim da introduçao das paragens
 		else {
-			cout << "\n\nStops successfully added to your trip.\n\n";
+			cout << "Please enter the number of seats available ( minimun: 1 , maximum: 6):\n-> "; cin.clear();
+			int numSeats = ut.leInteiro(1, 6);
+			t.setAvailableSeats(numSeats);
+
+			cout << "\n\nStops and number of seats successfully added to your trip.\n\n";
+			Sleep(1500);
+			ut.clearScreen();
 			t.setStops(stops);
 			Trips.push_back(t);
 			Users.at(sessionPos)->addTrip(t);			//adiciona a viagem criada ao utilizador correspondente
@@ -527,5 +533,154 @@ totalMonth += (*it)->payment();
 return totalMonth;
 }
 */
+
+void Agency::runTrip(int tripID) {
+
+	Trip t;
+	int tripIndex;
+	vector<int> passengersID;
+
+	for (unsigned int i = 0; i < Trips.size(); i++)
+	{
+		if (Trips[i].getID() == tripID) {
+			t = Trips[i];
+			tripIndex = i;
+			break;
+		}
+	}
+
+	passengersID = t.getPassengers();
+	vector<string> stops = t.getStops();
+
+	for (size_t i = 0; i < stops.size(); i++)
+	{
+		string currentStop = stops.at(i);
+
+		ut.clearScreen();
+		cout << "Running trip # " << t.getID() << " :\n"; cout << "Origin: " << t.getOrigin() << endl; cout << "Destination: " << t.getDestination() << endl;
+		cout << "\nDriver: " << Users[getPos(t.getID())]->getName() << " \n";
+		cout << "Current stop is " << currentStop << "\n";
+
+		if (i == t.getStops().size() - 1)
+		{
+			cout << "Final destination reached!\n";
+		}
+		else {
+			//saida de passageiros
+			vector<User *> usersAway;
+
+			for (size_t i = 0; i < passengersID.size(); i++)
+			{
+				unsigned int vectorPos = getPos(passengersID[i]);
+
+				//se o ID é positivo, procura-se no vetor Users
+				if (passengersID[i] > 0)
+				{
+					//se a ultima paragem é a atual, ele sai
+					if (Users[vectorPos]->getLast() == currentStop)
+					{
+						usersAway.push_back(Users[vectorPos]);
+					}
+				}
+
+				//se o ID é negativo, procura-se no vetor de Guest
+				if (passengersID[i] < 0)
+				{
+					for (size_t j = 0; j < Guests.size(); j++)
+					{
+						//encontrado o guest do ID respetivo
+						if (Guests[j]->getID() == passengersID[i])
+						{
+							//se a paragem final é a atual, ele sai
+							if (Guests[j]->getEnd() == currentStop)
+							{
+								//criacao de um user local para ser adicionado ao vetor de entradas
+								User *u = new Passenger(Guests[j]->getName());
+								usersAway.push_back(u);
+							}
+						}
+					}
+				}
+			}
+
+			//se houve alguma saida de passageiros
+			if (usersAway.size() > 0)
+			{
+				cout << "\n->Exited:\n";
+				for (size_t i = 0; i < usersAway.size(); i++)
+				{
+					cout << usersAway[i]->getName() << endl;
+				}
+
+				cout << endl;
+				//atualizacao do numero de lugares disponiveis
+				t.setAvailableSeats(t.getNumSeats() + (int)usersAway.size());
+			}
+
+			///entrada de passageiros///
+			vector<User *> usersOnBoard;
+
+			if (t.getNumSeats() > 0)
+			{
+				for (size_t i = 0; i < passengersID.size(); i++)
+				{
+					unsigned int vectorPos = getPos(passengersID[i]);
+
+					//se o ID é positivo, procura-se no vetor Users
+					if (passengersID[i] > 0)
+					{
+						//se a primeira paragem é a atual, ele entra
+						if (Users[vectorPos]->getFirst() == currentStop)
+						{
+							usersOnBoard.push_back(Users[vectorPos]);
+						}
+					}
+
+					//se o ID é negativo, procura-se no vetor de Guest
+					if (passengersID[i] < 0)
+					{
+						for (size_t j = 0; j < Guests.size(); j++)
+						{
+							//encontrado o guest do ID respetivo
+							if (Guests[j]->getID() == passengersID[i])
+							{
+								//se a paragem inicial é a atual
+								if (Guests[j]->getStart() == currentStop)
+								{
+									//criacao de um user local para ser adicionado ao vetor de entradas
+									User *u = new Passenger(Guests[j]->getName());
+									usersOnBoard.push_back(u);
+								}
+							}
+						}
+					}
+				}
+
+				//se houve alguma entrada de passageiros
+				if (usersOnBoard.size() > 0)
+				{
+					cout << "\n->Entered:\n";
+					for (size_t i = 0; i < usersOnBoard.size(); i++)
+					{
+						cout << usersOnBoard[i]->getName() << endl;
+					}
+
+					cout << endl;
+					t.setAvailableSeats(t.getNumSeats() - (int)usersOnBoard.size());
+				}
+			}
+
+			else
+			{
+				cout << "All seats are full at this stop.\n";
+			}
+
+		}
+
+		//espera pelo input da tecla Enter para passar à proxima paragem
+		cout << "\n\n-> ENTER to go to the next stop <-";
+		ut.getEnter();
+	}
+}
 
 
