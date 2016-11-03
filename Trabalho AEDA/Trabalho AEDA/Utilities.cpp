@@ -129,3 +129,7 @@ void Utilities::red()
 {
 	setcolor(4);
 }
+void Utilities::green()
+{
+	setcolor(2);
+}

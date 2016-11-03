@@ -441,13 +441,13 @@ void Agency::addTrip() {
 	string eachStop;
 	int stopNumber = 1;
 
-	cout << "\tAVAILABLE STOPS:\n\n";
+	ut.red(); cout << "\tAVAILABLE STOPS:\n\n"; ut.white();
 
 	for (size_t i = 0; i < stopsAvailable.size(); i++) {
 		cout << "- " << stopsAvailable[i] << endl;
 	}
 	cout << endl;
-	cout << "Please enter your stops (CTRL + Z to END):\n";
+	ut.grey(); cout << "Please enter your stops (CTRL + Z to END):\n"; ut.white();
 
 	while (1)
 	{
@@ -488,17 +488,31 @@ void Agency::addTrip() {
 		
 		//fim da introduçao das paragens
 		else {
-			cout << "Please enter the number of seats available ( minimun: 1 , maximum: 6):\n-> "; cin.clear();
-			int numSeats = ut.leInteiro(1, 6);
-			t.setAvailableSeats(numSeats);
 
-			cout << "\n\nStops and number of seats successfully added to your trip.\n\n";
-			Sleep(1500);
-			ut.clearScreen();
 			t.setStops(stops);
-			Trips.push_back(t);
-			Users.at(sessionPos)->addTrip(t);			//adiciona a viagem criada ao utilizador correspondente
-			break;										//deixa o ciclo 'while'
+
+			if (stops.size() < 2)
+			{
+				ut.red(); cout << "[ERROR] You did not enter at least 2 distinct stops.\n"; ut.white();
+				Sleep(2500);
+				ut.clearScreen();
+			}
+			else
+			{
+				//introducao do numero de lugares disponiveis
+				ut.blue(); cout << "\nPlease enter the number of seats available ( minimun: 1 , maximum: 6):\n-> "; cin.clear(); ut.white();
+				int numSeats = ut.leInteiro(1, 6); cin.clear();
+				t.setAvailableSeats(numSeats);
+
+				//adicao da viagem ao vetor na agencia
+				ut.green();  cout << "\n\nStops and number of seats successfully added to your trip.\n\n"; ut.white();
+				Sleep(2500);
+				ut.clearScreen();
+				Trips.push_back(t);
+				Users.at(sessionPos)->addTrip(t);			//adiciona a viagem criada ao utilizador correspondente
+				
+			}
+			break;
 		}
 	}
 }
@@ -557,13 +571,14 @@ void Agency::runTrip(int tripID) {
 		string currentStop = stops.at(i);
 
 		ut.clearScreen();
-		cout << "Running trip # " << t.getID() << " :\n"; cout << "Origin: " << t.getOrigin() << endl; cout << "Destination: " << t.getDestination() << endl;
+		ut.green(); cout << "Running trip # " << t.getID() << " :\n";
+		ut.grey(); cout << "Origin: " << t.getOrigin() << endl; cout << "Destination: " << t.getDestination() << endl;
 		cout << "\nDriver: " << Users[getPos(t.getID())]->getName() << " \n";
-		cout << "Current stop is " << currentStop << "\n";
+		ut.white();  cout << "\nCurrent stop is " << currentStop << "\n";
 
 		if (i == t.getStops().size() - 1)
 		{
-			cout << "Final destination reached!\n";
+			ut.blue(); cout << "Final destination reached!\n"; ut.white();
 		}
 		else {
 			//saida de passageiros
@@ -606,7 +621,7 @@ void Agency::runTrip(int tripID) {
 			//se houve alguma saida de passageiros
 			if (usersAway.size() > 0)
 			{
-				cout << "\n->Exited:\n";
+				ut.red(); cout << "\n->Exited:\n"; ut.white(); 
 				for (size_t i = 0; i < usersAway.size(); i++)
 				{
 					cout << usersAway[i]->getName() << endl;
@@ -659,7 +674,7 @@ void Agency::runTrip(int tripID) {
 				//se houve alguma entrada de passageiros
 				if (usersOnBoard.size() > 0)
 				{
-					cout << "\n->Entered:\n";
+					ut.green(); cout << "\n->Entered:\n"; ut.white();
 					for (size_t i = 0; i < usersOnBoard.size(); i++)
 					{
 						cout << usersOnBoard[i]->getName() << endl;
