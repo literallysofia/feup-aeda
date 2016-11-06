@@ -60,10 +60,10 @@ public:
 	void optionsMainMenu_User();
 
 	//Ficheiros
-	void extrairUsers();
-	void escreverUsers();
-	void extrairBuddies();
-	void escreverBuddies();
+	void extractUsers();
+	void writeUsers();
+	void extractBuddies();
+	void writeBuddies();
 
 	//Functions
 

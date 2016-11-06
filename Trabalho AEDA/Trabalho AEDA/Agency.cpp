@@ -229,11 +229,10 @@ void Agency::optionsMainMenu_User() {
 }
 
 
-/*FICHEIROS*/
-//TODO: veiculos disponiveis (id driver;lugares disponíveis;itinerário) & historico de viagens(nome do utilizador;proprietário da viatura;ponto de origem;ponto de destino;hora de início;hora de fim;dia)
+/*FILES*/
 
 //users (id;nome;carro;pass) 
-void Agency::extrairUsers()
+void Agency::extractUsers()
 {
 	ifstream Userfile("Users.txt");
 	string line;
@@ -246,31 +245,38 @@ void Agency::extrairUsers()
 		while (getline(Userfile, line))
 		{
 
-			size_t pos1 = line.find(";"); //posiçao 1
-			string str1 = line.substr(pos1 + 1); //nome+carro+pass
-			size_t pos2 = str1.find(";"); //posição 2
-			string str2 = str1.substr(pos2 + 1); //carro+pass
-			size_t pos3 = str2.find(";"); //posiçao 3
+			size_t pos1 = line.find(";"); //posi?ao 1
+			string str1 = line.substr(pos1 + 1); //nome+carro+balance+pass
+			size_t pos2 = str1.find(";"); //posi??o 2
+			string str2 = str1.substr(pos2 + 1); //carro+balance+pass
+			size_t pos3 = str2.find(";"); //posi?ao 3
+			string str3 = str2.substr(pos3 + 1); //balance+pass
+			size_t pos4 = str3.find(";"); //posi?ao 3
 
 			string ids = line.substr(0, pos1); //string id
 			string nome = str1.substr(0, pos2);
-			string scarro = str2.substr(0, pos3); //string se carro
-			string pass = str2.substr(pos3 + 1);
+			string scarro = str2.substr(0, pos3); //string carro
+			string sbalance = str3.substr(0, pos4); //string balance
+			string pass = str3.substr(pos4 + 1);
 
 			int idi = stoi(ids, nullptr, 10); //passa o id de string para int
 			bool bcarro;
-			if (scarro == "1")
+			if (scarro == "1") //passa a tring carro para bool
 				bcarro = true;
 			else bcarro = false;
 
+			float balancef = stof(sbalance); //passa o balance de string para float
+
 			if (bcarro)
 			{
-				User *d1 = new Driver(idi, nome, pass);
+				//se o User tiver carro, adiciona um novo driver
+				User *d1 = new Driver(idi, nome, balancef, pass);
 				Users.push_back(d1);
 			}
 			else
 			{
-				User *p1 = new Passenger(idi, nome, pass);
+				//caso contrario adiciona um novo passenger
+				User *p1 = new Passenger(idi, nome, balancef, pass);
 				Users.push_back(p1);
 			}
 		}
@@ -279,8 +285,7 @@ void Agency::extrairUsers()
 	else { ut.setcolor(4); cerr << "Impossivel abrir ficheiro." << endl; ut.setcolor(15); }
 }
 
-
-void Agency::escreverUsers()
+void Agency::writeUsers()
 {
 	ofstream UserFile("Users.txt");
 
@@ -289,80 +294,93 @@ void Agency::escreverUsers()
 		for (unsigned int i = 0; i < Users.size(); i++)
 		{
 			UserFile << Users.at(i)->getID() << ";" << Users.at(i)->getName() << ";";
+
 			if (Users.at(i)->car())
 				UserFile << "1";
 			else UserFile << "0";
 
-			UserFile << ";" << Users.at(i)->getPassword() << endl;
+			UserFile << ";" << Users.at(i)->getBalance() << ";" << Users.at(i)->getPassword() << endl;
 		}
 		UserFile.close();
 	}
 	else { ut.setcolor(4); cerr << "Impossivel abrir ficheiro." << endl; ut.setcolor(15); }
 }
 
-/*
-//buddies (id;id buddies)
-//TODO: map
-void Agency::extrairBuddies()
+//buddies (id;ids buddies) 
+void Agency::extractBuddies()
 {
 	ifstream Buddiesfile("Buddies.txt");
 	string line;
 
-
 	if (Buddiesfile.is_open())
 	{
-		if (!vbuddies.empty()) vbuddies.clear();
-
 		while (getline(Buddiesfile, line))
 		{
-
-			size_t pos1 = line.find(";"); //posiçao 1
-			string ids = line.substr(0, pos1); //string id
+			size_t pos1 = line.find(";"); //posi?ao 1
+			string ids = line.substr(0, pos1); //string id do user
 
 			string buddiess = line.substr(pos1 + 1); //string buddies
 
-			int idi = stoi(ids, nullptr, 10); //passa o id de string para int
+			int id = stoi(ids, nullptr, 10); //passa o id do user de string para int
 
-			buddiess.append(",");
-
-			vector <int> buddies;
-			buddies.push_back(idi);
-
-			while (!(buddiess.empty()))
+			for (unsigned int i = 0; i < Users.size(); i++)
 			{
-				buddies.push_back(stoi(buddiess.substr(0, buddiess.find_first_of(",")), nullptr, 10)); //adiciona um buddy ao vetor de buddies
-				buddiess.erase(0, buddiess.find_first_of(",") + 1); //apaga esse buddy e a virgula seguinte da lista de buddies
+				if (Users.at(i)->getID() == id) //se o user na posi?ao i ? o user do ficheiro
+				{
+					if (!Users.at(i)->getBuddies().empty())  Users.at(i)->deleteBuddies(); //se o vetor buddies desse user nao est? vazio, apaga os elementos existentes
+
+					buddiess.append(","); //adiciona ? string buddies uma virgula no final
+
+					while (!(buddiess.empty()))
+					{
+						int idbuddy = stoi(buddiess.substr(0, buddiess.find_first_of(",")), nullptr, 10); //id do buddy a analisar
+
+						for (unsigned int j = 0; j < Users.size(); j++)
+						{
+							if (Users.at(j)->getID() == idbuddy)
+							{
+								Users.at(i)->addBuddy(Users.at(j)); //adiciona esse buddy ao vetor de buddies do user
+								buddiess.erase(0, buddiess.find_first_of(",") + 1); //apaga esse buddy e a virgula seguinte da string de buddies
+							}
+						}
+					}
+				}
 			}
-
-			vbuddies.push_back(buddies); //cria um novo elemento no vector
-
 		}
+
 		Buddiesfile.close();
 	}
 	else { ut.setcolor(4); cerr << "Impossivel abrir ficheiro." << endl; ut.setcolor(15); }
 }
 
-void Agency::escreverBuddies()
+void Agency::writeBuddies()
 {
 	ofstream BuddiesFile("Buddies.txt");
 
+
 	if (BuddiesFile.is_open())
 	{
-		for (unsigned int i = 0; i < vbuddies.size(); i++)
+		for (unsigned int i = 0; i < Users.size(); i++)
 		{
-			BuddiesFile << vbuddies.at(i).at(0) << ";";
+			BuddiesFile << Users.at(i)->getID() << ";";
 
-			for (unsigned int j = 1; i < vbuddies.at(i).size(); j++)
+			string buddies_s;
+
+			for (unsigned int j = 0; j < Users.at(j)->getBuddies().size(); j++)
 			{
-				BuddiesFile << vbuddies.at(i).at(j) << ",";
+				buddies_s.append(to_string(Users.at(i)->getBuddies().at(j)->getID()));
+				buddies_s.append(",");
 			}
-			BuddiesFile << endl;
+
+			buddies_s.erase(buddies_s.size() - 1, 1); //apaga a ultima virgula
+			BuddiesFile << buddies_s << endl;
 		}
 		BuddiesFile.close();
 	}
 	else { ut.setcolor(4); cerr << "Impossivel abrir ficheiro." << endl; ut.setcolor(15); }
 }
-*/
+
+
 
 /* FUNCOES */
 

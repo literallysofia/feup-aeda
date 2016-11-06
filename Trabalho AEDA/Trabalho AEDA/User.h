@@ -13,7 +13,7 @@ protected:
 	string password;
 	float balance; //saldo disponivel na conta
 	static int maintenanceFee;
-	//vector <User *> buddies;
+	vector <User *> buddies;
 	
 public:
 	User(int ID, string name, string password);
@@ -21,11 +21,12 @@ public:
 	int getID() const;
 	string getName() const;
 	string getPassword() const;
+	float getBalance() const;
 	void deposit(float value);
 	virtual void payment() { return; };
 	virtual bool car() const = 0;
-	//void addBuddy(User * user) { buddies.push_back(user); }
-	//vector<User *> getBuddies() const { return buddies; };
+	void addBuddy(User * user) { buddies.push_back(user); }
+	vector<User *> getBuddies() const { return buddies; };
 };
 
 class Driver :

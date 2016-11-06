@@ -27,6 +27,11 @@ string User::getPassword() const
 	return password;
 }
 
+float User::getBalance() const
+{
+	return balance;
+}
+
 void User::deposit(float value)
 {
 	balance += value;
