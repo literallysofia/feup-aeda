@@ -137,7 +137,7 @@ void Agency::optionsMainMenu_Admin() {
 		switch (option)
 		{
 		case 1:
-			//TODO mostrar todos users
+			Agency::instance()->menuDisplayUsers();
 			break;
 		case 2:
 			//TODO mostrar o historico de trips
@@ -146,7 +146,7 @@ void Agency::optionsMainMenu_Admin() {
 			//TODO mostrar transacoes
 			break;
 		case 4:
-			//TODO mostrar buddies (relacoes de amizade)
+			Agency::instance()->menuDisplayBuddies();
 			break;
 		case 5:
 			break;
@@ -245,18 +245,18 @@ void Agency::extractUsers()
 		while (getline(Userfile, line))
 		{
 
-			size_t pos1 = line.find(";"); //posi?ao 1
-			string str1 = line.substr(pos1 + 1); //nome+carro+balance+pass
-			size_t pos2 = str1.find(";"); //posi??o 2
-			string str2 = str1.substr(pos2 + 1); //carro+balance+pass
-			size_t pos3 = str2.find(";"); //posi?ao 3
+			size_t pos1 = line.find(";"); //posiçao 1
+			string str1 = line.substr(pos1 + 1); //nome+balance+carro+pass
+			size_t pos2 = str1.find(";"); //posiçao 2
+			string str2 = str1.substr(pos2 + 1); //balance+carro+pass
+			size_t pos3 = str2.find(";"); //posiçao 3
 			string str3 = str2.substr(pos3 + 1); //balance+pass
-			size_t pos4 = str3.find(";"); //posi?ao 3
+			size_t pos4 = str3.find(";"); //posiçao 3
 
 			string ids = line.substr(0, pos1); //string id
 			string nome = str1.substr(0, pos2);
-			string scarro = str2.substr(0, pos3); //string carro
-			string sbalance = str3.substr(0, pos4); //string balance
+			string sbalance = str2.substr(0, pos3); //string balance
+			string scarro = str3.substr(0, pos4); //string carro
 			string pass = str3.substr(pos4 + 1);
 
 			int idi = stoi(ids, nullptr, 10); //passa o id de string para int
@@ -265,7 +265,7 @@ void Agency::extractUsers()
 				bcarro = true;
 			else bcarro = false;
 
-			float balancef = stof(sbalance); //passa o balance de string para float
+			float balancef = stof(sbalance, NULL); //passa o balance de string para float
 
 			if (bcarro)
 			{
@@ -353,6 +353,7 @@ void Agency::extractBuddies()
 	else { ut.setcolor(4); cerr << "Impossivel abrir ficheiro." << endl; ut.setcolor(15); }
 }
 
+//TODO: WRITEBUDDIES NAO FUNCIONA
 void Agency::writeBuddies()
 {
 	ofstream BuddiesFile("Buddies.txt");
@@ -442,3 +443,127 @@ totalMonth += (*it)->payment();
 return totalMonth;
 }
 */
+
+
+void Agency::displayUsers() {
+
+	for (unsigned int i = 0; i < Users.size(); i++)
+	{
+		cout << setw(5) << Users.at(i)->getID();
+		cout << setw(20) << Users.at(i)->getName();
+		cout << setw(18) << setprecision(2) << fixed <<  Users.at(i)->getBalance();
+
+		if(Users.at(i)->car())
+			cout << setw(12)  << "Yes" << endl;
+		else cout << setw(12) << "No" << endl;
+	}
+
+	return;
+}
+
+int Agency::menuDisplayUsers() {
+
+	ut.clearScreen();
+
+	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
+		<< "|~~~                      "; ut.blue(); cout << "ShareIt"; ut.white(); cout << "                      ~~~| " << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
+		<< "|                          ";  ut.grey(); cout << "Users";  ut.white(); cout << "                          |" << endl;
+	ut.blue(); cout << "-----------------------------------------------------------" << endl;
+	ut.setcolor(7); cout << setw(5) << "ID" << setw(20) << "Name" << setw(18) << "Balance" << setw(12) << "Has Car?" << endl;
+	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
+	ut.setcolor(15);  displayUsers();
+	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;  ut.setcolor(7);
+	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
+		<< "|~~~                                 ";  ut.setcolor(7); cout << "< 0. Return >";  ut.setcolor(15); cout << "     ~~~|" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl << endl;
+
+	unsigned short int opcao;
+	cout << "Insira a sua escolha: ";
+	cin >> opcao;
+
+	while (cin.fail() || (opcao > 0))
+	{
+		if (cin.eof())
+		{
+			cin.clear();
+			return 0;
+		}
+		cin.clear();
+		cin.ignore(1000, '\n');
+		ut.setcolor(4); cout << "> Digito invalido!" << endl;
+		ut.setcolor(15); cout << "Volte a indicar escolha: ";
+		cin >> opcao;
+	}
+
+	if ((opcao >= 0) && (opcao < 1))
+	{
+		if (opcao == 0)
+			return 0;
+		return opcao;
+	}
+	return 0;
+
+}
+
+void Agency::displayBuddies() {
+
+	for (unsigned int i = 0; i < Users.size(); i++)
+	{
+		ut.setcolor(7); cout << setw(5) << "   USER"; ut.blue(); cout <<" | ";
+		ut.white(); cout<< Users.at(i)->getName() << endl;
+		ut.setcolor(7); cout << setw(5) << "BUDDIES"; ut.blue(); cout << " | ";
+		ut.white();
+		for (unsigned int j = 0; j < Users.at(j)->getBuddies().size(); j++)
+		{
+			cout << Users.at(i)->getBuddies().at(j)->getName() << "   ";
+		}
+
+		cout << endl << endl;
+	}
+
+	return;
+}
+
+int Agency::menuDisplayBuddies() {
+
+	ut.clearScreen();
+
+	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
+		<< "|~~~                      "; ut.blue(); cout << "ShareIt"; ut.white(); cout << "                      ~~~| " << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
+		<< "|                      ";  ut.grey(); cout << "Relationships";  ut.white(); cout << "                    |" << endl;
+	ut.blue(); cout << "-----------------------------------------------------------" << endl;
+	ut.setcolor(15);  displayBuddies();
+	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;  ut.setcolor(7);
+	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
+		<< "|~~~                                 ";  ut.setcolor(7); cout << "< 0. Return >";  ut.setcolor(15); cout << "     ~~~|" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl << endl;
+
+	unsigned short int opcao;
+	cout << "Insira a sua escolha: ";
+	cin >> opcao;
+
+	while (cin.fail() || (opcao > 0))
+	{
+		if (cin.eof())
+		{
+			cin.clear();
+			return 0;
+		}
+		cin.clear();
+		cin.ignore(1000, '\n');
+		ut.setcolor(4); cout << "> Digito invalido!" << endl;
+		ut.setcolor(15); cout << "Volte a indicar escolha: ";
+		cin >> opcao;
+	}
+
+	if ((opcao >= 0) && (opcao < 1))
+	{
+		if (opcao == 0)
+			return 0;
+		return opcao;
+	}
+	return 0;
+
+}
