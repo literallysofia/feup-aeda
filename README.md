@@ -138,3 +138,17 @@ Trip h/cpp:
 
 = setStops =
 > recebe como parametro um vetor de strings, atribui a uma viagem esse vetor de paragens
+
+Tools h/cpp:
+---------------
+= outputName =
+> util para o utilizador inserir ID ou nome
+> verifica se output é um inteiro(false) ou string(true)
+
+= insertPassword =
+> processo de inserir pass
+> retorna password escrita com ***
+
+= sameString =
+> vê se duas strings são iguais (true/false)
+
