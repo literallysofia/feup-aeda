@@ -256,18 +256,18 @@ void Agency::extractUsers()
 			string ids = line.substr(0, pos1); //string id
 			string nome = str1.substr(0, pos2);
 			string sbalance = str2.substr(0, pos3); //string balance
-			string scarro = str3.substr(0, pos4); //string carro
+			string scar = str3.substr(0, pos4); //string carro
 			string pass = str3.substr(pos4 + 1);
 
 			int idi = stoi(ids, nullptr, 10); //passa o id de string para int
-			bool bcarro;
-			if (scarro == "1") //passa a tring carro para bool
-				bcarro = true;
-			else bcarro = false;
+			bool bcar;
+			if (scar == "1") //passa a tring carro para bool
+				bcar = true;
+			else bcar = false;
 
 			float balancef = stof(sbalance, NULL); //passa o balance de string para float
 
-			if (bcarro)
+			if (bcar)
 			{
 				//se o User tiver carro, adiciona um novo driver
 				User *d1 = new Driver(idi, nome, balancef, pass);
@@ -341,9 +341,16 @@ void Agency::extractBuddies()
 							{
 								Users.at(i)->addBuddy(Users.at(j)); //adiciona esse buddy ao vetor de buddies do user
 								buddiess.erase(0, buddiess.find_first_of(",") + 1); //apaga esse buddy e a virgula seguinte da string de buddies
+								break;
 							}
 						}
 					}
+					/*
+					for (unsigned int j = 0; j < Users.at(j)->getBuddies().size(); j++)
+					{
+						cout << Users.at(i)->getBuddies().at(j)->getName() << "   ";
+					}
+					*/
 				}
 			}
 		}
@@ -454,8 +461,8 @@ void Agency::displayUsers() {
 		cout << setw(18) << setprecision(2) << fixed <<  Users.at(i)->getBalance();
 
 		if(Users.at(i)->car())
-			cout << setw(12)  << "Yes" << endl;
-		else cout << setw(12) << "No" << endl;
+			cout << setw(12)  << "[X]" << endl;
+		else cout << setw(12) << "[ ]" << endl;
 	}
 
 	return;
@@ -470,7 +477,7 @@ int Agency::menuDisplayUsers() {
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
 		<< "|                          ";  ut.grey(); cout << "Users";  ut.white(); cout << "                          |" << endl;
 	ut.blue(); cout << "-----------------------------------------------------------" << endl;
-	ut.setcolor(7); cout << setw(5) << "ID" << setw(20) << "Name" << setw(18) << "Balance" << setw(12) << "Has Car?" << endl;
+	ut.setcolor(7); cout << setw(5) << "ID" << setw(20) << "Name" << setw(18) << "Balance" << setw(12) << "Driver" << endl;
 	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
 	ut.setcolor(15);  displayUsers();
 	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;  ut.setcolor(7);
@@ -514,7 +521,7 @@ void Agency::displayBuddies() {
 		ut.white(); cout<< Users.at(i)->getName() << endl;
 		ut.setcolor(7); cout << setw(5) << "BUDDIES"; ut.blue(); cout << " | ";
 		ut.white();
-		for (unsigned int j = 0; j < Users.at(j)->getBuddies().size(); j++)
+		for (unsigned int j = 0; j < Users.at(i)->getBuddies().size(); j++)
 		{
 			cout << Users.at(i)->getBuddies().at(j)->getName() << "   ";
 		}
