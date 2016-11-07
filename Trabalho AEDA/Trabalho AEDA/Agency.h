@@ -93,15 +93,12 @@ public:
 	void displayBuddies(); 
 	int menuDisplayBuddies();
 
-	/*void imprimeTrips();					//function that uses the Trips class' operator<< method to
+	void imprimeTrips();					//function that uses the Trips class' operator<< method to
 	//print all agency's trips to screen
 	void readUsers(std::ifstream & infile);    //TODO
 
 	void readTrips(std::ifstream & infile);
 
-	static float getFee() { return maintenaceFee; }
-
-	static void changeFee(float newValue) { maintenaceFee = newValue; }
 
 	float endMonth();
 

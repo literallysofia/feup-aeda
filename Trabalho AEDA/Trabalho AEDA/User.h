@@ -32,7 +32,7 @@ public:
 	virtual string getFirst() const;
 	virtual string getLast() const;
 	
-	virtual void payment() { return; };
+	virtual void payment();
 	void addBuddy(User * user) { buddies.push_back(user); };
 	void deleteBuddies() { buddies.clear(); }
 	vector<User *> getBuddies() const { return buddies; };
