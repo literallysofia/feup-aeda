@@ -8,6 +8,10 @@ User::User(int ID, string name, string password) : ID(ID), name(name) {
 	balance = 0;
 }
 
+User::User(string name) :name(name)
+{
+}
+
 User::~User()
 {
 }
@@ -30,6 +34,31 @@ string User::getPassword() const
 void User::deposit(float value)
 {
 	balance += value;
+}
+
+void User::payment()
+{
+	return;
+}
+
+bool User::car() const
+{
+	return false;
+}
+
+bool User::searchTrip(vector<Trip>& vec)
+{
+	return false;
+}
+
+string User::getFirst() const
+{
+	return string();
+}
+
+string User::getLast() const
+{
+	return string();
 }
 
 /*DRIVER CLASS*/
@@ -55,12 +84,35 @@ bool Driver::car() const
 	return true;
 }
 
+void Driver::addTrip(Trip &t)
+{
+	currentTrip = t;
+}
+
+bool Driver::searchTrip(vector<Trip>& vec) const
+{
+	return false;
+}
+
+string Driver::getFirst() const
+{
+	return string();
+}
+
+string Driver::getLast() const
+{
+	return string();
+}
+
 /*PASSENGER CLASS*/
 
 Passenger::Passenger(int ID, string name, string password) : User(ID, name, password) {
 	numTrips = 0;
 }
 
+Passenger::Passenger(string name): User(name) {
+
+}
 int Passenger::getNumTrips() const
 {
 	return numTrips;
@@ -94,4 +146,34 @@ bool Passenger::car() const
 void Passenger::resetTrips(void)
 {
 	numTrips = 0;
+}
+
+bool Passenger::searchTrip(vector<Trip> &vec)  //vec = vetor das viagens da agencia
+{
+	unsigned int posBeg = -1, posEnd = -1;
+	for (size_t i = 0; i < vec.size(); i++)
+	{
+		vector<string> stops = vec[i].getStops();
+		for (unsigned int j = 0; j < stops.size(); i++)
+		{
+			if (stops[j] == this->first)
+				posBeg = j;
+
+			if (stops[j] == this->last)
+				posEnd = j;
+		}
+
+		//se ambos os indices foram atualizados
+		if (posBeg != -1 && posEnd != -1)
+			//se a paragem inicial do guest vem antes da final, para a viagem indicada, return true;
+			if (posBeg < posEnd) {
+				this->currentTrip = vec[i].getID();
+				vec[i].addPassenger(this->ID);
+				return true;
+			}
+
+	}
+
+	//nenhuma das condiçoes de aceitação foi obtida
+	return false;
 }

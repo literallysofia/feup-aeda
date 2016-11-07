@@ -20,10 +20,51 @@ int Trip::getDriver() const
 	return driver;
 }
 
+int Trip::getID() const
+{
+	return ID;
+}
+
 int Trip::getPrice() const
 {
-	return stops.size(); //TODO trip price
+	return (int)stops.size(); //TODO trip price
 }
+
+void Trip::setDriverID(int driverID)
+{
+	driver = driverID;
+}
+
+void Trip::setID(int id)
+{
+	ID = id;
+}
+
+void Trip::setStops(vector<string>& vec)
+{
+	stops = vec;
+}
+
+void Trip::addPassenger(int passengerID)
+{
+	passengers.push_back(passengerID);
+}
+
+vector<int> Trip::getPassengers() const
+{
+	return passengers;
+}
+
+void Trip::setAvailableSeats(int num)
+{
+	seatsAvailable = num;
+}
+
+int Trip::getNumSeats() const
+{
+	return seatsAvailable;
+}
+
 
 vector<string> Trip::getStops() const
 {
