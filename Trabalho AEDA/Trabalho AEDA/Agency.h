@@ -83,7 +83,7 @@ public:
 
 	void runTrip(int tripID);
 
-	/*void imprimeUsers();					//function that uses the Users class' operator<< method to
+	void imprimeUsers();					//function that uses the Users class' operator<< method to
 	//print all agency's users to screen
 
 	void displayUsers();
@@ -103,7 +103,7 @@ public:
 
 	static void changeFee(float newValue) { maintenaceFee = newValue; }
 
-	float endMonth();*/
+	float endMonth();
 
 
 };
