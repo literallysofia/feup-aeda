@@ -62,8 +62,11 @@ public:
 	void optionsMainMenu_User();
 
 	//Ficheiros
-	void extrairUsers();
-	void escreverUsers();
+
+	void extractUsers();
+	void writeUsers();
+	void extractBuddies();
+	void writeBuddies();
 
 	//Functions
 
@@ -83,7 +86,14 @@ public:
 	/*void imprimeUsers();					//function that uses the Users class' operator<< method to
 	//print all agency's users to screen
 
-	void imprimeTrips();					//function that uses the Trips class' operator<< method to
+	void displayUsers();
+	int menuDisplayUsers();
+
+
+	void displayBuddies(); 
+	int menuDisplayBuddies();
+
+	/*void imprimeTrips();					//function that uses the Trips class' operator<< method to
 	//print all agency's trips to screen
 	void readUsers(std::ifstream & infile);    //TODO
 

@@ -88,7 +88,8 @@ int main()
 	HWND consoleWindow = GetConsoleWindow();
 	SetWindowPos(consoleWindow, 0, 310, 150, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
 
-	Agency::instance()->extrairUsers();
+	Agency::instance()->extractUsers();
+	Agency::instance()->extractBuddies();
 
 	optionsWelcomeMenu();
 	
@@ -106,7 +107,7 @@ int main()
 		cout << " - " << Agency::instance()->getUsers().at(i)->getPassword() << endl;
 	}
 
-	User *p2 = new Passenger(3, "test" , "test3");
+	
 	Agency::instance()->addUsers(p2);
 	Agency::instance()->escreverUsers();
 

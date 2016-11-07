@@ -67,5 +67,8 @@
     <Text Include="Users.txt">
       <Filter>Source Files\Resource Files</Filter>
     </Text>
+    <Text Include="Buddies.txt">
+      <Filter>Source Files\Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>
