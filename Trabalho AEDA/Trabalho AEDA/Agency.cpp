@@ -612,6 +612,7 @@ void Agency::runTrip(int tripID) {
 								//criacao de um user local para ser adicionado ao vetor de entradas
 								User *u = new Passenger(Guests[j]->getName());
 								usersAway.push_back(u);
+								//TODO: quando sair adicionar transacao
 							}
 						}
 					}
