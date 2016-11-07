@@ -16,15 +16,23 @@ protected:
 	vector <User *> buddies;
 	
 public:
+	User(string name);
 	User(int ID, string name, float balance, string password);
+
 	~User();
 	int getID() const;
 	string getName() const;
 	string getPassword() const;
 	float getBalance() const;
 	void deposit(float value);
-	virtual void payment() { return; };
-	virtual bool car() const = 0;
+
+	virtual bool car() const;
+	virtual void addTrip(Trip &t) {};
+	virtual bool searchTrip(vector<Trip> &vec);
+	virtual string getFirst() const;
+	virtual string getLast() const;
+	
+	virtual void payment();
 	void addBuddy(User * user) { buddies.push_back(user); };
 	void deleteBuddies() { buddies.clear(); }
 	vector<User *> getBuddies() const { return buddies; };
@@ -41,7 +49,11 @@ public:
 	int getNumSeats() const;		//apenas retorna o numero de lugares dados pelo utilizador,
 	Trip getCurrentTrip() const;		//retorna um objeto da classe Trip
 	void payment();
-	bool car() const ;
+	bool car() const;
+	void addTrip(Trip& t);
+	bool searchTrip(vector<Trip> &vec) const;
+	string getFirst() const;
+	string getLast() const;
 	/*
 	void setNumSeats(unsigned int num) { numSeats = num; };   //é perguntado ao utilizador aquando de inscricao
 	void resetTrips() {};					//nao faz nada se for Driver quando chamada por um iterador
@@ -55,7 +67,11 @@ private:
 	int numTrips;
 	string first, last;			//nomes das paragens finais e iniciais
 								//podem ser sempre as mesmas ou alteradas pelo utilizador no programa
+	int currentTrip;
+
 public:
+
+	Passenger(string name);
 	Passenger(int ID, string name, float balance, string password);
 	int getNumTrips() const;
 	string getFirst() const;
@@ -64,5 +80,6 @@ public:
 	void payment();
 	bool car() const;
 	void resetTrips(void);
-	//void addTrip(void) { numTrips++; };
+	void addTrip(Trip &t) { numTrips++; };
+	bool searchTrip(vector<Trip> &vec);
 };

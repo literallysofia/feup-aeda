@@ -65,6 +65,51 @@ void Utilities::clearScreen() {
 	SetConsoleCursorPosition(hStdOut, homeCoords);
 }
 
+//para ler um numero entre um minimo e maximo
+int Utilities::leInteiro(int min, int max) {
+
+	bool validInput = false;
+	int opcao;
+
+	while (!validInput) {
+		cin >> opcao;
+
+		if (opcao > max || opcao < min || cin.fail())
+		{
+			cout << endl << "[ERRO!] Nao foi introduzida uma opcao valida." << endl;
+			cout << " Por favor, introduza uma opcao entre " << min << " e " << max << ": ";
+			cin.clear();
+		}
+		else
+			validInput = true;
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	}
+
+	return opcao;
+
+
+}
+
+
+
+// espera que o utilizador prima ENTER
+void Utilities::getEnter() {
+
+	int ENTER = 13;
+	//FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
+
+	char ch = _getch();
+
+	while (ch != ENTER)
+	{
+		ch = _getch();
+	}
+
+	//PressKey();
+	//std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+}
+
+
 void Utilities::white()
 {
 	setcolor(15);
@@ -83,4 +128,8 @@ void Utilities::grey()
 void Utilities::red()
 {
 	setcolor(4);
+}
+void Utilities::green()
+{
+	setcolor(2);
 }
