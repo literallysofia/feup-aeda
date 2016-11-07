@@ -13,19 +13,21 @@ protected:
 	string password;
 	float balance; //saldo disponivel na conta
 	static int maintenanceFee;
-	//vector <User *> buddies;
+	vector <User *> buddies;
 	
 public:
-	User(int ID, string name, string password);
+	User(int ID, string name, float balance, string password);
 	~User();
 	int getID() const;
 	string getName() const;
 	string getPassword() const;
+	float getBalance() const;
 	void deposit(float value);
 	virtual void payment() { return; };
 	virtual bool car() const = 0;
-	//void addBuddy(User * user) { buddies.push_back(user); }
-	//vector<User *> getBuddies() const { return buddies; };
+	void addBuddy(User * user) { buddies.push_back(user); };
+	void deleteBuddies() { buddies.clear(); }
+	vector<User *> getBuddies() const { return buddies; };
 };
 
 class Driver :
@@ -35,7 +37,7 @@ private:
 	int numSeats;
 	Trip currentTrip;
 public:
-	Driver(int ID, string name, string password);
+	Driver(int ID, string name, float balance, string password);
 	int getNumSeats() const;		//apenas retorna o numero de lugares dados pelo utilizador,
 	Trip getCurrentTrip() const;		//retorna um objeto da classe Trip
 	void payment();
@@ -54,7 +56,7 @@ private:
 	string first, last;			//nomes das paragens finais e iniciais
 								//podem ser sempre as mesmas ou alteradas pelo utilizador no programa
 public:
-	Passenger(int ID, string name, string password);
+	Passenger(int ID, string name, float balance, string password);
 	int getNumTrips() const;
 	string getFirst() const;
 	string getLast() const;

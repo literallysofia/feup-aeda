@@ -60,10 +60,10 @@ public:
 	void optionsMainMenu_User();
 
 	//Ficheiros
-	void extrairUsers();
-	void escreverUsers();
-	void extrairBuddies();
-	void escreverBuddies();
+	void extractUsers();
+	void writeUsers();
+	void extractBuddies();
+	void writeBuddies();
 
 	//Functions
 
@@ -74,10 +74,13 @@ public:
 	vector<User *> getUsers();
 	void addUsers(User* u);
 
-	/*void imprimeUsers();					//function that uses the Users class' operator<< method to
-	//print all agency's users to screen
+	void displayUsers();
+	int menuDisplayUsers();
 
-	void imprimeTrips();					//function that uses the Trips class' operator<< method to
+	void displayBuddies(); 
+	int menuDisplayBuddies();
+
+	/*void imprimeTrips();					//function that uses the Trips class' operator<< method to
 	//print all agency's trips to screen
 	void readUsers(std::ifstream & infile);    //TODO
 
