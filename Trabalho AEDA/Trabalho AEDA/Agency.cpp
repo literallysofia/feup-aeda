@@ -36,6 +36,11 @@ Agency::~Agency()
 {
 }
 
+/* CLASS GET AND SET */
+vector<User *> Agency::getUsers() {
+	return Users;
+}
+
 
 /* MENUS */
 
@@ -102,7 +107,7 @@ void Agency::registerUser()
 		User *u1 = new Passenger(nID, name, 0.00, username, password);
 		addUser(u1);
 	}
-	
+
 	this->sessionID = nID;
 	this->sessionPos = (int)Users.size() - 1;
 	ut.red(); cout << "\n\n> Success! You just created your account!\n"; Sleep(2500); ut.white();
@@ -215,7 +220,6 @@ int Agency::mainMenu_Admin() {
 }
 
 void Agency::optionsMainMenu_Admin() {
-
 	unsigned short int option;
 
 	while (option = mainMenu_Admin())
@@ -240,6 +244,83 @@ void Agency::optionsMainMenu_Admin() {
 		}
 	return;
 }
+
+int Agency::menuDisplayUsers() {
+	ut.clearScreen();
+	ut.menuHeader();
+	cout << "|                          ";  ut.grey(); cout << "USERS";  ut.white(); cout << "                          |" << endl;
+	ut.blue(); cout << "-----------------------------------------------------------" << endl;
+	ut.setcolor(7); cout << setw(5) << "ID" << setw(10) << "User" << setw(20) << "Name" << setw(10) << "Balance" << setw(10) << "Driver" << endl;
+	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
+	ut.setcolor(15);  displayUsers();
+	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;  ut.setcolor(7);
+	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
+		<< "|~~~                                 ";  ut.setcolor(7); cout << "< 0. Return >";  ut.setcolor(15); cout << "     ~~~|" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl << endl;
+
+	unsigned short int option;
+	cout << "Type your choice: ";
+	cin >> option;
+
+	while (cin.fail() || (option < 0) || ((option > 2)))
+	{
+		if (cin.eof())
+		{
+			cin.clear();
+			return 0;
+		}
+		cin.clear();
+		cin.ignore(1000, '\n');
+		ut.red(); cout << "> Invalid choice!" << endl;
+		ut.white(); cout << "Please try again: ";
+		cin >> option;
+	}
+
+	if (option == 0)
+		return 0;
+	return option;
+}
+
+void Agency::optionsDisplayUsers() {
+	unsigned short int option;
+
+	while (option = menuDisplayUsers())
+		switch (option)
+		{
+		case 1:
+			//TODO ordenar users
+			break;
+		case 2:
+			//TODO ordenar users
+			break;
+		}
+	return;
+}
+
+void Agency::menuDisplayBuddies() {
+	ut.clearScreen();
+	ut.menuHeader();
+	cout << "|                      ";  ut.grey(); cout << "Relationships";  ut.white(); cout << "                    |" << endl;
+	ut.blue(); cout << "-----------------------------------------------------------" << endl;
+	ut.setcolor(15);  displayBuddies();
+	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
+	ut.red(); cout << "\n Press anything to go back."; ut.white(); getchar(); getchar();
+	return;
+}
+
+void Agency::menuDisplayTransactions() {
+	ut.clearScreen();
+	ut.menuHeader();
+	cout << "|~~~                     ";  ut.setcolor(7); cout << "Transactions";  ut.setcolor(15); cout << "                  ~~~|" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+	ut.setcolor(7); cout << setw(5) << "ID" << setw(14) << "Data" << setw(28) << "Value" << endl;
+	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
+	ut.setcolor(15);  displayTransactions();
+	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
+	ut.red(); cout << "\n Press anything to go back."; ut.white(); getchar(); getchar();
+	return;
+}
+
 
 /* MENUS USER */
 
@@ -314,7 +395,7 @@ void Agency::optionsMainMenu_User() {
 
 /*FILES*/
 
-//users (id;nome;carro;pass) 
+/* EXTRACT AND SAVE */
 void Agency::extractUsers()
 {
 	ifstream Userfile("Users.txt");
@@ -371,7 +452,7 @@ void Agency::extractUsers()
 	else { ut.setcolor(4); cerr << "Impossivel abrir ficheiro." << endl; ut.setcolor(15); }
 }
 
-void Agency::writeUsers()
+void Agency::saveUsers()
 {
 	ofstream UserFile("Users.txt");
 
@@ -392,7 +473,6 @@ void Agency::writeUsers()
 	else { ut.setcolor(4); cerr << "Impossivel abrir ficheiro." << endl; ut.setcolor(15); }
 }
 
-//buddies (id;ids buddies) 
 void Agency::extractBuddies()
 {
 	ifstream Buddiesfile("Buddies.txt");
@@ -440,7 +520,7 @@ void Agency::extractBuddies()
 	else { ut.setcolor(4); cerr << "Impossivel abrir ficheiro." << endl; ut.setcolor(15); }
 }
 
-void Agency::writeBuddies()
+void Agency::saveBuddies()
 {
 	ofstream BuddiesFile("Buddies.txt");
 
@@ -467,7 +547,6 @@ void Agency::writeBuddies()
 	else { ut.setcolor(4); cerr << "Impossivel abrir ficheiro." << endl; ut.setcolor(15); }
 }
 
-//Transactions (id;date;value)
 void Agency::extractTransactions() {
 
 	ifstream Transfile("Transactions.txt");
@@ -522,25 +601,25 @@ void Agency::extractTransactions() {
 	else { ut.setcolor(4); cerr << "Impossivel abrir ficheiro." << endl;  ut.setcolor(15); }
 }
 
-void Agency::writeTransactions() {
+void Agency::saveTransactions() {
 
-		ofstream TransFile("Transactions.txt");
+	ofstream TransFile("Transactions.txt");
 
-		if (TransFile.is_open())
+	if (TransFile.is_open())
+	{
+		for (unsigned int i = 0; i < Transactions.size(); i++)
 		{
-			for (unsigned int i = 0; i < Transactions.size(); i++)
-			{
-				TransFile << Transactions.at(i).GetId() << ";" 
-					<< Transactions.at(i).GetDate() << ";"
-					<< Transactions.at(i).GetValue() << endl;
-			}
-			TransFile.close();
+			TransFile << Transactions.at(i).GetId() << ";"
+				<< Transactions.at(i).GetDate() << ";"
+				<< Transactions.at(i).GetValue() << endl;
 		}
-		else { ut.setcolor(4); cerr << "Impossivel abrir ficheiro." << endl; ut.setcolor(15); }
+		TransFile.close();
+	}
+	else { ut.setcolor(4); cerr << "Impossivel abrir ficheiro." << endl; ut.setcolor(15); }
 }
 
 
-/* FUNCOES */
+/* FUNCTIONS */
 
 bool Agency::validUser(string username) {
 	for (unsigned int i = 0; i < Users.size(); i++) {
@@ -570,10 +649,6 @@ int Agency::getPos(int id) {
 			return i;
 	}
 	return -1;
-}
-
-vector<User *> Agency::getUsers() {
-	return Users;
 }
 
 int Agency::getLastId()
@@ -682,25 +757,6 @@ bool Agency::checkStop(string s) {
 
 	return exists;
 }
-
-/*
-//retorna o total do mes
-float Agency::endMonth() {
-
-typename vector<User *>::iterator it;
-float totalMonth = 0;
-
-for (it = users.begin(); it != users.end(); it++) {
-
-totalMonth += (*it)->payment();
-(*it)->resetTrips();   //só tem efeito nos passenger
-
-}
-
-return totalMonth;
-}
-*/
-
 
 void Agency::runTrip(int tripID) {
 
@@ -871,49 +927,6 @@ void Agency::displayUsers() {
 	return;
 }
 
-int Agency::menuDisplayUsers() {
-
-	ut.clearScreen();
-
-	ut.menuHeader();
-	cout << "|                          ";  ut.grey(); cout << "Users";  ut.white(); cout << "                          |" << endl;
-	ut.blue(); cout << "-----------------------------------------------------------" << endl;
-	ut.setcolor(7); cout << setw(5) << "ID" << setw(10) << "User" << setw(20) << "Name" << setw(10) << "Balance" << setw(10) << "Driver" << endl;
-	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
-	ut.setcolor(15);  displayUsers();
-	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;  ut.setcolor(7);
-	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
-		<< "|~~~                                 ";  ut.setcolor(7); cout << "< 0. Return >";  ut.setcolor(15); cout << "     ~~~|" << endl
-		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl << endl;
-
-	unsigned short int opcao;
-	cout << "Insira a sua escolha: ";
-	cin >> opcao;
-
-	while (cin.fail() || (opcao > 0))
-	{
-		if (cin.eof())
-		{
-			cin.clear();
-			return 0;
-		}
-		cin.clear();
-		cin.ignore(1000, '\n');
-		ut.setcolor(4); cout << "> Digito invalido!" << endl;
-		ut.setcolor(15); cout << "Volte a indicar escolha: ";
-		cin >> opcao;
-	}
-
-	if ((opcao >= 0) && (opcao < 1))
-	{
-		if (opcao == 0)
-			return 0;
-		return opcao;
-	}
-	return 0;
-
-}
-
 void Agency::displayBuddies() {
 
 	for (unsigned int i = 0; i < Users.size(); i++)
@@ -933,101 +946,33 @@ void Agency::displayBuddies() {
 	return;
 }
 
-int Agency::menuDisplayBuddies() {
-
-	ut.clearScreen();
-
-	ut.menuHeader();
-	cout << "|                      ";  ut.grey(); cout << "Relationships";  ut.white(); cout << "                    |" << endl;
-	ut.blue(); cout << "-----------------------------------------------------------" << endl;
-	ut.setcolor(15);  displayBuddies();
-	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;  ut.setcolor(7);
-	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
-		<< "|~~~                                 ";  ut.setcolor(7); cout << "< 0. Return >";  ut.setcolor(15); cout << "     ~~~|" << endl
-		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl << endl;
-
-	unsigned short int opcao;
-	cout << "Insira a sua escolha: ";
-	cin >> opcao;
-
-	while (cin.fail() || (opcao > 0))
-	{
-		if (cin.eof())
-		{
-			cin.clear();
-			return 0;
-		}
-		cin.clear();
-		cin.ignore(1000, '\n');
-		ut.setcolor(4); cout << "> Digito invalido!" << endl;
-		ut.setcolor(15); cout << "Volte a indicar escolha: ";
-		cin >> opcao;
-	}
-
-	if ((opcao >= 0) && (opcao < 1))
-	{
-		if (opcao == 0)
-			return 0;
-		return opcao;
-	}
-	return 0;
-
-}
-
 void Agency::displayTransactions() {
 
 	for (unsigned int i = 0; i < Transactions.size(); i++)
 	{
 		cout << setw(5) << Transactions.at(i).GetId();
 		cout << setw(20) << Transactions.at(i).GetDate();
-		cout << setw(18) << setprecision(2) << fixed << Transactions.at(i).GetValue();
+		cout << setw(22) << setprecision(2) << fixed << Transactions.at(i).GetValue();
 		cout << endl;
 	}
 
 	return;
 }
 
-int Agency::menuDisplayTransactions() {
+/*
+//retorna o total do mes
+float Agency::endMonth() {
 
-	ut.clearScreen();
+typename vector<User *>::iterator it;
+float totalMonth = 0;
 
-	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
-		<< "|~~~                      "; ut.blue(); cout << "ShareIt"; ut.white(); cout << "                      ~~~| " << endl
-		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
-		<< "|~~~                     ";  ut.setcolor(7); cout << "Transactions";  ut.setcolor(15); cout << "                  ~~~|" << endl
-		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-	ut.setcolor(7); cout << setw(5) << "ID" << setw(14) << "Data" << setw(28) << "Value" << endl;
-	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
-	ut.setcolor(15);  displayTransactions();
-	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;  ut.setcolor(7);
-	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
-		<< "|~~~                                 ";  ut.setcolor(7); cout << "< 0. Return >";  ut.setcolor(15); cout << "     ~~~|" << endl
-		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl << endl;
+for (it = users.begin(); it != users.end(); it++) {
 
-	unsigned short int opcao;
-	cout << "Insira a sua escolha: ";
-	cin >> opcao;
-
-	while (cin.fail() || (opcao > 0))
-	{
-		if (cin.eof())
-		{
-			cin.clear();
-			return 0;
-		}
-		cin.clear();
-		cin.ignore(1000, '\n');
-		ut.setcolor(4); cout << "> Digito invalido!" << endl;
-		ut.setcolor(15); cout << "Volte a indicar escolha: ";
-		cin >> opcao;
-	}
-
-	if ((opcao >= 0) && (opcao < 1))
-	{
-		if (opcao == 0)
-			return 0;
-		return opcao;
-	}
-	return 0;
+totalMonth += (*it)->payment();
+(*it)->resetTrips();   //só tem efeito nos passenger
 
 }
+
+return totalMonth;
+}
+*/

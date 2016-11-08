@@ -50,53 +50,58 @@ public:
 	singleton_instance = NULL;
 	instance()->importInfo();
 	}*/
+	
+	vector<User *> getUsers();
 
 	//Menu's
 
 	void registerUser();
 	void loginUser();
 
+	//Admin Only
 	int mainMenu_Admin();
 	void optionsMainMenu_Admin();
 
+	int menuDisplayUsers();
+	void optionsDisplayUsers();
+
+	void menuDisplayBuddies();
+	void menuDisplayTransactions();
+
+
+	//User Only
 	int mainMenu_User();
 	void optionsMainMenu_User();
+
 
 	//Files
 
 	void extractUsers();
-	void writeUsers();
+	void saveUsers();
 	void extractBuddies();
-	void writeBuddies();
+	void saveBuddies();
 	void extractTransactions();
-	void writeTransactions();
+	void saveTransactions();
 
 	//Basic Functions
 
-	bool validUser(string username); //existe user com name
+	bool validUser(string username); //existe user
 	bool validPassword(int pos, string password); //verifica se password esta correta
 	int findID(string name); //retorna id de name, id = -1 caso nao exista
 	int getPos(int id); //retorna posicao no vetor de users de id UTIL!!!
-	vector<User *> getUsers();
 	int getLastId();
 
 
 	//Functions
 	void addUser(User* u);
-
 	void addTrip();
 	bool checkStop(string s);
 	void runTrip(int tripID);
 
-
+	//Displays
 	void displayUsers();
-	int menuDisplayUsers();
-	
 	void displayBuddies(); 
-	int menuDisplayBuddies();
-
 	void displayTransactions();
-	int menuDisplayTransactions();
 
 	/*
 	void imprimeTrips();					//function that uses the Trips class' operator<< method to
