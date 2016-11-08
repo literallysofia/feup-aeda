@@ -76,6 +76,8 @@ public:
 
 	//Files
 
+	void extractData();
+	void saveData();
 	void extractUsers();
 	void saveUsers();
 	void extractBuddies();
