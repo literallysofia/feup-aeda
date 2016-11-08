@@ -24,6 +24,7 @@
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Stop.cpp" />
     <ClCompile Include="Tools.cpp" />
+    <ClCompile Include="Transactions.cpp" />
     <ClCompile Include="Trip.cpp" />
     <ClCompile Include="User.cpp" />
     <ClCompile Include="Utilities.cpp" />
@@ -33,12 +34,14 @@
     <ClInclude Include="Guest.h" />
     <ClInclude Include="Stop.h" />
     <ClInclude Include="Tools.h" />
+    <ClInclude Include="Transactions.h" />
     <ClInclude Include="Trip.h" />
     <ClInclude Include="User.h" />
     <ClInclude Include="Utilities.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Buddies.txt" />
+    <Text Include="Transactions.txt" />
     <Text Include="Users.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

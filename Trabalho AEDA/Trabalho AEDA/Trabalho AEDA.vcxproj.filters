@@ -39,6 +39,9 @@
     <ClCompile Include="Stop.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Transactions.cpp">
+      <Filter>Source Files\Resource Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Agency.h">
@@ -62,12 +65,18 @@
     <ClInclude Include="Stop.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Transactions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Users.txt">
       <Filter>Source Files\Resource Files</Filter>
     </Text>
     <Text Include="Buddies.txt">
+      <Filter>Source Files\Resource Files</Filter>
+    </Text>
+    <Text Include="Transactions.txt">
       <Filter>Source Files\Resource Files</Filter>
     </Text>
   </ItemGroup>

@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include "Trip.h"
+#include "Transactions.h"
 
 using namespace std;
 
@@ -14,6 +15,7 @@ protected:
 	float balance; //saldo disponivel na conta
 	static int maintenanceFee;
 	vector <User *> buddies;
+	vector <Transaction> transactions;
 	
 public:
 	User(string name);
@@ -25,7 +27,7 @@ public:
 	string getPassword() const;
 	float getBalance() const;
 	void deposit(float value);
-
+	vector <Transaction> getTransactions() const;
 	virtual bool car() const;
 	virtual void addTrip(Trip &t) {};
 	virtual bool searchTrip(vector<Trip> &vec);
