@@ -500,13 +500,14 @@ void Agency::optionsCreateTrip()
 void Agency::extractData() {
 	extractUsers();
 	extractBuddies();
+	extractStops();
 	extractTransactions();
 }
 
 void Agency::saveData() {
 	saveUsers();
 	//saveBuddies(); TODO: crasha tudo cuidado
-	//saveTransactions();
+	saveTransactions();
 	return;
 }
 

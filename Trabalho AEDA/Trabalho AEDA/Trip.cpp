@@ -1,6 +1,6 @@
 #include "Trip.h"
 
-int Trip::counter = 0;
+int Trip::counter = 1;
 
 Trip::Trip()
 {
