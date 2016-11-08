@@ -155,7 +155,7 @@ void Agency::loginUser()
 		name = output;
 	else id = stoi(output, nullptr, 10);
 
-	while (cin.fail() || (getPos(id) == -1 && validUser(name) == false))
+	while (cin.fail() || (getPos(id) == -1 && validUser(name) == false && name != "admin"))
 	{
 		if (cin.eof())
 		{
