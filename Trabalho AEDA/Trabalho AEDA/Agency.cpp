@@ -447,6 +447,15 @@ void Agency::optionsMenuAccount()
 		}
 }
 
+int Agency::menuCreateTrip()
+{
+	return 0;
+}
+
+void Agency::optionsCreateTrip()
+{
+}
+
 
 /*FILES*/
 

@@ -76,6 +76,9 @@ public:
 	int menuAccount();
 	void optionsMenuAccount();
 
+	int menuCreateTrip();
+	void optionsCreateTrip();
+
 
 	//Files
 

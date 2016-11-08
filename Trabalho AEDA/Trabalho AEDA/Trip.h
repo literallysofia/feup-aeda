@@ -8,8 +8,8 @@ using namespace std;
 class Trip
 {
 private:
-	int driver;
 	int ID;
+	int driver;
 	vector<string> stops;
 	vector<int> passengers;
 	int seatsAvailable;
