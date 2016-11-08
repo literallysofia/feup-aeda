@@ -41,6 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Buddies.txt" />
+    <Text Include="Record.txt" />
+    <Text Include="Stops.txt" />
     <Text Include="Transactions.txt" />
     <Text Include="Users.txt" />
   </ItemGroup>

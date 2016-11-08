@@ -111,7 +111,9 @@ void Agency::registerUser()
 	this->sessionID = nID;
 	this->sessionPos = (int)Users.size() - 1;
 	ut.red(); cout << "\n\n> Success! You just created your account!\n"; Sleep(2500); ut.white();
+
 	optionsMainMenu_User();
+
 
 	ut.clearScreen();
 	return;
@@ -188,7 +190,7 @@ int Agency::mainMenu_Admin() {
 	cout << "|~~~                   ";  ut.grey(); cout << "ADMINISTRATION";  ut.white(); cout << "                  ~~~|" << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
 		<< setw(18) << "1. Users" << setw(30) << "4. Relationships" << endl
-		<< setw(24) << "2. Trip Record" << setw(20) << "5. smth else" << endl
+		<< setw(24) << "2. Trip Record" << setw(16) << "5. Stops" << endl
 		<< setw(25) << "3. Transactions" << setw(19) << "6. smth else" << endl;
 	ut.blue(); cout << "-----------------------------------------------------------" << endl;  ut.white();
 	cout << "|~~~                                ";  ut.grey(); cout << "< 0. Close >";  ut.white(); cout << "       ~~~|" << endl
@@ -226,18 +228,19 @@ void Agency::optionsMainMenu_Admin() {
 		switch (option)
 		{
 		case 1:
-			Agency::instance()->menuDisplayUsers();
+			menuDisplayUsers();
 			break;
 		case 2:
 			//TODO mostrar o historico de trips
 			break;
 		case 3:
-			Agency::instance()->menuDisplayTransactions();
+			menuDisplayTransactions();
 			break;
 		case 4:
-			Agency::instance()->menuDisplayBuddies();
+			menuDisplayBuddies();
 			break;
 		case 5:
+			menuDisplayStops();
 			break;
 		case 6:
 			break;
@@ -316,6 +319,19 @@ void Agency::menuDisplayTransactions() {
 	ut.setcolor(7); cout << setw(5) << "ID" << setw(14) << "Data" << setw(28) << "Value" << endl;
 	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
 	ut.setcolor(15);  displayTransactions();
+	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
+	ut.red(); cout << "\n Press anything to go back."; ut.white(); getchar(); getchar();
+	return;
+}
+
+void Agency::menuDisplayStops() {
+	ut.clearScreen();
+	ut.menuHeader();
+	cout << "|~~~                       ";  ut.setcolor(7); cout << "Stops";  ut.setcolor(15); cout << "                       ~~~|" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+	ut.setcolor(7); cout << setw(15) << "Code" << setw(35) << "Name" << endl;
+	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
+	ut.setcolor(15);  displayStops();
 	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
 	ut.red(); cout << "\n Press anything to go back."; ut.white(); getchar(); getchar();
 	return;
@@ -627,6 +643,45 @@ void Agency::saveTransactions() {
 				<< Transactions.at(i).GetValue() << endl;
 		}
 		TransFile.close();
+	}
+	else { ut.setcolor(4); cerr << "Impossivel abrir ficheiro." << endl; ut.setcolor(15); }
+}
+
+void Agency::extractStops() {
+
+	ifstream Stopsfile("Stops.txt");
+	string line;
+
+	if (Stopsfile.is_open())
+	{
+		while (getline(Stopsfile, line))
+		{
+			size_t pos1 = line.find(";"); //posi?ao 1
+			string code = line.substr(0, pos1); //string codigo da paragem
+			string name = line.substr(pos1 + 1); //string nome da paragem
+
+			stop s;
+			s.code = code;
+			s.name = name;
+			Stops.push_back(s);
+		}
+		Stopsfile.close();
+	}
+
+	else { ut.setcolor(4); cerr << "Impossivel abrir ficheiro." << endl; ut.setcolor(15); }
+}
+
+void Agency::saveStops() {
+
+	ofstream StopsFile("Stops.txt");
+
+	if (StopsFile.is_open())
+	{
+		for (unsigned int i = 0; i < Stops.size(); i++)
+		{
+			StopsFile << Stops.at(i).code << ";" << Stops.at(i).name << ";" << endl;
+		}
+		StopsFile.close();
 	}
 	else { ut.setcolor(4); cerr << "Impossivel abrir ficheiro." << endl; ut.setcolor(15); }
 }
@@ -971,6 +1026,19 @@ void Agency::displayTransactions() {
 
 	return;
 }
+
+void Agency::displayStops() {
+
+	for (unsigned int i = 0; i < Stops.size(); i++)
+	{
+		cout << setw(15) << Stops.at(i).code;
+		cout << setw(35) << Stops.at(i).name;
+		cout << endl;
+	}
+
+	return;
+}
+
 
 /*
 //retorna o total do mes

@@ -79,5 +79,11 @@
     <Text Include="Buddies.txt">
       <Filter>Source Files\Resource Files</Filter>
     </Text>
+    <Text Include="Record.txt">
+      <Filter>Source Files\Resource Files</Filter>
+    </Text>
+    <Text Include="Stops.txt">
+      <Filter>Source Files\Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>
