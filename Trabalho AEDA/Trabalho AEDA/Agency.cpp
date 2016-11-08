@@ -412,6 +412,19 @@ void Agency::optionsMainMenu_User() {
 /*FILES*/
 
 /* EXTRACT AND SAVE */
+void Agency::extractData() {
+	extractUsers();
+	extractBuddies();
+	extractTransactions();
+}
+
+void Agency::saveData() {
+	saveUsers();
+	saveBuddies();
+	saveTransactions();
+	return;
+}
+
 void Agency::extractUsers()
 {
 	ifstream Userfile("Users.txt");

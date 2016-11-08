@@ -83,15 +83,12 @@ void optionsWelcomeMenu()
 
 int main()
 {
-	
 	//Janela//
 	HWND consoleWindow = GetConsoleWindow();
 	SetWindowPos(consoleWindow, 0, 310, 150, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
 
-	Agency::instance()->extractUsers();
-	Agency::instance()->extractBuddies();
-	Agency::instance()->extractTransactions();
 	Agency::instance()->extractStops();
+	Agency::instance()->extractData();
 
 	optionsWelcomeMenu();
 	
