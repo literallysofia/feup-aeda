@@ -9,6 +9,13 @@ Utilities::~Utilities()
 {
 }
 
+void Utilities::menuHeader()
+{
+	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
+		<< "|~~~                      "; blue(); cout << "ShareIt"; white(); cout << "                      ~~~| " << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+}
+
 void Utilities::setcolor(int ForgC)
 {
 	WORD wColor;

@@ -62,7 +62,7 @@ public:
 	int mainMenu_User();
 	void optionsMainMenu_User();
 
-	//Ficheiros
+	//Files
 
 	void extractUsers();
 	void writeUsers();
@@ -71,14 +71,18 @@ public:
 	void extractTransactions();
 	void writeTransactions();
 
-	//Functions
+	//Basic Functions
 
-	bool validUser(string name);
-	bool validPassword(string password);
-	int findID(string name);
-	int getPos(int id);
+	bool validUser(string name); //existe user com name
+	bool validPassword(int pos, string password); //verifica se password esta correta
+	int findID(string name); //retorna id de name, id = -1 caso nao exista
+	int getPos(int id); //retorna posicao no vetor de users de id UTIL!!!
 	vector<User *> getUsers();
-	void addUsers(User* u);
+	int getLastId();
+
+
+	//Functions
+	void addUser(User* u);
 
 	void addTrip();
 	bool checkStop(string s);

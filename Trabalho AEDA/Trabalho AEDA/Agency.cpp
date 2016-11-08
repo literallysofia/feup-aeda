@@ -44,73 +44,186 @@ void Agency::registerUser()
 	ut.clearScreen();
 	string type, name, password;
 
-	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
-		<< "|~~~                      "; ut.blue(); cout << "ShareIt"; ut.white(); cout << "                      ~~~| " << endl
-		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
-		<< "|                      ";  ut.grey(); cout << "Create Account";  ut.white(); cout << "                     |" << endl;
+	ut.menuHeader();
+	cout << "|                      ";  ut.grey(); cout << "Create Account";  ut.white(); cout << "                     |" << endl;
 	ut.blue(); cout << "-----------------------------------------------------------" << endl; ut.white();
 	cout << "    Types of accounts:\n      - Driver: You need to register your car and host\n      trips. You'll also earn some money.\n      - Passenger: You can only join existing trips.\n\n";
-	ut.grey(); cout << "  > Do you want to register as a Driver? (y/n) "; ut.white(); cin >> type;  cout << endl;
-	ut.grey(); cout << "  > Enter name: "; ut.white(); cin.ignore(); getline(cin, name); cout << endl;
-	ut.grey(); cout << "  > Enter password: "; ut.white();  cin >> password; cout << endl;
+	ut.grey(); cout << "    > Do you want to register as a Driver? (y/n) "; ut.white(); cin >> type;  cout << endl;
 
-	if ((type == "y") || (type == "Y"))
-		//addUser(true, name, password);
-		cout << "ok";
-	else {
-		if ((type == "n") || (type == "N"))
-			//addUser(false, name, password);
-			cout << "okk";
-		else return; //TODO nao pode ser assim lmao
+	while (cin.fail() || ((type != "y") && (type != "Y") && (type != "n") && (type != "N")))
+	{
+		if (cin.eof())
+		{
+			cin.clear();
+			return;
+		}
+		cin.clear();
+		cin.ignore(1000, '\n');
+		ut.red(); cout << "> Invalid choice!" << endl;
+		ut.white(); cout << "Please try again: ";
+		cin >> type; cout << endl;
 	}
 
-	//TODO melhorar esta shit
+	if ((type == "y") || (type == "Y")) {
+		ut.blue(); cout << "  DRIVER ACCOUNT\n"; ut.white();
+		ut.grey(); cout << "    > Enter name: "; ut.white(); cin >> name;
 
-	//TODO adicionar utilizador
-	//TODO sucesso ou nao
-	//TODO abrir menu principal
+		while (cin.fail() || validUser(name)) {
+			if (cin.eof())
+			{
+				cin.clear();
+				ut.clearScreen();
+				return;
+			}
+			cin.clear();
+			cin.ignore(1000, '\n');
+			ut.red(); cout << "\n> Invalid name!" << endl;
+			ut.white(); cout << "Please try again: ";
+			cin >> name;
+		}
+
+		bool a = true;
+		while (a) {
+			ut.grey(); cout << "\n    > Enter password: "; ut.white();
+			password = t.insertPassword();
+			ut.grey(); cout << "\n    > Confirm password: "; ut.white();
+			if (t.sameString(password, t.insertPassword()))
+				a = false;
+			else { ut.red(); cout << "\n> Password doesnt match! Try again.\n"; }
+		}
+
+		int nID = getLastId() + 1;
+		User *u1 = new Driver(nID, name, 0.00, password);
+		addUser(u1);
+		this->sessionID = nID;
+		this->sessionPos = Users.size() - 1;
+		ut.red(); cout << "\n\n> Success! You just created your account!\n"; Sleep(2500); ut.white();
+		optionsMainMenu_User();
+	}
+	else if ((type == "n") || (type == "N")) {
+		ut.blue(); cout << "  PASSENGER ACCOUNT\n"; ut.white();
+		ut.grey(); cout << "    > Enter name: "; ut.white(); cin >> name;
+
+		while (cin.fail() || validUser(name)) {
+			if (cin.eof())
+			{
+				cin.clear();
+				ut.clearScreen();
+				return;
+			}
+			cin.clear();
+			cin.ignore(1000, '\n');
+			ut.red(); cout << "\n> Invalid name!" << endl;
+			ut.white(); cout << "Please try again: ";
+			cin >> name;
+		}
+
+		bool a = true;
+		while (a) {
+			ut.grey(); cout << "\n    > Enter password: "; ut.white();
+			password = t.insertPassword();
+			ut.grey(); cout << "\n    > Confirm password: "; ut.white();
+			if (t.sameString(password, t.insertPassword()))
+				a = false;
+			else { ut.red(); cout << "\n> Password doesnt match! Try again.\n"; }
+		}
+
+		int nID = getLastId() + 1;
+		User *u1 = new Passenger(nID, name, 0.00, password);
+		addUser(u1);
+		this->sessionID = nID;
+		this->sessionPos = Users.size() - 1;
+		ut.red(); cout << "\n\n> Success! You just created your account!\n"; Sleep(2500); ut.white();
+		optionsMainMenu_User();
+	}
+	ut.clearScreen();
+	return;
 }
 
 void Agency::loginUser()
 {
 	ut.clearScreen();
 	int id = 0;
-	string output, password;
+	string output, password, name;
 
-	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
-		<< "|~~~                      "; ut.blue(); cout << "ShareIt"; ut.white(); cout << "                      ~~~| " << endl
-		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
-		<< "|                          ";  ut.grey(); cout << "Login";  ut.white(); cout << "                          |" << endl;
+	ut.menuHeader();
+	cout << "|                          ";  ut.grey(); cout << "Login";  ut.white(); cout << "                          |" << endl;
 	ut.blue(); cout << "-----------------------------------------------------------" << endl;
-	ut.grey(); cout << "       > Enter id or name: "; ut.white(); cin.ignore(); getline(cin, output); cout << endl;
-	ut.grey(); cout << "       > Enter password: "; ut.white();  cin >> password; cout << endl;
+	ut.grey(); cout << "    > Enter id or name: "; ut.white(); cin.ignore(); getline(cin, output);
 
-	if (output == "admin")
-		optionsMainMenu_Admin();
-	else {
-		if (t.outputName(output)) { // se é uma string
-			if (validUser(output) && validPassword(password)) {
-				this->sessionID = findID(output);
-				this->sessionPos = getPos(sessionID);
-				optionsMainMenu_User();
-			}
-			else return;
+	if (t.outputName(output))
+		name = output;
+	else id = stoi(output, nullptr, 10);
+
+	while (cin.fail() || (getPos(id) == -1 && validUser(name) == false && name != "admin"))
+	{
+		if (cin.eof())
+		{
+			cin.clear();
+			ut.clearScreen();
+			return;
+		}
+		cin.clear();
+		cin.ignore(1000, '\n');
+		ut.red(); cout << "> Login failed!" << endl;
+		ut.white(); cout << "Please try again.\n\n";
+		ut.grey(); cout << "    > Enter id or name: "; ut.white(); getline(cin, output);
+
+		if (t.outputName(output))
+			name = output;
+		else id = stoi(output, nullptr, 10);
+	}
+
+	//TODO: problemas com cin.ignore() e getline, nao sei se aceita quando o nome tem espacos e tal idk
+
+	if (name == "admin") {
+		ut.grey(); cout << "\n    > Enter password: "; ut.white();
+		if (t.insertPassword() == "admin") {
+			ut.red(); cout << "\n\n> Login successful as admin!\n"; Sleep(2000); ut.white();
+			optionsMainMenu_Admin();
 		}
 		else {
-			id = stoi(output, nullptr, 10);
-			if (getPos(id) == -1)
-				return; //nao existe woops
-			else {
+			ut.red(); cout << "\n\n> Login failed!" << endl; ut.white();
+			Sleep(2000);
+			ut.clearScreen();
+			return;
+		}
+	}
+	else {
+		if (id != 0) { //caso faca login por id
+			ut.grey(); cout << "\n    > Enter password: "; ut.white();
+			password = t.insertPassword();
+			if (validPassword(getPos(id), password)) {
 				this->sessionID = id;
 				this->sessionPos = getPos(sessionID);
+				ut.red(); cout << "\n\n> Login successful!\n"; Sleep(2000); ut.white();
 				optionsMainMenu_User();
+			}
+			else {
+				ut.red(); cout << "\n\n> Login failed!" << endl; ut.white();
+				Sleep(2000);
+				ut.clearScreen();
+				return;
+			}
+		}
+		else { //caso  faca login por nome
+			ut.grey(); cout << "\n    > Enter password: "; ut.white();
+			password = t.insertPassword();
+			if (validPassword(getPos(findID(name)), password)) {
+				this->sessionID = findID(name);
+				this->sessionPos = getPos(sessionID);
+				ut.red(); cout << "\n\n> Login successful!\n"; Sleep(2000); ut.white();
+				optionsMainMenu_User();
+			}
+			else {
+				ut.red(); cout << "\n\n> Login failed!" << endl; ut.white();
+				Sleep(2000);
+				ut.clearScreen();
+				return;
 			}
 		}
 	}
-
-	//TODO verificar se existe 
-	//TODO admin ou nao
-	//TODO abrir menu principal
+	ut.clearScreen();
 	return;
 }
 
@@ -118,10 +231,8 @@ void Agency::loginUser()
 int Agency::mainMenu_Admin() {
 
 	ut.clearScreen();
-	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
-		<< "|~~~                      "; ut.blue(); cout << "ShareIt"; ut.white(); cout << "                      ~~~| " << endl
-		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
-		<< "|~~~                   ";  ut.grey(); cout << "ADMINISTRATION";  ut.white(); cout << "                  ~~~|" << endl
+	ut.menuHeader();
+	cout << "|~~~                   ";  ut.grey(); cout << "ADMINISTRATION";  ut.white(); cout << "                  ~~~|" << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
 		<< setw(18) << "1. Users" << setw(30) << "4. Relationships" << endl
 		<< setw(24) << "2. Trip Record" << setw(20) << "5. smth else" << endl
@@ -187,10 +298,8 @@ void Agency::optionsMainMenu_Admin() {
 int Agency::mainMenu_User() {
 
 	ut.clearScreen();
-	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
-		<< "|~~~                      "; ut.blue(); cout << "ShareIt"; ut.white(); cout << "                      ~~~| " << endl
-		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
-		<< "|~~~                   ";  ut.grey(); cout << "MAIN MENU";  ut.white(); cout << "                  ~~~|" << endl
+	ut.menuHeader();
+	cout << "|~~~                     ";  ut.grey(); cout << "MAIN MENU";  ut.white(); cout << "                     ~~~|" << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
 	ut.grey(); cout << setw(30) << "You are logged in as: "; ut.white(); cout << Users.at(getPos(sessionID))->getName() << endl;
 	ut.blue(); cout << "-----------------------------------------------------------" << endl; ut.white();
@@ -490,11 +599,9 @@ bool Agency::validUser(string name) {
 	return false;
 }
 
-bool Agency::validPassword(string password) {
-	for (unsigned int i = 0; i < Users.size(); i++) {
-		if (password == Users.at(i)->getPassword())
-			return true;
-	}
+bool Agency::validPassword(int pos, string password) {
+	if (password == Users.at(pos)->getPassword())
+		return true;
 	return false;
 }
 
@@ -518,7 +625,12 @@ vector<User *> Agency::getUsers() {
 	return Users;
 }
 
-void Agency::addUsers(User * u)
+int Agency::getLastId()
+{
+	return Users.at(Users.size() - 1)->getID();
+}
+
+void Agency::addUser(User * u)
 {
 	Users.push_back(u);
 }
@@ -811,10 +923,8 @@ int Agency::menuDisplayUsers() {
 
 	ut.clearScreen();
 
-	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
-		<< "|~~~                      "; ut.blue(); cout << "ShareIt"; ut.white(); cout << "                      ~~~| " << endl
-		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
-		<< "|                          ";  ut.grey(); cout << "Users";  ut.white(); cout << "                          |" << endl;
+	ut.menuHeader();
+	cout << "|                          ";  ut.grey(); cout << "Users";  ut.white(); cout << "                          |" << endl;
 	ut.blue(); cout << "-----------------------------------------------------------" << endl;
 	ut.setcolor(7); cout << setw(5) << "ID" << setw(20) << "Name" << setw(18) << "Balance" << setw(12) << "Driver" << endl;
 	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
@@ -875,10 +985,8 @@ int Agency::menuDisplayBuddies() {
 
 	ut.clearScreen();
 
-	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
-		<< "|~~~                      "; ut.blue(); cout << "ShareIt"; ut.white(); cout << "                      ~~~| " << endl
-		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
-		<< "|                      ";  ut.grey(); cout << "Relationships";  ut.white(); cout << "                    |" << endl;
+	ut.menuHeader();
+	cout << "|                      ";  ut.grey(); cout << "Relationships";  ut.white(); cout << "                    |" << endl;
 	ut.blue(); cout << "-----------------------------------------------------------" << endl;
 	ut.setcolor(15);  displayBuddies();
 	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;  ut.setcolor(7);
