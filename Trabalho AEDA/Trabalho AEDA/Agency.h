@@ -13,6 +13,7 @@
 #include "User.h"
 #include "Guest.h"
 #include "Trip.h"
+#include "Transactions.h"
 
 using namespace std;
 
@@ -28,7 +29,7 @@ private:
 	vector<Trip> Trips;
 	vector<Guest *> Guests;
 	vector<string> stopsAvailable = { "a","b","c" };
-	//vector<Transaction> Transactions;
+	vector<Transaction> Transactions;
 
 public:
 	Agency();
@@ -67,6 +68,8 @@ public:
 	void writeUsers();
 	void extractBuddies();
 	void writeBuddies();
+	void extractTransactions();
+	void writeTransactions();
 
 	//Basic Functions
 
@@ -82,21 +85,20 @@ public:
 	void addUser(User* u);
 
 	void addTrip();
-
 	bool checkStop(string s);
-
 	void runTrip(int tripID);
 
-	void imprimeUsers();					//function that uses the Users class' operator<< method to
-	//print all agency's users to screen
 
 	void displayUsers();
 	int menuDisplayUsers();
-
-
+	
 	void displayBuddies(); 
 	int menuDisplayBuddies();
 
+	void displayTransactions();
+	int menuDisplayTransactions();
+
+	/*
 	void imprimeTrips();					//function that uses the Trips class' operator<< method to
 	//print all agency's trips to screen
 	void readUsers(std::ifstream & infile);    //TODO
@@ -105,6 +107,7 @@ public:
 
 
 	float endMonth();
+	*/
 
 
 };
