@@ -73,10 +73,10 @@
     <Text Include="Users.txt">
       <Filter>Source Files\Resource Files</Filter>
     </Text>
-    <Text Include="Buddies.txt">
+    <Text Include="Transactions.txt">
       <Filter>Source Files\Resource Files</Filter>
     </Text>
-    <Text Include="Transactions.txt">
+    <Text Include="Buddies.txt">
       <Filter>Source Files\Resource Files</Filter>
     </Text>
   </ItemGroup>

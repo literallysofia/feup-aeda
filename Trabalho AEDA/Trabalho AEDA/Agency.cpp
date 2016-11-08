@@ -42,7 +42,7 @@ Agency::~Agency()
 void Agency::registerUser()
 {
 	ut.clearScreen();
-	string type, name, password;
+	string type, name, username, password;
 
 	ut.menuHeader();
 	cout << "|                      ";  ut.grey(); cout << "Create Account";  ut.white(); cout << "                     |" << endl;
@@ -64,78 +64,50 @@ void Agency::registerUser()
 		cin >> type; cout << endl;
 	}
 
+	ut.grey(); cout << "    > Enter username: "; ut.white(); cin >> username;
+
+	while (cin.fail() || validUser(username)) {
+		if (cin.eof())
+		{
+			cin.clear();
+			ut.clearScreen();
+			return;
+		}
+		cin.clear();
+		cin.ignore(1000, '\n');
+		ut.red(); cout << "\n> That username is taken!" << endl;
+		ut.white(); cout << "Please try again: ";
+		cin >> username;
+	}
+
+	bool a = false;
+	while (!a) {
+		ut.grey(); cout << "\n    > Enter password: "; ut.white();
+		password = t.insertPassword();
+		ut.grey(); cout << "\n    > Confirm password: "; ut.white();
+		if (t.sameString(password, t.insertPassword()))
+			a = true;
+		else { ut.red(); cout << "\n> Password doesnt match! Try again.\n"; }
+	}
+
+	ut.grey(); cout << "\n\n    > Enter name: "; ut.white(); cin.ignore(); getline(cin, name);
+
+	int nID = getLastId() + 1;
+
 	if ((type == "y") || (type == "Y")) {
-		ut.blue(); cout << "  DRIVER ACCOUNT\n"; ut.white();
-		ut.grey(); cout << "    > Enter name: "; ut.white(); cin >> name;
-
-		while (cin.fail() || validUser(name)) {
-			if (cin.eof())
-			{
-				cin.clear();
-				ut.clearScreen();
-				return;
-			}
-			cin.clear();
-			cin.ignore(1000, '\n');
-			ut.red(); cout << "\n> Invalid name!" << endl;
-			ut.white(); cout << "Please try again: ";
-			cin >> name;
-		}
-
-		bool a = true;
-		while (a) {
-			ut.grey(); cout << "\n    > Enter password: "; ut.white();
-			password = t.insertPassword();
-			ut.grey(); cout << "\n    > Confirm password: "; ut.white();
-			if (t.sameString(password, t.insertPassword()))
-				a = false;
-			else { ut.red(); cout << "\n> Password doesnt match! Try again.\n"; }
-		}
-
-		int nID = getLastId() + 1;
-		User *u1 = new Driver(nID, name, 0.00, password);
+		User *u1 = new Driver(nID, name, 0.00, username, password);
 		addUser(u1);
-		this->sessionID = nID;
-		this->sessionPos = Users.size() - 1;
-		ut.red(); cout << "\n\n> Success! You just created your account!\n"; Sleep(2500); ut.white();
-		optionsMainMenu_User();
 	}
-	else if ((type == "n") || (type == "N")) {
-		ut.blue(); cout << "  PASSENGER ACCOUNT\n"; ut.white();
-		ut.grey(); cout << "    > Enter name: "; ut.white(); cin >> name;
-
-		while (cin.fail() || validUser(name)) {
-			if (cin.eof())
-			{
-				cin.clear();
-				ut.clearScreen();
-				return;
-			}
-			cin.clear();
-			cin.ignore(1000, '\n');
-			ut.red(); cout << "\n> Invalid name!" << endl;
-			ut.white(); cout << "Please try again: ";
-			cin >> name;
-		}
-
-		bool a = true;
-		while (a) {
-			ut.grey(); cout << "\n    > Enter password: "; ut.white();
-			password = t.insertPassword();
-			ut.grey(); cout << "\n    > Confirm password: "; ut.white();
-			if (t.sameString(password, t.insertPassword()))
-				a = false;
-			else { ut.red(); cout << "\n> Password doesnt match! Try again.\n"; }
-		}
-
-		int nID = getLastId() + 1;
-		User *u1 = new Passenger(nID, name, 0.00, password);
+	else {
+		User *u1 = new Passenger(nID, name, 0.00, username, password);
 		addUser(u1);
-		this->sessionID = nID;
-		this->sessionPos = Users.size() - 1;
-		ut.red(); cout << "\n\n> Success! You just created your account!\n"; Sleep(2500); ut.white();
-		optionsMainMenu_User();
 	}
+	
+	this->sessionID = nID;
+	this->sessionPos = (int)Users.size() - 1;
+	ut.red(); cout << "\n\n> Success! You just created your account!\n"; Sleep(2500); ut.white();
+	optionsMainMenu_User();
+
 	ut.clearScreen();
 	return;
 }
@@ -143,19 +115,15 @@ void Agency::registerUser()
 void Agency::loginUser()
 {
 	ut.clearScreen();
-	int id = 0;
-	string output, password, name;
+	int id;
+	string username, password;
 
 	ut.menuHeader();
 	cout << "|                          ";  ut.grey(); cout << "Login";  ut.white(); cout << "                          |" << endl;
 	ut.blue(); cout << "-----------------------------------------------------------" << endl;
-	ut.grey(); cout << "    > Enter id or name: "; ut.white(); cin.ignore(); getline(cin, output);
+	ut.grey(); cout << "    > Enter username: "; ut.white(); cin >> username;
 
-	if (t.outputName(output))
-		name = output;
-	else id = stoi(output, nullptr, 10);
-
-	while (cin.fail() || (getPos(id) == -1 && validUser(name) == false && name != "admin"))
+	while (cin.fail() || (validUser(username) == false && username != "admin"))
 	{
 		if (cin.eof())
 		{
@@ -167,16 +135,12 @@ void Agency::loginUser()
 		cin.ignore(1000, '\n');
 		ut.red(); cout << "> Login failed!" << endl;
 		ut.white(); cout << "Please try again.\n\n";
-		ut.grey(); cout << "    > Enter id or name: "; ut.white(); getline(cin, output);
-
-		if (t.outputName(output))
-			name = output;
-		else id = stoi(output, nullptr, 10);
+		ut.grey(); cout << "    > Enter username: "; ut.white(); cin >> username;
 	}
 
 	//TODO: problemas com cin.ignore() e getline, nao sei se aceita quando o nome tem espacos e tal idk
 
-	if (name == "admin") {
+	if (username == "admin") {
 		ut.grey(); cout << "\n    > Enter password: "; ut.white();
 		if (t.insertPassword() == "admin") {
 			ut.red(); cout << "\n\n> Login successful as admin!\n"; Sleep(2000); ut.white();
@@ -190,37 +154,21 @@ void Agency::loginUser()
 		}
 	}
 	else {
-		if (id != 0) { //caso faca login por id
-			ut.grey(); cout << "\n    > Enter password: "; ut.white();
-			password = t.insertPassword();
-			if (validPassword(getPos(id), password)) {
-				this->sessionID = id;
-				this->sessionPos = getPos(sessionID);
-				ut.red(); cout << "\n\n> Login successful!\n"; Sleep(2000); ut.white();
-				optionsMainMenu_User();
-			}
-			else {
-				ut.red(); cout << "\n\n> Login failed!" << endl; ut.white();
-				Sleep(2000);
-				ut.clearScreen();
-				return;
-			}
+		id = findID(username);
+
+		ut.grey(); cout << "\n    > Enter password: "; ut.white();
+		password = t.insertPassword();
+		if (validPassword(getPos(id), password)) {
+			this->sessionID = id;
+			this->sessionPos = getPos(sessionID);
+			ut.red(); cout << "\n\n> Login successful!\n"; Sleep(2000); ut.white();
+			optionsMainMenu_User();
 		}
-		else { //caso  faca login por nome
-			ut.grey(); cout << "\n    > Enter password: "; ut.white();
-			password = t.insertPassword();
-			if (validPassword(getPos(findID(name)), password)) {
-				this->sessionID = findID(name);
-				this->sessionPos = getPos(sessionID);
-				ut.red(); cout << "\n\n> Login successful!\n"; Sleep(2000); ut.white();
-				optionsMainMenu_User();
-			}
-			else {
-				ut.red(); cout << "\n\n> Login failed!" << endl; ut.white();
-				Sleep(2000);
-				ut.clearScreen();
-				return;
-			}
+		else {
+			ut.red(); cout << "\n\n> Login failed!" << endl; ut.white();
+			Sleep(2000);
+			ut.clearScreen();
+			return;
 		}
 	}
 	ut.clearScreen();
@@ -405,13 +353,13 @@ void Agency::extractUsers()
 			if (bcar)
 			{
 				//se o User tiver carro, adiciona um novo driver
-				User *d1 = new Driver(idi, nome, balancef, pass);
+				User *d1 = new Driver(idi, nome, balancef, "string", pass);
 				Users.push_back(d1);
 			}
 			else
 			{
 				//caso contrario adiciona um novo passenger
-				User *p1 = new Passenger(idi, nome, balancef, pass);
+				User *p1 = new Passenger(idi, nome, balancef, "string", pass);
 				Users.push_back(p1);
 			}
 		}
@@ -591,9 +539,9 @@ void Agency::writeTransactions() {
 
 /* FUNCOES */
 
-bool Agency::validUser(string name) {
+bool Agency::validUser(string username) {
 	for (unsigned int i = 0; i < Users.size(); i++) {
-		if (name == Users.at(i)->getName())
+		if (username == Users.at(i)->getUsername())
 			return true;
 	}
 	return false;
@@ -605,9 +553,9 @@ bool Agency::validPassword(int pos, string password) {
 	return false;
 }
 
-int Agency::findID(string name) {
+int Agency::findID(string username) {
 	for (unsigned int i = 0; i < Users.size(); i++) {
-		if (name == Users.at(i)->getName())
+		if (username == Users.at(i)->getUsername())
 			return Users.at(i)->getID();
 	}
 	return -1;
