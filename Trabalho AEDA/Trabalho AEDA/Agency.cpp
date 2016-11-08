@@ -214,7 +214,8 @@ void Agency::loginUser()
 				this->sessionPos = getPos(sessionID);
 				ut.red(); cout << "\n\n> Login successful!\n"; Sleep(2000); ut.white();
 				optionsMainMenu_User();
-			} else {
+			}
+			else {
 				ut.red(); cout << "\n\n> Login failed!" << endl; ut.white();
 				Sleep(2000);
 				ut.clearScreen();
@@ -230,10 +231,8 @@ void Agency::loginUser()
 int Agency::mainMenu_Admin() {
 
 	ut.clearScreen();
-	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
-		<< "|~~~                      "; ut.blue(); cout << "ShareIt"; ut.white(); cout << "                      ~~~| " << endl
-		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
-		<< "|~~~                   ";  ut.grey(); cout << "ADMINISTRATION";  ut.white(); cout << "                  ~~~|" << endl
+	ut.menuHeader();
+	cout << "|~~~                   ";  ut.grey(); cout << "ADMINISTRATION";  ut.white(); cout << "                  ~~~|" << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
 		<< setw(18) << "1. Users" << setw(30) << "4. Relationships" << endl
 		<< setw(24) << "2. Trip Record" << setw(20) << "5. smth else" << endl
@@ -299,10 +298,8 @@ void Agency::optionsMainMenu_Admin() {
 int Agency::mainMenu_User() {
 
 	ut.clearScreen();
-	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
-		<< "|~~~                      "; ut.blue(); cout << "ShareIt"; ut.white(); cout << "                      ~~~| " << endl
-		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
-		<< "|~~~                   ";  ut.grey(); cout << "MAIN MENU";  ut.white(); cout << "                  ~~~|" << endl
+	ut.menuHeader();
+	cout << "|~~~                     ";  ut.grey(); cout << "MAIN MENU";  ut.white(); cout << "                     ~~~|" << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
 	ut.grey(); cout << setw(30) << "You are logged in as: "; ut.white(); cout << Users.at(getPos(sessionID))->getName() << endl;
 	ut.blue(); cout << "-----------------------------------------------------------" << endl; ut.white();
@@ -862,10 +859,8 @@ int Agency::menuDisplayUsers() {
 
 	ut.clearScreen();
 
-	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
-		<< "|~~~                      "; ut.blue(); cout << "ShareIt"; ut.white(); cout << "                      ~~~| " << endl
-		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
-		<< "|                          ";  ut.grey(); cout << "Users";  ut.white(); cout << "                          |" << endl;
+	ut.menuHeader();
+	cout << "|                          ";  ut.grey(); cout << "Users";  ut.white(); cout << "                          |" << endl;
 	ut.blue(); cout << "-----------------------------------------------------------" << endl;
 	ut.setcolor(7); cout << setw(5) << "ID" << setw(20) << "Name" << setw(18) << "Balance" << setw(12) << "Driver" << endl;
 	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
@@ -926,10 +921,8 @@ int Agency::menuDisplayBuddies() {
 
 	ut.clearScreen();
 
-	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
-		<< "|~~~                      "; ut.blue(); cout << "ShareIt"; ut.white(); cout << "                      ~~~| " << endl
-		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
-		<< "|                      ";  ut.grey(); cout << "Relationships";  ut.white(); cout << "                    |" << endl;
+	ut.menuHeader();
+	cout << "|                      ";  ut.grey(); cout << "Relationships";  ut.white(); cout << "                    |" << endl;
 	ut.blue(); cout << "-----------------------------------------------------------" << endl;
 	ut.setcolor(15);  displayBuddies();
 	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;  ut.setcolor(7);
