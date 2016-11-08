@@ -1,18 +1,20 @@
 #include "Trip.h"
 
+int Trip::counter = 0;
+
 Trip::Trip()
-{
-}
-
-
-Trip::~Trip()
 {
 }
 
 Trip::Trip(int driver, vector<string> stops)
 {
+	ID = counter++;
 	this->driver = driver;
 	this->stops = stops;
+}
+
+Trip::~Trip()
+{
 }
 
 int Trip::getDriver() const
@@ -64,7 +66,6 @@ int Trip::getNumSeats() const
 {
 	return seatsAvailable;
 }
-
 
 vector<string> Trip::getStops() const
 {

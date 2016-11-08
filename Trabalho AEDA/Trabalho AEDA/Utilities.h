@@ -25,5 +25,6 @@ public:
 	void grey();
 	void red();
 	void green();
+	void yellow();
 };
 
