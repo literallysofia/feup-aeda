@@ -329,18 +329,21 @@ void Agency::extractUsers()
 		{
 
 			size_t pos1 = line.find(";"); //posiçao 1
-			string str1 = line.substr(pos1 + 1); //nome+balance+carro+pass
+			string str1 = line.substr(pos1 + 1); //nome+balance+carro+user+pass
 			size_t pos2 = str1.find(";"); //posiçao 2
-			string str2 = str1.substr(pos2 + 1); //balance+carro+pass
+			string str2 = str1.substr(pos2 + 1); //balance+carro+user+pass
 			size_t pos3 = str2.find(";"); //posiçao 3
-			string str3 = str2.substr(pos3 + 1); //balance+pass
-			size_t pos4 = str3.find(";"); //posiçao 3
+			string str3 = str2.substr(pos3 + 1); //balance+user+pass
+			size_t pos4 = str3.find(";"); //posiçao 4
+			string str4 = str3.substr(pos3 + 1); //user+pass
+			size_t pos5 = str4.find(";"); //posiçao 5
 
 			string ids = line.substr(0, pos1); //string id
 			string nome = str1.substr(0, pos2);
 			string sbalance = str2.substr(0, pos3); //string balance
 			string scar = str3.substr(0, pos4); //string carro
-			string pass = str3.substr(pos4 + 1);
+			string user = str4.substr(0, pos5);
+			string pass = str4.substr(pos5 + 1);
 
 			int idi = stoi(ids, nullptr, 10); //passa o id de string para int
 			bool bcar;
@@ -353,13 +356,13 @@ void Agency::extractUsers()
 			if (bcar)
 			{
 				//se o User tiver carro, adiciona um novo driver
-				User *d1 = new Driver(idi, nome, balancef, "string", pass);
+				User *d1 = new Driver(idi, nome, balancef, user, pass);
 				Users.push_back(d1);
 			}
 			else
 			{
 				//caso contrario adiciona um novo passenger
-				User *p1 = new Passenger(idi, nome, balancef, "string", pass);
+				User *p1 = new Passenger(idi, nome, balancef, user, pass);
 				Users.push_back(p1);
 			}
 		}
@@ -382,7 +385,7 @@ void Agency::writeUsers()
 				UserFile << "1";
 			else UserFile << "0";
 
-			UserFile << ";" << Users.at(i)->getBalance() << ";" << Users.at(i)->getPassword() << endl;
+			UserFile << ";" << Users.at(i)->getBalance() << ";" << Users.at(i)->getUsername() << ";" << Users.at(i)->getPassword() << endl;
 		}
 		UserFile.close();
 	}
@@ -856,12 +859,13 @@ void Agency::displayUsers() {
 	for (unsigned int i = 0; i < Users.size(); i++)
 	{
 		cout << setw(5) << Users.at(i)->getID();
+		cout << setw(10) << Users.at(i)->getUsername();
 		cout << setw(20) << Users.at(i)->getName();
-		cout << setw(18) << setprecision(2) << fixed << Users.at(i)->getBalance();
+		cout << setw(10) << setprecision(2) << fixed << Users.at(i)->getBalance();
 
 		if (Users.at(i)->car())
-			cout << setw(12) << "[X]" << endl;
-		else cout << setw(12) << "[ ]" << endl;
+			cout << setw(10) << "[X]" << endl;
+		else cout << setw(10) << "[ ]" << endl;
 	}
 
 	return;
@@ -874,7 +878,7 @@ int Agency::menuDisplayUsers() {
 	ut.menuHeader();
 	cout << "|                          ";  ut.grey(); cout << "Users";  ut.white(); cout << "                          |" << endl;
 	ut.blue(); cout << "-----------------------------------------------------------" << endl;
-	ut.setcolor(7); cout << setw(5) << "ID" << setw(20) << "Name" << setw(18) << "Balance" << setw(12) << "Driver" << endl;
+	ut.setcolor(7); cout << setw(5) << "ID" << setw(10) << "User" << setw(20) << "Name" << setw(10) << "Balance" << setw(10) << "Driver" << endl;
 	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
 	ut.setcolor(15);  displayUsers();
 	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;  ut.setcolor(7);
