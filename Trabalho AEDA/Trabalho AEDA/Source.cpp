@@ -91,6 +91,7 @@ int main()
 	Agency::instance()->extractUsers();
 	Agency::instance()->extractBuddies();
 	Agency::instance()->extractTransactions();
+	Agency::instance()->extractStops();
 
 	optionsWelcomeMenu();
 	
