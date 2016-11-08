@@ -17,6 +17,11 @@
 
 using namespace std;
 
+struct stop {
+	string code;
+	string name;
+};
+
 class Agency
 {
 private:
@@ -30,6 +35,7 @@ private:
 	vector<Guest *> Guests;
 	vector<string> stopsAvailable = { "a","b","c" };
 	vector<Transaction> Transactions;
+	vector<stop> Stops;
 
 public:
 	Agency();
@@ -67,6 +73,7 @@ public:
 
 	void menuDisplayBuddies();
 	void menuDisplayTransactions();
+	void menuDisplayStops();
 
 
 	//User Only
@@ -90,6 +97,8 @@ public:
 	void saveBuddies();
 	void extractTransactions();
 	void saveTransactions();
+	void extractStops();
+	void saveStops();
 
 	//Basic Functions
 
@@ -110,6 +119,7 @@ public:
 	void displayUsers();
 	void displayBuddies(); 
 	void displayTransactions();
+	void displayStops();
 
 	/*
 	void imprimeTrips();					//function that uses the Trips class' operator<< method to
