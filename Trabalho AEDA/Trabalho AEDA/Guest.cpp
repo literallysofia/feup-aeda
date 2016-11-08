@@ -31,10 +31,10 @@ int Guest::getID() const
 bool Guest::searchTrip(vector<Trip> &vec)  //vec = vetor das viagens da agencia
 {
 	unsigned int posBeg = -1, posEnd = -1;
-	for (size_t i = 0; i < vec.size(); i++)
+	for (unsigned int i = 0; i < vec.size(); i++)
 	{
 		vector<string> stops = vec[i].getStops();
-		for (size_t j = 0; j < stops.size(); i++)
+		for (unsigned int j = 0; j < stops.size(); i++)
 		{
 			if (stops[j] == this->start)
 				posBeg = j;

@@ -13,6 +13,8 @@ class Utilities
 public:
 	Utilities();
 	~Utilities();
+
+	void menuHeader();
 	void setcolor(int ForgC);
 	void clearScreen();
 	int leInteiro(int min, int max);
