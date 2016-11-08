@@ -143,8 +143,6 @@ void Agency::loginUser()
 		ut.grey(); cout << "    > Enter username: "; ut.white(); cin >> username;
 	}
 
-	//TODO: problemas com cin.ignore() e getline, nao sei se aceita quando o nome tem espacos e tal idk
-
 	if (username == "admin") {
 		ut.grey(); cout << "\n    > Enter password: "; ut.white();
 		if (t.insertPassword() == "admin") {
@@ -325,7 +323,6 @@ void Agency::menuDisplayTransactions() {
 /* MENUS USER */
 
 int Agency::mainMenu_User() {
-
 	ut.clearScreen();
 	ut.menuHeader();
 	cout << "|~~~                     ";  ut.grey(); cout << "MAIN MENU";  ut.white(); cout << "                     ~~~|" << endl
@@ -364,21 +361,22 @@ int Agency::mainMenu_User() {
 		cin >> option;
 	}
 
-	//if (option == 0)
-		//TODO logout
-	return option;
-
+	if (option == 0) {
+		saveData();
+		return 0;
+	}
+	else
+		return option;
 }
 
 void Agency::optionsMainMenu_User() {
-
 	unsigned short int option;
 
 	while (option = mainMenu_User())
 		switch (option)
 		{
 		case 1:
-			//TODO mostrar conta do user
+			optionsMenuAccount();
 			break;
 		case 2:
 			//TODO se tem carro, criar trip, se nao tem, nao pode, volta atras
@@ -388,6 +386,63 @@ void Agency::optionsMainMenu_User() {
 			break;
 		case 4:
 			//TODO add buddy
+			break;
+		}
+}
+
+int Agency::menuAccount()
+{
+	ut.clearScreen();
+	ut.menuHeader();
+	cout << "|                          ";  ut.grey(); cout << "USERS";  ut.white(); cout << "                          |" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+	ut.grey(); cout << setw(5) << "ID" << setw(10) << "User" << setw(13) << "Name" << setw(15) << "Balance" << setw(13) << "Num Cars" << endl;
+	ut.blue(); cout << "-----------------------------------------------------------" << endl;
+	ut.white();
+
+	cout << setw(5) << Users.at(getPos(sessionID))->getID() << setw(10) << Users.at(getPos(sessionID))->getUsername() << setw(15) <<
+		Users.at(getPos(sessionID))->getName() << setw(10) << Users.at(getPos(sessionID))->getBalance() << setw(12) << 1 << endl;
+
+		ut.blue(); cout << "-----------------------------------------------------------" << endl;  ut.grey();
+		cout << setw(18) << "1. Deposit" << setw(32) << "2. smth else" << endl; ut.white();
+	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
+		<< "|~~~                                 ";  ut.grey(); cout << "< 0. Return >";  ut.white(); cout << "     ~~~|" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl << endl;
+
+	unsigned short int option;
+	cout << "Type your choice: ";
+	cin >> option;
+
+	while (cin.fail() || (option < 0) || ((option > 2)))
+	{
+		if (cin.eof())
+		{
+			cin.clear();
+			return 0;
+		}
+		cin.clear();
+		cin.ignore(1000, '\n');
+		ut.red(); cout << "> Invalid choice!" << endl;
+		ut.white(); cout << "Please try again: ";
+		cin >> option;
+	}
+
+	if (option == 0)
+		return 0;
+	return option;
+}
+
+void Agency::optionsMenuAccount()
+{
+	unsigned short int option;
+	while (option = menuAccount())
+		switch (option)
+		{
+		case 1:
+			//TODO depositar dinheiro em balance
+			break;
+		case 2:
+			//idk
 			break;
 		}
 }
@@ -404,8 +459,8 @@ void Agency::extractData() {
 
 void Agency::saveData() {
 	saveUsers();
-	saveBuddies();
-	saveTransactions();
+	//saveBuddies(); TODO: crasha tudo cuidado
+	//saveTransactions();
 	return;
 }
 

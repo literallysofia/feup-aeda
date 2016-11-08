@@ -73,6 +73,9 @@ public:
 	int mainMenu_User();
 	void optionsMainMenu_User();
 
+	int menuAccount();
+	void optionsMenuAccount();
+
 
 	//Files
 
