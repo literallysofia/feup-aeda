@@ -71,7 +71,7 @@ public:
 	//Basic Functions
 
 	bool validUser(string name); //existe user com name
-	bool validPassword(int id, string password); //verifica se password esta correta
+	bool validPassword(int pos, string password); //verifica se password esta correta
 	int findID(string name); //retorna id de name, id = -1 caso nao exista
 	int getPos(int id); //retorna posicao no vetor de users de id UTIL!!!
 	vector<User *> getUsers();

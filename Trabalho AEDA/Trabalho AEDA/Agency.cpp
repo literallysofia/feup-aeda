@@ -72,6 +72,7 @@ void Agency::registerUser()
 			if (cin.eof())
 			{
 				cin.clear();
+				ut.clearScreen();
 				return;
 			}
 			cin.clear();
@@ -107,6 +108,7 @@ void Agency::registerUser()
 			if (cin.eof())
 			{
 				cin.clear();
+				ut.clearScreen();
 				return;
 			}
 			cin.clear();
@@ -134,58 +136,93 @@ void Agency::registerUser()
 		ut.red(); cout << "\n\n> Success! You just created your account!\n"; Sleep(2500); ut.white();
 		optionsMainMenu_User();
 	}
-
-
-
-	//TODO melhorar esta shit
-
-	//TODO adicionar utilizador
-	//TODO sucesso ou nao
-	//TODO abrir menu principal
+	ut.clearScreen();
+	return;
 }
 
 void Agency::loginUser()
 {
 	ut.clearScreen();
 	int id = 0;
-	string output, password;
+	string output, password, name;
 
-	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
-		<< "|~~~                      "; ut.blue(); cout << "ShareIt"; ut.white(); cout << "                      ~~~| " << endl
-		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
-		<< "|                          ";  ut.grey(); cout << "Login";  ut.white(); cout << "                          |" << endl;
+	ut.menuHeader();
+	cout << "|                          ";  ut.grey(); cout << "Login";  ut.white(); cout << "                          |" << endl;
 	ut.blue(); cout << "-----------------------------------------------------------" << endl;
-	ut.grey(); cout << "       > Enter id or name: "; ut.white(); cin.ignore(); getline(cin, output); cout << endl;
-	ut.grey(); cout << "       > Enter password: "; ut.white();  cin >> password; cout << endl;
+	ut.grey(); cout << "    > Enter id or name: "; ut.white(); cin.ignore(); getline(cin, output);
 
-	if (output == "admin")
-		optionsMainMenu_Admin();
-	else {
-		if (t.outputName(output)) { // se é uma string
-			if (validUser(output)) {
-				this->sessionID = findID(output);
-				if (validPassword(sessionID, password)) {
-					this->sessionPos = getPos(sessionID);
-					optionsMainMenu_User();
-				}
-			}
-			else return;
+	if (t.outputName(output))
+		name = output;
+	else id = stoi(output, nullptr, 10);
+
+	while (cin.fail() || (getPos(id) == -1 && validUser(name) == false))
+	{
+		if (cin.eof())
+		{
+			cin.clear();
+			ut.clearScreen();
+			return;
+		}
+		cin.clear();
+		cin.ignore(1000, '\n');
+		ut.red(); cout << "> Login failed!" << endl;
+		ut.white(); cout << "Please try again.\n\n";
+		ut.grey(); cout << "    > Enter id or name: "; ut.white(); getline(cin, output);
+
+		if (t.outputName(output))
+			name = output;
+		else id = stoi(output, nullptr, 10);
+	}
+
+	//TODO: problemas com cin.ignore() e getline, nao sei se aceita quando o nome tem espacos e tal idk
+
+	if (name == "admin") {
+		ut.grey(); cout << "\n    > Enter password: "; ut.white();
+		if (t.insertPassword() == "admin") {
+			ut.red(); cout << "\n\n> Login successful as admin!\n"; Sleep(2000); ut.white();
+			optionsMainMenu_Admin();
 		}
 		else {
-			id = stoi(output, nullptr, 10);
-			if (getPos(id) == -1)
-				return; //nao existe woops
-			else {
+			ut.red(); cout << "\n\n> Login failed!" << endl; ut.white();
+			Sleep(2000);
+			ut.clearScreen();
+			return;
+		}
+	}
+	else {
+		if (id != 0) { //caso faca login por id
+			ut.grey(); cout << "\n    > Enter password: "; ut.white();
+			password = t.insertPassword();
+			if (validPassword(getPos(id), password)) {
 				this->sessionID = id;
 				this->sessionPos = getPos(sessionID);
+				ut.red(); cout << "\n\n> Login successful!\n"; Sleep(2000); ut.white();
 				optionsMainMenu_User();
+			}
+			else {
+				ut.red(); cout << "\n\n> Login failed!" << endl; ut.white();
+				Sleep(2000);
+				ut.clearScreen();
+				return;
+			}
+		}
+		else { //caso  faca login por nome
+			ut.grey(); cout << "\n    > Enter password: "; ut.white();
+			password = t.insertPassword();
+			if (validPassword(getPos(findID(name)), password)) {
+				this->sessionID = findID(name);
+				this->sessionPos = getPos(sessionID);
+				ut.red(); cout << "\n\n> Login successful!\n"; Sleep(2000); ut.white();
+				optionsMainMenu_User();
+			} else {
+				ut.red(); cout << "\n\n> Login failed!" << endl; ut.white();
+				Sleep(2000);
+				ut.clearScreen();
+				return;
 			}
 		}
 	}
-
-	//TODO verificar se existe 
-	//TODO admin ou nao
-	//TODO abrir menu principal
+	ut.clearScreen();
 	return;
 }
 
@@ -501,8 +538,8 @@ bool Agency::validUser(string name) {
 	return false;
 }
 
-bool Agency::validPassword(int id, string password) {
-	if (password == Users.at(id)->getPassword())
+bool Agency::validPassword(int pos, string password) {
+	if (password == Users.at(pos)->getPassword())
 		return true;
 	return false;
 }
