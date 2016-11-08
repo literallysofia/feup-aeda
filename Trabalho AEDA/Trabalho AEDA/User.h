@@ -11,6 +11,7 @@ class User
 protected:
 	int ID;
 	const string name;
+	string username;
 	string password;
 	float balance; //saldo disponivel na conta
 	static int maintenanceFee;
@@ -19,11 +20,11 @@ protected:
 	
 public:
 	User(string name);
-	User(int ID, string name, float balance, string password);
-
+	User(int ID, string name, float balance, string username, string password);
 	~User();
 	int getID() const;
 	string getName() const;
+	string getUsername() const;
 	string getPassword() const;
 	float getBalance() const;
 	void deposit(float value);
@@ -47,7 +48,7 @@ private:
 	int numSeats;
 	Trip currentTrip;
 public:
-	Driver(int ID, string name, float balance, string password);
+	Driver(int ID, string name, float balance, string username, string password);
 	int getNumSeats() const;		//apenas retorna o numero de lugares dados pelo utilizador,
 	Trip getCurrentTrip() const;		//retorna um objeto da classe Trip
 	void payment();
@@ -72,9 +73,8 @@ private:
 	int currentTrip;
 
 public:
-
 	Passenger(string name);
-	Passenger(int ID, string name, float balance, string password);
+	Passenger(int ID, string name, float balance, string username, string password);
 	int getNumTrips() const;
 	string getFirst() const;
 	string getLast() const;
