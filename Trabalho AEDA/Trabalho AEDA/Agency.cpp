@@ -169,7 +169,7 @@ void Agency::optionsMainMenu_Admin() {
 			//TODO mostrar o historico de trips
 			break;
 		case 3:
-			//TODO mostrar transacoes
+			Agency::instance()->menuDisplayTransactions();
 			break;
 		case 4:
 			Agency::instance()->menuDisplayBuddies();
@@ -371,12 +371,6 @@ void Agency::extractBuddies()
 							}
 						}
 					}
-					/*
-					for (unsigned int j = 0; j < Users.at(j)->getBuddies().size(); j++)
-					{
-						cout << Users.at(i)->getBuddies().at(j)->getName() << "   ";
-					}
-					*/
 				}
 			}
 		}
@@ -386,7 +380,6 @@ void Agency::extractBuddies()
 	else { ut.setcolor(4); cerr << "Impossivel abrir ficheiro." << endl; ut.setcolor(15); }
 }
 
-//TODO: WRITEBUDDIES NAO FUNCIONA
 void Agency::writeBuddies()
 {
 	ofstream BuddiesFile("Buddies.txt");
@@ -414,6 +407,77 @@ void Agency::writeBuddies()
 	else { ut.setcolor(4); cerr << "Impossivel abrir ficheiro." << endl; ut.setcolor(15); }
 }
 
+//Transactions (id;date;value)
+void Agency::extractTransactions() {
+
+	ifstream Transfile("Transactions.txt");
+	string line;
+
+	int i = 0;
+
+	if (Transfile.is_open())
+	{
+		if (!Transactions.empty()) Transactions.clear();
+
+		while (getline(Transfile, line))
+		{
+
+			size_t pos1 = line.find(";"); //posiçao 1
+			string str1 = line.substr(pos1 + 1); //id+date+value
+			size_t pos2 = str1.find(";"); //posiçao 2
+			string str2 = str1.substr(pos2 + 1); //date+value
+			size_t pos3 = str2.find(";"); //posiçao 3
+
+
+			string ids = line.substr(0, pos1); //string id
+			string date = str1.substr(0, pos2);
+			string svalue = str2.substr(0, pos3); //string balance
+
+			int idi = stoi(ids, nullptr, 10); //passa o id de string para int
+
+			float valuef = stof(svalue, NULL); //passa o balance de string para float
+
+			size_t posd1 = date.find("/");
+			string strd1 = date.substr(posd1 + 1); //mes + ano
+			size_t posd2 = strd1.find("/");
+
+			string dia = date.substr(0, posd1);
+			string mes = strd1.substr(0, posd2);
+			string ano = strd1.substr(posd2 + 1);
+
+			//adiciona um 0 antes do mes e do dia caso nao tenham so um digito
+			if (dia.size() == 1)
+				dia = "0" + dia;
+			if (mes.size() == 1)
+				mes = "0" + mes;
+
+			string datafinal = dia + "/" + mes + "/" + ano;
+
+			Transactions.push_back(Transaction(idi, datafinal, valuef)); //cria um novo elemento no vector
+			i++;
+		}
+
+		Transfile.close();
+	}
+	else { ut.setcolor(4); cerr << "Impossivel abrir ficheiro." << endl;  ut.setcolor(15); }
+}
+
+void Agency::writeTransactions() {
+
+		ofstream TransFile("Transactions.txt");
+
+		if (TransFile.is_open())
+		{
+			for (unsigned int i = 0; i < Transactions.size(); i++)
+			{
+				TransFile << Transactions.at(i).GetId() << ";" 
+					<< Transactions.at(i).GetDate() << ";"
+					<< Transactions.at(i).GetValue() << endl;
+			}
+			TransFile.close();
+		}
+		else { ut.setcolor(4); cerr << "Impossivel abrir ficheiro." << endl; ut.setcolor(15); }
+}
 
 
 /* FUNCOES */
@@ -461,7 +525,7 @@ void Agency::addUsers(User * u)
 
 void Agency::addTrip() {
 
-	Trip t;	t.setDriverID(1); t.setID( 1);
+	Trip t;	t.setDriverID(1); t.setID(1);
 	//Trip t;	t.setDriverID(sessionID); t.setID(Trips.back().getID() + 1);
 	vector<string> stops;
 	string eachStop;
@@ -486,7 +550,7 @@ void Agency::addTrip() {
 			try
 			{
 				//se a paragem existe
-				if (checkStop(eachStop)) {	
+				if (checkStop(eachStop)) {
 					//se a paragem ja foi inserida lança a exceçao
 					if (find(stops.begin(), stops.end(), eachStop) != stops.end()) {
 						throw RepeatedStop(eachStop);
@@ -498,7 +562,7 @@ void Agency::addTrip() {
 					}
 				}
 				//se nao existe lança a exceçao
-				else                       
+				else
 					throw NonexistentStop(eachStop);
 
 			}
@@ -511,7 +575,7 @@ void Agency::addTrip() {
 				cout << e;
 			}
 		}
-		
+
 		//fim da introduçao das paragens
 		else {
 
@@ -536,7 +600,7 @@ void Agency::addTrip() {
 				ut.clearScreen();
 				Trips.push_back(t);
 				Users.at(sessionPos)->addTrip(t);			//adiciona a viagem criada ao utilizador correspondente
-				
+
 			}
 			break;
 		}
@@ -649,7 +713,7 @@ void Agency::runTrip(int tripID) {
 			//se houve alguma saida de passageiros
 			if (usersAway.size() > 0)
 			{
-				ut.red(); cout << "\n->Exited:\n"; ut.white(); 
+				ut.red(); cout << "\n->Exited:\n"; ut.white();
 				for (size_t i = 0; i < usersAway.size(); i++)
 				{
 					cout << usersAway[i]->getName() << endl;
@@ -733,10 +797,10 @@ void Agency::displayUsers() {
 	{
 		cout << setw(5) << Users.at(i)->getID();
 		cout << setw(20) << Users.at(i)->getName();
-		cout << setw(18) << setprecision(2) << fixed <<  Users.at(i)->getBalance();
+		cout << setw(18) << setprecision(2) << fixed << Users.at(i)->getBalance();
 
-		if(Users.at(i)->car())
-			cout << setw(12)  << "[X]" << endl;
+		if (Users.at(i)->car())
+			cout << setw(12) << "[X]" << endl;
 		else cout << setw(12) << "[ ]" << endl;
 	}
 
@@ -792,8 +856,8 @@ void Agency::displayBuddies() {
 
 	for (unsigned int i = 0; i < Users.size(); i++)
 	{
-		ut.setcolor(7); cout << setw(5) << "   USER"; ut.blue(); cout <<" | ";
-		ut.white(); cout<< Users.at(i)->getName() << endl;
+		ut.setcolor(7); cout << setw(5) << "   USER"; ut.blue(); cout << " | ";
+		ut.white(); cout << Users.at(i)->getName() << endl;
 		ut.setcolor(7); cout << setw(5) << "BUDDIES"; ut.blue(); cout << " | ";
 		ut.white();
 		for (unsigned int j = 0; j < Users.at(i)->getBuddies().size(); j++)
@@ -817,6 +881,64 @@ int Agency::menuDisplayBuddies() {
 		<< "|                      ";  ut.grey(); cout << "Relationships";  ut.white(); cout << "                    |" << endl;
 	ut.blue(); cout << "-----------------------------------------------------------" << endl;
 	ut.setcolor(15);  displayBuddies();
+	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;  ut.setcolor(7);
+	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
+		<< "|~~~                                 ";  ut.setcolor(7); cout << "< 0. Return >";  ut.setcolor(15); cout << "     ~~~|" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl << endl;
+
+	unsigned short int opcao;
+	cout << "Insira a sua escolha: ";
+	cin >> opcao;
+
+	while (cin.fail() || (opcao > 0))
+	{
+		if (cin.eof())
+		{
+			cin.clear();
+			return 0;
+		}
+		cin.clear();
+		cin.ignore(1000, '\n');
+		ut.setcolor(4); cout << "> Digito invalido!" << endl;
+		ut.setcolor(15); cout << "Volte a indicar escolha: ";
+		cin >> opcao;
+	}
+
+	if ((opcao >= 0) && (opcao < 1))
+	{
+		if (opcao == 0)
+			return 0;
+		return opcao;
+	}
+	return 0;
+
+}
+
+void Agency::displayTransactions() {
+
+	for (unsigned int i = 0; i < Transactions.size(); i++)
+	{
+		cout << setw(5) << Transactions.at(i).GetId();
+		cout << setw(20) << Transactions.at(i).GetDate();
+		cout << setw(18) << setprecision(2) << fixed << Transactions.at(i).GetValue();
+		cout << endl;
+	}
+
+	return;
+}
+
+int Agency::menuDisplayTransactions() {
+
+	ut.clearScreen();
+
+	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
+		<< "|~~~                      "; ut.blue(); cout << "ShareIt"; ut.white(); cout << "                      ~~~| " << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
+		<< "|~~~                     ";  ut.setcolor(7); cout << "Transactions";  ut.setcolor(15); cout << "                  ~~~|" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+	ut.setcolor(7); cout << setw(5) << "ID" << setw(14) << "Data" << setw(28) << "Value" << endl;
+	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
+	ut.setcolor(15);  displayTransactions();
 	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;  ut.setcolor(7);
 	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
 		<< "|~~~                                 ";  ut.setcolor(7); cout << "< 0. Return >";  ut.setcolor(15); cout << "     ~~~|" << endl

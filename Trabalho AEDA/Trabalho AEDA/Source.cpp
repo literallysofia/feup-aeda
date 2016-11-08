@@ -90,28 +90,10 @@ int main()
 
 	Agency::instance()->extractUsers();
 	Agency::instance()->extractBuddies();
+	Agency::instance()->extractTransactions();
 
 	optionsWelcomeMenu();
 	
 
-	/*
-	//testar funçoes ficheiros
-
-	Agency::instance()->extrairUsers();
-	for (unsigned int i = 0; i < Agency::instance()->getUsers().size(); i++)
-	{
-		cout << Agency::instance()->getUsers().at(i)->getID() << " - " << Agency::instance()->getUsers().at(i)->getName() << " - ";
-		if (Agency::instance()->getUsers().at(i)->car())
-			cout << "1";
-		else cout << "0";
-		cout << " - " << Agency::instance()->getUsers().at(i)->getPassword() << endl;
-	}
-
-	
-	Agency::instance()->addUsers(p2);
-	Agency::instance()->escreverUsers();
-
-	*/
-		
 	return 0;
 }

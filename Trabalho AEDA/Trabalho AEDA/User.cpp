@@ -42,6 +42,11 @@ void User::deposit(float value)
 	balance += value;
 }
 
+vector<Transaction> User::getTransactions() const
+{
+	return transactions;
+}
+
 void User::payment()
 {
 	return;
