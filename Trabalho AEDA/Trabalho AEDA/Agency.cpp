@@ -828,6 +828,7 @@ void Agency::addTrip() {
 	{
 		cout << "Stop # " << stopNumber << " : ";
 		cin >> stopCode;
+		stopCode = t.convertUpper(stopCode);
 
 		//enquanto o utilizador nao inserir ctrl+z
 		if (!cin.eof())
@@ -877,13 +878,22 @@ void Agency::addTrip() {
 				int numSeats = ut.leInteiro(1, 6); cin.clear();
 
 				//criacao do objeto trip
-				Trip t(sessionID, stops);
+				Trip trp(sessionID, stops);
 				//adicao da viagem ao vetor na agencia
 				ut.green();  cout << "\n\nStops and number of seats successfully added to your trip.\n\n"; ut.white();
 				Sleep(2500);
 				ut.clearScreen();
-				Trips.push_back(t);
-				Users.at(sessionPos)->addTrip(t);			//adiciona a viagem criada ao utilizador correspondente
+				Trips.push_back(trp);
+				Users.at(sessionPos)->addTrip(trp);			//adiciona a viagem criada ao utilizador correspondente
+				//TODO current trip pode ser mais que uma
+
+				/*for (unsigned int i = 0; i < Trips.size(); i++) {
+					cout << Trips.at(i).getID() << endl;
+					for (unsigned int j = 0; j < Trips.at(i).getStops().size(); j++) {
+						cout << Trips.at(i).getStops().at(j) << endl;
+					}
+				}
+				system("pause");*/
 			}
 			break;
 		}
