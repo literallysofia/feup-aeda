@@ -1,6 +1,6 @@
 #include "Transactions.h"
 
-Transaction::Transaction(unsigned int id, string date, float value)
+Transaction::Transaction(unsigned int id, Date date, float value)
 {
 	this->id = id;
 	this->date = date;
@@ -12,7 +12,7 @@ unsigned int Transaction::GetId() const
 	return id;
 }
 
-string Transaction::GetDate() const
+Date Transaction::GetDate() const
 {
 	return date;
 }

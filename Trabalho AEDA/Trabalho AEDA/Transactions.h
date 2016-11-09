@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
+#include "Date.h"
 
 using namespace std;
 
@@ -8,11 +9,11 @@ class Transaction
 {
 private:
 	int id;
-	string date;
+	Date date;
 	float value;
 public:
-	Transaction (unsigned int id, string date, float value);
+	Transaction (unsigned int id, Date date, float value);
 	unsigned int GetId() const;
-	string GetDate() const;
+	Date GetDate() const;
 	float GetValue() const;
 };
