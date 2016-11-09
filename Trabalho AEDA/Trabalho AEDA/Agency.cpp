@@ -316,7 +316,7 @@ void Agency::menuDisplayTransactions() {
 	ut.menuHeader();
 	cout << "|~~~                     ";  ut.setcolor(7); cout << "Transactions";  ut.setcolor(15); cout << "                  ~~~|" << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-	ut.setcolor(7); cout << setw(5) << "ID" << setw(14) << "Data" << setw(28) << "Value" << endl;
+	ut.setcolor(7); cout << setw(5) << "ID" << setw(27) << "Data" << setw(22) << "Value" << endl;
 	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
 	ut.setcolor(15);  displayTransactions();
 	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
@@ -605,23 +605,9 @@ void Agency::extractTransactions() {
 
 			float valuef = stof(svalue, NULL); //passa o balance de string para float
 
-			size_t posd1 = date.find("/");
-			string strd1 = date.substr(posd1 + 1); //mes + ano
-			size_t posd2 = strd1.find("/");
+			Date d1(date);
 
-			string dia = date.substr(0, posd1);
-			string mes = strd1.substr(0, posd2);
-			string ano = strd1.substr(posd2 + 1);
-
-			//adiciona um 0 antes do mes e do dia caso nao tenham so um digito
-			if (dia.size() == 1)
-				dia = "0" + dia;
-			if (mes.size() == 1)
-				mes = "0" + mes;
-
-			string datafinal = dia + "/" + mes + "/" + ano;
-
-			Transactions.push_back(Transaction(idi, datafinal, valuef)); //cria um novo elemento no vector
+			Transactions.push_back(Transaction(idi, d1, valuef)); //cria um novo elemento no vector
 			i++;
 		}
 
@@ -1015,6 +1001,8 @@ void Agency::displayBuddies() {
 }
 
 void Agency::displayTransactions() {
+
+	sort(Transactions.begin(), Transactions.end(), [](Transaction &a, Transaction &b) {return a.GetDate() < b.GetDate(); });
 
 	for (unsigned int i = 0; i < Transactions.size(); i++)
 	{
