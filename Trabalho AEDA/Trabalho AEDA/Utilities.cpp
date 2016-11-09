@@ -140,3 +140,8 @@ void Utilities::green()
 {
 	setcolor(2);
 }
+
+void Utilities::yellow()
+{
+	setcolor(14);
+}

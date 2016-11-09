@@ -8,8 +8,9 @@ using namespace std;
 class Trip
 {
 private:
-	int driver;
+	static int counter;
 	int ID;
+	int driver;
 	vector<string> stops;
 	vector<int> passengers;
 	int seatsAvailable;
@@ -19,8 +20,8 @@ private:
 	//bool active;
 public:
 	Trip();
-	~Trip();
 	Trip(int driver, vector<string> stops);
+	~Trip();
 	int getDriver() const;
 	int getID() const;
 	vector<string> getStops() const;

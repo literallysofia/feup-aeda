@@ -88,10 +88,8 @@ int main()
 	SetWindowPos(consoleWindow, 0, 310, 150, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
 
 	Agency::instance()->extractData();
-	Agency::instance()->extractStops();
 
 	optionsWelcomeMenu();
-	
 
 	return 0;
 }

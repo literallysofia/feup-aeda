@@ -52,3 +52,9 @@ bool Tools::sameString(string a, string b)
 		return true;
 	return false;
 }
+
+string Tools::convertUpper(string code)
+{
+	transform(code.begin(), code.end(), code.begin(), toupper);
+	return code;
+}

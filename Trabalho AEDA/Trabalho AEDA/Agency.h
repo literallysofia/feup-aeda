@@ -29,11 +29,12 @@ private:
 
 	int sessionID;
 	int sessionPos;
+
 	//Global Vectors
 	vector<User *> Users;
 	vector<Trip> Trips;
 	vector<Guest *> Guests;
-	vector<string> stopsAvailable = { "a","b","c" };
+	//vector<string> stopsAvailable = { "a","b","c" };
 	vector<Transaction> Transactions;
 	vector<stop> Stops;
 
@@ -79,6 +80,12 @@ public:
 	//User Only
 	int mainMenu_User();
 	void optionsMainMenu_User();
+
+	int menuAccount();
+	void optionsMenuAccount();
+
+	int menuCreateTrip();
+	void optionsCreateTrip();
 
 
 	//Files
