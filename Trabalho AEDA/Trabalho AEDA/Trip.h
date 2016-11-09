@@ -8,6 +8,7 @@ using namespace std;
 class Trip
 {
 private:
+	static int counter;
 	int ID;
 	int driver;
 	vector<string> stops;
@@ -18,8 +19,8 @@ private:
 						//Date endTime;
 public:
 	Trip();
-	~Trip();
 	Trip(int driver, vector<string> stops);
+	~Trip();
 	int getDriver() const;
 	int getID() const;
 	vector<string> getStops() const;

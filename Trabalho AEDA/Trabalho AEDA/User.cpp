@@ -78,7 +78,8 @@ string User::getLast() const
 }
 
 /*DRIVER CLASS*/
-Driver::Driver(int ID, string name, float balance, string username, string password) : User(ID, name, balance, username, password) {}
+Driver::Driver(int ID, string name, float balance, string username, string password) : User(ID, name, balance, username, password) {
+}
 
 int Driver::getNumSeats() const
 {

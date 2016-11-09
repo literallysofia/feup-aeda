@@ -395,7 +395,7 @@ void Agency::optionsMainMenu_User() {
 			optionsMenuAccount();
 			break;
 		case 2:
-			//TODO se tem carro, criar trip, se nao tem, nao pode, volta atras
+			optionsCreateTrip();
 			break;
 		case 3:
 			//TODO quem tem carro pode fazer join?
@@ -465,11 +465,32 @@ void Agency::optionsMenuAccount()
 
 int Agency::menuCreateTrip()
 {
+	ut.clearScreen();
+	ut.menuHeader();
+	cout << "|                       ";  ut.grey(); cout << "TRIP PLANNER";  ut.white(); cout << "                      |" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+	ut.grey(); cout << setw(16) << "Code" << setw(33) << "Town" << endl;
+	ut.blue(); cout << "-----------------------------------------------------------" << endl;
+	ut.white(); displayStops();
+	ut.blue(); cout << "-----------------------------------------------------------" << endl; ut.white();
+
+	addTrip();
 	return 0;
 }
 
 void Agency::optionsCreateTrip()
 {
+	unsigned short int option;
+	while (option = menuCreateTrip())
+		switch (option)
+		{
+		case 1:
+			//TODO depositar dinheiro em balance
+			break;
+		case 2:
+			//idk
+			break;
+		}
 }
 
 
@@ -479,13 +500,14 @@ void Agency::optionsCreateTrip()
 void Agency::extractData() {
 	extractUsers();
 	extractBuddies();
+	extractStops();
 	extractTransactions();
 }
 
 void Agency::saveData() {
 	saveUsers();
 	//saveBuddies(); TODO: crasha tudo cuidado
-	//saveTransactions();
+	saveTransactions();
 	return;
 }
 
@@ -514,8 +536,8 @@ void Agency::extractUsers()
 
 			string ids = line.substr(0, pos1); //string id
 			string nome = str1.substr(0, pos2);
-			string sbalance = str2.substr(0, pos3); //string balance
-			string scar = str3.substr(0, pos4); //string carro
+			string scar = str2.substr(0, pos3); //string carro
+			string sbalance = str3.substr(0, pos4); //string balance
 			string user = str4.substr(0, pos5);
 			string pass = str4.substr(pos5 + 1);
 
@@ -794,25 +816,19 @@ void Agency::addUser(User * u)
 }
 
 void Agency::addTrip() {
-
-	Trip t;	t.setDriverID(1); t.setID(1);
+	//Trip t;	t.setDriverID(1); t.setID(1);
 	//Trip t;	t.setDriverID(sessionID); t.setID(Trips.back().getID() + 1);
 	vector<string> stops;
-	string eachStop;
+	string stopCode;
 	int stopNumber = 1;
 
-	ut.red(); cout << "\tAVAILABLE STOPS:\n\n"; ut.white();
-
-	for (size_t i = 0; i < stopsAvailable.size(); i++) {
-		cout << "- " << stopsAvailable[i] << endl;
-	}
-	cout << endl;
-	ut.grey(); cout << "Please enter your stops (CTRL + Z to END):\n"; ut.white();
+	ut.yellow(); cout << "Please enter your stops (CTRL + Z to END):\n"; ut.white();
 
 	while (1)
 	{
 		cout << "Stop # " << stopNumber << " : ";
-		cin >> eachStop;
+		cin >> stopCode;
+		stopCode = t.convertUpper(stopCode);
 
 		//enquanto o utilizador nao inserir ctrl+z
 		if (!cin.eof())
@@ -820,20 +836,20 @@ void Agency::addTrip() {
 			try
 			{
 				//se a paragem existe
-				if (checkStop(eachStop)) {
+				if (checkStop(stopCode)) {
 					//se a paragem ja foi inserida lança a exceçao
-					if (find(stops.begin(), stops.end(), eachStop) != stops.end()) {
-						throw RepeatedStop(eachStop);
+					if (find(stops.begin(), stops.end(), stopCode) != stops.end()) {
+						throw RepeatedStop(stopCode);
 					}
 					//caso corra tudo bem é adicionada ao vetor
 					else {
-						stops.push_back(eachStop);
+						stops.push_back(stopCode);
 						stopNumber++;
 					}
 				}
 				//se nao existe lança a exceçao
 				else
-					throw NonexistentStop(eachStop);
+					throw NonexistentStop(stopCode);
 
 			}
 			catch (const NonexistentStop &e)
@@ -849,11 +865,9 @@ void Agency::addTrip() {
 		//fim da introduçao das paragens
 		else {
 
-			t.setStops(stops);
-
 			if (stops.size() < 2)
 			{
-				ut.red(); cout << "[ERROR] You did not enter at least 2 distinct stops.\n"; ut.white();
+				ut.red(); cout << "ERROR: You did not enter at least 2 distinct stops.\n"; ut.white();
 				Sleep(2500);
 				ut.clearScreen();
 			}
@@ -862,15 +876,24 @@ void Agency::addTrip() {
 				//introducao do numero de lugares disponiveis
 				ut.blue(); cout << "\nPlease enter the number of seats available ( minimun: 1 , maximum: 6):\n-> "; cin.clear(); ut.white();
 				int numSeats = ut.leInteiro(1, 6); cin.clear();
-				t.setAvailableSeats(numSeats);
 
+				//criacao do objeto trip
+				Trip trp(sessionID, stops);
 				//adicao da viagem ao vetor na agencia
 				ut.green();  cout << "\n\nStops and number of seats successfully added to your trip.\n\n"; ut.white();
 				Sleep(2500);
 				ut.clearScreen();
-				Trips.push_back(t);
-				Users.at(sessionPos)->addTrip(t);			//adiciona a viagem criada ao utilizador correspondente
+				Trips.push_back(trp);
+				Users.at(sessionPos)->addTrip(trp);			//adiciona a viagem criada ao utilizador correspondente
+				//TODO current trip pode ser mais que uma
 
+				/*for (unsigned int i = 0; i < Trips.size(); i++) {
+					cout << Trips.at(i).getID() << endl;
+					for (unsigned int j = 0; j < Trips.at(i).getStops().size(); j++) {
+						cout << Trips.at(i).getStops().at(j) << endl;
+					}
+				}
+				system("pause");*/
 			}
 			break;
 		}
@@ -881,15 +904,15 @@ bool Agency::checkStop(string s) {
 
 	bool exists = false;
 
-	for (size_t i = 0; i < stopsAvailable.size(); i++)
+	for (size_t i = 0; i < Stops.size(); i++)
 	{
-		if (stopsAvailable[i] == s)
+		if (Stops.at(i).code == s)
 			exists = true;
 	}
 
 	return exists;
 }
-
+/*
 void Agency::runTrip(int tripID) {
 
 	Trip t;
@@ -1040,7 +1063,7 @@ void Agency::runTrip(int tripID) {
 		ut.getEnter();
 	}
 }
-
+*/
 
 void Agency::displayUsers() {
 
@@ -1092,14 +1115,12 @@ void Agency::displayTransactions() {
 }
 
 void Agency::displayStops() {
-
 	for (unsigned int i = 0; i < Stops.size(); i++)
 	{
 		cout << setw(15) << Stops.at(i).code;
 		cout << setw(35) << Stops.at(i).name;
 		cout << endl;
 	}
-
 	return;
 }
 
