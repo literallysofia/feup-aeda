@@ -13,9 +13,10 @@ private:
 	vector<string> stops;
 	vector<int> passengers;
 	int seatsAvailable;
-						//bool active;
-						//Date startTime;
-						//Date endTime;
+	//Date date;
+	//Hour startTime;
+	//Hour endTime;
+	//bool active;
 public:
 	Trip();
 	~Trip();

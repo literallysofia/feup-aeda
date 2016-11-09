@@ -22,6 +22,7 @@
     <ClCompile Include="Agency.cpp" />
     <ClCompile Include="Date.cpp" />
     <ClCompile Include="Guest.cpp" />
+    <ClCompile Include="Hour.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Stop.cpp" />
     <ClCompile Include="Tools.cpp" />
@@ -34,6 +35,7 @@
     <ClInclude Include="Agency.h" />
     <ClInclude Include="Date.h" />
     <ClInclude Include="Guest.h" />
+    <ClInclude Include="Hour.h" />
     <ClInclude Include="Stop.h" />
     <ClInclude Include="Tools.h" />
     <ClInclude Include="Transactions.h" />
