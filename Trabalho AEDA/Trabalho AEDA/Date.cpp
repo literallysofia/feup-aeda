@@ -39,14 +39,13 @@ void Date::setYear(int a) {
 
 ostream& operator<<(ostream& out, Date & date) {
 
-	
 	if (date.day < 10 && date.month < 10)
-		out << "0" << date.day << '/' << "0" << date.month << '/' << date.year;
+		out << setw(19) << "0" << date.day << '/' << "0" << date.month << '/' << date.year;
 	else if (date.day < 10)
-		out << "0" << date.day << '/' << date.month << '/' << date.year;
+		out << setw(19) << "0" << date.day << '/' << date.month << '/' << date.year;
 	else if (date.month < 10)
-		out << date.day << '/' << "0" << date.month << '/' << date.year;
-	else out << date.day << '/' << date.month << '/' << date.year;
+		out << setw(20) << date.day << '/' << "0" << date.month << '/' << date.year;
+	else out << setw(20) << date.day << '/' << date.month << '/' << date.year;
 	
 	return out;
 }

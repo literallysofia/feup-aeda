@@ -1094,7 +1094,7 @@ void Agency::displayTransactions() {
 	for (unsigned int i = 0; i < Transactions.size(); i++)
 	{
 		cout << setw(5) << Transactions.at(i).GetId();
-		cout << setw(20) << Transactions.at(i).GetDate();
+		cout << Transactions.at(i).GetDate();
 		cout << setw(22) << setprecision(2) << fixed << Transactions.at(i).GetValue();
 		cout << endl;
 	}
