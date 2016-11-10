@@ -6,11 +6,13 @@ Trip::Trip()
 {
 }
 
-Trip::Trip(int driver, vector<string> stops)
+Trip::Trip(int ID, int driver, vector<Stop> stops, Date date, Hour start, Hour end)
 {
-	ID = counter++;
 	this->driver = driver;
 	this->stops = stops;
+	this->date = date;
+	this->startTime = start;
+	this->endTime = end;
 }
 
 Trip::~Trip()
@@ -27,57 +29,32 @@ int Trip::getID() const
 	return ID;
 }
 
-int Trip::getPrice() const
-{
-	return (int)stops.size(); //TODO trip price
-}
-
-void Trip::setDriverID(int driverID)
-{
-	driver = driverID;
-}
-
-void Trip::setID(int id)
-{
-	ID = id;
-}
-
-void Trip::setStops(vector<string>& vec)
-{
-	stops = vec;
-}
-
-void Trip::addPassenger(int passengerID)
-{
-	passengers.push_back(passengerID);
-}
-
-vector<int> Trip::getPassengers() const
-{
-	return passengers;
-}
-
-void Trip::setAvailableSeats(int num)
-{
-	seatsAvailable = num;
-}
-
-int Trip::getNumSeats() const
-{
-	return seatsAvailable;
-}
-
-vector<string> Trip::getStops() const
+vector<Stop> Trip::getStops() const
 {
 	return stops;
 }
 
+Date Trip::getDate() const
+{
+	return date;
+}
+
+Hour Trip::getStart() const
+{
+	return startTime;
+}
+
+Hour Trip::getEnd() const
+{
+	return endTime;
+}
+
 string Trip::getOrigin() const
 {
-	return stops.at(0);
+	return stops.at(0).getCode();
 }
 
 string Trip::getDestination() const
 {
-	return stops.at(stops.size() - 1);
+	return stops.at(stops.size() - 1).getCode();
 }

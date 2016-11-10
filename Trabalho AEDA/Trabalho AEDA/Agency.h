@@ -34,7 +34,6 @@ private:
 	vector<User *> Users;
 	vector<Trip> Trips;
 	vector<Guest *> Guests;
-	//vector<string> stopsAvailable = { "a","b","c" };
 	vector<Transaction> Transactions;
 	vector<stop> Stops;
 
@@ -112,9 +111,9 @@ public:
 
 	//Functions
 	void addUser(User* u);
-	void addTrip();
-	bool checkStop(string s);
-	void runTrip(int tripID);
+	//void addTrip();
+	//bool checkStop(string s);
+	//void runTrip(int tripID);
 
 	//Displays
 	void displayUsers();

@@ -62,11 +62,12 @@ bool User::car() const
 	return false;
 }
 
+/*
 bool User::searchTrip(vector<Trip>& vec)
 {
 	return false;
 }
-
+*/
 string User::getFirst() const
 {
 	return string();
@@ -85,12 +86,12 @@ int Driver::getNumSeats() const
 {
 	return numSeats;
 }
-
+/*
 Trip Driver::getCurrentTrip() const
 {
 	return currentTrip;
 }
-
+*/
 void Driver::payment()
 {
 	balance -= maintenanceFee;
@@ -101,6 +102,7 @@ bool Driver::car() const
 	return true;
 }
 
+/*
 void Driver::addTrip(Trip &t)
 {
 	currentTrip = t;
@@ -110,7 +112,7 @@ bool Driver::searchTrip(vector<Trip>& vec) const
 {
 	return false;
 }
-
+*/
 string Driver::getFirst() const
 {
 	return string();
@@ -165,7 +167,7 @@ void Passenger::resetTrips(void)
 	numTrips = 0;
 }
 
-bool Passenger::searchTrip(vector<Trip> &vec)  //vec = vetor das viagens da agencia
+/*bool Passenger::searchTrip(vector<Trip> &vec)  //vec = vetor das viagens da agencia
 {
 	unsigned int posBeg = -1, posEnd = -1;
 	for (size_t i = 0; i < vec.size(); i++)
@@ -193,4 +195,4 @@ bool Passenger::searchTrip(vector<Trip> &vec)  //vec = vetor das viagens da agen
 
 	//nenhuma das condiçoes de aceitação foi obtida
 	return false;
-}
+}*/

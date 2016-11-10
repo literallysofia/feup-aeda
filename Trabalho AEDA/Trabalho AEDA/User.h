@@ -30,8 +30,8 @@ public:
 	void deposit(float value);
 	vector <Transaction> getTransactions() const;
 	virtual bool car() const;
-	virtual void addTrip(Trip &t) {};
-	virtual bool searchTrip(vector<Trip> &vec);
+	//virtual void addTrip(Trip &t) {};
+	//virtual bool searchTrip(vector<Trip> &vec);
 	virtual string getFirst() const;
 	virtual string getLast() const;
 	
@@ -46,15 +46,15 @@ class Driver :
 {
 private:
 	int numSeats;
-	Trip currentTrip;
+	//Trip currentTrip;
 public:
 	Driver(int ID, string name, float balance, string username, string password);
 	int getNumSeats() const;		//apenas retorna o numero de lugares dados pelo utilizador,
-	Trip getCurrentTrip() const;		//retorna um objeto da classe Trip
+	//Trip getCurrentTrip() const;		//retorna um objeto da classe Trip
 	void payment();
 	bool car() const;
-	void addTrip(Trip& t);
-	bool searchTrip(vector<Trip> &vec) const;
+	//void addTrip(Trip& t);
+	//bool searchTrip(vector<Trip> &vec) const;
 	string getFirst() const;
 	string getLast() const;
 	/*
@@ -82,6 +82,6 @@ public:
 	void payment();
 	bool car() const;
 	void resetTrips(void);
-	void addTrip(Trip &t) { numTrips++; };
-	bool searchTrip(vector<Trip> &vec);
+	//void addTrip(Trip &t) { numTrips++; };
+	//bool searchTrip(vector<Trip> &vec);
 };
