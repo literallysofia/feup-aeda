@@ -14,6 +14,8 @@
 #include "Guest.h"
 #include "Trip.h"
 #include "Transactions.h"
+#include "Stop.h"
+#include "Date.h"
 
 using namespace std;
 
@@ -35,7 +37,7 @@ private:
 	vector<Trip> Trips;
 	vector<Guest *> Guests;
 	vector<Transaction> Transactions;
-	vector<stop> Stops;
+	vector<stop> stopsAvailable;
 
 public:
 	Agency();
@@ -111,8 +113,8 @@ public:
 
 	//Functions
 	void addUser(User* u);
-	//void addTrip();
-	//bool checkStop(string s);
+	void addTrip();
+	bool checkStop(string s);
 	//void runTrip(int tripID);
 
 	//Displays

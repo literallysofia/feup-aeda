@@ -862,11 +862,11 @@ void Agency::displayStops() {
 	return;
 }
 
-/*
+
 void Agency::addTrip() {
-	//Trip t;	t.setDriverID(1); t.setID(1);
-	//Trip t;	t.setDriverID(sessionID); t.setID(Trips.back().getID() + 1);
-	vector<string> stops;
+
+	vector<Stop> tripPlan;
+	vector<string> stopCodes;
 	string stopCode;
 	int stopNumber = 1;
 
@@ -886,12 +886,12 @@ void Agency::addTrip() {
 				//se a paragem existe
 				if (checkStop(stopCode)) {
 					//se a paragem ja foi inserida lança a exceçao
-					if (find(stops.begin(), stops.end(), stopCode) != stops.end()) {
+					if (find(stopCodes.begin(), stopCodes.end(), stopCode) != stopCodes.end()) {
 						throw RepeatedStop(stopCode);
 					}
 					//caso corra tudo bem é adicionada ao vetor
 					else {
-						stops.push_back(stopCode);
+						stopCodes.push_back(stopCode);
 						stopNumber++;
 					}
 				}
@@ -913,7 +913,7 @@ void Agency::addTrip() {
 		//fim da introduçao das paragens
 		else {
 
-			if (stops.size() < 2)
+			if (stopCodes.size() < 2)
 			{
 				ut.red(); cout << "ERROR: You did not enter at least 2 distinct stops.\n"; ut.white();
 				Sleep(2500);
@@ -925,8 +925,28 @@ void Agency::addTrip() {
 				ut.blue(); cout << "\nPlease enter the number of seats available ( minimun: 1 , maximum: 6):\n-> "; cin.clear(); ut.white();
 				int numSeats = ut.leInteiro(1, 6); cin.clear();
 
-				//criacao do objeto trip
+				//id da nova viagem a ser criada
 				int idTrip = Trips.size();
+
+				//vetor de estrutura STOP
+				for (unsigned int i = 0; i < stopCodes.size(); i++) {
+					tripPlan.push_back(Stop(stopCodes.at(i), numSeats));
+				}
+
+				//data da viagem
+				string tripDate;
+				ut.blue(); cout << "\nPlease enter the date:\n-> "; cin.clear(); ut.white();
+				Date(tripDate);
+
+				//hora inicio
+				ut.blue(); cout << "\nPlease enter start:\n-> "; cin.clear(); ut.white();
+
+				//hora fim
+				ut.blue(); cout << "\nPlease enter end:\n-> "; cin.clear(); ut.white();
+				
+
+
+
 				//Trip trp(idTrip, sessionID, stops);
 				//adicao da viagem ao vetor na agencia
 				ut.green();  cout << "\n\nStops and number of seats successfully added to your trip.\n\n"; ut.white();
@@ -943,7 +963,7 @@ void Agency::addTrip() {
 															}
 															}
 															system("pause");*/
-			/*}
+			}
 			break;
 		}
 	}
@@ -953,14 +973,14 @@ bool Agency::checkStop(string s) {
 
 	bool exists = false;
 
-	for (size_t i = 0; i < Stops.size(); i++)
+	for (size_t i = 0; i < stopsAvailable.size(); i++)
 	{
-		if (Stops.at(i).code == s)
+		if (stopsAvailable.at(i).code == s)
 			exists = true;
 	}
 
 	return exists;
-}*/
+}
 
 /*
 void Agency::runTrip(int tripID) {

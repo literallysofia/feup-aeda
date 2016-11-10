@@ -14,7 +14,7 @@ private:
 
 public:
 	Date() {};
-	Date(string date); // data na forma DD/MM/AAA
+	Date(string date); // data na forma DD/MM/AAAA
 
 	int getDay() const;
 	int getMonth() const;
