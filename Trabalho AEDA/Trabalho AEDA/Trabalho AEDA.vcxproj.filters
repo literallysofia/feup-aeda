@@ -36,9 +36,6 @@
     <ClCompile Include="Guest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Stop.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Transactions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -46,6 +43,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Hour.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Stop.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -68,9 +68,6 @@
     <ClInclude Include="Guest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Stop.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Transactions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -78,6 +75,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Hour.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Stop.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -28,6 +28,7 @@ int Guest::getID() const
 	return guestID;
 }
 
+/*
 bool Guest::searchTrip(vector<Trip> &vec)  //vec = vetor das viagens da agencia
 {
 	unsigned int posBeg = -1, posEnd = -1;
@@ -57,3 +58,4 @@ bool Guest::searchTrip(vector<Trip> &vec)  //vec = vetor das viagens da agencia
 	//nenhuma das condiçoes de aceitação foi obtida
 	return false;
 }
+*/
