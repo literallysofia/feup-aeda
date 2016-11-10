@@ -474,7 +474,7 @@ int Agency::menuCreateTrip()
 	ut.white(); displayStops();
 	ut.blue(); cout << "-----------------------------------------------------------" << endl; ut.white();
 
-	addTrip();
+	//addTrip();
 	return 0;
 }
 

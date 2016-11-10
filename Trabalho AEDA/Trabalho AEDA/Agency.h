@@ -111,9 +111,9 @@ public:
 
 	//Functions
 	void addUser(User* u);
-	void addTrip();
-	bool checkStop(string s);
-	void runTrip(int tripID);
+	//void addTrip();
+	//bool checkStop(string s);
+	//void runTrip(int tripID);
 
 	//Displays
 	void displayUsers();

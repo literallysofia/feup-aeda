@@ -11,7 +11,7 @@ Stop::~Stop()
 Stop::Stop(string code, int seats)
 {
 	this->code = code;
-	this->availableSeats = seats;
+	availableSeats = seats;
 }
 
 string Stop::getCode() const
