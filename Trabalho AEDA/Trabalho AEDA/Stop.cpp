@@ -1,16 +1,18 @@
 #include "Stop.h"
 
-Stop::Stop()
+Stop::Stop(string code, int seats)
 {
+	this->code = code;
+	this->availableSeats = seats;
 }
 
 Stop::~Stop()
 {
 }
 
-string Stop::getLocation() const
+string Stop::getCode() const
 {
-	return location;
+	return code;
 }
 
 int Stop::getAvailableSeats() const
@@ -18,7 +20,17 @@ int Stop::getAvailableSeats() const
 	return availableSeats;
 }
 
-vector<User*> Stop::getPassengers() const
+vector<int> Stop::getPassengers() const
 {
-	return Passengers;
+	return passengers;
+}
+
+void Stop::decAvailableSeats()
+{
+	availableSeats--;
+}
+
+void Stop::addPassenger(int id)
+{
+	passengers.push_back(id);
 }

@@ -34,7 +34,6 @@ private:
 	vector<User *> Users;
 	vector<Trip> Trips;
 	vector<Guest *> Guests;
-	//vector<string> stopsAvailable = { "a","b","c" };
 	vector<Transaction> Transactions;
 	vector<stop> Stops;
 
