@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 #include "User.h"
 #include <string>
 #include <vector>
@@ -11,6 +12,7 @@ private:
 	int availableSeats;
 	vector<int> passengers;
 public:
+	Stop();
 	Stop(string code, int seats);
 	~Stop();
 	string getCode() const;
@@ -19,4 +21,3 @@ public:
 	void decAvailableSeats();
 	void addPassenger(int id);
 };
-

@@ -862,7 +862,7 @@ void Agency::displayStops() {
 	return;
 }
 
-
+/*
 void Agency::addTrip() {
 	//Trip t;	t.setDriverID(1); t.setID(1);
 	//Trip t;	t.setDriverID(sessionID); t.setID(Trips.back().getID() + 1);
@@ -943,7 +943,7 @@ void Agency::addTrip() {
 															}
 															}
 															system("pause");*/
-			}
+			/*}
 			break;
 		}
 	}
@@ -960,7 +960,7 @@ bool Agency::checkStop(string s) {
 	}
 
 	return exists;
-}
+}*/
 
 /*
 void Agency::runTrip(int tripID) {

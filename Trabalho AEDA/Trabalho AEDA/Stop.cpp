@@ -1,13 +1,17 @@
 #include "Stop.h"
 
-Stop::Stop(string code, int seats)
+Stop::Stop()
 {
-	this->code = code;
-	this->availableSeats = seats;
 }
 
 Stop::~Stop()
 {
+}
+
+Stop::Stop(string code, int seats)
+{
+	this->code = code;
+	this->availableSeats = seats;
 }
 
 string Stop::getCode() const
