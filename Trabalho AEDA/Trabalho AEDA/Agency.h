@@ -43,7 +43,7 @@ public:
 	Agency();
 	~Agency();
 
-	//Cria uma nova instância.
+	//Cria uma nova instï¿½ncia.
 	static Agency* instance()
 	{
 		if (!singleton_instance)
@@ -52,7 +52,7 @@ public:
 		return singleton_instance;
 	}
 
-	//Elimina a instância atual e cria outra.
+	//Elimina a instï¿½ncia atual e cria outra.
 	/*void logout() {
 	delete singleton_instance;
 	singleton_instance = NULL;
@@ -76,6 +76,7 @@ public:
 	void menuDisplayBuddies();
 	void menuDisplayTransactions();
 	void menuDisplayStops();
+	void menuDisplayRecord();
 
 
 	//User Only
@@ -103,7 +104,7 @@ public:
 	void extractTransactions();
 	void saveTransactions();
 	void extractStops();
-	void saveStops();
+	void extractRecord();
 
 	//Basic Functions
 
@@ -125,6 +126,7 @@ public:
 	void displayBuddies(); 
 	void displayTransactions();
 	void displayStops();
+	void displayRecord();
 
 	/*
 	void imprimeTrips();					//function that uses the Trips class' operator<< method to

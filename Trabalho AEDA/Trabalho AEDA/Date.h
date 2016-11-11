@@ -3,6 +3,7 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <iomanip>
 
 using namespace std;
 
@@ -26,6 +27,7 @@ public:
 	
 
 	friend ostream& operator<<(ostream& out, Date& date); 
+	//string toString(Date date);
 	friend bool operator< (Date & d1, Date& d2);
 	friend bool operator> (Date& d1, Date& d2);
 	friend bool operator== (Date& d1, Date& d2); 

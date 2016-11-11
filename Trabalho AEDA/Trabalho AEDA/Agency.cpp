@@ -228,7 +228,7 @@ void Agency::optionsMainMenu_Admin() {
 			menuDisplayUsers();
 			break;
 		case 2:
-			//TODO mostrar o historico de trips
+			menuDisplayRecord();
 			break;
 		case 3:
 			menuDisplayTransactions();
@@ -313,7 +313,7 @@ void Agency::menuDisplayTransactions() {
 	ut.menuHeader();
 	cout << "|~~~                     ";  ut.setcolor(7); cout << "Transactions";  ut.setcolor(15); cout << "                  ~~~|" << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-	ut.setcolor(7); cout << setw(5) << "ID" << setw(27) << "Data" << setw(22) << "Value" << endl;
+	ut.setcolor(7); cout << setw(5) << "ID" << setw(27) << "Date" << setw(22) << "Value" << endl;
 	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
 	ut.setcolor(15);  displayTransactions();
 	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
@@ -329,6 +329,20 @@ void Agency::menuDisplayStops() {
 	ut.setcolor(7); cout << setw(15) << "Code" << setw(35) << "Name" << endl;
 	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
 	ut.setcolor(15);  displayStops();
+	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
+	ut.red(); cout << "\n Press anything to go back."; ut.white(); getchar(); getchar();
+	return;
+}
+
+void Agency::menuDisplayRecord()
+{
+	ut.clearScreen();
+	ut.menuHeader();
+	cout << "|~~~                     ";  ut.setcolor(7); cout << "Trips Record";  ut.setcolor(15); cout << "                  ~~~|" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+	ut.setcolor(7); cout << setw(3) <<"ID" << setw(8) << "Driver" << setw(8) << "Orgn" << setw(8) << "Dstn" << setw(14) << "Date" << setw(9) << "Start" << setw(7) << "End" << endl;
+	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
+	ut.setcolor(15);  displayRecord();
 	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
 	ut.red(); cout << "\n Press anything to go back."; ut.white(); getchar(); getchar();
 	return;
@@ -509,12 +523,14 @@ void Agency::extractData() {
 	extractBuddies();
 	extractStops();
 	extractTransactions();
+	extractRecord();
 }
 
 void Agency::saveData() {
 	saveUsers();
 	//saveBuddies(); TODO: crasha tudo cuidado
 	saveTransactions();
+	extractRecord();
 	return;
 }
 
@@ -749,19 +765,56 @@ void Agency::extractStops() {
 	else { ut.red(); cerr << "ERROR: unable to open file." << endl; ut.white(); }
 }
 
-void Agency::saveStops() {
-
-	ofstream StopsFile("Stops.txt");
-
-	if (StopsFile.is_open())
+void Agency::extractRecord()
+{
+	
+	ifstream Recfile("Record.txt");
+	string line;
+	
+	if (Recfile.is_open())
 	{
-		for (unsigned int i = 0; i < stopsAvailable.size(); i++)
+		if (!Trips.empty()) Trips.clear();
+
+		while (getline(Recfile, line))
 		{
-			StopsFile << stopsAvailable.at(i).code << ";" << stopsAvailable.at(i).name << ";" << endl;
-		}
-		StopsFile.close();
+
+			size_t pos1 = line.find(";"); //posiçao 1
+			string str1 = line.substr(pos1 + 1); //driver+stopStart+stopEnd+date+horaStart+horaEnd
+			size_t pos2 = str1.find(";"); //posiçao 2
+			string str2 = str1.substr(pos2 + 1); //stopStart+stopEnd+date+horaStart+horaEnd
+			size_t pos3 = str2.find(";"); //posiçao 3
+			string str3 = str2.substr(pos3 + 1); //stopEnd+date+horaStart+horaEnd
+			size_t pos4 = str3.find(";"); //posiçao 4
+			string str4 = str3.substr(pos4 + 1); //date+horaStart+horaEnd
+			size_t pos5 = str4.find(";"); //posiçao 5
+			string str5 = str4.substr(pos5 + 1); //horaStart+horaEnd
+			size_t pos6 = str5.find(";"); //posiçao 6
+
+			string idT_s = line.substr(0, pos1); //string id trip
+			string idD_s = str1.substr(0, pos2); //string id driver
+			string stopStart_s = str2.substr(0, pos3);
+			string stopEnd_s = str3.substr(0, pos4);
+			string date_s = str4.substr(0, pos5);
+			string horaStart_s = str5.substr(0, pos6);
+			string horaEnd_s = str5.substr(pos6 + 1);
+
+			int idT_i = stoi(idT_s, nullptr, 10); //passa o idT de string para int
+			int idD_i = stoi(idD_s, nullptr, 10); //passa o idD de string para int
+			Stop sS(stopStart_s, 0);
+			Stop sE(stopEnd_s, 0);
+			Date d(date_s);
+			Hour hS(horaStart_s);
+			Hour hE(horaEnd_s);
+
+			vector <Stop> s = { sS,sE };
+
+			Trip T(idT_i, idD_i, s, d, hS, hE);
+			Trips.push_back(T);
+		} 
+		Recfile.close();
 	}
-	else { ut.red(); cerr << "ERROR: unable to open file." << endl; ut.white(); }
+	else { ut.setcolor(4); cerr << "Impossivel abrir ficheiro." << endl; ut.setcolor(15); }
+
 }
 
 
@@ -850,7 +903,7 @@ void Agency::displayTransactions() {
 	for (unsigned int i = 0; i < Transactions.size(); i++)
 	{
 		cout << setw(5) << Transactions.at(i).GetId();
-		cout << setw(20) << Transactions.at(i).GetDate();
+		cout << setw(20)<< Transactions.at(i).GetDate();
 		cout << setw(22) << setprecision(2) << fixed << Transactions.at(i).GetValue();
 		cout << endl;
 	}
@@ -866,6 +919,22 @@ void Agency::displayStops() {
 		cout << endl;
 	}
 	return;
+}
+
+void Agency::displayRecord()
+{
+	for (unsigned int i = 0; i < Trips.size(); i++)
+	{
+		cout << setw(3) << Trips.at(i).getID();
+		cout << setw(5) << Trips.at(i).getDriver();
+		cout << setw(11) << Trips.at(i).getOrigin();
+		cout << setw(8) << Trips.at(i).getDestination();
+		cout << setw(5) << Trips.at(i).getDate();
+		cout << setw(6) << Trips.at(i).getStart();
+		cout << setw(4) << Trips.at(i).getEnd();
+
+		cout << endl;
+	}
 }
 
 
@@ -972,7 +1041,6 @@ void Agency::addTrip() {
 				//adicao da viagem ao vetor na agencia
 				ut.green();  cout << "\n\nStops and number of seats successfully added to your trip.\n\n"; ut.white();
 				Sleep(2500);
-				ut.clearScreen();
 				Trips.push_back(trp);
 				Users.at(sessionPos)->addTrip(trp);			//adiciona a viagem criada ao utilizador correspondente (VIAGEM A DECORRER)
 
