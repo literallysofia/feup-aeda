@@ -46,17 +46,42 @@ void Date::setYear(int a) {
 
 ostream& operator<<(ostream& out, Date & date) {
 
-	
 	if (date.day < 10 && date.month < 10)
-		out << "0" << date.day << '/' << "0" << date.month << '/' << date.year;
+		out 
+		//<< setw(19) 
+		<< "0" << date.day << '/' << "0" << date.month << '/' << date.year;
 	else if (date.day < 10)
-		out << "0" << date.day << '/' << date.month << '/' << date.year;
+		out 
+		//<< setw(19) 
+		<< "0" << date.day << '/' << date.month << '/' << date.year;
 	else if (date.month < 10)
-		out << date.day << '/' << "0" << date.month << '/' << date.year;
-	else out << date.day << '/' << date.month << '/' << date.year;
+		out 
+		//<< setw(20) 
+		<< date.day << '/' << "0" << date.month << '/' << date.year;
+	else out 
+		//<< setw(20) 
+		<< date.day << '/' << date.month << '/' << date.year;
 	
 	return out;
 }
+
+/*
+string toString(Date & date) {
+
+	string date_s;
+
+	if (date.day < 10 && date.month < 10)
+		date_s = '0' + date.day + '/' + '0' + date.month  + '/' + date.year;
+	else if (date.day < 10)
+		date_s = '0' + date.day + '/' + date.month + '/' + date.year;
+	else if (date.month < 10)
+		date_s = date.day + '/' + "0" + date.month + '/' + date.year;
+	else date_s = date.day + '/' + date.month + '/' + date.year;
+
+	return date_s;
+
+}
+*/
 
 bool operator< (Date& d1, Date& d2) {
 	if (!d1.valid()) { return false; };
