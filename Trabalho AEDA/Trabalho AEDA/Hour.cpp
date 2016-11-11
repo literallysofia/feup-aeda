@@ -12,6 +12,12 @@ Hour::Hour(string hourStr)
 	this->minutes = minutes;
 }
 
+Hour::Hour(int hour, int minutes)
+{
+	this->hour = hour;
+	this->minutes = minutes;
+}
+
 int Hour::getHour() const {
 	return hour;
 }

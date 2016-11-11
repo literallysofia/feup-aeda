@@ -13,6 +13,7 @@ private:
 public:
 	Hour() {};
 	Hour(string hour);
+	Hour(int hour, int minutes);
 	int getHour() const;
 	int getMinutes() const;
 	void setHour(int hour);

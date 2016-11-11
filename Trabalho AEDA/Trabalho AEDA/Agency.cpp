@@ -214,8 +214,7 @@ int Agency::mainMenu_Admin() {
 
 
 	if (option == 0)
-		//TODO logout();
-		exit(0);
+		return 0;
 	return option;
 }
 
@@ -419,8 +418,8 @@ int Agency::menuAccount()
 	cout << setw(5) << Users.at(getPos(sessionID))->getID() << setw(10) << Users.at(getPos(sessionID))->getUsername() << setw(15) <<
 		Users.at(getPos(sessionID))->getName() << setw(10) << Users.at(getPos(sessionID))->getBalance() << setw(12) << 1 << endl;
 
-		ut.blue(); cout << "-----------------------------------------------------------" << endl;  ut.grey();
-		cout << setw(18) << "1. Deposit" << setw(32) << "2. smth else" << endl; ut.white();
+	ut.blue(); cout << "-----------------------------------------------------------" << endl;  ut.grey();
+	cout << setw(18) << "1. Deposit" << setw(32) << "2. smth else" << endl; ut.white();
 	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
 		<< "|~~~                                 ";  ut.grey(); cout << "< 0. Return >";  ut.white(); cout << "     ~~~|" << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl << endl;
@@ -474,7 +473,7 @@ int Agency::menuCreateTrip()
 	ut.white(); displayStops();
 	ut.blue(); cout << "-----------------------------------------------------------" << endl; ut.white();
 
-	//addTrip();
+	addTrip();
 	return 0;
 }
 
@@ -735,7 +734,7 @@ void Agency::extractStops() {
 			stop s;
 			s.code = code;
 			s.name = name;
-			Stops.push_back(s);
+			stopsAvailable.push_back(s);
 		}
 		Stopsfile.close();
 	}
@@ -749,9 +748,9 @@ void Agency::saveStops() {
 
 	if (StopsFile.is_open())
 	{
-		for (unsigned int i = 0; i < Stops.size(); i++)
+		for (unsigned int i = 0; i < stopsAvailable.size(); i++)
 		{
-			StopsFile << Stops.at(i).code << ";" << Stops.at(i).name << ";" << endl;
+			StopsFile << stopsAvailable.at(i).code << ";" << stopsAvailable.at(i).name << ";" << endl;
 		}
 		StopsFile.close();
 	}
@@ -853,10 +852,10 @@ void Agency::displayTransactions() {
 }
 
 void Agency::displayStops() {
-	for (unsigned int i = 0; i < Stops.size(); i++)
+	for (unsigned int i = 0; i < stopsAvailable.size(); i++)
 	{
-		cout << setw(15) << Stops.at(i).code;
-		cout << setw(35) << Stops.at(i).name;
+		cout << setw(15) << stopsAvailable.at(i).code;
+		cout << setw(35) << stopsAvailable.at(i).name;
 		cout << endl;
 	}
 	return;
@@ -923,10 +922,10 @@ void Agency::addTrip() {
 			{
 				//introducao do numero de lugares disponiveis
 				ut.blue(); cout << "\nPlease enter the number of seats available ( minimun: 1 , maximum: 6):\n-> "; cin.clear(); ut.white();
-				int numSeats = ut.leInteiro(1, 6); cin.clear();
+				int numSeats = ut.readInt(1, 6); cin.clear();
 
 				//id da nova viagem a ser criada
-				int idTrip = Trips.size();
+				int idTrip = Trips.size() + 1;
 
 				//vetor de estrutura STOP
 				for (unsigned int i = 0; i < stopCodes.size(); i++) {
@@ -934,35 +933,49 @@ void Agency::addTrip() {
 				}
 
 				//data da viagem
-				string tripDate;
-				ut.blue(); cout << "\nPlease enter the date:\n-> "; cin.clear(); ut.white();
-				Date(tripDate);
+				int day, month, year;
+				ut.blue(); cout << "\nPlease enter the date:\n "; cin.clear(); ut.white();
+				cout << "> Day: "; cin >> day; cout << " > Month: "; cin >> month; cout << " > Year: "; cin >> year;
+				Date tripDate(day, month, year);
+
+				if (!tripDate.valid())
+					cout << "Invalid date!\n";
+
+				//TODO excecao data invalida
 
 				//hora inicio
-				ut.blue(); cout << "\nPlease enter start:\n-> "; cin.clear(); ut.white();
+				int hourS, minutesS;
+				ut.blue(); cout << "\nPlease enter start:\n "; cin.clear(); ut.white();
+				cout << "> Hour: "; cin >> hourS; cout << " > Minutes: "; cin >> minutesS;
+				Hour start(hourS, minutesS);
+
+				//TODO hora errada
 
 				//hora fim
-				ut.blue(); cout << "\nPlease enter end:\n-> "; cin.clear(); ut.white();
-				
+				int hourE, minutesE;
+				ut.blue(); cout << "\nPlease enter end:\n "; cin.clear(); ut.white();
+				cout << "> Hour: "; cin >> hourE; cout << "> Minutes: "; cin >> minutesE;
+				Hour end(hourE, minutesE);
 
+				//TODO hora errada
 
+				//criacao do objeto trip
+				Trip trp(idTrip, sessionID, tripPlan, tripDate, start, end);
 
-				//Trip trp(idTrip, sessionID, stops);
 				//adicao da viagem ao vetor na agencia
 				ut.green();  cout << "\n\nStops and number of seats successfully added to your trip.\n\n"; ut.white();
 				Sleep(2500);
 				ut.clearScreen();
-				//Trips.push_back(trp);
-				//Users.at(sessionPos)->addTrip(trp);			//adiciona a viagem criada ao utilizador correspondente
-															//TODO current trip pode ser mais que uma
+				Trips.push_back(trp);
+				Users.at(sessionPos)->addTrip(trp);			//adiciona a viagem criada ao utilizador correspondente (VIAGEM A DECORRER)
 
-															/*for (unsigned int i = 0; i < Trips.size(); i++) {
-															cout << Trips.at(i).getID() << endl;
-															for (unsigned int j = 0; j < Trips.at(i).getStops().size(); j++) {
-															cout << Trips.at(i).getStops().at(j) << endl;
-															}
-															}
-															system("pause");*/
+				/*for (unsigned int i = 0; i < Trips.size(); i++) {
+					cout << Trips.at(i).getID() << endl;
+					for (unsigned int j = 0; j < Trips.at(i).getStops().size(); j++) {
+						cout << Trips.at(i).getStops().at(j).getCode() << endl;
+					}
+				}
+				system("pause");*/
 			}
 			break;
 		}

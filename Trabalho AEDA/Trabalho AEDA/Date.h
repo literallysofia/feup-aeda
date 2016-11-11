@@ -15,6 +15,7 @@ private:
 public:
 	Date() {};
 	Date(string date); // data na forma DD/MM/AAAA
+	Date(int day, int month, int year);
 
 	int getDay() const;
 	int getMonth() const;
