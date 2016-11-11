@@ -391,7 +391,6 @@ int Agency::mainMenu_User() {
 	}
 
 	if (option == 0) {
-		saveData();
 		return 0;
 	}
 	else
@@ -530,7 +529,7 @@ void Agency::saveData() {
 	saveUsers();
 	//saveBuddies(); TODO: crasha tudo cuidado
 	saveTransactions();
-	extractRecord();
+	saveRecord();
 	return;
 }
 
@@ -815,6 +814,27 @@ void Agency::extractRecord()
 	}
 	else { ut.setcolor(4); cerr << "Impossivel abrir ficheiro." << endl; ut.setcolor(15); }
 
+}
+
+void Agency::saveRecord() {
+
+	ofstream RecordFile("Record.txt");
+
+	if (RecordFile.is_open())
+	{
+		for (unsigned int i = 0; i < Trips.size(); i++)
+		{
+			RecordFile << Trips.at(i).getID() << ";"
+				<< Trips.at(i).getDriver() << ";"
+				<< Trips.at(i).getOrigin() << ";"
+				<< Trips.at(i).getDestination() << ";"
+				<< Trips.at(i).getDate() << ";"
+				<< Trips.at(i).getStart() << ";"
+				<< Trips.at(i).getEnd() << endl;
+		}
+		RecordFile.close();
+	}
+	else { ut.red(); cerr << "ERROR: unable to open file." << endl; ut.white(); }
 }
 
 
