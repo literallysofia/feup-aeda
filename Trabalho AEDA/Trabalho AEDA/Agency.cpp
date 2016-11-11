@@ -214,8 +214,7 @@ int Agency::mainMenu_Admin() {
 
 
 	if (option == 0)
-		//TODO logout();
-		exit(0);
+		return 0;
 	return option;
 }
 
@@ -349,10 +348,10 @@ int Agency::mainMenu_User() {
 	cout << setw(18) << "1. Account" << setw(30) << "3. Add Buddy" << endl;
 
 	if (Users.at(sessionPos)->car()) { //caso seja driver
-		cout << setw(22) << "2. Create Trip" << setw(24) << "4. Add Car" << endl;
+		cout << setw(23) << "2. Create Trip\n";
 	}
 	else { // caso seja passenger
-		cout << setw(20) << "2. Join Trip" << setw(28) << "4. smth else" << endl;
+		cout << setw(21) << "2. Join Trip\n";
 	}
 
 	ut.blue(); cout << "-----------------------------------------------------------" << endl;  ut.white();
@@ -363,7 +362,7 @@ int Agency::mainMenu_User() {
 	cout << "Type your choice: ";
 	cin >> option;
 
-	while (cin.fail() || (option > 4) || (option < 0))
+	while (cin.fail() || (option > 2) || (option < 0))
 	{
 		if (cin.eof())
 		{
@@ -395,12 +394,11 @@ void Agency::optionsMainMenu_User() {
 			optionsMenuAccount();
 			break;
 		case 2:
-			optionsCreateTrip();
+			if (Users.at(sessionPos)->car())
+				optionsCreateTrip();
+			else optionsJoinTrip();
 			break;
 		case 3:
-			//TODO quem tem carro pode fazer join?
-			break;
-		case 4:
 			//TODO add buddy
 			break;
 		}
@@ -419,8 +417,8 @@ int Agency::menuAccount()
 	cout << setw(5) << Users.at(getPos(sessionID))->getID() << setw(10) << Users.at(getPos(sessionID))->getUsername() << setw(15) <<
 		Users.at(getPos(sessionID))->getName() << setw(10) << Users.at(getPos(sessionID))->getBalance() << setw(12) << 1 << endl;
 
-		ut.blue(); cout << "-----------------------------------------------------------" << endl;  ut.grey();
-		cout << setw(18) << "1. Deposit" << setw(32) << "2. smth else" << endl; ut.white();
+	ut.blue(); cout << "-----------------------------------------------------------" << endl;  ut.grey();
+	cout << setw(18) << "1. Deposit" << setw(32) << "2. smth else" << endl; ut.white();
 	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
 		<< "|~~~                                 ";  ut.grey(); cout << "< 0. Return >";  ut.white(); cout << "     ~~~|" << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl << endl;
@@ -474,7 +472,7 @@ int Agency::menuCreateTrip()
 	ut.white(); displayStops();
 	ut.blue(); cout << "-----------------------------------------------------------" << endl; ut.white();
 
-	//addTrip();
+	addTrip();
 	return 0;
 }
 
@@ -491,6 +489,15 @@ void Agency::optionsCreateTrip()
 			//idk
 			break;
 		}
+}
+
+int Agency::menuJoinTrip()
+{
+	return 0;
+}
+
+void Agency::optionsJoinTrip()
+{
 }
 
 
@@ -564,7 +571,7 @@ void Agency::extractUsers()
 		}
 		Userfile.close();
 	}
-	else { ut.setcolor(4); cerr << "Impossivel abrir ficheiro." << endl; ut.setcolor(15); }
+	else { ut.red(); cerr << "ERROR: unable to open file." << endl; ut.white(); }
 }
 
 void Agency::saveUsers()
@@ -585,7 +592,7 @@ void Agency::saveUsers()
 		}
 		UserFile.close();
 	}
-	else { ut.setcolor(4); cerr << "Impossivel abrir ficheiro." << endl; ut.setcolor(15); }
+	else { ut.red(); cerr << "ERROR: unable to open file." << endl; ut.white(); }
 }
 
 void Agency::extractBuddies()
@@ -632,7 +639,7 @@ void Agency::extractBuddies()
 
 		Buddiesfile.close();
 	}
-	else { ut.setcolor(4); cerr << "Impossivel abrir ficheiro." << endl; ut.setcolor(15); }
+	else { ut.red(); cerr << "ERROR: unable to open file." << endl; ut.white(); }
 }
 
 void Agency::saveBuddies()
@@ -659,7 +666,7 @@ void Agency::saveBuddies()
 		}
 		BuddiesFile.close();
 	}
-	else { ut.setcolor(4); cerr << "Impossivel abrir ficheiro." << endl; ut.setcolor(15); }
+	else { ut.red(); cerr << "ERROR: unable to open file." << endl; ut.white(); }
 }
 
 void Agency::extractTransactions() {
@@ -699,7 +706,7 @@ void Agency::extractTransactions() {
 
 		Transfile.close();
 	}
-	else { ut.setcolor(4); cerr << "Impossivel abrir ficheiro." << endl;  ut.setcolor(15); }
+	else { ut.red(); cerr << "ERROR: unable to open file." << endl; ut.white(); }
 }
 
 void Agency::saveTransactions() {
@@ -716,7 +723,7 @@ void Agency::saveTransactions() {
 		}
 		TransFile.close();
 	}
-	else { ut.setcolor(4); cerr << "Impossivel abrir ficheiro." << endl; ut.setcolor(15); }
+	else { ut.red(); cerr << "ERROR: unable to open file." << endl; ut.white(); }
 }
 
 void Agency::extractStops() {
@@ -735,12 +742,11 @@ void Agency::extractStops() {
 			stop s;
 			s.code = code;
 			s.name = name;
-			Stops.push_back(s);
+			stopsAvailable.push_back(s);
 		}
 		Stopsfile.close();
 	}
-
-	else { ut.setcolor(4); cerr << "Impossivel abrir ficheiro." << endl; ut.setcolor(15); }
+	else { ut.red(); cerr << "ERROR: unable to open file." << endl; ut.white(); }
 }
 
 void Agency::saveStops() {
@@ -749,13 +755,13 @@ void Agency::saveStops() {
 
 	if (StopsFile.is_open())
 	{
-		for (unsigned int i = 0; i < Stops.size(); i++)
+		for (unsigned int i = 0; i < stopsAvailable.size(); i++)
 		{
-			StopsFile << Stops.at(i).code << ";" << Stops.at(i).name << ";" << endl;
+			StopsFile << stopsAvailable.at(i).code << ";" << stopsAvailable.at(i).name << ";" << endl;
 		}
 		StopsFile.close();
 	}
-	else { ut.setcolor(4); cerr << "Impossivel abrir ficheiro." << endl; ut.setcolor(15); }
+	else { ut.red(); cerr << "ERROR: unable to open file." << endl; ut.white(); }
 }
 
 
@@ -853,20 +859,20 @@ void Agency::displayTransactions() {
 }
 
 void Agency::displayStops() {
-	for (unsigned int i = 0; i < Stops.size(); i++)
+	for (unsigned int i = 0; i < stopsAvailable.size(); i++)
 	{
-		cout << setw(15) << Stops.at(i).code;
-		cout << setw(35) << Stops.at(i).name;
+		cout << setw(15) << stopsAvailable.at(i).code;
+		cout << setw(35) << stopsAvailable.at(i).name;
 		cout << endl;
 	}
 	return;
 }
 
-/*
+
 void Agency::addTrip() {
-	//Trip t;	t.setDriverID(1); t.setID(1);
-	//Trip t;	t.setDriverID(sessionID); t.setID(Trips.back().getID() + 1);
-	vector<string> stops;
+
+	vector<Stop> tripPlan;
+	vector<string> stopCodes;
 	string stopCode;
 	int stopNumber = 1;
 
@@ -886,12 +892,12 @@ void Agency::addTrip() {
 				//se a paragem existe
 				if (checkStop(stopCode)) {
 					//se a paragem ja foi inserida lança a exceçao
-					if (find(stops.begin(), stops.end(), stopCode) != stops.end()) {
+					if (find(stopCodes.begin(), stopCodes.end(), stopCode) != stopCodes.end()) {
 						throw RepeatedStop(stopCode);
 					}
 					//caso corra tudo bem é adicionada ao vetor
 					else {
-						stops.push_back(stopCode);
+						stopCodes.push_back(stopCode);
 						stopNumber++;
 					}
 				}
@@ -913,7 +919,7 @@ void Agency::addTrip() {
 		//fim da introduçao das paragens
 		else {
 
-			if (stops.size() < 2)
+			if (stopCodes.size() < 2)
 			{
 				ut.red(); cout << "ERROR: You did not enter at least 2 distinct stops.\n"; ut.white();
 				Sleep(2500);
@@ -922,28 +928,62 @@ void Agency::addTrip() {
 			else
 			{
 				//introducao do numero de lugares disponiveis
-				ut.blue(); cout << "\nPlease enter the number of seats available ( minimun: 1 , maximum: 6):\n-> "; cin.clear(); ut.white();
-				int numSeats = ut.leInteiro(1, 6); cin.clear();
+				ut.blue(); cout << "\nPlease enter the number of seats available ( minimun: 1 , maximum: 6):\n > "; cin.clear(); ut.white();
+				int numSeats = ut.readInt(1, 6); cin.clear();
+
+				//id da nova viagem a ser criada
+				int idTrip = (int)Trips.size() + 1;
+
+				//vetor de estrutura STOP
+				for (unsigned int i = 0; i < stopCodes.size(); i++) {
+					tripPlan.push_back(Stop(stopCodes.at(i), numSeats));
+				}
+
+				//data da viagem
+				int day, month, year;
+				ut.blue(); cout << "\nPlease enter the date:\n "; cin.clear(); ut.white();
+				cout << "> Day: "; cin >> day; cout << " > Month: "; cin >> month; cout << " > Year: "; cin >> year;
+				Date tripDate(day, month, year);
+
+				if (!tripDate.valid())
+					cout << "Invalid date!\n";
+
+				//TODO excecao data invalida
+
+				//hora inicio
+				int hourS, minutesS;
+				ut.blue(); cout << "\nPlease enter start:\n "; cin.clear(); ut.white();
+				cout << "> Hour: "; cin >> hourS; cout << " > Minutes: "; cin >> minutesS;
+				Hour start(hourS, minutesS);
+
+				//TODO hora errada
+
+				//hora fim
+				int hourE, minutesE;
+				ut.blue(); cout << "\nPlease enter end:\n "; cin.clear(); ut.white();
+				cout << "> Hour: "; cin >> hourE; cout << "> Minutes: "; cin >> minutesE;
+				Hour end(hourE, minutesE);
+
+				//TODO hora errada
 
 				//criacao do objeto trip
-				int idTrip = Trips.size();
-				//Trip trp(idTrip, sessionID, stops);
+				Trip trp(idTrip, sessionID, tripPlan, tripDate, start, end);
+
 				//adicao da viagem ao vetor na agencia
 				ut.green();  cout << "\n\nStops and number of seats successfully added to your trip.\n\n"; ut.white();
 				Sleep(2500);
 				ut.clearScreen();
-				//Trips.push_back(trp);
-				//Users.at(sessionPos)->addTrip(trp);			//adiciona a viagem criada ao utilizador correspondente
-															//TODO current trip pode ser mais que uma
+				Trips.push_back(trp);
+				Users.at(sessionPos)->addTrip(trp);			//adiciona a viagem criada ao utilizador correspondente (VIAGEM A DECORRER)
 
-															/*for (unsigned int i = 0; i < Trips.size(); i++) {
-															cout << Trips.at(i).getID() << endl;
-															for (unsigned int j = 0; j < Trips.at(i).getStops().size(); j++) {
-															cout << Trips.at(i).getStops().at(j) << endl;
-															}
-															}
-															system("pause");*/
-			/*}
+				/*for (unsigned int i = 0; i < Trips.size(); i++) {
+					cout << Trips.at(i).getID() << endl;
+					for (unsigned int j = 0; j < Trips.at(i).getStops().size(); j++) {
+						cout << Trips.at(i).getStops().at(j).getCode() << endl;
+					}
+				}
+				system("pause");*/
+			}
 			break;
 		}
 	}
@@ -953,14 +993,14 @@ bool Agency::checkStop(string s) {
 
 	bool exists = false;
 
-	for (size_t i = 0; i < Stops.size(); i++)
+	for (size_t i = 0; i < stopsAvailable.size(); i++)
 	{
-		if (Stops.at(i).code == s)
+		if (stopsAvailable.at(i).code == s)
 			exists = true;
 	}
 
 	return exists;
-}*/
+}
 
 /*
 void Agency::runTrip(int tripID) {

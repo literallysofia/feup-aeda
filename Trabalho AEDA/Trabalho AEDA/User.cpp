@@ -86,12 +86,12 @@ int Driver::getNumSeats() const
 {
 	return numSeats;
 }
-/*
-Trip Driver::getCurrentTrip() const
+
+vector<Trip> Driver::getCurrentTrips() const
 {
-	return currentTrip;
+	return currentTrips;
 }
-*/
+
 void Driver::payment()
 {
 	balance -= maintenanceFee;
@@ -102,12 +102,12 @@ bool Driver::car() const
 	return true;
 }
 
-/*
+
 void Driver::addTrip(Trip &t)
 {
-	currentTrip = t;
+	currentTrips.push_back(t);
 }
-
+/*
 bool Driver::searchTrip(vector<Trip>& vec) const
 {
 	return false;

@@ -73,18 +73,18 @@ void Utilities::clearScreen() {
 }
 
 //para ler um numero entre um minimo e maximo
-int Utilities::leInteiro(int min, int max) {
+int Utilities::readInt(int min, int max) {
 
 	bool validInput = false;
-	int opcao;
+	int option;
 
 	while (!validInput) {
-		cin >> opcao;
+		cin >> option;
 
-		if (opcao > max || opcao < min || cin.fail())
+		if (option > max || option < min || cin.fail())
 		{
-			cout << endl << "[ERRO!] Nao foi introduzida uma opcao valida." << endl;
-			cout << " Por favor, introduza uma opcao entre " << min << " e " << max << ": ";
+			cout << endl << "ERROR: Not a valid date!\n" << endl;
+			cout << " Please, type a number between " << min << " and " << max << ": ";
 			cin.clear();
 		}
 		else
@@ -92,7 +92,7 @@ int Utilities::leInteiro(int min, int max) {
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	}
 
-	return opcao;
+	return option;
 
 
 }
