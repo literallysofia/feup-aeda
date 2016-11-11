@@ -6,7 +6,7 @@ LSD;Lousada
 MAI;Maia
 MDC;Marco de Canaveses
 MTS;Matosinhos
-PDF;Paços de Ferreira
+PDF;Pacos de Ferreira
 PDV;Povoa de Varzim
 PFL;Penafiel
 PRD;Paredes
