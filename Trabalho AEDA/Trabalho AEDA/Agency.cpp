@@ -527,7 +527,7 @@ void Agency::extractData() {
 
 void Agency::saveData() {
 	saveUsers();
-	//saveBuddies(); TODO: crasha tudo cuidado
+	saveBuddies(); //TODO: crasha tudo cuidado
 	saveTransactions();
 	saveRecord();
 	return;
@@ -670,7 +670,7 @@ void Agency::saveBuddies()
 
 			string buddies_s;
 
-			for (unsigned int j = 0; j < Users.at(j)->getBuddies().size(); j++)
+			for (unsigned int j = 0; j < Users.at(i)->getBuddies().size(); j++)
 			{
 				buddies_s.append(to_string(Users.at(i)->getBuddies().at(j)->getID()));
 				buddies_s.append(",");
