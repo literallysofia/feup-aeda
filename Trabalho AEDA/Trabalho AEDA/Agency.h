@@ -14,6 +14,8 @@
 #include "Guest.h"
 #include "Trip.h"
 #include "Transactions.h"
+#include "Stop.h"
+#include "Date.h"
 
 using namespace std;
 
@@ -35,14 +37,14 @@ private:
 	vector<Trip> Trips;
 	vector<Guest *> Guests;
 	vector<Transaction> Transactions;
-	vector<stop> Stops;
 	vector <Trip> TripsRecord;
+	vector<stop> stopsAvailable;
 
 public:
 	Agency();
 	~Agency();
 
-	//Cria uma nova instância.
+	//Cria uma nova instï¿½ncia.
 	static Agency* instance()
 	{
 		if (!singleton_instance)
@@ -51,7 +53,7 @@ public:
 		return singleton_instance;
 	}
 
-	//Elimina a instância atual e cria outra.
+	//Elimina a instï¿½ncia atual e cria outra.
 	/*void logout() {
 	delete singleton_instance;
 	singleton_instance = NULL;
@@ -88,6 +90,9 @@ public:
 	int menuCreateTrip();
 	void optionsCreateTrip();
 
+	int menuJoinTrip();
+	void optionsJoinTrip();
+
 
 	//Files
 
@@ -113,8 +118,8 @@ public:
 
 	//Functions
 	void addUser(User* u);
-	//void addTrip();
-	//bool checkStop(string s);
+	void addTrip();
+	bool checkStop(string s);
 	//void runTrip(int tripID);
 
 	//Displays
