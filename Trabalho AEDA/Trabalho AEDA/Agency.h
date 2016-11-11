@@ -105,6 +105,7 @@ public:
 	void saveTransactions();
 	void extractStops();
 	void extractRecord();
+	void saveRecord();
 
 	//Basic Functions
 
