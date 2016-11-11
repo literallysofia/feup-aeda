@@ -348,10 +348,10 @@ int Agency::mainMenu_User() {
 	cout << setw(18) << "1. Account" << setw(30) << "3. Add Buddy" << endl;
 
 	if (Users.at(sessionPos)->car()) { //caso seja driver
-		cout << setw(22) << "2. Create Trip\n";
+		cout << setw(23) << "2. Create Trip\n";
 	}
 	else { // caso seja passenger
-		cout << setw(20) << "2. Join Trip\n";
+		cout << setw(21) << "2. Join Trip\n";
 	}
 
 	ut.blue(); cout << "-----------------------------------------------------------" << endl;  ut.white();
@@ -571,7 +571,7 @@ void Agency::extractUsers()
 		}
 		Userfile.close();
 	}
-	else { ut.setcolor(4); cerr << "Impossivel abrir ficheiro." << endl; ut.setcolor(15); }
+	else { ut.red(); cerr << "ERROR: unable to open file." << endl; ut.white(); }
 }
 
 void Agency::saveUsers()
@@ -592,7 +592,7 @@ void Agency::saveUsers()
 		}
 		UserFile.close();
 	}
-	else { ut.setcolor(4); cerr << "Impossivel abrir ficheiro." << endl; ut.setcolor(15); }
+	else { ut.red(); cerr << "ERROR: unable to open file." << endl; ut.white(); }
 }
 
 void Agency::extractBuddies()
@@ -639,7 +639,7 @@ void Agency::extractBuddies()
 
 		Buddiesfile.close();
 	}
-	else { ut.setcolor(4); cerr << "Impossivel abrir ficheiro." << endl; ut.setcolor(15); }
+	else { ut.red(); cerr << "ERROR: unable to open file." << endl; ut.white(); }
 }
 
 void Agency::saveBuddies()
@@ -666,7 +666,7 @@ void Agency::saveBuddies()
 		}
 		BuddiesFile.close();
 	}
-	else { ut.setcolor(4); cerr << "Impossivel abrir ficheiro." << endl; ut.setcolor(15); }
+	else { ut.red(); cerr << "ERROR: unable to open file." << endl; ut.white(); }
 }
 
 void Agency::extractTransactions() {
@@ -706,7 +706,7 @@ void Agency::extractTransactions() {
 
 		Transfile.close();
 	}
-	else { ut.setcolor(4); cerr << "Impossivel abrir ficheiro." << endl;  ut.setcolor(15); }
+	else { ut.red(); cerr << "ERROR: unable to open file." << endl; ut.white(); }
 }
 
 void Agency::saveTransactions() {
@@ -723,7 +723,7 @@ void Agency::saveTransactions() {
 		}
 		TransFile.close();
 	}
-	else { ut.setcolor(4); cerr << "Impossivel abrir ficheiro." << endl; ut.setcolor(15); }
+	else { ut.red(); cerr << "ERROR: unable to open file." << endl; ut.white(); }
 }
 
 void Agency::extractStops() {
@@ -746,8 +746,7 @@ void Agency::extractStops() {
 		}
 		Stopsfile.close();
 	}
-
-	else { ut.setcolor(4); cerr << "Impossivel abrir ficheiro." << endl; ut.setcolor(15); }
+	else { ut.red(); cerr << "ERROR: unable to open file." << endl; ut.white(); }
 }
 
 void Agency::saveStops() {
@@ -762,7 +761,7 @@ void Agency::saveStops() {
 		}
 		StopsFile.close();
 	}
-	else { ut.setcolor(4); cerr << "Impossivel abrir ficheiro." << endl; ut.setcolor(15); }
+	else { ut.red(); cerr << "ERROR: unable to open file." << endl; ut.white(); }
 }
 
 
@@ -933,7 +932,7 @@ void Agency::addTrip() {
 				int numSeats = ut.readInt(1, 6); cin.clear();
 
 				//id da nova viagem a ser criada
-				int idTrip = Trips.size() + 1;
+				int idTrip = (int)Trips.size() + 1;
 
 				//vetor de estrutura STOP
 				for (unsigned int i = 0; i < stopCodes.size(); i++) {
