@@ -28,6 +28,13 @@ void Hour::setMinutes(int m) {
 	minutes = m;
 }
 
+bool Hour::validHour()
+{
+	if (hour < 0 || hour > 23) return false;
+	if (minutes > 59 || minutes <1) return false;
+	return true;
+}
+
 ostream& operator<<(ostream& out, Hour &h) {
 
 	if (h.hour < 10 && h.minutes < 10)

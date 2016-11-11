@@ -18,4 +18,5 @@ public:
 	void setHour(int hour);
 	void setMinutes(int mimnutes);
 	friend ostream& operator<<(ostream& out, Hour& hour);
+	bool validHour();
 };

@@ -8,6 +8,7 @@ Trip::Trip()
 
 Trip::Trip(int ID, int driver, vector<Stop> stops, Date date, Hour start, Hour end)
 {
+	this->ID = ID;
 	this->driver = driver;
 	this->stops = stops;
 	this->date = date;

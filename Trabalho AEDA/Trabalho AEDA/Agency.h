@@ -36,6 +36,7 @@ private:
 	vector<Guest *> Guests;
 	vector<Transaction> Transactions;
 	vector<stop> Stops;
+	vector <Trip> TripsRecord;
 
 public:
 	Agency();
@@ -74,6 +75,7 @@ public:
 	void menuDisplayBuddies();
 	void menuDisplayTransactions();
 	void menuDisplayStops();
+	void menuDisplayRecord();
 
 
 	//User Only
@@ -98,7 +100,7 @@ public:
 	void extractTransactions();
 	void saveTransactions();
 	void extractStops();
-	void saveStops();
+	void extractRecord();
 
 	//Basic Functions
 
@@ -120,6 +122,7 @@ public:
 	void displayBuddies(); 
 	void displayTransactions();
 	void displayStops();
+	void displayRecord();
 
 	/*
 	void imprimeTrips();					//function that uses the Trips class' operator<< method to
