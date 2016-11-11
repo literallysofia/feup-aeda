@@ -189,9 +189,9 @@ int Agency::mainMenu_Admin() {
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
 		<< setw(18) << "1. Users" << setw(30) << "4. Relationships" << endl
 		<< setw(24) << "2. Trip Record" << setw(16) << "5. Stops" << endl
-		<< setw(25) << "3. Transactions" << setw(19) << "6. smth else" << endl;
+		<< setw(25) << "3. Transactions" << setw(16) << "6. Search" << endl;
 	ut.blue(); cout << "-----------------------------------------------------------" << endl;  ut.white();
-	cout << "|~~~                                ";  ut.grey(); cout << "< 0. Close >";  ut.white(); cout << "       ~~~|" << endl
+	cout << "|~~~                               ";  ut.grey(); cout << "< 0. Logout >";  ut.white(); cout << "       ~~~|" << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl << endl;
 
 	unsigned short int option;
@@ -429,10 +429,10 @@ int Agency::menuAccount()
 	ut.white();
 
 	cout << setw(5) << Users.at(getPos(sessionID))->getID() << setw(10) << Users.at(getPos(sessionID))->getUsername() << setw(15) <<
-		Users.at(getPos(sessionID))->getName() << setw(10) << Users.at(getPos(sessionID))->getBalance() << setw(12) << 1 << endl;
+		Users.at(getPos(sessionID))->getName() << setw(13) << Users.at(getPos(sessionID))->getBalance() << setw(12) << 1 << endl;
 
 	ut.blue(); cout << "-----------------------------------------------------------" << endl;  ut.grey();
-	cout << setw(18) << "1. Deposit" << setw(32) << "2. smth else" << endl; ut.white();
+	cout << setw(20) << "1. Deposit" << setw(31) << "2. smth else" << endl; ut.white();
 	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
 		<< "|~~~                                 ";  ut.grey(); cout << "< 0. Return >";  ut.white(); cout << "     ~~~|" << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl << endl;
@@ -467,7 +467,7 @@ void Agency::optionsMenuAccount()
 		switch (option)
 		{
 		case 1:
-			//TODO depositar dinheiro em balance
+			deposit();
 			break;
 		case 2:
 			//idk
@@ -554,7 +554,7 @@ void Agency::extractUsers()
 			size_t pos3 = str2.find(";"); //posiçao 3
 			string str3 = str2.substr(pos3 + 1); //balance+user+pass
 			size_t pos4 = str3.find(";"); //posiçao 4
-			string str4 = str3.substr(pos3 + 1); //user+pass
+			string str4 = str3.substr(pos4 + 1); //user+pass
 			size_t pos5 = str4.find(";"); //posiçao 5
 
 			string ids = line.substr(0, pos1); //string id
@@ -881,9 +881,9 @@ void Agency::displayBuddies() {
 
 	for (unsigned int i = 0; i < Users.size(); i++)
 	{
-		ut.setcolor(7); cout << setw(5) << "   USER"; ut.blue(); cout << " | ";
+		ut.setcolor(7); cout << setw(10) << "   USER"; ut.blue(); cout << " | ";
 		ut.white(); cout << Users.at(i)->getName() << endl;
-		ut.setcolor(7); cout << setw(5) << "BUDDIES"; ut.blue(); cout << " | ";
+		ut.setcolor(7); cout << setw(10) << "BUDDIES"; ut.blue(); cout << " | ";
 		ut.white();
 		for (unsigned int j = 0; j < Users.at(i)->getBuddies().size(); j++)
 		{
@@ -1068,6 +1068,25 @@ bool Agency::checkStop(string s) {
 	}
 
 	return exists;
+}
+
+float Agency::deposit()
+{
+	float value;
+	ut.yellow(); cout << "\n > "; ut.grey(); cout << "Insert the amount of money you want to deposit in your account: "; ut.white();
+	cin >> value;
+
+	if ((value > 0) && (value < 500)) {
+		Users.at(sessionPos)->deposit(value);
+		ut.yellow(); cout << "\n Success!"; ut.white();
+	}
+	else {
+		ut.red(); cout << "\n Not a valid value!"; ut.white();
+	}
+	Sleep(2000);
+	cin.clear();
+	cin.ignore(1000, '\n');
+	return 0;
 }
 
 /*
