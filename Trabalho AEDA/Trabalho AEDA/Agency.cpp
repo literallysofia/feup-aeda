@@ -250,7 +250,7 @@ int Agency::menuDisplayUsers() {
 	ut.menuHeader();
 	cout << "|                          ";  ut.grey(); cout << "USERS";  ut.white(); cout << "                          |" << endl;
 	ut.blue(); cout << "-----------------------------------------------------------" << endl;
-	ut.setcolor(7); cout << setw(5) << "ID" << setw(10) << "User" << setw(20) << "Name" << setw(10) << "Balance" << setw(10) << "Driver" << endl;
+	ut.setcolor(7); cout << setw(5) << "ID" << setw(10) << "User" << setw(16) << "Name" << setw(16) << "Balance" << setw(10) << "Driver" << endl;
 	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
 	ut.setcolor(15);  displayUsers();
 	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;  ut.setcolor(7);
@@ -300,7 +300,7 @@ void Agency::optionsDisplayUsers() {
 void Agency::menuDisplayBuddies() {
 	ut.clearScreen();
 	ut.menuHeader();
-	cout << "|                      ";  ut.grey(); cout << "Relationships";  ut.white(); cout << "                    |" << endl;
+	cout << "|                      ";  ut.grey(); cout << "RELATIONSHIPS";  ut.white(); cout << "                      |" << endl;
 	ut.blue(); cout << "-----------------------------------------------------------" << endl;
 	ut.setcolor(15);  displayBuddies();
 	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
@@ -311,7 +311,7 @@ void Agency::menuDisplayBuddies() {
 void Agency::menuDisplayTransactions() {
 	ut.clearScreen();
 	ut.menuHeader();
-	cout << "|~~~                     ";  ut.setcolor(7); cout << "Transactions";  ut.setcolor(15); cout << "                  ~~~|" << endl
+	cout << "|~~~                     ";  ut.setcolor(7); cout << "TRANSACTIONS";  ut.setcolor(15); cout << "                  ~~~|" << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
 	ut.setcolor(7); cout << setw(5) << "ID" << setw(27) << "Date" << setw(22) << "Value" << endl;
 	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
@@ -324,7 +324,7 @@ void Agency::menuDisplayTransactions() {
 void Agency::menuDisplayStops() {
 	ut.clearScreen();
 	ut.menuHeader();
-	cout << "|~~~                       ";  ut.setcolor(7); cout << "Stops";  ut.setcolor(15); cout << "                       ~~~|" << endl
+	cout << "|~~~                       ";  ut.setcolor(7); cout << "STOPS";  ut.setcolor(15); cout << "                       ~~~|" << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
 	ut.setcolor(7); cout << setw(15) << "Code" << setw(35) << "Name" << endl;
 	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
@@ -338,9 +338,9 @@ void Agency::menuDisplayRecord()
 {
 	ut.clearScreen();
 	ut.menuHeader();
-	cout << "|~~~                     ";  ut.setcolor(7); cout << "Trips Record";  ut.setcolor(15); cout << "                  ~~~|" << endl
+	cout << "|~~~                     ";  ut.setcolor(7); cout << "TRIP RECORD";  ut.setcolor(15); cout << "                   ~~~|" << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-	ut.setcolor(7); cout << setw(3) <<"ID" << setw(8) << "Driver" << setw(8) << "Orgn" << setw(8) << "Dstn" << setw(14) << "Date" << setw(9) << "Start" << setw(7) << "End" << endl;
+	ut.setcolor(7); cout << setw(3) <<"ID" << setw(8) << "Driver" << setw(8) << "Origin" << setw(10) << "Destiny" << setw(9) << "Date" << setw(11) << "Start" << setw(7) << "End" << endl;
 	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
 	ut.setcolor(15);  displayRecord();
 	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
@@ -391,7 +391,6 @@ int Agency::mainMenu_User() {
 	}
 
 	if (option == 0) {
-		saveData();
 		return 0;
 	}
 	else
@@ -528,9 +527,9 @@ void Agency::extractData() {
 
 void Agency::saveData() {
 	saveUsers();
-	//saveBuddies(); TODO: crasha tudo cuidado
+	saveBuddies();
 	saveTransactions();
-	extractRecord();
+	saveRecord();
 	return;
 }
 
@@ -671,7 +670,7 @@ void Agency::saveBuddies()
 
 			string buddies_s;
 
-			for (unsigned int j = 0; j < Users.at(j)->getBuddies().size(); j++)
+			for (unsigned int j = 0; j < Users.at(i)->getBuddies().size(); j++)
 			{
 				buddies_s.append(to_string(Users.at(i)->getBuddies().at(j)->getID()));
 				buddies_s.append(",");
@@ -813,8 +812,28 @@ void Agency::extractRecord()
 		} 
 		Recfile.close();
 	}
-	else { ut.setcolor(4); cerr << "Impossivel abrir ficheiro." << endl; ut.setcolor(15); }
+	else { ut.red(); cerr << "ERROR: unable to open file." << endl; ut.white(); }
+}
 
+void Agency::saveRecord() {
+
+	ofstream RecordFile("Record.txt");
+
+	if (RecordFile.is_open())
+	{
+		for (unsigned int i = 0; i < Trips.size(); i++)
+		{
+			RecordFile << Trips.at(i).getID() << ";"
+				<< Trips.at(i).getDriver() << ";"
+				<< Trips.at(i).getOrigin() << ";"
+				<< Trips.at(i).getDestination() << ";"
+				<< Trips.at(i).getDate() << ";"
+				<< Trips.at(i).getStart() << ";"
+				<< Trips.at(i).getEnd() << endl;
+		}
+		RecordFile.close();
+	}
+	else { ut.red(); cerr << "ERROR: unable to open file." << endl; ut.white(); }
 }
 
 
@@ -927,11 +946,11 @@ void Agency::displayRecord()
 	{
 		cout << setw(3) << Trips.at(i).getID();
 		cout << setw(5) << Trips.at(i).getDriver();
-		cout << setw(11) << Trips.at(i).getOrigin();
-		cout << setw(8) << Trips.at(i).getDestination();
+		cout << setw(9) << Trips.at(i).getOrigin();
+		cout << setw(10) << Trips.at(i).getDestination();
 		cout << setw(5) << Trips.at(i).getDate();
-		cout << setw(6) << Trips.at(i).getStart();
-		cout << setw(4) << Trips.at(i).getEnd();
+		cout << setw(5) << Trips.at(i).getStart();
+		cout << setw(5) << Trips.at(i).getEnd();
 
 		cout << endl;
 	}

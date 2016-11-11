@@ -52,6 +52,12 @@ int welcomeMenu() {
 		u.white(); cout << "Please try again: ";
 		cin >> choice;
 	}
+
+	if (choice== 0) {
+		Agency::instance()->saveData();
+		return 0;
+	}
+
 	return choice;
 }
 
@@ -59,8 +65,9 @@ int welcomeMenu() {
 void optionsWelcomeMenu()
 {
 	unsigned short int choice;
-
+	
 	while (choice = welcomeMenu())
+
 		switch (choice)
 		{
 		case 1:
@@ -73,10 +80,6 @@ void optionsWelcomeMenu()
 			break;
 		case 3:
 			//TODO guest link
-			break;
-		case 0:
-			Sleep(5000);
-			exit(0);
 			break;
 		}
 }
