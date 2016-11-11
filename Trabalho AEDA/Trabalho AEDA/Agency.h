@@ -120,6 +120,7 @@ public:
 	void addTrip();
 	bool checkStop(string s);
 	//void runTrip(int tripID);
+	float deposit();
 
 	//Displays
 	void displayUsers();
