@@ -37,7 +37,6 @@ private:
 	vector<Trip> Trips;
 	vector<Guest *> Guests;
 	vector<Transaction> Transactions;
-	vector <Trip> TripsRecord;
 	vector<stop> stopsAvailable;
 
 public:

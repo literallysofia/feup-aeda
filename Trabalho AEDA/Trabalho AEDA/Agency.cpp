@@ -530,6 +530,7 @@ void Agency::saveData() {
 	saveUsers();
 	//saveBuddies(); TODO: crasha tudo cuidado
 	saveTransactions();
+	extractRecord();
 	return;
 }
 
@@ -772,7 +773,7 @@ void Agency::extractRecord()
 	
 	if (Recfile.is_open())
 	{
-		if (!TripsRecord.empty()) TripsRecord.clear();
+		if (!Trips.empty()) Trips.clear();
 
 		while (getline(Recfile, line))
 		{
@@ -808,13 +809,14 @@ void Agency::extractRecord()
 			vector <Stop> s = { sS,sE };
 
 			Trip T(idT_i, idD_i, s, d, hS, hE);
-			TripsRecord.push_back(T);
+			Trips.push_back(T);
 		} 
 		Recfile.close();
 	}
 	else { ut.setcolor(4); cerr << "Impossivel abrir ficheiro." << endl; ut.setcolor(15); }
 
 }
+
 
 /* FUNCTIONS */
 
@@ -921,21 +923,21 @@ void Agency::displayStops() {
 
 void Agency::displayRecord()
 {
-	for (unsigned int i = 0; i < TripsRecord.size(); i++)
+	for (unsigned int i = 0; i < Trips.size(); i++)
 	{
-		cout << setw(3) << TripsRecord.at(i).getID();
-		cout << setw(5) << TripsRecord.at(i).getDriver();
-		cout << setw(11) << TripsRecord.at(i).getOrigin();
-		cout << setw(8) << TripsRecord.at(i).getDestination();
-		cout << setw(5) << TripsRecord.at(i).getDate();
-		cout << setw(6) << TripsRecord.at(i).getStart();
-		cout << setw(4) << TripsRecord.at(i).getEnd();
+		cout << setw(3) << Trips.at(i).getID();
+		cout << setw(5) << Trips.at(i).getDriver();
+		cout << setw(11) << Trips.at(i).getOrigin();
+		cout << setw(8) << Trips.at(i).getDestination();
+		cout << setw(5) << Trips.at(i).getDate();
+		cout << setw(6) << Trips.at(i).getStart();
+		cout << setw(4) << Trips.at(i).getEnd();
 
 		cout << endl;
 	}
 }
 
-/*
+
 void Agency::addTrip() {
 
 	vector<Stop> tripPlan;
