@@ -88,6 +88,9 @@ public:
 	int menuCreateTrip();
 	void optionsCreateTrip();
 
+	int menuJoinTrip();
+	void optionsJoinTrip();
+
 
 	//Files
 

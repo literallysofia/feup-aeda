@@ -348,10 +348,10 @@ int Agency::mainMenu_User() {
 	cout << setw(18) << "1. Account" << setw(30) << "3. Add Buddy" << endl;
 
 	if (Users.at(sessionPos)->car()) { //caso seja driver
-		cout << setw(22) << "2. Create Trip" << setw(24) << "4. Add Car" << endl;
+		cout << setw(22) << "2. Create Trip\n";
 	}
 	else { // caso seja passenger
-		cout << setw(20) << "2. Join Trip" << setw(28) << "4. smth else" << endl;
+		cout << setw(20) << "2. Join Trip\n";
 	}
 
 	ut.blue(); cout << "-----------------------------------------------------------" << endl;  ut.white();
@@ -362,7 +362,7 @@ int Agency::mainMenu_User() {
 	cout << "Type your choice: ";
 	cin >> option;
 
-	while (cin.fail() || (option > 4) || (option < 0))
+	while (cin.fail() || (option > 2) || (option < 0))
 	{
 		if (cin.eof())
 		{
@@ -394,12 +394,11 @@ void Agency::optionsMainMenu_User() {
 			optionsMenuAccount();
 			break;
 		case 2:
-			optionsCreateTrip();
+			if (Users.at(sessionPos)->car())
+				optionsCreateTrip();
+			else optionsJoinTrip();
 			break;
 		case 3:
-			//TODO quem tem carro pode fazer join?
-			break;
-		case 4:
 			//TODO add buddy
 			break;
 		}
@@ -490,6 +489,15 @@ void Agency::optionsCreateTrip()
 			//idk
 			break;
 		}
+}
+
+int Agency::menuJoinTrip()
+{
+	return 0;
+}
+
+void Agency::optionsJoinTrip()
+{
 }
 
 
@@ -921,7 +929,7 @@ void Agency::addTrip() {
 			else
 			{
 				//introducao do numero de lugares disponiveis
-				ut.blue(); cout << "\nPlease enter the number of seats available ( minimun: 1 , maximum: 6):\n-> "; cin.clear(); ut.white();
+				ut.blue(); cout << "\nPlease enter the number of seats available ( minimun: 1 , maximum: 6):\n > "; cin.clear(); ut.white();
 				int numSeats = ut.readInt(1, 6); cin.clear();
 
 				//id da nova viagem a ser criada
