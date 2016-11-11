@@ -527,7 +527,7 @@ void Agency::extractData() {
 
 void Agency::saveData() {
 	saveUsers();
-	saveBuddies(); //TODO: crasha tudo cuidado
+	saveBuddies();
 	saveTransactions();
 	saveRecord();
 	return;
