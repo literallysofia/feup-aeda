@@ -83,8 +83,8 @@ int Utilities::readInt(int min, int max) {
 
 		if (option > max || option < min || cin.fail())
 		{
-			cout << endl << "ERROR: Not a valid date!\n" << endl;
-			cout << " Please, type a number between " << min << " and " << max << ": ";
+			red(); cout << "ERROR: Not a valid number!\n\n"; white();
+			green();  cout << " Please, type a number between " << min << " and " << max << ": "; white();
 			cin.clear();
 		}
 		else
@@ -96,6 +96,28 @@ int Utilities::readInt(int min, int max) {
 
 
 }
+
+void Utilities::clearScreen_param(int x) {
+
+	COORD upperLeftCorner = { 0, x };
+	DWORD charsWritten;
+	DWORD conSize;
+	HANDLE hCon = GetStdHandle(STD_OUTPUT_HANDLE);
+	CONSOLE_SCREEN_BUFFER_INFO  csbi;
+
+	GetConsoleScreenBufferInfo(hCon, &csbi);
+	conSize = csbi.dwSize.X * csbi.dwSize.Y;
+
+	// fill with spaces
+	FillConsoleOutputCharacter(hCon, TEXT(' '), conSize, upperLeftCorner, &charsWritten);
+	GetConsoleScreenBufferInfo(hCon, &csbi);
+	FillConsoleOutputAttribute(hCon, csbi.wAttributes, conSize, upperLeftCorner, &charsWritten);
+
+	// cursor to upper left corner
+	SetConsoleCursorPosition(hCon, upperLeftCorner);
+
+}
+
 
 
 
@@ -145,3 +167,4 @@ void Utilities::yellow()
 {
 	setcolor(14);
 }
+

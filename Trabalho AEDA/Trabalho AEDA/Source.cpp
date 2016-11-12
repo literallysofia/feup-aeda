@@ -80,6 +80,7 @@ void optionsWelcomeMenu()
 			break;
 		case 3:
 			//TODO guest link
+			Agency::instance()->addTrip();
 			break;
 		}
 }

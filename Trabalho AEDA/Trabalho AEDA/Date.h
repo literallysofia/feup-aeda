@@ -27,11 +27,13 @@ public:
 	
 
 	friend ostream& operator<<(ostream& out, Date& date); 
-	//string toString(Date date);
+	string toString();
 	friend bool operator< (Date & d1, Date& d2);
 	friend bool operator> (Date& d1, Date& d2);
 	friend bool operator== (Date& d1, Date& d2); 
 	bool valid() const;
+	int daysBetween(Date &other);
+	void setCurrent();
 	//friend bool operator>= (Date& d1, Date& d2); // operador de comparacao (maior ou igual)	
 	//friend bool operator!= (Date& d1, Date& d2); // operador de desigualdade
 	//friend bool validade2datas(Date& d1, Date& d2);
