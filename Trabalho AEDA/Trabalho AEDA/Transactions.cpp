@@ -21,3 +21,16 @@ float Transaction::GetValue() const
 {
 	return value;
 }
+
+ostream& operator<<(ostream & out, const Transaction & t) {
+
+	out << setw(5) << t.GetId();
+	out << setw(20) << t.GetDate();
+	out << setw(22) << setprecision(2) << fixed << t.GetValue();
+	out << endl; return out;
+}
+
+void Transaction::save(ofstream & out) const {
+
+	out << GetId() << ";" << GetDate() << ";" << GetValue() << endl;
+}
