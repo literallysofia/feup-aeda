@@ -658,7 +658,7 @@ void Agency::extractUsers()
 
 void Agency::saveUsers()
 {
-	ofstream UserFile("Users.txt");
+	ofstream UserFile("Users.txt", ios::trunc);
 
 	if (UserFile.is_open())
 	{
@@ -726,7 +726,7 @@ void Agency::extractBuddies()
 
 void Agency::saveBuddies()
 {
-	ofstream BuddiesFile("Buddies.txt");
+	ofstream BuddiesFile("Buddies.txt", ios::trunc);
 
 
 	if (BuddiesFile.is_open())
@@ -793,7 +793,7 @@ void Agency::extractTransactions() {
 
 void Agency::saveTransactions() {
 
-	ofstream TransFile("Transactions.txt");
+	ofstream TransFile("Transactions.txt", ios::trunc);
 
 	if (TransFile.is_open())
 	{
@@ -882,7 +882,7 @@ void Agency::extractRecord()
 
 void Agency::saveRecord() {
 
-	ofstream RecordFile("Record.txt");
+	ofstream RecordFile("Record.txt", ios::trunc);
 
 	if (RecordFile.is_open())
 	{
