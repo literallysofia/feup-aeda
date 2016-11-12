@@ -125,7 +125,7 @@ public:
 	bool checkStop(string s);
 	//void runTrip(int tripID);
 	float deposit();
-	int getUnixCode(Date &d, Hour &h);
+	time_t getUnixCode(Date &d, Hour &h);
 
 	//Displays
 	void displayUsers();
