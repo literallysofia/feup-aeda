@@ -14,7 +14,7 @@ public:
 };
 ostream & operator<<(ostream &out, const NonexistentStop &obj)
 {
-	out << "The stop '" << obj.stop << "' does not exist.\n"; return out;
+	out << "ERROR: The stop '" << obj.stop << "' does not exist.\n"; return out;
 }
 
 class RepeatedStop
@@ -25,8 +25,76 @@ public:
 };
 ostream & operator<<(ostream &out, const RepeatedStop &obj)
 {
-	out << "The stop '" << obj.stop << "' was already used.\n"; return out;
+	out << "ERROR: The stop '" << obj.stop << "' was already used.\n"; return out;
 }
+
+class InvalidDate
+{
+public:
+	Date date;
+	InvalidDate(Date d) { date = d; }
+};
+ostream & operator<<(ostream &out, const InvalidDate &obj)
+{
+	out << "ERROR: '" << obj.date.getDay() << '/' << obj.date.getMonth()
+		<< '/' << obj.date.getYear() << "' is not a valid date format.\n"; return out;
+};
+
+class PassedDate
+{
+public:
+	int day, month, year;
+	PassedDate(int d, int m, int y) { day = d; month = m; year = y; }
+};
+ostream & operator<<(ostream &out, const PassedDate &obj)
+{
+	out << "ERROR: '" << obj.day << '/' << obj.month
+		<< '/' << obj.year << "' has passed already.\n"; return out;
+};
+
+class TooLong
+{
+public:
+	int day, month, year;
+	TooLong(int d, int m, int y) { day = d; month = m; year = y; }
+};
+ostream & operator<<(ostream &out, const TooLong &obj)
+{
+	out << "ERROR: The trip must be within a year. You entered" << " '" << obj.day << '/' << obj.month
+		<< '/' << obj.year << "' .\n"; return out;
+};
+
+class InvalidHour
+{
+public:
+	int hour, minutes;
+	InvalidHour(int h, int m) { hour = h; minutes = m; }
+};
+ostream & operator<<(ostream &out, const InvalidHour &obj)
+{
+	out << "ERROR: '" << obj.hour << ':' << obj.minutes << "' is invalid.\n"; return out;
+};
+
+class PassedHour
+{
+public:
+	int hour, minutes;
+	PassedHour(int h, int m) { hour = h; minutes = m; }
+};
+ostream & operator<<(ostream &out, const PassedHour &obj)
+{
+	out << "ERROR: '" << obj.hour << ':';
+	if (obj.minutes < 10)
+	{
+		out << '0';
+	}
+	out << obj.minutes << "' as passed already.\n"; return out;
+};
+
+/// PRINT DA STRUCT STOP
+ostream & operator<<(ostream &out, const stop &e) {
+	out << "ERROR: " << e.code << " - " << e.name << endl; return out;
+};
 
 Agency::Agency()
 {
@@ -40,7 +108,6 @@ Agency::~Agency()
 vector<User *> Agency::getUsers() {
 	return Users;
 }
-
 
 /* MENUS */
 
@@ -962,9 +1029,21 @@ void Agency::addTrip() {
 	vector<Stop> tripPlan;
 	vector<string> stopCodes;
 	string stopCode;
+	Date tripDate, currentDate; 
+	//initialize current system's date
+	currentDate.setCurrent();
+	Hour endHour, startHour, currentHour;
+	//initialize current system's date
+	currentHour.setCurrent();
+
 	int stopNumber = 1;
 
 	ut.yellow(); cout << "Please enter your stops (CTRL + Z to END):\n"; ut.white();
+
+	for (size_t i = 0; i < stopsAvailable.size(); i++)
+	{
+		cout << stopsAvailable[i];
+	}
 
 	while (1)
 	{
@@ -1028,35 +1107,126 @@ void Agency::addTrip() {
 					tripPlan.push_back(Stop(stopCodes.at(i), numSeats));
 				}
 
-				//data da viagem
-				int day, month, year;
-				ut.blue(); cout << "\nPlease enter the date:\n "; cin.clear(); ut.white();
-				cout << "> Day: "; cin >> day; cout << " > Month: "; cin >> month; cout << " > Year: "; cin >> year;
-				Date tripDate(day, month, year);
+				while (1) {
 
-				if (!tripDate.valid())
-					cout << "Invalid date!\n";
+					try
+					{
+						//data da viagem
+						int day, month, year;
+						ut.blue(); cout << "\nPlease enter the date:\n "; cin.clear(); ut.white();
+						cout << "> Day: "; cin >> day; cout << " > Month: "; cin >> month; cout << " > Year: "; cin >> year;
+						tripDate.setDay(day); tripDate.setMonth(month); tripDate.setYear(year);
 
-				//TODO excecao data invalida
+						//se a data nao é valida
+						if (!tripDate.valid()) 
+						{
+							throw InvalidDate(tripDate);
+						}
+						else if (tripDate < currentDate)
+						{
+							throw PassedDate(day, month, year);
+						}
+						else if (currentDate.daysBetween(tripDate) > 365)
+						{
+							throw TooLong(day, month, year);
+						}
+						else
+						{
+							break;
+						}
 
-				//hora inicio
-				int hourS, minutesS;
-				ut.blue(); cout << "\nPlease enter start:\n "; cin.clear(); ut.white();
-				cout << "> Hour: "; cin >> hourS; cout << " > Minutes: "; cin >> minutesS;
-				Hour start(hourS, minutesS);
+					}
+					catch (const InvalidDate &e)
+					{
+						ut.red(); cout << e; ut.white();
+					}
+					catch (const PassedDate &e)
+					{
+						ut.red(); cout << e; ut.white();
+					}
+					catch (const TooLong &e)
+					{
+						ut.red(); cout << e; ut.white();
+					}
+					
+				}
 
-				//TODO hora errada
+				while (1) {
 
-				//hora fim
-				int hourE, minutesE;
-				ut.blue(); cout << "\nPlease enter end:\n "; cin.clear(); ut.white();
-				cout << "> Hour: "; cin >> hourE; cout << "> Minutes: "; cin >> minutesE;
-				Hour end(hourE, minutesE);
+					int actualTime = getUnixCode(currentDate, currentHour);
 
-				//TODO hora errada
+					try
+					{
+					
+						//hora inicio
+						int hourS, minutesS;
+						ut.blue(); cout << "\nPlease enter starting time:\n "; cin.clear(); ut.white();
+						cout << "> Hour: "; cin >> hourS; cout << " > Minutes: "; cin >> minutesS;
+						//Hour startHour(hourS, minutesS);
+						startHour.setHour(hourS); startHour.setMinutes(minutesS);
+
+						int startUnix = getUnixCode(tripDate, startHour);
+
+						if (!startHour.validHour())
+						{
+							throw InvalidHour(startHour.getHour(), startHour.getMinutes());							
+						}
+						else if (startUnix <= actualTime +3600 && startUnix >= actualTime)	//if entered time is in less than 1 hour = 3600 seconds
+						{
+							ut.red(); cout << "ERROR: Departure time must be at least 1 hour from now.\n"; ut.white();
+						}
+						else if (startUnix < actualTime)
+						{
+							throw PassedHour(startHour.getHour(), startHour.getMinutes());
+						}
+						else
+						{
+							break;
+						}
+					}
+					catch (const InvalidHour &e)
+					{
+						ut.red(); cout << e; ut.white();
+					}
+					catch (const PassedHour &e)
+					{
+						ut.red(); cout << e; ut.white();
+					}
+				}
+						
+				while (1) {
+
+					try
+					{
+						//hora fim
+						int hourE, minutesE;
+						ut.blue(); cout << "\nPlease enter finish time:\n "; cin.clear(); ut.white();
+						cout << "> Hour: "; cin >> hourE; cout << "> Minutes: "; cin >> minutesE;
+						//Hour endHour(hourE, minutesE);
+						endHour.setHour(hourE); endHour.setMinutes(minutesE);
+
+						if (!endHour.validHour())
+						{
+							throw InvalidHour(endHour.getHour(), endHour.getMinutes());
+						}
+						else if (endHour < startHour)
+						{
+							ut.red(); cout << "ERROR: The finish time can not be previous to the departure time.\n"; ut.white();
+						}
+						else
+						{
+							break;
+						}
+					}
+					catch (const InvalidHour &e)
+					{
+						ut.red(); cout << e; ut.white();
+					}
+				}
+						
 
 				//criacao do objeto trip
-				Trip trp(idTrip, sessionID, tripPlan, tripDate, start, end);
+				Trip trp(idTrip, sessionID, tripPlan, tripDate, startHour, endHour);
 
 				//adicao da viagem ao vetor na agencia
 				ut.green();  cout << "\n\nStops and number of seats successfully added to your trip.\n\n"; ut.white();
@@ -1279,3 +1449,19 @@ totalMonth += (*it)->payment();
 return totalMonth;
 }
 */
+int Agency::getUnixCode(Date &d, Hour &h) {
+
+	int ret;
+	struct tm info;
+
+	info.tm_year = d.getYear() - 1900;
+	info.tm_mon = d.getMonth() - 1;
+	info.tm_mday = d.getDay();
+	info.tm_hour = h.getHour();
+	info.tm_min = h.getMinutes();
+	info.tm_sec = 0;
+	info.tm_isdst = -1;
+
+	ret = mktime(&info);
+	return ret;
+}

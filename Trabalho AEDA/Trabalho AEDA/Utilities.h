@@ -3,6 +3,7 @@
 #include <iostream>
 #include <limits>
 #include <conio.h>
+#include <ctime>
 
 #undef max
 

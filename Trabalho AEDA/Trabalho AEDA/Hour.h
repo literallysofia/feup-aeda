@@ -3,6 +3,8 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <time.h>
+#include <stdio.h>
 
 using namespace std;
 
@@ -20,4 +22,6 @@ public:
 	void setMinutes(int mimnutes);
 	friend ostream& operator<<(ostream& out, Hour& hour);
 	bool validHour();
+	bool operator<(const Hour &h2) const;
+	void setCurrent();
 };

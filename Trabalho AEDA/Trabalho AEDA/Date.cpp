@@ -65,23 +65,22 @@ ostream& operator<<(ostream& out, Date & date) {
 	return out;
 }
 
-/*
-string toString(Date & date) {
+string Date::toString() {
 
 	string date_s;
 
-	if (date.day < 10 && date.month < 10)
-		date_s = '0' + date.day + '/' + '0' + date.month  + '/' + date.year;
-	else if (date.day < 10)
-		date_s = '0' + date.day + '/' + date.month + '/' + date.year;
-	else if (date.month < 10)
-		date_s = date.day + '/' + "0" + date.month + '/' + date.year;
-	else date_s = date.day + '/' + date.month + '/' + date.year;
+	if (day < 10 && month < 10)
+		date_s = '0' + day + '/' + '0' + month  + '/' + year;
+	else if (day < 10)
+		date_s = '0' + day + '/' + month + '/' + year;
+	else if (month < 10)
+		date_s = day + '/' + "0" + month + '/' + year;
+	else date_s = day + '/' + month + '/' + year;
 
 	return date_s;
 
 }
-*/
+
 
 bool operator< (Date& d1, Date& d2) {
 	if (!d1.valid()) { return false; };
@@ -121,6 +120,7 @@ bool operator > (Date& d1, Date& d2) {
 
 bool Date::valid() const {
 
+	if (year/1000.0 < 0.2 != 0) return false;
 	if (year < 0) return false;
 	if (month >12 || month <1) return false;
 	if (day >31 || day <1) return false;
@@ -137,3 +137,49 @@ bool Date::valid() const {
 
 	return true;
 };
+
+int Date::daysBetween(Date &d2)
+{
+	int month_days[] = { 31,28,31,30,31,30,31,31,30,31,30,31 };
+
+	int days = 0;
+
+	if (this->year == d2.year)
+	{
+		if (this->month == d2.month)
+			days = d2.day - this->day;
+		else
+		{
+			for (int i = this->month; i < d2.month - 1; i++)
+				days += month_days[i];
+			days += month_days[this->month - 1] - this->day + d2.day;
+		}
+	}
+	else
+	{
+		for (int i = 0; i < d2.month - 1; i++)
+			days += month_days[i];
+		for (int i = this->month; i < 12; i++)
+			days += month_days[i];
+		if (d2.year - this->year >= 0)
+			days += (d2.year - this->year - 1) * 365 +
+			month_days[this->month - 1] - this->day + d2.day;
+	}	
+
+	return days;
+}
+
+void Date::setCurrent() {
+
+	//recolha de informacao da data atual
+	char date[9];
+	_strdate_s(date);
+	string nova_data_string = date;					//reformulaçao pois a data é recebida de forma americana mm/dd/yy
+	int dia = atoi(nova_data_string.substr(3, 2).c_str());
+	int mes = atoi(nova_data_string.substr(0, 2).c_str());
+	int ano = atoi(nova_data_string.substr(6, 2).c_str()) + 2000;
+
+	this->setDay(dia); this->setMonth(mes); this->setYear(ano);
+
+	///////////////
+}

@@ -83,8 +83,8 @@ int Utilities::readInt(int min, int max) {
 
 		if (option > max || option < min || cin.fail())
 		{
-			cout << endl << "ERROR: Not a valid date!\n" << endl;
-			cout << " Please, type a number between " << min << " and " << max << ": ";
+			red(); cout << "ERROR: Not a valid number!\n\n"; white();
+			green();  cout << " Please, type a number between " << min << " and " << max << ": "; white();
 			cin.clear();
 		}
 		else
@@ -167,3 +167,4 @@ void Utilities::yellow()
 {
 	setcolor(14);
 }
+
