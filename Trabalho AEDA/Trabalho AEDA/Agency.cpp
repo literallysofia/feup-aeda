@@ -117,7 +117,7 @@ void Agency::registerUser()
 	string type, name, username, password;
 
 	ut.menuHeader();
-	cout << "|                      ";  ut.grey(); cout << "Create Account";  ut.white(); cout << "                     |" << endl;
+	cout << "|                      ";  ut.grey(); cout << "CREATE ACCOUNT";  ut.white(); cout << "                     |" << endl;
 	ut.blue(); cout << "-----------------------------------------------------------" << endl; ut.white();
 	cout << "    Types of accounts:\n      - Driver: You need to register your car and host\n      trips. You'll also earn some money.\n      - Passenger: You can only join existing trips.\n\n";
 	ut.grey(); cout << "    > Do you want to register as a Driver? (y/n) "; ut.white(); cin >> type;  cout << endl;
@@ -177,7 +177,7 @@ void Agency::registerUser()
 
 	this->sessionID = nID;
 	this->sessionPos = (int)Users.size() - 1;
-	ut.red(); cout << "\n\n> Success! You just created your account!\n"; Sleep(2500); ut.white();
+	ut.yellow(); cout << "\n\n> Success! You just created your account!\n"; Sleep(2500); ut.white();
 
 	optionsMainMenu_User();
 
@@ -193,7 +193,7 @@ void Agency::loginUser()
 	string username, password;
 
 	ut.menuHeader();
-	cout << "|                          ";  ut.grey(); cout << "Login";  ut.white(); cout << "                          |" << endl;
+	cout << "|                          ";  ut.grey(); cout << "LOGIN";  ut.white(); cout << "                          |" << endl;
 	ut.blue(); cout << "-----------------------------------------------------------" << endl;
 	ut.grey(); cout << "    > Enter username: "; ut.white(); cin >> username;
 
@@ -215,7 +215,7 @@ void Agency::loginUser()
 	if (username == "admin") {
 		ut.grey(); cout << "\n    > Enter password: "; ut.white();
 		if (t.insertPassword() == "admin") {
-			ut.red(); cout << "\n\n> Login successful as admin!\n"; Sleep(2000); ut.white();
+			ut.yellow(); cout << "\n\n> Login as admin succeeded!\n"; Sleep(2000); ut.white();
 			optionsMainMenu_Admin();
 		}
 		else {
@@ -233,7 +233,7 @@ void Agency::loginUser()
 		if (validPassword(getPos(id), password)) {
 			this->sessionID = id;
 			this->sessionPos = getPos(sessionID);
-			ut.red(); cout << "\n\n> Login successful!\n"; Sleep(2000); ut.white();
+			ut.yellow(); cout << "\n\n> Login succeeded!!\n"; Sleep(2000); ut.white();
 			optionsMainMenu_User();
 		}
 		else {
@@ -475,7 +475,7 @@ void Agency::optionsMainMenu_User() {
 			break;
 		case 2:
 			if (Users.at(sessionPos)->car())
-				optionsCreateTrip();
+				menuCreateTrip();
 			else optionsJoinTrip();
 			break;
 		case 3:
@@ -488,7 +488,7 @@ int Agency::menuAccount()
 {
 	ut.clearScreen();
 	ut.menuHeader();
-	cout << "|                          ";  ut.grey(); cout << "USERS";  ut.white(); cout << "                          |" << endl
+	cout << "|                          ";  ut.grey(); cout << "ACCOUNT";  ut.white(); cout << "                          |" << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
 	ut.grey(); cout << setw(5) << "ID" << setw(10) << "User" << setw(13) << "Name" << setw(15) << "Balance" << setw(13) << "Num Cars" << endl;
 	ut.blue(); cout << "-----------------------------------------------------------" << endl;
@@ -554,21 +554,6 @@ int Agency::menuCreateTrip()
 
 	addTrip();
 	return 0;
-}
-
-void Agency::optionsCreateTrip()
-{
-	unsigned short int option;
-	while (option = menuCreateTrip())
-		switch (option)
-		{
-		case 1:
-			//TODO depositar dinheiro em balance
-			break;
-		case 2:
-			//idk
-			break;
-		}
 }
 
 int Agency::menuJoinTrip()
