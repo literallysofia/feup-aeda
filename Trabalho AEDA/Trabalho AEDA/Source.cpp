@@ -73,6 +73,7 @@ void optionsWelcomeMenu()
 			break;
 		case 3:
 			//TODO guest link
+			Agency::instance()->addTrip();
 			break;
 		case 0:
 			Sleep(5000);

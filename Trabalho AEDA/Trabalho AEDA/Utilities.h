@@ -17,6 +17,7 @@ public:
 	void clearScreen();
 	int leInteiro(int min, int max);
 	void getEnter();
+	void clearScreen_param(int x);
 
 	void white();
 	void blue();

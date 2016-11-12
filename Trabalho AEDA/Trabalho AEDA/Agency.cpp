@@ -479,7 +479,6 @@ void Agency::addTrip() {
 	{
 		cout << "Stop # " << stopNumber << " : ";
 		cin >> eachStop;
-
 		//enquanto o utilizador nao inserir ctrl+z
 		if (!cin.eof())
 		{
@@ -504,11 +503,11 @@ void Agency::addTrip() {
 			}
 			catch (const NonexistentStop &e)
 			{
-				cout << e;
+				ut.red(); cout << e; ut.white();
 			}
 			catch (const RepeatedStop &e)
 			{
-				cout << e;
+				ut.red(); cout << e; ut.white();
 			}
 		}
 		
