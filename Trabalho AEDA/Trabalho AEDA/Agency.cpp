@@ -476,7 +476,7 @@ void Agency::optionsMainMenu_User() {
 		case 2:
 			if (Users.at(sessionPos)->car())
 				menuCreateTrip();
-			else optionsJoinTrip();
+			else menuJoinTrip();
 			break;
 		case 3:
 			//TODO add buddy
@@ -558,11 +558,17 @@ int Agency::menuCreateTrip()
 
 int Agency::menuJoinTrip()
 {
-	return 0;
-}
+	ut.clearScreen();
+	ut.menuHeader();
+	cout << "|                       ";  ut.grey(); cout << "TRIP PLANNER";  ut.white(); cout << "                      |" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+	ut.grey(); cout << setw(16) << "Code" << setw(33) << "Town" << endl;
+	ut.blue(); cout << "-----------------------------------------------------------" << endl;
+	ut.white(); displayStops();
+	ut.blue(); cout << "-----------------------------------------------------------" << endl; ut.white();
 
-void Agency::optionsJoinTrip()
-{
+	joinTrip();
+	return 0;
 }
 
 
@@ -918,6 +924,19 @@ int Agency::getLastId()
 	return Users.at(Users.size() - 1)->getID();
 }
 
+bool Agency::checkStop(string s) {
+
+	bool exists = false;
+
+	for (size_t i = 0; i < stopsAvailable.size(); i++)
+	{
+		if (stopsAvailable.at(i).code == s)
+			exists = true;
+	}
+
+	return exists;
+}
+
 void Agency::addUser(User * u)
 {
 	Users.push_back(u);
@@ -988,7 +1007,6 @@ void Agency::displayRecord()
 		cout << Trips.at(i);
 	}
 }
-
 
 void Agency::addTrip() {
 
@@ -1124,7 +1142,6 @@ void Agency::addTrip() {
 						int hourS, minutesS;
 						ut.yellow(); cout << "\n > "; ut.grey(); cout << "Enter starting time:\n "; cin.clear(); ut.white();
 						cout << "> Hour: "; cin >> hourS; cout << " > Minutes: "; cin >> minutesS;
-						//Hour startHour(hourS, minutesS);
 						startHour.setHour(hourS); startHour.setMinutes(minutesS);
 
 						int startUnix = getUnixCode(tripDate, startHour);
@@ -1164,7 +1181,6 @@ void Agency::addTrip() {
 						int hourE, minutesE;
 						ut.yellow(); cout << "\n > "; ut.grey(); cout << "Please enter finish time:\n "; cin.clear(); ut.white();
 						cout << "> Hour: "; cin >> hourE; cout << "> Minutes: "; cin >> minutesE;
-						//Hour endHour(hourE, minutesE);
 						endHour.setHour(hourE); endHour.setMinutes(minutesE);
 
 						if (!endHour.validHour())
@@ -1207,20 +1223,124 @@ void Agency::addTrip() {
 			break;
 		}
 	}
+	return;
 }
 
-bool Agency::checkStop(string s) {
+void Agency::joinTrip()
+{
+	vector<Stop> tripPlan;
+	vector<string> stopCodes;
+	string stopCode;
+	Date tripDate, currentDate;
+	//initialize current system's date
+	currentDate.setCurrent();
+	Hour endHour, startHour, currentHour;
+	//initialize current system's date
+	currentHour.setCurrent();
 
-	bool exists = false;
+	int stopNumber = 1;
 
-	for (size_t i = 0; i < stopsAvailable.size(); i++)
+	ut.yellow(); cout << " > "; ut.grey(); cout << "Please enter your trip:\n"; ut.white();
+
+
+	while (1)
 	{
-		if (stopsAvailable.at(i).code == s)
-			exists = true;
-	}
+		if (stopNumber == 1)
+			cout << " From: ";
+		else cout << " To: ";
 
-	return exists;
+		cin >> stopCode;
+		stopCode = t.convertUpper(stopCode);
+
+		//enquanto nao tiver sido inserido o inicio e o fim (duas stops)
+		if (stopCodes.size() != 2)
+		{
+			try
+			{
+				//se a paragem existe
+				if (checkStop(stopCode)) {
+					//se a paragem ja foi inserida lança a exceçao
+					if (find(stopCodes.begin(), stopCodes.end(), stopCode) != stopCodes.end()) {
+						throw RepeatedStop(stopCode);
+					}
+					//caso corra tudo bem é adicionada ao vetor
+					else {
+						stopCodes.push_back(stopCode);
+						stopNumber++;
+					}
+				}
+				//se nao existe lança a exceçao
+				else
+					throw NonexistentStop(stopCode);
+
+			}
+			catch (const NonexistentStop &e)
+			{
+				ut.red(); cout << e; ut.white();
+			}
+			catch (const RepeatedStop &e)
+			{
+				ut.red(); cout << e; ut.white();
+			}
+		}
+
+		//fim da introduçao das paragens
+		else {
+
+			while (1) {
+
+				try
+				{
+					//data da viagem
+					int day, month, year;
+					ut.yellow(); cout << "\n > "; ut.grey(); cout << "Enter your trip's date:\n "; cin.clear(); ut.white();
+					cout << "> Day: "; cin >> day; cout << " > Month: "; cin >> month; cout << " > Year: "; cin >> year;
+					tripDate.setDay(day); tripDate.setMonth(month); tripDate.setYear(year);
+
+					//se a data nao é valida
+					if (!tripDate.valid())
+					{
+						throw InvalidDate(tripDate);
+					}
+					else if (tripDate < currentDate)
+					{
+						throw PassedDate(day, month, year);
+					}
+					else if (currentDate.daysBetween(tripDate) > 365)
+					{
+						throw TooLong(day, month, year);
+					}
+					else
+					{
+						break;
+					}
+
+				}
+				catch (const InvalidDate &e)
+				{
+					ut.red(); cout << e; ut.white();
+				}
+				catch (const PassedDate &e)
+				{
+					ut.red(); cout << e; ut.white();
+				}
+				catch (const TooLong &e)
+				{
+					ut.red(); cout << e; ut.white();
+				}
+
+			}
+
+			//TODO searchTrip(); stopCodes e tripData -> parametros de pesquisa
+			//TODO encontra ou nao?
+			//TODO sim: adiciona passenger a viagem (decrementar stops e assim)
+			//TODO nao: nao existem lmao vai a pe
+			break;
+		}
+	}
+	return;
 }
+
 
 float Agency::deposit()
 {
@@ -1424,6 +1544,6 @@ int Agency::getUnixCode(Date &d, Hour &h) {
 	info.tm_sec = 0;
 	info.tm_isdst = -1;
 
-	ret = mktime(&info);
+	ret = (int)mktime(&info);
 	return ret;
 }
