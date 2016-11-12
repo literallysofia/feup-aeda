@@ -371,7 +371,7 @@ void Agency::menuDisplayBuddies() {
 	ut.blue(); cout << "-----------------------------------------------------------" << endl;
 	ut.setcolor(15);  displayBuddies();
 	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
-	ut.red(); cout << "\n Press anything to go back."; ut.white(); getchar(); getchar();
+	ut.red(); cout << "\n Press enter to go back."; ut.white(); getchar(); getchar();
 	return;
 }
 
@@ -384,7 +384,7 @@ void Agency::menuDisplayTransactions() {
 	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
 	ut.setcolor(15);  displayTransactions();
 	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
-	ut.red(); cout << "\n Press anything to go back."; ut.white(); getchar(); getchar();
+	ut.red(); cout << "\n Press enter to go back."; ut.white(); getchar(); getchar();
 	return;
 }
 
@@ -397,7 +397,7 @@ void Agency::menuDisplayStops() {
 	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
 	ut.setcolor(15);  displayStops();
 	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
-	ut.red(); cout << "\n Press anything to go back."; ut.white(); getchar(); getchar();
+	ut.red(); cout << "\n Press enter to go back."; ut.white(); getchar(); getchar();
 	return;
 }
 
@@ -407,11 +407,11 @@ void Agency::menuDisplayRecord()
 	ut.menuHeader();
 	cout << "|~~~                     ";  ut.setcolor(7); cout << "TRIP RECORD";  ut.setcolor(15); cout << "                   ~~~|" << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-	ut.setcolor(7); cout << setw(3) <<"ID" << setw(8) << "Driver" << setw(8) << "Origin" << setw(10) << "Destiny" << setw(9) << "Date" << setw(11) << "Start" << setw(7) << "End" << endl;
+	ut.setcolor(7); cout << setw(3) << "ID" << setw(8) << "Driver" << setw(8) << "Origin" << setw(10) << "Destiny" << setw(9) << "Date" << setw(11) << "Start" << setw(7) << "End" << endl;
 	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
 	ut.setcolor(15);  displayRecord();
 	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
-	ut.red(); cout << "\n Press anything to go back."; ut.white(); getchar(); getchar();
+	ut.red(); cout << "\n Press enter to go back."; ut.white(); getchar(); getchar();
 	return;
 }
 
@@ -833,10 +833,10 @@ void Agency::extractStops() {
 
 void Agency::extractRecord()
 {
-	
+
 	ifstream Recfile("Record.txt");
 	string line;
-	
+
 	if (Recfile.is_open())
 	{
 		if (!Trips.empty()) Trips.clear();
@@ -876,7 +876,7 @@ void Agency::extractRecord()
 
 			Trip T(idT_i, idD_i, s, d, hS, hE);
 			Trips.push_back(T);
-		} 
+		}
 		Recfile.close();
 	}
 	else { ut.red(); cerr << "ERROR: unable to open file." << endl; ut.white(); }
@@ -989,7 +989,7 @@ void Agency::displayTransactions() {
 	for (unsigned int i = 0; i < Transactions.size(); i++)
 	{
 		cout << setw(5) << Transactions.at(i).GetId();
-		cout << setw(20)<< Transactions.at(i).GetDate();
+		cout << setw(20) << Transactions.at(i).GetDate();
 		cout << setw(22) << setprecision(2) << fixed << Transactions.at(i).GetValue();
 		cout << endl;
 	}
@@ -1029,7 +1029,7 @@ void Agency::addTrip() {
 	vector<Stop> tripPlan;
 	vector<string> stopCodes;
 	string stopCode;
-	Date tripDate, currentDate; 
+	Date tripDate, currentDate;
 	//initialize current system's date
 	currentDate.setCurrent();
 	Hour endHour, startHour, currentHour;
@@ -1038,16 +1038,11 @@ void Agency::addTrip() {
 
 	int stopNumber = 1;
 
-	ut.yellow(); cout << "Please enter your stops (CTRL + Z to END):\n"; ut.white();
-
-	for (size_t i = 0; i < stopsAvailable.size(); i++)
-	{
-		cout << stopsAvailable[i];
-	}
+	ut.yellow(); cout << " > "; ut.grey(); cout << "Please enter your stops (CTRL + Z to END):\n"; ut.white();
 
 	while (1)
 	{
-		cout << "Stop # " << stopNumber << " : ";
+		cout << " Stop # " << stopNumber << " : ";
 
 		cin >> stopCode;
 		stopCode = t.convertUpper(stopCode);
@@ -1096,8 +1091,8 @@ void Agency::addTrip() {
 			else
 			{
 				//introducao do numero de lugares disponiveis
-				ut.blue(); cout << "\nPlease enter the number of seats available ( minimun: 1 , maximum: 6):\n > "; cin.clear(); ut.white();
-				int numSeats = ut.readInt(1, 6); cin.clear();
+				ut.yellow(); cout << "\n > "; ut.grey(); cout << "Enter the number of seats available ( minimun: 1 , maximum: 6):\n"; cin.clear(); ut.white();
+				cout << " > "; int numSeats = ut.readInt(1, 6); cin.clear();
 
 				//id da nova viagem a ser criada
 				int idTrip = (int)Trips.size() + 1;
@@ -1113,12 +1108,12 @@ void Agency::addTrip() {
 					{
 						//data da viagem
 						int day, month, year;
-						ut.blue(); cout << "\nPlease enter the date:\n "; cin.clear(); ut.white();
-						cout << "> Day: "; cin >> day; cout << " > Month: "; cin >> month; cout << " > Year: "; cin >> year;
+						ut.yellow(); cout << "\n > "; ut.grey(); cout << "Enter your trip's date:\n "; cin.clear(); ut.white();
+						cout << " > Day: "; cin >> day; cout << " > Month: "; cin >> month; cout << " > Year: "; cin >> year;
 						tripDate.setDay(day); tripDate.setMonth(month); tripDate.setYear(year);
 
 						//se a data nao é valida
-						if (!tripDate.valid()) 
+						if (!tripDate.valid())
 						{
 							throw InvalidDate(tripDate);
 						}
@@ -1148,7 +1143,7 @@ void Agency::addTrip() {
 					{
 						ut.red(); cout << e; ut.white();
 					}
-					
+
 				}
 
 				while (1) {
@@ -1157,10 +1152,10 @@ void Agency::addTrip() {
 
 					try
 					{
-					
+
 						//hora inicio
 						int hourS, minutesS;
-						ut.blue(); cout << "\nPlease enter starting time:\n "; cin.clear(); ut.white();
+						ut.yellow(); cout << "\n > "; ut.grey(); cout << "Enter starting time:\n "; cin.clear(); ut.white();
 						cout << "> Hour: "; cin >> hourS; cout << " > Minutes: "; cin >> minutesS;
 						//Hour startHour(hourS, minutesS);
 						startHour.setHour(hourS); startHour.setMinutes(minutesS);
@@ -1169,9 +1164,9 @@ void Agency::addTrip() {
 
 						if (!startHour.validHour())
 						{
-							throw InvalidHour(startHour.getHour(), startHour.getMinutes());							
+							throw InvalidHour(startHour.getHour(), startHour.getMinutes());
 						}
-						else if (startUnix <= actualTime +3600 && startUnix >= actualTime)	//if entered time is in less than 1 hour = 3600 seconds
+						else if (startUnix <= actualTime + 3600 && startUnix >= actualTime)	//if entered time is in less than 1 hour = 3600 seconds
 						{
 							ut.red(); cout << "ERROR: Departure time must be at least 1 hour from now.\n"; ut.white();
 						}
@@ -1193,14 +1188,14 @@ void Agency::addTrip() {
 						ut.red(); cout << e; ut.white();
 					}
 				}
-						
+
 				while (1) {
 
 					try
 					{
 						//hora fim
 						int hourE, minutesE;
-						ut.blue(); cout << "\nPlease enter finish time:\n "; cin.clear(); ut.white();
+						ut.yellow(); cout << "\n > "; ut.grey(); cout << "Please enter finish time:\n "; cin.clear(); ut.white();
 						cout << "> Hour: "; cin >> hourE; cout << "> Minutes: "; cin >> minutesE;
 						//Hour endHour(hourE, minutesE);
 						endHour.setHour(hourE); endHour.setMinutes(minutesE);
@@ -1223,7 +1218,7 @@ void Agency::addTrip() {
 						ut.red(); cout << e; ut.white();
 					}
 				}
-						
+
 
 				//criacao do objeto trip
 				Trip trp(idTrip, sessionID, tripPlan, tripDate, startHour, endHour);
