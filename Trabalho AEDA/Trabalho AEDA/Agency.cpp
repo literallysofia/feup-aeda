@@ -1109,7 +1109,7 @@ void Agency::addTrip() {
 						//data da viagem
 						int day, month, year;
 						ut.yellow(); cout << "\n > "; ut.grey(); cout << "Enter your trip's date:\n "; cin.clear(); ut.white();
-						cout << " > Day: "; cin >> day; cout << " > Month: "; cin >> month; cout << " > Year: "; cin >> year;
+						cout << "> Day: "; cin >> day; cout << " > Month: "; cin >> month; cout << " > Year: "; cin >> year;
 						tripDate.setDay(day); tripDate.setMonth(month); tripDate.setYear(year);
 
 						//se a data nao é valida
