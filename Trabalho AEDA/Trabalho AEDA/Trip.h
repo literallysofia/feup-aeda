@@ -33,4 +33,6 @@ public:
 	Hour getEnd() const;
 	string getOrigin() const;
 	string getDestination() const;
+	void save(ofstream & out) const;
+	friend ostream& operator<<(ostream& out, const Trip &t);
 };

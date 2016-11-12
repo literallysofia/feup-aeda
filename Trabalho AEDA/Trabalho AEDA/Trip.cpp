@@ -59,3 +59,28 @@ string Trip::getDestination() const
 {
 	return stops.at(stops.size() - 1).getCode();
 }
+
+ostream& operator<<(ostream& out, const Trip &t) {
+
+	out << setw(3) << t.getID();
+	out << setw(5) << t.getDriver();
+	out << setw(9) << t.getOrigin();
+	out << setw(10) << t.getDestination();
+	out << setw(5) << t.getDate();
+	out << setw(5) << t.getStart();
+	out << setw(5) << t.getEnd();
+	out << endl; 
+
+	return out;
+}
+
+void Trip::save(ofstream & out) const {
+
+	out << getID() << ";"
+		<< getDriver() << ";"
+		<< getOrigin() << ";"
+		<< getDestination() << ";"
+		<< getDate() << ";"
+		<< getStart() << ";"
+		<< getEnd() << endl;
+}
