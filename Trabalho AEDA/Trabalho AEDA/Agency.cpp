@@ -799,9 +799,7 @@ void Agency::saveTransactions() {
 	{
 		for (unsigned int i = 0; i < Transactions.size(); i++)
 		{
-			TransFile << Transactions.at(i).GetId() << ";"
-				<< Transactions.at(i).GetDate() << ";"
-				<< Transactions.at(i).GetValue() << endl;
+			Transactions.at(i).save(TransFile);
 		}
 		TransFile.close();
 	}
@@ -890,13 +888,7 @@ void Agency::saveRecord() {
 	{
 		for (unsigned int i = 0; i < Trips.size(); i++)
 		{
-			RecordFile << Trips.at(i).getID() << ";"
-				<< Trips.at(i).getDriver() << ";"
-				<< Trips.at(i).getOrigin() << ";"
-				<< Trips.at(i).getDestination() << ";"
-				<< Trips.at(i).getDate() << ";"
-				<< Trips.at(i).getStart() << ";"
-				<< Trips.at(i).getEnd() << endl;
+			Trips.at(i).save(RecordFile);
 		}
 		RecordFile.close();
 	}
@@ -988,10 +980,7 @@ void Agency::displayTransactions() {
 
 	for (unsigned int i = 0; i < Transactions.size(); i++)
 	{
-		cout << setw(5) << Transactions.at(i).GetId();
-		cout << setw(20)<< Transactions.at(i).GetDate();
-		cout << setw(22) << setprecision(2) << fixed << Transactions.at(i).GetValue();
-		cout << endl;
+		cout << Transactions.at(i);
 	}
 
 	return;
@@ -1011,15 +1000,7 @@ void Agency::displayRecord()
 {
 	for (unsigned int i = 0; i < Trips.size(); i++)
 	{
-		cout << setw(3) << Trips.at(i).getID();
-		cout << setw(5) << Trips.at(i).getDriver();
-		cout << setw(9) << Trips.at(i).getOrigin();
-		cout << setw(10) << Trips.at(i).getDestination();
-		cout << setw(5) << Trips.at(i).getDate();
-		cout << setw(5) << Trips.at(i).getStart();
-		cout << setw(5) << Trips.at(i).getEnd();
-
-		cout << endl;
+		cout << Trips.at(i);
 	}
 }
 
@@ -1040,10 +1021,10 @@ void Agency::addTrip() {
 
 	ut.yellow(); cout << "Please enter your stops (CTRL + Z to END):\n"; ut.white();
 
-	for (size_t i = 0; i < stopsAvailable.size(); i++)
+	/*for (size_t i = 0; i < stopsAvailable.size(); i++)
 	{
 		cout << stopsAvailable[i];
-	}
+	}*/
 
 	while (1)
 	{

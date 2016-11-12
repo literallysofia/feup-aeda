@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <iostream>
+#include <sstream>
 #include "Date.h"
 
 using namespace std;
@@ -16,4 +18,6 @@ public:
 	unsigned int GetId() const;
 	Date GetDate() const;
 	float GetValue() const;
+	void save(ofstream & out) const;
+	friend ostream& operator<<(ostream & out, const Transaction & t);
 };
