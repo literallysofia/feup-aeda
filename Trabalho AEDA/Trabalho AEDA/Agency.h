@@ -6,6 +6,7 @@
 #include <vector>
 #include <iomanip>
 #include <map>
+#include <ctime>
 #include <Windows.h>
 #include <algorithm>
 #include "Utilities.h"
@@ -23,6 +24,8 @@ struct stop {
 	string code;
 	string name;
 };
+
+
 
 class Agency
 {
@@ -122,6 +125,7 @@ public:
 	bool checkStop(string s);
 	//void runTrip(int tripID);
 	float deposit();
+	int getUnixCode(Date &d, Hour &h);
 
 	//Displays
 	void displayUsers();
@@ -141,5 +145,6 @@ public:
 	float endMonth();
 	*/
 
-
 };
+
+

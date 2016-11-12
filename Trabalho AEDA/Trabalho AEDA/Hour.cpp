@@ -53,3 +53,27 @@ ostream& operator<<(ostream& out, Hour &h) {
 
 	return out;
 }
+
+bool Hour::operator<(const Hour &h2) const{
+
+	if (this->hour < h2.hour) return true;
+	else if (h2.hour > this->hour)return false;
+	else
+	{
+		if (this->minutes < h2.minutes) return true;
+		else return false;
+	}
+}
+
+void Hour::setCurrent() {
+
+	time_t rawtime;
+	struct tm timeinfo;
+	
+
+	time(&rawtime);                   // Get the current time
+	localtime_s(&timeinfo, &rawtime);  // Convert the current time to the local time
+
+	this->setHour(timeinfo.tm_hour);
+	this->setMinutes(timeinfo.tm_min);
+}
