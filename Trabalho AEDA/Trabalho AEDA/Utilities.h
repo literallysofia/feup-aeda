@@ -3,6 +3,7 @@
 #include <iostream>
 #include <limits>
 #include <conio.h>
+#include <ctime>
 
 #undef max
 
@@ -19,6 +20,7 @@ public:
 	void clearScreen();
 	int readInt(int min, int max);
 	void getEnter();
+	void clearScreen_param(int x);
 
 	void white();
 	void blue();
