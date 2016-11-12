@@ -28,13 +28,14 @@ int Guest::getID() const
 	return guestID;
 }
 
+/*
 bool Guest::searchTrip(vector<Trip> &vec)  //vec = vetor das viagens da agencia
 {
 	unsigned int posBeg = -1, posEnd = -1;
-	for (size_t i = 0; i < vec.size(); i++)
+	for (unsigned int i = 0; i < vec.size(); i++)
 	{
 		vector<string> stops = vec[i].getStops();
-		for (size_t j = 0; j < stops.size(); i++)
+		for (unsigned int j = 0; j < stops.size(); i++)
 		{
 			if (stops[j] == this->start)
 				posBeg = j;
@@ -57,3 +58,4 @@ bool Guest::searchTrip(vector<Trip> &vec)  //vec = vetor das viagens da agencia
 	//nenhuma das condiçoes de aceitação foi obtida
 	return false;
 }
+*/

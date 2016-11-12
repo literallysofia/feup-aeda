@@ -1,40 +1,36 @@
 #pragma once
-
 #include <iostream>
 #include <string>
 #include <vector>
+#include "Stop.h"
+#include "Date.h"
+#include "Hour.h"
 using namespace std;
 
 class Trip
 {
 private:
-	int driver;
+	static int counter;
 	int ID;
-	vector<string> stops;
-	vector<int> passengers;
-	int seatsAvailable;
-						//bool active;
-						//Date startTime;
-						//Date endTime;
+	int driver;
+	vector<Stop> stops;
+	Date date;
+	Hour startTime;
+	Hour endTime;
+	//int carSeats;
+	//vector<int> passengers;
+	//vector<string> stops;
+	//bool active;
 public:
 	Trip();
+	Trip(int ID, int driver, vector<Stop> stops, Date date, Hour start, Hour end);
 	~Trip();
-	Trip(int driver, vector<string> stops);
 	int getDriver() const;
 	int getID() const;
-	vector<string> getStops() const;
+	vector<Stop> getStops() const;
+	Date getDate() const;
+	Hour getStart() const;
+	Hour getEnd() const;
 	string getOrigin() const;
 	string getDestination() const;
-	int getPrice() const;
-	void setDriverID(int driverID);
-	void setID(int id);
-	void setStops(vector<string> &vec);
-	void addPassenger(int passengerID);
-	vector<int> getPassengers() const;
-	void setAvailableSeats(int num);
-	int getNumSeats() const;
-
-	//bool getActive();
-	//Date getStartingTime();
-	//Date getEndingTime();
 };

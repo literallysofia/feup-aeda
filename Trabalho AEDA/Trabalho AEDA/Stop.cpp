@@ -8,9 +8,15 @@ Stop::~Stop()
 {
 }
 
-string Stop::getLocation() const
+Stop::Stop(string code, int seats)
 {
-	return location;
+	this->code = code;
+	availableSeats = seats;
+}
+
+string Stop::getCode() const
+{
+	return code;
 }
 
 int Stop::getAvailableSeats() const
@@ -18,7 +24,17 @@ int Stop::getAvailableSeats() const
 	return availableSeats;
 }
 
-vector<User*> Stop::getPassengers() const
+vector<int> Stop::getPassengers() const
 {
-	return Passengers;
+	return passengers;
+}
+
+void Stop::decAvailableSeats()
+{
+	availableSeats--;
+}
+
+void Stop::addPassenger(int id)
+{
+	passengers.push_back(id);
 }

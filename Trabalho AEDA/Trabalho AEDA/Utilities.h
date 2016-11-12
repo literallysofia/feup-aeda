@@ -13,9 +13,11 @@ class Utilities
 public:
 	Utilities();
 	~Utilities();
+
+	void menuHeader();
 	void setcolor(int ForgC);
 	void clearScreen();
-	int leInteiro(int min, int max);
+	int readInt(int min, int max);
 	void getEnter();
 	void clearScreen_param(int x);
 
@@ -24,5 +26,6 @@ public:
 	void grey();
 	void red();
 	void green();
+	void yellow();
 };
 

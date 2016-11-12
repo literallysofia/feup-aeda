@@ -1,20 +1,21 @@
 #pragma once
-#include "User.h"
 #include <string>
+#include <vector>
 using namespace std;
 
 class Stop
 {
 private:
-	string location;
+	string code;
 	int availableSeats;
-	vector<User *> Passengers;
+	vector<int> passengers;
 public:
 	Stop();
+	Stop(string code, int seats);
 	~Stop();
-	string getLocation() const;
+	string getCode() const;
 	int getAvailableSeats() const;
-	vector<User *> getPassengers() const;
-	//void setAvailableSeats();
+	vector<int> getPassengers() const;
+	void decAvailableSeats();
+	void addPassenger(int id);
 };
-

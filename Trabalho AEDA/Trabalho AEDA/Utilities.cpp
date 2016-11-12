@@ -9,6 +9,13 @@ Utilities::~Utilities()
 {
 }
 
+void Utilities::menuHeader()
+{
+	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
+		<< "|~~~                      "; blue(); cout << "ShareIt"; white(); cout << "                      ~~~| " << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+}
+
 void Utilities::setcolor(int ForgC)
 {
 	WORD wColor;
@@ -66,18 +73,18 @@ void Utilities::clearScreen() {
 }
 
 //para ler um numero entre um minimo e maximo
-int Utilities::leInteiro(int min, int max) {
+int Utilities::readInt(int min, int max) {
 
 	bool validInput = false;
-	int opcao;
+	int option;
 
 	while (!validInput) {
-		cin >> opcao;
+		cin >> option;
 
-		if (opcao > max || opcao < min || cin.fail())
+		if (option > max || option < min || cin.fail())
 		{
-			cout << endl << "[ERRO!] Nao foi introduzida uma opcao valida." << endl;
-			cout << " Por favor, introduza uma opcao entre " << min << " e " << max << ": ";
+			cout << endl << "ERROR: Not a valid date!\n" << endl;
+			cout << " Please, type a number between " << min << " and " << max << ": ";
 			cin.clear();
 		}
 		else
@@ -85,7 +92,7 @@ int Utilities::leInteiro(int min, int max) {
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	}
 
-	return opcao;
+	return option;
 
 
 }
@@ -154,4 +161,9 @@ void Utilities::red()
 void Utilities::green()
 {
 	setcolor(2);
+}
+
+void Utilities::yellow()
+{
+	setcolor(14);
 }

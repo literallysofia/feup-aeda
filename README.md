@@ -6,7 +6,7 @@ AEDA1617_2MIEIC1_E
 
 Requisitos Obrigatórios:
 ------------------------
-- [ ] Visualização dos Users
+- [X] Visualização dos Users
 - [ ] Visualização do histórico de viagens
 - [ ] Ficheiro: Users
 - [ ] Ficheiro: Relationships ("buddies")
@@ -47,11 +47,41 @@ Agency h/cpp:
 = mainMenu_User =
 > menu principal de um user
 
+= displayUsers =
+> diplay do id, nome, balance, username, pass
+
+= menuDisplayUsers =
+> menu de dipay de users
+
+= displayBuddies =
+> diplay do nome do user e dos seus buddies
+
+= menuDisplayBuddies =
+> menu de display de buddies 
+
+= displayTransactions =
+> diplay do id, data e value das transactions
+
+= menuDisplayTransactions =
+> menu de display de transactions
+
 = extractUsers =
 > extrai do ficheiro de texto "Users.txt" a informação de todos os users para um vetor Users
 
 = writeUsers =
 > guarda toda a informação do vetor Users, no ficheiro de texto
+
+= extractBuddies =
+> extrai do ficheiro de texto "Buddies.txt" a informação de todos os users para um vetor Buddies
+
+= writeBuddies =
+> guarda toda a informação do vetor Buddies, no ficheiro de texto
+
+= extractTransactions =
+> extrai do ficheiro de texto "Transactions.txt" a informação de todos os users para um vetor Users
+
+= writeTransactions =
+> guarda toda a informação do vetor Transactions, no ficheiro de texto
 
 = validUser =
 > booleano que retorna de um user "nome" existe
@@ -138,3 +168,26 @@ Trip h/cpp:
 
 = setStops =
 > recebe como parametro um vetor de strings, atribui a uma viagem esse vetor de paragens
+
+= addBuddy =
+> recebe o user que pretende adicionar ao vetor de buddies
+
+= deleteBuddies =
+> limpa o vetor de buddies
+
+= getBuddies=
+> retorna o vetor buddies
+
+Tools h/cpp:
+---------------
+= outputName =
+> util para o utilizador inserir ID ou nome
+> verifica se output é um inteiro(false) ou string(true)
+
+= insertPassword =
+> processo de inserir pass
+> retorna password escrita com ***
+
+= sameString =
+> vê se duas strings são iguais (true/false)
+

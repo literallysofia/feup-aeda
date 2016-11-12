@@ -36,6 +36,15 @@
     <ClCompile Include="Guest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Transactions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Date.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Hour.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="Stop.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -59,6 +68,15 @@
     <ClInclude Include="Guest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Transactions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Date.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Hour.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="Stop.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -67,7 +85,16 @@
     <Text Include="Users.txt">
       <Filter>Source Files\Resource Files</Filter>
     </Text>
+    <Text Include="Transactions.txt">
+      <Filter>Source Files\Resource Files</Filter>
+    </Text>
     <Text Include="Buddies.txt">
+      <Filter>Source Files\Resource Files</Filter>
+    </Text>
+    <Text Include="Record.txt">
+      <Filter>Source Files\Resource Files</Filter>
+    </Text>
+    <Text Include="Stops.txt">
       <Filter>Source Files\Resource Files</Filter>
     </Text>
   </ItemGroup>

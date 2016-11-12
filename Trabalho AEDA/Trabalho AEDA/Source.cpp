@@ -52,6 +52,12 @@ int welcomeMenu() {
 		u.white(); cout << "Please try again: ";
 		cin >> choice;
 	}
+
+	if (choice== 0) {
+		Agency::instance()->saveData();
+		return 0;
+	}
+
 	return choice;
 }
 
@@ -59,8 +65,9 @@ int welcomeMenu() {
 void optionsWelcomeMenu()
 {
 	unsigned short int choice;
-
+	
 	while (choice = welcomeMenu())
+
 		switch (choice)
 		{
 		case 1:
@@ -75,44 +82,18 @@ void optionsWelcomeMenu()
 			//TODO guest link
 			Agency::instance()->addTrip();
 			break;
-		case 0:
-			Sleep(5000);
-			exit(0);
-			break;
 		}
 }
 
 int main()
 {
-	
 	//Janela//
 	HWND consoleWindow = GetConsoleWindow();
 	SetWindowPos(consoleWindow, 0, 310, 150, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
 
-	Agency::instance()->extractUsers();
-	Agency::instance()->extractBuddies();
+	Agency::instance()->extractData();
 
 	optionsWelcomeMenu();
-	
 
-	/*
-	//testar funçoes ficheiros
-
-	Agency::instance()->extrairUsers();
-	for (unsigned int i = 0; i < Agency::instance()->getUsers().size(); i++)
-	{
-		cout << Agency::instance()->getUsers().at(i)->getID() << " - " << Agency::instance()->getUsers().at(i)->getName() << " - ";
-		if (Agency::instance()->getUsers().at(i)->car())
-			cout << "1";
-		else cout << "0";
-		cout << " - " << Agency::instance()->getUsers().at(i)->getPassword() << endl;
-	}
-
-	
-	Agency::instance()->addUsers(p2);
-	Agency::instance()->escreverUsers();
-
-	*/
-		
 	return 0;
 }

@@ -13,8 +13,16 @@
 #include "User.h"
 #include "Guest.h"
 #include "Trip.h"
+#include "Transactions.h"
+#include "Stop.h"
+#include "Date.h"
 
 using namespace std;
+
+struct stop {
+	string code;
+	string name;
+};
 
 class Agency
 {
@@ -23,18 +31,19 @@ private:
 
 	int sessionID;
 	int sessionPos;
+
 	//Global Vectors
 	vector<User *> Users;
 	vector<Trip> Trips;
 	vector<Guest *> Guests;
-	vector<string> stopsAvailable = { "a","b","c" };
-	//vector<Transaction> Transactions;
+	vector<Transaction> Transactions;
+	vector<stop> stopsAvailable;
 
 public:
 	Agency();
 	~Agency();
 
-	//Cria uma nova instância.
+	//Cria uma nova instï¿½ncia.
 	static Agency* instance()
 	{
 		if (!singleton_instance)
@@ -43,56 +52,85 @@ public:
 		return singleton_instance;
 	}
 
-	//Elimina a instância atual e cria outra.
+	//Elimina a instï¿½ncia atual e cria outra.
 	/*void logout() {
 	delete singleton_instance;
 	singleton_instance = NULL;
 	instance()->importInfo();
 	}*/
+	
+	vector<User *> getUsers();
 
 	//Menu's
 
 	void registerUser();
 	void loginUser();
 
+	//Admin Only
 	int mainMenu_Admin();
 	void optionsMainMenu_Admin();
 
+	int menuDisplayUsers();
+	void optionsDisplayUsers();
+
+	void menuDisplayBuddies();
+	void menuDisplayTransactions();
+	void menuDisplayStops();
+	void menuDisplayRecord();
+
+
+	//User Only
 	int mainMenu_User();
 	void optionsMainMenu_User();
 
-	//Ficheiros
+	int menuAccount();
+	void optionsMenuAccount();
 
+	int menuCreateTrip();
+	void optionsCreateTrip();
+
+	int menuJoinTrip();
+	void optionsJoinTrip();
+
+
+	//Files
+
+	void extractData();
+	void saveData();
 	void extractUsers();
-	void writeUsers();
+	void saveUsers();
 	void extractBuddies();
-	void writeBuddies();
+	void saveBuddies();
+	void extractTransactions();
+	void saveTransactions();
+	void extractStops();
+	void extractRecord();
+	void saveRecord();
+
+	//Basic Functions
+
+	bool validUser(string username); //existe user
+	bool validPassword(int pos, string password); //verifica se password esta correta
+	int findID(string name); //retorna id de name, id = -1 caso nao exista
+	int getPos(int id); //retorna posicao no vetor de users de id UTIL!!!
+	int getLastId();
+
 
 	//Functions
-
-	bool validUser(string name);
-	bool validPassword(string password);
-	int findID(string name);
-	int getPos(int id);
-	vector<User *> getUsers();
-	void addUsers(User* u);
-
+	void addUser(User* u);
 	void addTrip();
-
 	bool checkStop(string s);
+	//void runTrip(int tripID);
+	float deposit();
 
-	void runTrip(int tripID);
-
-	void imprimeUsers();					//function that uses the Users class' operator<< method to
-	//print all agency's users to screen
-
+	//Displays
 	void displayUsers();
-	int menuDisplayUsers();
-
-
 	void displayBuddies(); 
-	int menuDisplayBuddies();
+	void displayTransactions();
+	void displayStops();
+	void displayRecord();
 
+	/*
 	void imprimeTrips();					//function that uses the Trips class' operator<< method to
 	//print all agency's trips to screen
 	void readUsers(std::ifstream & infile);    //TODO
@@ -101,6 +139,7 @@ public:
 
 
 	float endMonth();
+	*/
 
 
 };

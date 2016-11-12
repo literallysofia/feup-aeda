@@ -3,14 +3,14 @@
 /*USER CLASS*/
 int User::maintenanceFee = 20;
 
-User::User(int ID, string name, float balance, string password) : ID(ID), name(name) {
-	this->password = password;
-	this->balance = balance;
-	balance = 0;
-}
-
 User::User(string name) :name(name)
 {
+}
+
+User::User(int ID, string name, float balance, string username, string password) : ID(ID), name(name) {
+	this->username = username;
+	this->password = password;
+	this->balance = balance;
 }
 
 User::~User()
@@ -25,6 +25,11 @@ int User::getID() const
 string User::getName() const
 {
 	return name;
+}
+
+string User::getUsername() const
+{
+	return username;
 }
 
 string User::getPassword() const
@@ -42,6 +47,11 @@ void User::deposit(float value)
 	balance += value;
 }
 
+vector<Transaction> User::getTransactions() const
+{
+	return transactions;
+}
+
 void User::payment()
 {
 	return;
@@ -52,11 +62,12 @@ bool User::car() const
 	return false;
 }
 
+/*
 bool User::searchTrip(vector<Trip>& vec)
 {
 	return false;
 }
-
+*/
 string User::getFirst() const
 {
 	return string();
@@ -68,16 +79,17 @@ string User::getLast() const
 }
 
 /*DRIVER CLASS*/
-Driver::Driver(int ID, string name, float balance, string password) : User(ID, name, balance, password) {}
+Driver::Driver(int ID, string name, float balance, string username, string password) : User(ID, name, balance, username, password) {
+}
 
 int Driver::getNumSeats() const
 {
 	return numSeats;
 }
 
-Trip Driver::getCurrentTrip() const
+vector<Trip> Driver::getCurrentTrips() const
 {
-	return currentTrip;
+	return currentTrips;
 }
 
 void Driver::payment()
@@ -90,16 +102,17 @@ bool Driver::car() const
 	return true;
 }
 
+
 void Driver::addTrip(Trip &t)
 {
-	currentTrip = t;
+	currentTrips.push_back(t);
 }
-
+/*
 bool Driver::searchTrip(vector<Trip>& vec) const
 {
 	return false;
 }
-
+*/
 string Driver::getFirst() const
 {
 	return string();
@@ -112,13 +125,13 @@ string Driver::getLast() const
 
 /*PASSENGER CLASS*/
 
-Passenger::Passenger(int ID, string name, float balance, string password) : User(ID, name, balance, password) {
+Passenger::Passenger(string name) : User(name) {
+}
+
+Passenger::Passenger(int ID, string name, float balance, string username, string password) : User(ID, name, balance, username, password) {
 	numTrips = 0;
 }
 
-Passenger::Passenger(string name): User(name) {
-
-}
 int Passenger::getNumTrips() const
 {
 	return numTrips;
@@ -154,7 +167,7 @@ void Passenger::resetTrips(void)
 	numTrips = 0;
 }
 
-bool Passenger::searchTrip(vector<Trip> &vec)  //vec = vetor das viagens da agencia
+/*bool Passenger::searchTrip(vector<Trip> &vec)  //vec = vetor das viagens da agencia
 {
 	unsigned int posBeg = -1, posEnd = -1;
 	for (size_t i = 0; i < vec.size(); i++)
@@ -182,4 +195,4 @@ bool Passenger::searchTrip(vector<Trip> &vec)  //vec = vetor das viagens da agen
 
 	//nenhuma das condiçoes de aceitação foi obtida
 	return false;
-}
+}*/

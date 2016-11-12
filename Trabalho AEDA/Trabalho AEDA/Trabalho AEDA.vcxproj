@@ -20,25 +20,34 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Agency.cpp" />
+    <ClCompile Include="Date.cpp" />
     <ClCompile Include="Guest.cpp" />
+    <ClCompile Include="Hour.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Stop.cpp" />
     <ClCompile Include="Tools.cpp" />
+    <ClCompile Include="Transactions.cpp" />
     <ClCompile Include="Trip.cpp" />
     <ClCompile Include="User.cpp" />
     <ClCompile Include="Utilities.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Agency.h" />
+    <ClInclude Include="Date.h" />
     <ClInclude Include="Guest.h" />
+    <ClInclude Include="Hour.h" />
     <ClInclude Include="Stop.h" />
     <ClInclude Include="Tools.h" />
+    <ClInclude Include="Transactions.h" />
     <ClInclude Include="Trip.h" />
     <ClInclude Include="User.h" />
     <ClInclude Include="Utilities.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Buddies.txt" />
+    <Text Include="Record.txt" />
+    <Text Include="Stops.txt" />
+    <Text Include="Transactions.txt" />
     <Text Include="Users.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
