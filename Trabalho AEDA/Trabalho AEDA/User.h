@@ -13,24 +13,29 @@ protected:
 	string password;
 	float balance; //saldo disponivel na conta
 	static int maintenanceFee;
-	//vector <User *> buddies;
+	vector <User *> buddies;
 	
 public:
-	User(int ID, string name, string password);
 	User(string name);
+	User(int ID, string name, float balance, string password);
+
 	~User();
 	int getID() const;
 	string getName() const;
 	string getPassword() const;
+	float getBalance() const;
 	void deposit(float value);
-	virtual void payment();
+
 	virtual bool car() const;
 	virtual void addTrip(Trip &t) {};
 	virtual bool searchTrip(vector<Trip> &vec);
 	virtual string getFirst() const;
 	virtual string getLast() const;
-	//void addBuddy(User * user) { buddies.push_back(user); }
-	//vector<User *> getBuddies() const { return buddies; };
+	
+	virtual void payment();
+	void addBuddy(User * user) { buddies.push_back(user); };
+	void deleteBuddies() { buddies.clear(); }
+	vector<User *> getBuddies() const { return buddies; };
 };
 
 class Driver :
@@ -40,7 +45,7 @@ private:
 	int numSeats;
 	Trip currentTrip;
 public:
-	Driver(int ID, string name, string password);
+	Driver(int ID, string name, float balance, string password);
 	int getNumSeats() const;		//apenas retorna o numero de lugares dados pelo utilizador,
 	Trip getCurrentTrip() const;		//retorna um objeto da classe Trip
 	void payment();
@@ -65,8 +70,9 @@ private:
 	int currentTrip;
 
 public:
-	Passenger(int ID, string name, string password);
+
 	Passenger(string name);
+	Passenger(int ID, string name, float balance, string password);
 	int getNumTrips() const;
 	string getFirst() const;
 	string getLast() const;

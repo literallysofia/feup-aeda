@@ -38,6 +38,7 @@
     <ClInclude Include="Utilities.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="Buddies.txt" />
     <Text Include="Users.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

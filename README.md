@@ -71,6 +71,12 @@ Agency h/cpp:
 = addUser =
 > adiciona um novo objeto User ao vetor Users
 
+= checkStop =
+> recebe uma string e verifica se ela pertence ao vetor de paragens disponiveis, retorna false se nao existir
+
+= addTrip = 
+> adiciona uma trip ao vetor sob o User que está logado na aplicação
+
 User h/cpp:
 ----------
 > tem classes derivadas: Driver, Passenger
@@ -93,6 +99,9 @@ User h/cpp:
 = car =
 > retorna se tem carro ou nao (driver ou passenger) - VIRTUAL
 
+= addTrip =
+> recebe como parametro um objeto do tipo Trip, e adiciona ao Driver associado - VIRTUAL
+
 Guest h/cpp:
 ---------------
 = getName =
@@ -109,6 +118,9 @@ Trip h/cpp:
 = getDriver =
 > retorna o driver
 
+= getID =
+> retorna o ID da viagem (para uso interno)
+
 = getStops =
 > retorna vetor de paragens da viagem (itinerário)
 
@@ -117,3 +129,12 @@ Trip h/cpp:
 
 = getDestination =
 > retorna destino
+
+= setDriverID =
+> recebe como parametro o ID de um User, ao qual fica associado a viagem
+
+= setID =
+> recebe como parametro um inteiro, ao qual fica associado o ID da viagem para uso interno
+
+= setStops =
+> recebe como parametro um vetor de strings, atribui a uma viagem esse vetor de paragens

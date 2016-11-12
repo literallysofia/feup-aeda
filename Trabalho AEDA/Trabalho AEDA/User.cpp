@@ -3,8 +3,9 @@
 /*USER CLASS*/
 int User::maintenanceFee = 20;
 
-User::User(int ID, string name, string password) : ID(ID), name(name) {
+User::User(int ID, string name, float balance, string password) : ID(ID), name(name) {
 	this->password = password;
+	this->balance = balance;
 	balance = 0;
 }
 
@@ -29,6 +30,11 @@ string User::getName() const
 string User::getPassword() const
 {
 	return password;
+}
+
+float User::getBalance() const
+{
+	return balance;
 }
 
 void User::deposit(float value)
@@ -62,7 +68,7 @@ string User::getLast() const
 }
 
 /*DRIVER CLASS*/
-Driver::Driver(int ID, string name, string password) : User(ID, name, password) {}
+Driver::Driver(int ID, string name, float balance, string password) : User(ID, name, balance, password) {}
 
 int Driver::getNumSeats() const
 {
@@ -106,7 +112,7 @@ string Driver::getLast() const
 
 /*PASSENGER CLASS*/
 
-Passenger::Passenger(int ID, string name, string password) : User(ID, name, password) {
+Passenger::Passenger(int ID, string name, float balance, string password) : User(ID, name, balance, password) {
 	numTrips = 0;
 }
 

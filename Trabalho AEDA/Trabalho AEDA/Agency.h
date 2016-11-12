@@ -62,8 +62,11 @@ public:
 	void optionsMainMenu_User();
 
 	//Ficheiros
-	void extrairUsers();
-	void escreverUsers();
+
+	void extractUsers();
+	void writeUsers();
+	void extractBuddies();
+	void writeBuddies();
 
 	//Functions
 
@@ -80,8 +83,15 @@ public:
 
 	void runTrip(int tripID);
 
-	/*void imprimeUsers();					//function that uses the Users class' operator<< method to
+	void imprimeUsers();					//function that uses the Users class' operator<< method to
 	//print all agency's users to screen
+
+	void displayUsers();
+	int menuDisplayUsers();
+
+
+	void displayBuddies(); 
+	int menuDisplayBuddies();
 
 	void imprimeTrips();					//function that uses the Trips class' operator<< method to
 	//print all agency's trips to screen
@@ -89,11 +99,8 @@ public:
 
 	void readTrips(std::ifstream & infile);
 
-	static float getFee() { return maintenaceFee; }
 
-	static void changeFee(float newValue) { maintenaceFee = newValue; }
-
-	float endMonth();*/
+	float endMonth();
 
 
 };
