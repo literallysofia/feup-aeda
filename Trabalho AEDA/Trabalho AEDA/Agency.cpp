@@ -1805,6 +1805,7 @@ bool Agency::hasBuddies(Trip &recTrip)
 
 void Agency::choseTrip(vector<Trip> &recTrips, vector<Trip> &buddieTrips, vector<string> &stopCodes)
 {
+	int idi, idf;
 	string first = stopCodes.at(0); //origem pretendida
 	string last = stopCodes.at(1); //destino pretendido
 	vector<int> allTrips; //vetor com ids de todas as trips disponiveis como opcao
@@ -1835,9 +1836,29 @@ void Agency::choseTrip(vector<Trip> &recTrips, vector<Trip> &buddieTrips, vector
 	for (unsigned int i = 0; i < ActiveTrips.size(); i++) {
 		if (id == ActiveTrips.at(i).getID()) {
 			ActiveTrips.at(i).addPassenger(sessionID); //adiciona user ao vetor de passageiros da trip
-			Users.at(sessionPos)->addTrip(id, first, last);
+			Users.at(sessionPos)->addTrip(id, first, last); //adiciona id, inicio e fim da viagem que vai fazer (inicio e fim pode ser um trecho)
+
+			for (unsigned int j = 0; j < ActiveTrips.at(i).getStops().size(); j++) {
+				if (first == ActiveTrips.at(i).getStops().at(j).getCode()) //obtem id inicial ; idi
+					idi = j;
+				if (last == ActiveTrips.at(i).getStops().at(j).getCode()) //obtem id final ; idf
+					idf = j;
+			}
+
+			for (idi; idi < idf; idi++) { //verifica se ha lugares disponiveis em cada paragem, menos na final, visto que user sai nessa
+				ActiveTrips.at(i).setStops(idi, sessionID); //decrementa e adiciona user à viagem nas stops
+			}
 		}
 	}
+
+	/*for (unsigned int i = 0; i < ActiveTrips.size(); i++) {
+		if (id == ActiveTrips.at(i).getID()) {
+			for (unsigned int j = 0; j < ActiveTrips.at(i).getStops().size(); j++) {
+				cout << ActiveTrips.at(i).getStops().at(j).getCode() << "/" << ActiveTrips.at(i).getStops().at(j).getAvailableSeats() << "/" <<
+					 ActiveTrips.at(i).getStops().at(j).getPassengers().size() << endl;
+			}
+		}
+	}*/
 
 	ut.yellow(); cout << "\n Success! You were added to the trip!\n"; ut.white();
 	Sleep(2000);
