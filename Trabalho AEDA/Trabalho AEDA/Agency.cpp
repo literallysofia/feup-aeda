@@ -292,7 +292,7 @@ void Agency::optionsMainMenu_Admin() {
 		switch (option)
 		{
 		case 1:
-			menuDisplayUsers();
+			optionsDisplayUsers();
 			break;
 		case 2:
 			menuDisplayRecord();
@@ -323,7 +323,7 @@ int Agency::menuDisplayUsers() {
 	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
 	ut.setcolor(15);  displayUsers();
 	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;  ut.setcolor(7);
-	ut.setcolor(7); cout << setw(18) << "1. Sort by Username" << setw(32) << "2. Sort by Name" << endl;
+	ut.setcolor(7); cout << setw(24) << "1. Sort by Username" << setw(29) << "2. Sort by Name" << endl;
 	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
 		<< "|~~~                                 ";  ut.setcolor(7); cout << "< 0. Return >";  ut.setcolor(15); cout << "     ~~~|" << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl << endl;
@@ -361,7 +361,7 @@ void Agency::optionsDisplayUsers() {
 			menuDisplayUsersByUsername();
 			break;
 		case 2:
-			//TODO: SORT BY NAME
+			menuDisplayUsersByName();
 			break;
 		}
 	return;
@@ -371,7 +371,7 @@ void Agency::menuDisplayUsersByUsername() {
 
 	ut.clearScreen();
 	vector<User*> UsersV = Users;
-	sort(UsersV.begin(), UsersV.end(), [](User* a, User* b) {return a->getID() < b->getID(); });
+	sort(UsersV.begin(), UsersV.end(), [](User* a, User* b) {return a->getUsername() < b->getUsername(); });
 
 	ut.menuHeader();
 	cout << "|                          ";  ut.grey(); cout << "USERS BY USERNAME";  ut.white(); cout << "                          |" << endl;
@@ -381,6 +381,36 @@ void Agency::menuDisplayUsersByUsername() {
 	
 	ut.setcolor(15);
 	
+	for (unsigned int i = 0; i < UsersV.size(); i++)
+	{
+		cout << setw(5) << UsersV.at(i)->getID();
+		cout << setw(10) << UsersV.at(i)->getUsername();
+		cout << setw(20) << UsersV.at(i)->getName();
+		cout << setw(10) << setprecision(2) << fixed << UsersV.at(i)->getBalance();
+
+		if (UsersV.at(i)->car())
+			cout << setw(10) << "[X]" << endl;
+		else cout << setw(10) << "[ ]" << endl;
+	}
+
+	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
+	ut.red(); cout << "\n Press enter to go back."; ut.white(); getchar(); getchar();
+}
+
+void Agency::menuDisplayUsersByName() {
+
+	ut.clearScreen();
+	vector<User*> UsersV = Users;
+	sort(UsersV.begin(), UsersV.end(), [](User* a, User* b) {return a->getName() < b->getName(); });
+
+	ut.menuHeader();
+	cout << "|                          ";  ut.grey(); cout << "USERS BY NAME";  ut.white(); cout << "                          |" << endl;
+	ut.blue(); cout << "-----------------------------------------------------------" << endl;
+	ut.setcolor(7); cout << setw(5) << "ID" << setw(10) << "User" << setw(16) << "Name" << setw(16) << "Balance" << setw(10) << "Driver" << endl;
+	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
+
+	ut.setcolor(15);
+
 	for (unsigned int i = 0; i < UsersV.size(); i++)
 	{
 		cout << setw(5) << UsersV.at(i)->getID();
