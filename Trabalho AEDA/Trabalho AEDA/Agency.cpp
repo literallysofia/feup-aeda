@@ -571,6 +571,33 @@ int Agency::menuJoinTrip()
 	return 0;
 }
 
+void Agency::showRecTrips(vector<Trip> recTrips, vector<Trip> buddieTrips)
+{
+	ut.clearScreen();
+	ut.menuHeader();
+	cout << "|                     ";  ut.grey(); cout << "TRIPS AVAILABLE";  ut.white(); cout << "                     |" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+	if (buddieTrips.size() != 0) {
+		ut.grey(); cout << setw(16) << "Trips with buddies:\n"
+			<< setw(3) << "ID" << setw(8) << "Driver" << setw(9) << "Date" << setw(11) << "Start" << setw(7) << "End" << endl;
+		ut.blue(); cout << "-----------------------------------------------------------" << endl; ut.white();
+		for (unsigned int i = 0; i < buddieTrips.size(); i++) {
+			cout << buddieTrips.at(i);
+		}
+	}
+	if (recTrips.size() != 0) {
+		ut.grey(); cout << setw(16) << "Trips without buddies:\n"
+			<< setw(3) << "ID" << setw(8) << "Driver" << setw(9) << "Date" << setw(11) << "Start" << setw(7) << "End" << endl;
+		ut.blue(); cout << "-----------------------------------------------------------" << endl; ut.white();
+		for (unsigned int i = 0; i < recTrips.size(); i++) {
+			cout << recTrips.at(i);
+		}
+	}
+
+	//TODO escolher trip, e adiciona a cena
+
+}
+
 
 /*FILES*/
 
@@ -1231,7 +1258,9 @@ void Agency::joinTrip()
 	vector<string> stopCodes;
 	string stopCode;
 	Date tripDate, currentDate;
-	vector<Trip> possibleTrips;
+	vector<Trip> possibleTrips; // que verificam data, origem e destino
+	vector<Trip> recTrips; //trips recomendadas, que tem espaco (originam da de cima)
+	vector<Trip> buddieTrips; //trips recomendadas com buddies
 	//initialize current system's date
 	currentDate.setCurrent();
 	Hour endHour, startHour, currentHour;
@@ -1337,12 +1366,22 @@ void Agency::joinTrip()
 				ut.red(); cout << "Sorry, no trip found!\n"; ut.white(); return;
 			}
 			else { //caso haja viagens, verificar se ha lugares disponiveis
-				
+
+				recTrips = availableTrips(possibleTrips, stopCodes);
+				if (recTrips.size() == 0) { //caso todos os lugares ja estejam ocupados
+					ut.red(); cout << "Sorry, there is no space left in any trips!\n"; ut.white(); return;
+				}
+				else { //caso haja lugares
+					for (unsigned int i = 0; i < recTrips.size(); i++) { //verificar se ha buddies em comum
+						if (hasBuddies(recTrips.at(i)) == true) { //divide trips em recomendadas com buddies e sem buddies
+							buddieTrips.push_back(recTrips.at(i));
+							recTrips.erase(recTrips.begin() + i);
+							i--;
+						}
+					}
+					showRecTrips(recTrips, buddieTrips);
+				}
 			}
-			//TODO searchTrip(); stopCodes e tripData -> parametros de pesquisa
-			//TODO encontra ou nao?
-			//TODO sim: adiciona passenger a viagem (decrementar stops e assim)
-			//TODO nao: nao existem lmao vai a pe
 			break;
 		}
 	}
@@ -1369,6 +1408,64 @@ vector<Trip> Agency::searchTrip(vector<string> stopCodes, Date tripDate)
 	}
 
 	return possibleTrips; //vetor é nulo caso nao haja viagens
+}
+
+vector<Trip> Agency::availableTrips(vector<Trip> possibleTrips, vector<string> stopCodes)
+{
+	vector<Trip> spaceTrips; // vetor de trips com espaco suficiente para juntar passageiro
+
+	for (unsigned int i = 0; i < possibleTrips.size(); i++) {
+		if (availableSpace(possibleTrips.at(i), stopCodes) == true)
+			spaceTrips.push_back(possibleTrips.at(i));
+	}
+	return spaceTrips;
+}
+
+bool Agency::availableSpace(Trip possibleTrip, vector<string> stopCodes) { //recebe uma viagem e trajeto do user, e ve se ha lugares disponiveis
+	int idi, idf, a;
+	string first = stopCodes.at(0); //origem pretendida
+	string last = stopCodes.at(1); //destino pretendido
+
+	for (unsigned int j = 0; j < possibleTrip.getStops().size(); j++) {
+		if (first == possibleTrip.getStops().at(j).getCode()) //obtem id inicial ; idi
+			idi = j;
+		if (last == possibleTrip.getStops().at(j).getCode()) //obtem id final ; idf
+			idf = j;
+	}
+
+	for (idi; idi < idf; idi++) { //verifica se ha lugares disponiveis em cada paragem, menos na final, visto que user sai nessa
+		if (possibleTrip.getStops().at(idi).getAvailableSeats() > 0)
+			a = 1;
+		else a = 0;
+	}
+
+	if (a == 0)
+		return false;
+	else return true;
+
+}
+
+bool Agency::hasBuddies(Trip recTrip)
+{
+	vector<int> userBuddies; //ids de todos os buddies do user
+	vector<int> tripids; //ids do driver e passageiros presentes em toda a viagem
+	int numBuddies = 0;
+
+	for (unsigned int i = 0; i < Users.at(sessionPos)->getBuddies().size(); i++) {
+		userBuddies.push_back(Users.at(sessionPos)->getBuddies().at(i)->getID());
+	}
+
+	tripids = recTrip.getPassengers();
+	tripids.push_back(recTrip.getDriver());
+
+	for (unsigned int i = 0; i < userBuddies.size(); i++) {
+		if (find(tripids.begin(), tripids.end(), userBuddies.at(i)) != tripids.end())
+			numBuddies++;
+	}
+
+	if (numBuddies > 0)
+		return true;
+	else return false;
 }
 
 
