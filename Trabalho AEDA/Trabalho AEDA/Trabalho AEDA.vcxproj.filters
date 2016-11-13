@@ -100,5 +100,8 @@
     <Text Include="Stops.txt">
       <Filter>Source Files\Resource Files</Filter>
     </Text>
+    <Text Include="ActiveTrips.txt">
+      <Filter>Source Files\Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

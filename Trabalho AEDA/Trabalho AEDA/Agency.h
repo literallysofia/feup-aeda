@@ -116,6 +116,8 @@ public:
 	void extractStops();
 	void extractRecord();
 	void saveRecord();
+	void extractActive();
+	void saveActive();
 
 	//Basic Functions
 

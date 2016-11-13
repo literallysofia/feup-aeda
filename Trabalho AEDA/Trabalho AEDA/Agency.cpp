@@ -558,6 +558,7 @@ int Agency::menuSearchUser() {
 	return 0;
 
 }
+/*
 
 int Agency::menuSearchTransaction() {
 
@@ -639,6 +640,7 @@ int Agency::menuSearchTransaction() {
 	return 0;
 
 }
+*/
 
 
 
@@ -837,6 +839,7 @@ void Agency::extractData() {
 	extractStops();
 	extractTransactions();
 	extractRecord();
+	extractActive();
 }
 
 void Agency::saveData() {
@@ -1142,6 +1145,77 @@ void Agency::saveRecord() {
 	else { ut.red(); cerr << "ERROR: unable to open file." << endl; ut.white(); }
 }
 
+void Agency::extractActive()
+{
+
+	ifstream Activefile("ActiveTrips.txt");
+	string line;
+
+	if (Activefile.is_open())
+	{
+		while (getline(Activefile, line))
+		{
+
+			size_t pos1 = line.find(";"); //posiçao 1
+			string str1 = line.substr(pos1 + 1); //driver+stops+date+horaStart+horaEnd
+			size_t pos2 = str1.find(";"); //posiçao 2
+			string str2 = str1.substr(pos2 + 1); //stops+date+horaStart+horaEnd
+			size_t pos3 = str2.find("["); //posiçao 3
+			size_t pos4 = str2.find("]"); //posiçao 4
+			string str3 = str2.substr(pos4 + 2); //date+horaStart+horaEnd
+			size_t pos5 = str3.find(";"); //posiçao 5
+			string str4 = str3.substr(pos5 + 1); //horaStart+horaEnd
+			size_t pos6 = str4.find(";"); //posiçao 6
+
+			string idT_s = line.substr(0, pos1); //string id trip
+			string idD_s = str1.substr(0, pos2); //string id driver
+			string stops_s = str2.substr(pos3+1, pos4-1); //string stops
+			string date_s = str3.substr(0, pos5); //strind data
+			string horaStart_s = str4.substr(0, pos6); //string start
+			string horaEnd_s = str4.substr(pos6 + 1); //string end
+
+			int idT_i = stoi(idT_s, nullptr, 10); //passa o idT de string para int
+			int idD_i = stoi(idD_s, nullptr, 10); //passa o idD de string para int
+			Date d(date_s); //passa a data de string para Date
+			Hour hS(horaStart_s); //passa a start de string para Hour
+			Hour hE(horaEnd_s); //passa a end de string para Hour
+
+			stops_s.append(";"); //adiciona um ; ao fim da string stop
+
+			vector <Stop> vs;
+
+			while (!(stops_s.empty()))
+			{
+			
+				size_t pos1 = stops_s.find(";");
+				string estaparagem = stops_s.substr(0, pos1);
+
+				size_t pos2 = estaparagem.find(",");
+
+				string code = estaparagem.substr(0, pos2); 
+				string nro_s = estaparagem.substr(pos2 + 1); 
+				
+				int nro = stoi(nro_s, nullptr, 10); // passa o numero de lugares de string para int
+
+				Stop s(code, nro);
+				vs.push_back(s);
+
+				stops_s.erase(0, pos1 + 1); //apaga essa stop e o ; seguinte da lista de stops
+			}
+
+			Trip T(idT_i, idD_i, vs, d, hS, hE);
+			ActiveTrips.push_back(T);
+		}
+
+		Activefile.close();
+	}
+	else { ut.red(); cerr << "ERROR: unable to open file." << endl; ut.white(); }
+}
+
+void Agency::saveActive()
+{
+}
+
 
 /* FUNCTIONS */
 
@@ -1354,7 +1428,7 @@ void Agency::addTrip() {
 						cout << "> Day: "; cin >> day; cout << " > Month: "; cin >> month; cout << " > Year: "; cin >> year;
 						tripDate.setDay(day); tripDate.setMonth(month); tripDate.setYear(year);
 
-				
+
 						//se a data nao é valida
 						if (!tripDate.valid())
 						{

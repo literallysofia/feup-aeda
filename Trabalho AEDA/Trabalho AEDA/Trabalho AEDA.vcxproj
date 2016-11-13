@@ -45,6 +45,7 @@
     <ClInclude Include="Utilities.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="ActiveTrips.txt" />
     <Text Include="Buddies.txt" />
     <Text Include="Record.txt" />
     <Text Include="Stops.txt" />
