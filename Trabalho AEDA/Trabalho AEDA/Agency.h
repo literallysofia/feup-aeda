@@ -78,6 +78,9 @@ public:
 	int menuDisplayUsers();
 	void optionsDisplayUsers();
 
+	void menuDisplayUsersByUsername();
+	void menuDisplayUsersByName();
+
 	int menuSearch();
 	void optionsMenuSearch();
 
@@ -87,7 +90,13 @@ public:
 	void menuDisplayRecord();
 
 	int menuSearchUser();
+	void optionsMenuSearchUser();
+
+	int menuSearchTrip();
+	void optionsMenuSearchTrip();
+
 	int menuSearchTransaction();
+	void optionsMenuSearchTransaction();
 
 
 
