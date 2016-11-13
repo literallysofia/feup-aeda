@@ -39,6 +39,7 @@ private:
 	vector<User *> Users;
 	vector<Trip> Trips;
 	vector<Guest *> Guests;
+	vector<Trip> ActiveTrips;
 	vector<Transaction> Transactions;
 	vector<stop> stopsAvailable;
 
@@ -90,10 +91,8 @@ public:
 	void optionsMenuAccount();
 
 	int menuCreateTrip();
-	void optionsCreateTrip();
-
 	int menuJoinTrip();
-	void optionsJoinTrip();
+	void showRecTrips(vector<Trip> recTrips, vector<Trip> buddieTrips, vector<string> &stopCodes);
 
 
 	//Files
@@ -117,12 +116,18 @@ public:
 	int findID(string name); //retorna id de name, id = -1 caso nao exista
 	int getPos(int id); //retorna posicao no vetor de users de id UTIL!!!
 	int getLastId();
+	bool checkStop(string s);
 
 
 	//Functions
 	void addUser(User* u);
 	void addTrip();
-	bool checkStop(string s);
+	void joinTrip();
+	vector<Trip> searchTrip(vector<string> &stopCodes, Date &tripDate);
+	vector<Trip> availableTrips(vector<Trip> &possibleTrips, vector<string> &stopCodes);
+	bool availableSpace(Trip &possibleTrip, vector<string> &stopCodes);
+	bool hasBuddies(Trip &recTrip);
+	void choseTrip(vector<Trip> &recTrips, vector<Trip> &buddieTrips, vector<string> &stopCodes);
 	//void runTrip(int tripID);
 	float deposit();
 	time_t getUnixCode(Date &d, Hour &h);
