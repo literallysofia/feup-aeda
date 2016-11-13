@@ -847,6 +847,7 @@ void Agency::saveData() {
 	saveBuddies();
 	saveTransactions();
 	saveRecord();
+	saveActive();
 	return;
 }
 
@@ -1214,6 +1215,19 @@ void Agency::extractActive()
 
 void Agency::saveActive()
 {
+
+	ofstream ActiveFile("ActiveTrips.txt", ios::trunc);
+
+	if (ActiveFile.is_open())
+	{
+		for (unsigned int i = 0; i < ActiveTrips.size(); i++)
+		{
+			ActiveTrips.at(i).saveAT(ActiveFile);
+		}
+		ActiveFile.close();
+	}
+	else { ut.red(); cerr << "ERROR: unable to open file." << endl; ut.white(); }
+
 }
 
 
