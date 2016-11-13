@@ -6,6 +6,12 @@
 
 using namespace std;
 
+struct pTrip {
+	int id;
+	string first;
+	string last;
+};
+
 class User
 {
 protected:
@@ -16,7 +22,6 @@ protected:
 	float balance; //saldo disponivel na conta
 	static int maintenanceFee;
 	vector <User *> buddies;
-	vector <Transaction> transactions;
 	
 public:
 	User(string name);
@@ -28,7 +33,6 @@ public:
 	string getPassword() const;
 	float getBalance() const;
 	void deposit(float value);
-	vector <Transaction> getTransactions() const;
 	virtual bool car() const;
 	virtual void addTrip(Trip &t) {};
 	//virtual bool searchTrip(vector<Trip> &vec);
@@ -46,17 +50,11 @@ class Driver :
 {
 private:
 	int numSeats;
-	vector<Trip> currentTrips;
 public:
 	Driver(int ID, string name, float balance, string username, string password);
 	int getNumSeats() const;		//apenas retorna o numero de lugares dados pelo utilizador,
-	vector<Trip> getCurrentTrips() const;
 	void payment();
 	bool car() const;
-	void addTrip(Trip& t);
-	//bool searchTrip(vector<Trip> &vec) const;
-	string getFirst() const;
-	string getLast() const;
 	/*
 	void setNumSeats(unsigned int num) { numSeats = num; };   //é perguntado ao utilizador aquando de inscricao
 	void resetTrips() {};					//nao faz nada se for Driver quando chamada por um iterador
@@ -68,16 +66,12 @@ class Passenger :
 {
 private:
 	int numTrips;
-	string first, last;			//nomes das paragens finais e iniciais
-								//podem ser sempre as mesmas ou alteradas pelo utilizador no programa
-	int currentTrip;
-
+	vector<pTrip> pTrips; //vetor com a estrutura pTrip que diz o ID da trip na qual esta, e origem e destino do trecho
 public:
 	Passenger(string name);
 	Passenger(int ID, string name, float balance, string username, string password);
 	int getNumTrips() const;
-	string getFirst() const;
-	string getLast() const;
+	vector<pTrip> getPTrips();
 	void setNumTrips();
 	void payment();
 	bool car() const;

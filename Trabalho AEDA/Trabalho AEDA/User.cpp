@@ -47,11 +47,6 @@ void User::deposit(float value)
 	balance += value;
 }
 
-vector<Transaction> User::getTransactions() const
-{
-	return transactions;
-}
-
 void User::payment()
 {
 	return;
@@ -87,11 +82,6 @@ int Driver::getNumSeats() const
 	return numSeats;
 }
 
-vector<Trip> Driver::getCurrentTrips() const
-{
-	return currentTrips;
-}
-
 void Driver::payment()
 {
 	balance -= maintenanceFee;
@@ -100,27 +90,6 @@ void Driver::payment()
 bool Driver::car() const
 {
 	return true;
-}
-
-
-void Driver::addTrip(Trip &t)
-{
-	currentTrips.push_back(t);
-}
-/*
-bool Driver::searchTrip(vector<Trip>& vec) const
-{
-	return false;
-}
-*/
-string Driver::getFirst() const
-{
-	return string();
-}
-
-string Driver::getLast() const
-{
-	return string();
 }
 
 /*PASSENGER CLASS*/
@@ -137,14 +106,9 @@ int Passenger::getNumTrips() const
 	return numTrips;
 }
 
-string Passenger::getFirst() const
+vector<pTrip> Passenger::getPTrips()
 {
-	return first;
-}
-
-string Passenger::getLast() const
-{
-	return last;
+	return pTrips;
 }
 
 void Passenger::setNumTrips()
