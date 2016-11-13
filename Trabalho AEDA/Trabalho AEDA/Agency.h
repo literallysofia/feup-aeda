@@ -122,7 +122,7 @@ public:
 	void addUser(User* u);
 	void addTrip();
 	void joinTrip();
-	int searchTrip(vector<string> stopCodes, Date tripDate);
+	vector<Trip> searchTrip(vector<string> stopCodes, Date tripDate);
 	//void runTrip(int tripID);
 	float deposit();
 	int getUnixCode(Date &d, Hour &h);

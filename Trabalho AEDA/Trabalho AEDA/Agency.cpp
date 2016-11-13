@@ -1228,10 +1228,10 @@ void Agency::addTrip() {
 
 void Agency::joinTrip()
 {
-	vector<Stop> tripPlan;
 	vector<string> stopCodes;
 	string stopCode;
 	Date tripDate, currentDate;
+	vector<Trip> possibleTrips;
 	//initialize current system's date
 	currentDate.setCurrent();
 	Hour endHour, startHour, currentHour;
@@ -1331,6 +1331,14 @@ void Agency::joinTrip()
 
 			}
 
+			possibleTrips = searchTrip(stopCodes, tripDate); //vetor de viagens possiveis (tendo em conta data, origem e destino APENAS
+
+			if (possibleTrips.size() == 0) { //caso nao haja viagens possiveis
+				ut.red(); cout << "Sorry, no trip found!\n"; ut.white(); return;
+			}
+			else { //caso haja viagens, verificar se ha lugares disponiveis
+				
+			}
 			//TODO searchTrip(); stopCodes e tripData -> parametros de pesquisa
 			//TODO encontra ou nao?
 			//TODO sim: adiciona passenger a viagem (decrementar stops e assim)
@@ -1341,9 +1349,26 @@ void Agency::joinTrip()
 	return;
 }
 
-int searchTrip(vector<string> stopCodes, Date tripDate) {
+vector<Trip> Agency::searchTrip(vector<string> stopCodes, Date tripDate)
+{
+	vector<Trip> possibleTrips;
+	string first = stopCodes.at(0); //origem pretendida
+	string last = stopCodes.at(1); //destino pretendido
 
-	return 0;
+	for (unsigned int i = 0; i < ActiveTrips.size(); i++) {
+		if (ActiveTrips.at(i).getDate() == tripDate) { //caso seja a data prentendida
+			for (unsigned int j = 0; j < ActiveTrips.at(i).getStops().size(); j++) { //procurar origem
+				if (first == ActiveTrips.at(i).getStops().at(j).getCode()) { //encontrou origem
+					for (unsigned int k = j + 1; k < ActiveTrips.at(i).getStops().size(); k++) { //procurar destino
+						if (last == ActiveTrips.at(i).getStops().at(k).getCode()) //encontrou destino
+							possibleTrips.push_back(ActiveTrips.at(i)); // adiciona viagem possivel ao vetor possibleTrips
+					}
+				}
+			}
+		}
+	}
+
+	return possibleTrips; //vetor é nulo caso nao haja viagens
 }
 
 
