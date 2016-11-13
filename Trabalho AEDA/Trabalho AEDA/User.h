@@ -24,9 +24,12 @@ protected:
 	vector <User *> buddies;
 	
 public:
+	User();
 	User(string name);
 	User(int ID, string name, float balance, string username, string password);
 	~User();
+	void setUsername(string username);
+	void setID(int ID);
 	int getID() const;
 	string getName() const;
 	string getUsername() const;
@@ -43,6 +46,7 @@ public:
 	void addBuddy(User * user) { buddies.push_back(user); };
 	void deleteBuddies() { buddies.clear(); }
 	vector<User *> getBuddies() const { return buddies; };
+	bool User::operator ==(const User *u) const;
 };
 
 class Driver :

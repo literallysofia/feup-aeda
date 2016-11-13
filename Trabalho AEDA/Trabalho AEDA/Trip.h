@@ -36,5 +36,6 @@ public:
 	vector<int> getPassengers() const;
 	void addPassenger(int idp);
 	void save(ofstream & out) const;
+	void saveAT(ofstream & out) const;
 	friend ostream& operator<<(ostream& out, const Trip &t);
 };
