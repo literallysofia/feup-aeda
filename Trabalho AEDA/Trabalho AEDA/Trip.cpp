@@ -60,6 +60,16 @@ string Trip::getDestination() const
 	return stops.at(stops.size() - 1).getCode();
 }
 
+vector<int> Trip::getPassengers() const
+{
+	return passengers;
+}
+
+void Trip::addPassenger(int idp)
+{
+	passengers.push_back(idp);
+}
+
 ostream& operator<<(ostream& out, const Trip &t) {
 
 	out << setw(3) << t.getID();

@@ -61,11 +61,6 @@ void User::deposit(float value)
 	balance += value;
 }
 
-vector<Transaction> User::getTransactions() const
-{
-	return transactions;
-}
-
 void User::payment()
 {
 	return;
@@ -110,11 +105,6 @@ int Driver::getNumSeats() const
 	return numSeats;
 }
 
-vector<Trip> Driver::getCurrentTrips() const
-{
-	return currentTrips;
-}
-
 void Driver::payment()
 {
 	balance -= maintenanceFee;
@@ -123,27 +113,6 @@ void Driver::payment()
 bool Driver::car() const
 {
 	return true;
-}
-
-
-void Driver::addTrip(Trip &t)
-{
-	currentTrips.push_back(t);
-}
-/*
-bool Driver::searchTrip(vector<Trip>& vec) const
-{
-	return false;
-}
-*/
-string Driver::getFirst() const
-{
-	return string();
-}
-
-string Driver::getLast() const
-{
-	return string();
 }
 
 /*PASSENGER CLASS*/
@@ -160,14 +129,9 @@ int Passenger::getNumTrips() const
 	return numTrips;
 }
 
-string Passenger::getFirst() const
+vector<pTrip> Passenger::getPTrips()
 {
-	return first;
-}
-
-string Passenger::getLast() const
-{
-	return last;
+	return pTrips;
 }
 
 void Passenger::setNumTrips()
@@ -188,6 +152,16 @@ bool Passenger::car() const
 void Passenger::resetTrips(void)
 {
 	numTrips = 0;
+}
+
+void Passenger::addTrip(int tripID, string first, string last)
+{
+	pTrip pt;
+	pt.id = tripID;
+	pt.first = first;
+	pt.last = last;
+	pTrips.push_back(pt);
+	numTrips++;
 }
 
 /*bool Passenger::searchTrip(vector<Trip> &vec)  //vec = vetor das viagens da agencia

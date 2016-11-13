@@ -117,7 +117,7 @@ void Agency::registerUser()
 	string type, name, username, password;
 
 	ut.menuHeader();
-	cout << "|                      ";  ut.grey(); cout << "Create Account";  ut.white(); cout << "                     |" << endl;
+	cout << "|                      ";  ut.grey(); cout << "CREATE ACCOUNT";  ut.white(); cout << "                     |" << endl;
 	ut.blue(); cout << "-----------------------------------------------------------" << endl; ut.white();
 	cout << "    Types of accounts:\n      - Driver: You need to register your car and host\n      trips. You'll also earn some money.\n      - Passenger: You can only join existing trips.\n\n";
 	ut.grey(); cout << "    > Do you want to register as a Driver? (y/n) "; ut.white(); cin >> type;  cout << endl;
@@ -177,7 +177,7 @@ void Agency::registerUser()
 
 	this->sessionID = nID;
 	this->sessionPos = (int)Users.size() - 1;
-	ut.red(); cout << "\n\n> Success! You just created your account!\n"; Sleep(2500); ut.white();
+	ut.yellow(); cout << "\n\n> Success! You just created your account!\n"; Sleep(2500); ut.white();
 
 	optionsMainMenu_User();
 
@@ -193,7 +193,7 @@ void Agency::loginUser()
 	string username, password;
 
 	ut.menuHeader();
-	cout << "|                          ";  ut.grey(); cout << "Login";  ut.white(); cout << "                          |" << endl;
+	cout << "|                          ";  ut.grey(); cout << "LOGIN";  ut.white(); cout << "                          |" << endl;
 	ut.blue(); cout << "-----------------------------------------------------------" << endl;
 	ut.grey(); cout << "    > Enter username: "; ut.white(); cin >> username;
 
@@ -215,7 +215,7 @@ void Agency::loginUser()
 	if (username == "admin") {
 		ut.grey(); cout << "\n    > Enter password: "; ut.white();
 		if (t.insertPassword() == "admin") {
-			ut.red(); cout << "\n\n> Login successful as admin!\n"; Sleep(2000); ut.white();
+			ut.yellow(); cout << "\n\n> Login as admin succeeded!\n"; Sleep(2000); ut.white();
 			optionsMainMenu_Admin();
 		}
 		else {
@@ -233,7 +233,7 @@ void Agency::loginUser()
 		if (validPassword(getPos(id), password)) {
 			this->sessionID = id;
 			this->sessionPos = getPos(sessionID);
-			ut.red(); cout << "\n\n> Login successful!\n"; Sleep(2000); ut.white();
+			ut.yellow(); cout << "\n\n> Login succeeded!!\n"; Sleep(2000); ut.white();
 			optionsMainMenu_User();
 		}
 		else {
@@ -702,8 +702,8 @@ void Agency::optionsMainMenu_User() {
 			break;
 		case 2:
 			if (Users.at(sessionPos)->car())
-				optionsCreateTrip();
-			else optionsJoinTrip();
+				menuCreateTrip();
+			else menuJoinTrip();
 			break;
 		case 3:
 			//TODO add buddy
@@ -715,7 +715,7 @@ int Agency::menuAccount()
 {
 	ut.clearScreen();
 	ut.menuHeader();
-	cout << "|                          ";  ut.grey(); cout << "USERS";  ut.white(); cout << "                          |" << endl
+	cout << "|                          ";  ut.grey(); cout << "ACCOUNT";  ut.white(); cout << "                          |" << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
 	ut.grey(); cout << setw(5) << "ID" << setw(10) << "User" << setw(13) << "Name" << setw(15) << "Balance" << setw(13) << "Num Cars" << endl;
 	ut.blue(); cout << "-----------------------------------------------------------" << endl;
@@ -783,28 +783,48 @@ int Agency::menuCreateTrip()
 	return 0;
 }
 
-void Agency::optionsCreateTrip()
-{
-	unsigned short int option;
-	while (option = menuCreateTrip())
-		switch (option)
-		{
-		case 1:
-			//TODO depositar dinheiro em balance
-			break;
-		case 2:
-			//idk
-			break;
-		}
-}
-
 int Agency::menuJoinTrip()
 {
+	ut.clearScreen();
+	ut.menuHeader();
+	cout << "|                       ";  ut.grey(); cout << "TRIP PLANNER";  ut.white(); cout << "                      |" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+	ut.grey(); cout << setw(16) << "Code" << setw(33) << "Town" << endl;
+	ut.blue(); cout << "-----------------------------------------------------------" << endl;
+	ut.white(); displayStops();
+	ut.blue(); cout << "-----------------------------------------------------------" << endl; ut.white();
+
+	joinTrip();
 	return 0;
 }
 
-void Agency::optionsJoinTrip()
+void Agency::showRecTrips(vector<Trip> recTrips, vector<Trip> buddieTrips, vector<string> &stopCodes)
 {
+	ut.clearScreen();
+	ut.menuHeader();
+	cout << "|                     ";  ut.grey(); cout << "TRIPS AVAILABLE";  ut.white(); cout << "                     |" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+	if (buddieTrips.size() != 0) {
+		ut.grey(); cout << setw(16) << "Trips with buddies:\n";
+		ut.blue(); cout << "-----------------------------------------------------------" << endl;
+		ut.grey(); cout << setw(3) << "ID" << setw(8) << "Driver" << setw(8) << "Origin" << setw(10) << "Destiny" << setw(9) << "Date" << setw(11) << "Start" << setw(7) << "End" << endl;
+		ut.blue(); cout << "-----------------------------------------------------------" << endl; ut.white();
+		for (unsigned int i = 0; i < buddieTrips.size(); i++) {
+			cout << buddieTrips.at(i);
+		}
+	}
+	if (recTrips.size() != 0) {
+		ut.grey(); cout << setw(16) << "Trips without buddies:\n";
+		ut.blue(); cout << "-----------------------------------------------------------" << endl;
+		ut.grey(); cout << setw(3) << "ID" << setw(8) << "Driver" << setw(8) << "Origin" << setw(10) << "Destiny" << setw(9) << "Date" << setw(11) << "Start" << setw(7) << "End" << endl;
+		ut.blue(); cout << "-----------------------------------------------------------" << endl; ut.white();
+		for (unsigned int i = 0; i < recTrips.size(); i++) {
+			cout << recTrips.at(i);
+		}
+	}
+
+	choseTrip(recTrips, buddieTrips, stopCodes);
+	return;
 }
 
 
@@ -1160,6 +1180,19 @@ int Agency::getLastId()
 	return Users.at(Users.size() - 1)->getID();
 }
 
+bool Agency::checkStop(string s) {
+
+	bool exists = false;
+
+	for (size_t i = 0; i < stopsAvailable.size(); i++)
+	{
+		if (stopsAvailable.at(i).code == s)
+			exists = true;
+	}
+
+	return exists;
+}
+
 void Agency::addUser(User * u)
 {
 	Users.push_back(u);
@@ -1231,9 +1264,9 @@ void Agency::displayRecord()
 	}
 }
 
-
 void Agency::addTrip() {
 
+	time_t startUnix, endUnix;
 	vector<Stop> tripPlan;
 	vector<string> stopCodes;
 	string stopCode;
@@ -1321,6 +1354,7 @@ void Agency::addTrip() {
 						cout << "> Day: "; cin >> day; cout << " > Month: "; cin >> month; cout << " > Year: "; cin >> year;
 						tripDate.setDay(day); tripDate.setMonth(month); tripDate.setYear(year);
 
+				
 						//se a data nao é valida
 						if (!tripDate.valid())
 						{
@@ -1357,7 +1391,7 @@ void Agency::addTrip() {
 
 				while (1) {
 
-					int actualTime = getUnixCode(currentDate, currentHour);
+					time_t actualTime = getUnixCode(currentDate, currentHour);
 
 					try
 					{
@@ -1366,12 +1400,11 @@ void Agency::addTrip() {
 						int hourS, minutesS;
 						ut.yellow(); cout << "\n > "; ut.grey(); cout << "Enter starting time:\n "; cin.clear(); ut.white();
 						cout << "> Hour: "; cin >> hourS; cout << " > Minutes: "; cin >> minutesS;
-						//Hour startHour(hourS, minutesS);
 						startHour.setHour(hourS); startHour.setMinutes(minutesS);
 
-						int startUnix = getUnixCode(tripDate, startHour);
+						startUnix = getUnixCode(tripDate, startHour);
 
-						if (!startHour.validHour())
+						if (startHour.validHour() == false)
 						{
 							throw InvalidHour(startHour.getHour(), startHour.getMinutes());
 						}
@@ -1405,15 +1438,18 @@ void Agency::addTrip() {
 						//hora fim
 						int hourE, minutesE;
 						ut.yellow(); cout << "\n > "; ut.grey(); cout << "Please enter finish time:\n "; cin.clear(); ut.white();
+
 						cout << "> Hour: "; cin >> hourE; cout << "> Minutes: "; cin >> minutesE;
-						//Hour endHour(hourE, minutesE);
+
 						endHour.setHour(hourE); endHour.setMinutes(minutesE);
+
+						endUnix = getUnixCode(tripDate, endHour);
 
 						if (!endHour.validHour())
 						{
 							throw InvalidHour(endHour.getHour(), endHour.getMinutes());
 						}
-						else if (endHour < startHour)
+						else if (endUnix < startUnix)
 						{
 							ut.red(); cout << "ERROR: The finish time can not be previous to the departure time.\n"; ut.white();
 						}
@@ -1436,7 +1472,7 @@ void Agency::addTrip() {
 				ut.green();  cout << "\n\nStops and number of seats successfully added to your trip.\n\n"; ut.white();
 				Sleep(2500);
 				Trips.push_back(trp);
-				Users.at(sessionPos)->addTrip(trp);			//adiciona a viagem criada ao utilizador correspondente (VIAGEM A DECORRER)
+				ActiveTrips.push_back(trp);
 
 				/*for (unsigned int i = 0; i < Trips.size(); i++) {
 					cout << Trips.at(i).getID() << endl;
@@ -1449,20 +1485,284 @@ void Agency::addTrip() {
 			break;
 		}
 	}
+	return;
 }
 
-bool Agency::checkStop(string s) {
+void Agency::joinTrip()
+{
+	vector<string> stopCodes;
+	string stopCode;
+	Date tripDate, currentDate;
+	vector<Trip> possibleTrips; // que verificam data, origem e destino
+	vector<Trip> recTrips; //trips recomendadas, que tem espaco (originam da de cima)
+	vector<Trip> buddieTrips; //trips recomendadas com buddies
+	//initialize current system's date
+	currentDate.setCurrent();
+	Hour endHour, startHour, currentHour;
+	//initialize current system's date
+	currentHour.setCurrent();
 
-	bool exists = false;
+	int stopNumber = 1;
 
-	for (size_t i = 0; i < stopsAvailable.size(); i++)
+	ut.yellow(); cout << " > "; ut.grey(); cout << "Please enter your trip:\n"; ut.white();
+
+
+	while (1)
 	{
-		if (stopsAvailable.at(i).code == s)
-			exists = true;
+		if (stopNumber == 1) {
+			cout << " From: ";
+			cin >> stopCode;
+			stopCode = t.convertUpper(stopCode);
+		}
+		else if (stopNumber == 2) {
+			cout << " To: ";
+			cin >> stopCode;
+			stopCode = t.convertUpper(stopCode);
+		}
+
+		//enquanto nao tiver sido inserido o inicio e o fim (duas stops)
+		if (stopCodes.size() != 2)
+		{
+			try
+			{
+				//se a paragem existe
+				if (checkStop(stopCode)) {
+					//se a paragem ja foi inserida lança a exceçao
+					if (find(stopCodes.begin(), stopCodes.end(), stopCode) != stopCodes.end()) {
+						throw RepeatedStop(stopCode);
+					}
+					//caso corra tudo bem é adicionada ao vetor
+					else {
+						stopCodes.push_back(stopCode);
+						stopNumber++;
+					}
+				}
+				//se nao existe lança a exceçao
+				else
+					throw NonexistentStop(stopCode);
+
+			}
+			catch (const NonexistentStop &e)
+			{
+				ut.red(); cout << e; ut.white();
+			}
+			catch (const RepeatedStop &e)
+			{
+				ut.red(); cout << e; ut.white();
+			}
+		}
+
+		//fim da introduçao das paragens
+		else {
+
+			while (1) {
+
+				try
+				{
+					//data da viagem
+					int day, month, year;
+					ut.yellow(); cout << "\n > "; ut.grey(); cout << "Enter your trip's date:\n "; cin.clear(); ut.white();
+					cout << "> Day: "; cin >> day; cout << " > Month: "; cin >> month; cout << " > Year: "; cin >> year;
+					tripDate.setDay(day); tripDate.setMonth(month); tripDate.setYear(year);
+
+					//se a data nao é valida
+					if (!tripDate.valid())
+					{
+						throw InvalidDate(tripDate);
+					}
+					else if (tripDate < currentDate)
+					{
+						throw PassedDate(day, month, year);
+					}
+					else if (currentDate.daysBetween(tripDate) > 365)
+					{
+						throw TooLong(day, month, year);
+					}
+					else
+					{
+						break;
+					}
+
+				}
+				catch (const InvalidDate &e)
+				{
+					ut.red(); cout << e; ut.white();
+				}
+				catch (const PassedDate &e)
+				{
+					ut.red(); cout << e; ut.white();
+				}
+				catch (const TooLong &e)
+				{
+					ut.red(); cout << e; ut.white();
+				}
+
+			}
+
+			possibleTrips = searchTrip(stopCodes, tripDate); //vetor de viagens possiveis (tendo em conta data, origem e destino APENAS
+
+			if (possibleTrips.size() == 0) { //caso nao haja viagens possiveis
+				ut.red(); cout << "\n Sorry, no trip found!\n"; ut.white();
+				Sleep(2000);
+				cin.clear();
+				cin.ignore(1000, '\n');
+				return;
+			}
+			else { //caso haja viagens, verificar se ha lugares disponiveis
+
+				recTrips = availableTrips(possibleTrips, stopCodes);
+				if (recTrips.size() == 0) { //caso todos os lugares ja estejam ocupados
+					ut.red(); cout << "\n Sorry, there is no space left in any trips!\n"; ut.white();
+					Sleep(2000);
+					cin.clear();
+					cin.ignore(1000, '\n');
+					return;
+				}
+				else { //caso haja lugares
+					for (unsigned int i = 0; i < recTrips.size(); i++) { //verificar se ha buddies em comum
+						if (hasBuddies(recTrips.at(i)) == true) { //divide trips em recomendadas com buddies e sem buddies
+							buddieTrips.push_back(recTrips.at(i));
+							recTrips.erase(recTrips.begin() + i);
+							i--;
+						}
+					}
+					showRecTrips(recTrips, buddieTrips, stopCodes); //mostra trips recomendadas, com buddies e sem
+				}
+			}
+			break;
+		}
+	}
+	return;
+}
+
+vector<Trip> Agency::searchTrip(vector<string> &stopCodes, Date &tripDate)
+{
+	vector<Trip> possibleTrips;
+	string first = stopCodes.at(0); //origem pretendida
+	string last = stopCodes.at(1); //destino pretendido
+
+	for (unsigned int i = 0; i < ActiveTrips.size(); i++) {
+		if (ActiveTrips.at(i).getDate() == tripDate) { //caso seja a data prentendida
+			for (unsigned int j = 0; j < ActiveTrips.at(i).getStops().size(); j++) { //procurar origem
+				if (first == ActiveTrips.at(i).getStops().at(j).getCode()) { //encontrou origem
+					for (unsigned int k = j + 1; k < ActiveTrips.at(i).getStops().size(); k++) { //procurar destino
+						if (last == ActiveTrips.at(i).getStops().at(k).getCode()) //encontrou destino
+							possibleTrips.push_back(ActiveTrips.at(i)); // adiciona viagem possivel ao vetor possibleTrips
+					}
+				}
+			}
+		}
 	}
 
-	return exists;
+	return possibleTrips; //vetor é nulo caso nao haja viagens
 }
+
+vector<Trip> Agency::availableTrips(vector<Trip> &possibleTrips, vector<string> &stopCodes)
+{
+	vector<Trip> spaceTrips; // vetor de trips com espaco suficiente para juntar passageiro
+
+	for (unsigned int i = 0; i < possibleTrips.size(); i++) {
+		if (availableSpace(possibleTrips.at(i), stopCodes) == true)
+			spaceTrips.push_back(possibleTrips.at(i));
+	}
+	return spaceTrips;
+}
+
+bool Agency::availableSpace(Trip &possibleTrip, vector<string> &stopCodes) { //recebe uma viagem e trajeto do user, e ve se ha lugares disponiveis
+	int idi, idf, a;
+	string first = stopCodes.at(0); //origem pretendida
+	string last = stopCodes.at(1); //destino pretendido
+
+	for (unsigned int j = 0; j < possibleTrip.getStops().size(); j++) {
+		if (first == possibleTrip.getStops().at(j).getCode()) //obtem id inicial ; idi
+			idi = j;
+		if (last == possibleTrip.getStops().at(j).getCode()) //obtem id final ; idf
+			idf = j;
+	}
+
+	for (idi; idi < idf; idi++) { //verifica se ha lugares disponiveis em cada paragem, menos na final, visto que user sai nessa
+		if (possibleTrip.getStops().at(idi).getAvailableSeats() > 0)
+			a = 1;
+		else a = 0;
+	}
+
+	if (a == 0)
+		return false;
+	else return true;
+
+}
+
+bool Agency::hasBuddies(Trip &recTrip)
+{
+	vector<int> userBuddies; //ids de todos os buddies do user
+	vector<int> tripids; //ids do driver e passageiros presentes em toda a viagem
+	int numBuddies = 0;
+
+	for (unsigned int i = 0; i < Users.at(sessionPos)->getBuddies().size(); i++) {
+		userBuddies.push_back(Users.at(sessionPos)->getBuddies().at(i)->getID());
+	}
+
+	tripids = recTrip.getPassengers();
+	tripids.push_back(recTrip.getDriver());
+
+	for (unsigned int i = 0; i < userBuddies.size(); i++) {
+		if (find(tripids.begin(), tripids.end(), userBuddies.at(i)) != tripids.end())
+			numBuddies++;
+	}
+
+	if (numBuddies > 0)
+		return true;
+	else return false;
+}
+
+void Agency::choseTrip(vector<Trip> &recTrips, vector<Trip> &buddieTrips, vector<string> &stopCodes)
+{
+	string first = stopCodes.at(0); //origem pretendida
+	string last = stopCodes.at(1); //destino pretendido
+	vector<int> allTrips; //vetor com ids de todas as trips disponiveis como opcao
+	int id;
+	ut.yellow(); cout << "\n > "; ut.grey(); cout << "Enter the id of the trip you would like to join: "; ut.white(); cin >> id; cout << endl;
+
+	for (unsigned int i = 0; i < recTrips.size(); i++) {
+		allTrips.push_back(recTrips.at(i).getID());
+	}
+	for (unsigned int i = 0; i < buddieTrips.size(); i++) {
+		allTrips.push_back(buddieTrips.at(i).getID());
+	}
+
+	while (cin.fail() || find(allTrips.begin(), allTrips.end(), id) == allTrips.end())
+	{
+		if (cin.eof())
+		{
+			cin.clear();
+			return;
+		}
+		cin.clear();
+		cin.ignore(1000, '\n');
+		ut.red(); cout << "> Invalid choice!" << endl;
+		ut.white(); cout << "Please try again: ";
+		cin >> id;
+	}
+
+	for (unsigned int i = 0; i < ActiveTrips.size(); i++) {
+		if (id == ActiveTrips.at(i).getID()) {
+			ActiveTrips.at(i).addPassenger(sessionID); //adiciona user ao vetor de passageiros da trip
+			Users.at(sessionPos)->addTrip(id, first, last);
+		}
+	}
+
+	ut.yellow(); cout << "\n Success! You were added to the trip!\n"; ut.white();
+	Sleep(2000);
+	cin.clear();
+	cin.ignore(1000, '\n');
+	return;
+}
+
+
+
+
+
+
 
 float Agency::deposit()
 {
@@ -1653,9 +1953,9 @@ totalMonth += (*it)->payment();
 return totalMonth;
 }
 */
-int Agency::getUnixCode(Date &d, Hour &h) {
+time_t Agency::getUnixCode(Date &d, Hour &h) {
 
-	int ret;
+	time_t ret;
 	struct tm info;
 
 	info.tm_year = d.getYear() - 1900;
@@ -1666,6 +1966,6 @@ int Agency::getUnixCode(Date &d, Hour &h) {
 	info.tm_sec = 0;
 	info.tm_isdst = -1;
 
-	ret = mktime(&info);
+	ret = (int)mktime(&info);
 	return ret;
 }

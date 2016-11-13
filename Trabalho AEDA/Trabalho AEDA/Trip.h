@@ -17,8 +17,8 @@ private:
 	Date date;
 	Hour startTime;
 	Hour endTime;
+	vector<int> passengers;
 	//int carSeats;
-	//vector<int> passengers;
 	//vector<string> stops;
 	//bool active;
 public:
@@ -33,6 +33,8 @@ public:
 	Hour getEnd() const;
 	string getOrigin() const;
 	string getDestination() const;
+	vector<int> getPassengers() const;
+	void addPassenger(int idp);
 	void save(ofstream & out) const;
 	friend ostream& operator<<(ostream& out, const Trip &t);
 };
