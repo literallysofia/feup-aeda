@@ -39,6 +39,7 @@ private:
 	vector<User *> Users;
 	vector<Trip> Trips;
 	vector<Guest *> Guests;
+	vector<Trip> ActiveTrips;
 	vector<Transaction> Transactions;
 	vector<stop> stopsAvailable;
 
@@ -121,6 +122,7 @@ public:
 	void addUser(User* u);
 	void addTrip();
 	void joinTrip();
+	int searchTrip(vector<string> stopCodes, Date tripDate);
 	//void runTrip(int tripID);
 	float deposit();
 	int getUnixCode(Date &d, Hour &h);

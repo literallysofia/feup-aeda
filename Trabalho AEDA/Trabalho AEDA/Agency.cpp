@@ -1341,6 +1341,18 @@ void Agency::joinTrip()
 	return;
 }
 
+int searchTrip(vector<string> stopCodes, Date tripDate) {
+
+	return 0;
+}
+
+
+
+
+
+
+
+
 
 float Agency::deposit()
 {
