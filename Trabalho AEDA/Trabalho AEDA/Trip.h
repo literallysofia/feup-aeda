@@ -34,6 +34,7 @@ public:
 	string getOrigin() const;
 	string getDestination() const;
 	vector<int> getPassengers() const;
+	void addPassenger(int idp);
 	void save(ofstream & out) const;
 	friend ostream& operator<<(ostream& out, const Trip &t);
 };

@@ -131,6 +131,16 @@ void Passenger::resetTrips(void)
 	numTrips = 0;
 }
 
+void Passenger::addTrip(int tripID, string first, string last)
+{
+	pTrip pt;
+	pt.id = tripID;
+	pt.first = first;
+	pt.last = last;
+	pTrips.push_back(pt);
+	numTrips++;
+}
+
 /*bool Passenger::searchTrip(vector<Trip> &vec)  //vec = vetor das viagens da agencia
 {
 	unsigned int posBeg = -1, posEnd = -1;

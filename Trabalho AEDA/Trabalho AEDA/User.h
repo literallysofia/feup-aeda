@@ -34,7 +34,7 @@ public:
 	float getBalance() const;
 	void deposit(float value);
 	virtual bool car() const;
-	virtual void addTrip(Trip &t) {};
+	virtual void addTrip(int tripID, string first, string last) {};
 	//virtual bool searchTrip(vector<Trip> &vec);
 	virtual string getFirst() const;
 	virtual string getLast() const;
@@ -76,6 +76,6 @@ public:
 	void payment();
 	bool car() const;
 	void resetTrips(void);
-	//void addTrip(Trip &t) { numTrips++; };
+	void addTrip(int tripID, string first, string last);
 	//bool searchTrip(vector<Trip> &vec);
 };

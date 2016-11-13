@@ -92,7 +92,7 @@ public:
 
 	int menuCreateTrip();
 	int menuJoinTrip();
-	void showRecTrips(vector<Trip> recTrips, vector<Trip> buddieTrips);
+	void showRecTrips(vector<Trip> recTrips, vector<Trip> buddieTrips, vector<string> &stopCodes);
 
 
 	//Files
@@ -123,10 +123,11 @@ public:
 	void addUser(User* u);
 	void addTrip();
 	void joinTrip();
-	vector<Trip> searchTrip(vector<string> stopCodes, Date tripDate);
-	vector<Trip> availableTrips(vector<Trip> possibleTrips, vector<string> stopCodes);
-	bool availableSpace(Trip possibleTrip, vector<string> stopCodes);
-	bool hasBuddies(Trip recTrip);
+	vector<Trip> searchTrip(vector<string> &stopCodes, Date &tripDate);
+	vector<Trip> availableTrips(vector<Trip> &possibleTrips, vector<string> &stopCodes);
+	bool availableSpace(Trip &possibleTrip, vector<string> &stopCodes);
+	bool hasBuddies(Trip &recTrip);
+	void choseTrip(vector<Trip> &recTrips, vector<Trip> &buddieTrips, vector<string> &stopCodes);
 	//void runTrip(int tripID);
 	float deposit();
 	int getUnixCode(Date &d, Hour &h);
