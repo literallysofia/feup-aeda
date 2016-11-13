@@ -37,7 +37,7 @@ void Hour::setMinutes(int m) {
 bool Hour::validHour()
 {
 	if (hour < 0 || hour > 23) return false;
-	if (minutes > 59 || minutes <1) return false;
+	else if (minutes > 59 || minutes < 0) return false;
 	return true;
 }
 

@@ -130,7 +130,7 @@ public:
 	void choseTrip(vector<Trip> &recTrips, vector<Trip> &buddieTrips, vector<string> &stopCodes);
 	//void runTrip(int tripID);
 	float deposit();
-	int getUnixCode(Date &d, Hour &h);
+	time_t getUnixCode(Date &d, Hour &h);
 
 	//Displays
 	void displayUsers();

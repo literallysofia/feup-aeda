@@ -1039,6 +1039,7 @@ void Agency::displayRecord()
 
 void Agency::addTrip() {
 
+	time_t startUnix, endUnix;
 	vector<Stop> tripPlan;
 	vector<string> stopCodes;
 	string stopCode;
@@ -1126,6 +1127,7 @@ void Agency::addTrip() {
 						cout << "> Day: "; cin >> day; cout << " > Month: "; cin >> month; cout << " > Year: "; cin >> year;
 						tripDate.setDay(day); tripDate.setMonth(month); tripDate.setYear(year);
 
+				
 						//se a data nao é valida
 						if (!tripDate.valid())
 						{
@@ -1162,7 +1164,7 @@ void Agency::addTrip() {
 
 				while (1) {
 
-					int actualTime = getUnixCode(currentDate, currentHour);
+					time_t actualTime = getUnixCode(currentDate, currentHour);
 
 					try
 					{
@@ -1173,9 +1175,9 @@ void Agency::addTrip() {
 						cout << "> Hour: "; cin >> hourS; cout << " > Minutes: "; cin >> minutesS;
 						startHour.setHour(hourS); startHour.setMinutes(minutesS);
 
-						int startUnix = getUnixCode(tripDate, startHour);
+						startUnix = getUnixCode(tripDate, startHour);
 
-						if (!startHour.validHour())
+						if (startHour.validHour() == false)
 						{
 							throw InvalidHour(startHour.getHour(), startHour.getMinutes());
 						}
@@ -1209,14 +1211,18 @@ void Agency::addTrip() {
 						//hora fim
 						int hourE, minutesE;
 						ut.yellow(); cout << "\n > "; ut.grey(); cout << "Please enter finish time:\n "; cin.clear(); ut.white();
+
 						cout << "> Hour: "; cin >> hourE; cout << "> Minutes: "; cin >> minutesE;
+
 						endHour.setHour(hourE); endHour.setMinutes(minutesE);
+
+						endUnix = getUnixCode(tripDate, endHour);
 
 						if (!endHour.validHour())
 						{
 							throw InvalidHour(endHour.getHour(), endHour.getMinutes());
 						}
-						else if (endHour < startHour)
+						else if (endUnix < startUnix)
 						{
 							ut.red(); cout << "ERROR: The finish time can not be previous to the departure time.\n"; ut.white();
 						}
@@ -1720,9 +1726,9 @@ totalMonth += (*it)->payment();
 return totalMonth;
 }
 */
-int Agency::getUnixCode(Date &d, Hour &h) {
+time_t Agency::getUnixCode(Date &d, Hour &h) {
 
-	int ret;
+	time_t ret;
 	struct tm info;
 
 	info.tm_year = d.getYear() - 1900;
