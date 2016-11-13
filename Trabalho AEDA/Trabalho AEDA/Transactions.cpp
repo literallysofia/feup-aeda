@@ -1,10 +1,19 @@
 #include "Transactions.h"
 
+Transaction::Transaction()
+{
+}
+
 Transaction::Transaction(unsigned int id, Date date, float value)
 {
 	this->id = id;
 	this->date = date;
 	this->value = value;
+}
+
+void Transaction::setID(int ID)
+{
+	this->id = ID;
 }
 
 unsigned int Transaction::GetId() const

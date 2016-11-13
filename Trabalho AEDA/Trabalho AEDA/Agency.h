@@ -17,6 +17,7 @@
 #include "Transactions.h"
 #include "Stop.h"
 #include "Date.h"
+#include "SearchAndSort.h"
 
 using namespace std;
 
@@ -76,10 +77,17 @@ public:
 	int menuDisplayUsers();
 	void optionsDisplayUsers();
 
+	int menuSearch();
+	void optionsMenuSearch();
+
 	void menuDisplayBuddies();
 	void menuDisplayTransactions();
 	void menuDisplayStops();
 	void menuDisplayRecord();
+
+	int menuSearchUser();
+	int menuSearchTransaction();
+
 
 
 	//User Only

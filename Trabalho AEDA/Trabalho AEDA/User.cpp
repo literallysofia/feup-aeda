@@ -3,6 +3,10 @@
 /*USER CLASS*/
 int User::maintenanceFee = 20;
 
+User::User()
+{
+}
+
 User::User(string name) :name(name)
 {
 }
@@ -15,6 +19,16 @@ User::User(int ID, string name, float balance, string username, string password)
 
 User::~User()
 {
+}
+
+void User::setUsername(string username)
+{
+	this->username = username;
+}
+
+void User::setID(int ID)
+{
+	this->ID = ID;
 }
 
 int User::getID() const
@@ -76,6 +90,15 @@ string User::getFirst() const
 string User::getLast() const
 {
 	return string();
+}
+
+bool User::operator ==(const User *u) const {
+
+	if (this->username == u->getUsername())
+		return true;
+	else
+		return false;
+
 }
 
 /*DRIVER CLASS*/

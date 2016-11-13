@@ -307,10 +307,12 @@ void Agency::optionsMainMenu_Admin() {
 			menuDisplayStops();
 			break;
 		case 6:
+			optionsMenuSearch();
 			break;
 		}
 	return;
 }
+
 
 int Agency::menuDisplayUsers() {
 	ut.clearScreen();
@@ -364,6 +366,61 @@ void Agency::optionsDisplayUsers() {
 	return;
 }
 
+int Agency::menuSearch() {
+
+	ut.clearScreen();
+	ut.menuHeader();
+	cout << "|~~~                       ";  ut.grey(); cout << "SEARCH";  ut.white(); cout << "                      ~~~|" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
+		<< setw(18) << "1. Users" << endl
+		<< setw(18) << "2. Trips" << endl
+		<< setw(25) << "3. Transactions" << endl;
+	ut.blue(); cout << "-----------------------------------------------------------" << endl;  ut.white();
+	cout << "|~~~                               ";  ut.grey(); cout << "< 0. Return >";  ut.white(); cout << "       ~~~|" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl << endl;
+
+	unsigned short int option;
+	cout << "Type your choice: ";
+	cin >> option;
+
+	while (cin.fail() || (option > 3) || (option < 0))
+	{
+		if (cin.eof())
+		{
+			cin.clear();
+			return 0;
+		}
+		cin.clear();
+		cin.ignore(1000, '\n');
+		ut.red(); cout << "> Invalid choice!" << endl;
+		ut.white(); cout << "Please try again: ";
+		cin >> option;
+	}
+
+	return option;
+
+	if (option == 0)
+		return 0;
+}
+
+void Agency::optionsMenuSearch() {
+	unsigned short int option;
+
+	while (option = menuSearch())
+		switch (option)
+		{
+		case 1:
+			menuSearchUser();
+			break;
+		case 2:
+			//TODO: search Trips
+			break;
+		case 3:
+			//TODO: search Transactions
+			break;
+		}
+}
+
 void Agency::menuDisplayBuddies() {
 	ut.clearScreen();
 	ut.menuHeader();
@@ -414,6 +471,176 @@ void Agency::menuDisplayRecord()
 	ut.red(); cout << "\n Press enter to go back."; ut.white(); getchar(); getchar();
 	return;
 }
+
+int Agency::menuSearchUser() {
+
+	//TODO: NAO FUNCIONA O VETOR NAO É BEM PASSADO
+
+	ut.clearScreen();
+	ut.menuHeader();
+	cout << "|~~~                     ";  ut.setcolor(7); cout << "SEARCH USER";  ut.setcolor(15); cout << "                   ~~~|" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+
+	int id;
+	string input;
+	int pos;
+
+
+	cout << endl << "Username or ID of the user you are searching for: ";  cin.ignore(); getline(cin, input);
+	cout << endl;
+
+	while (cin.fail())
+	{
+		if (cin.eof())
+		{
+			cin.clear();
+			return 0;
+		}
+
+		cin.clear();
+		cin.ignore(1000, '\n');
+		ut.setcolor(4); cout << "> Invalid Input!" << endl;
+		ut.setcolor(15); cout << "Try again: ";
+		cin >> input;
+	}
+
+	if ((int)input.at(0) >= 48 && (int)input.at(0) <= 57) // verifica se o primeiro elemento da string corresponde a um inteiro no codigo ascii (entre 0 e 9)
+		id = stoi(input, nullptr, 10); // se a opcao for o ID
+	else id = 0;
+
+	User *u = new User();
+
+	if (id == 0) { //procuda por username
+		u->setUsername(input);
+		if (sequentialSearch(Users, u) != -1)
+			pos = sequentialSearch(Users, u);
+		else {
+			ut.setcolor(4); cerr << "> User not found." << endl; ut.setcolor(15);
+			ut.red(); cout << "\n Press any key to go back."; ut.white();
+			cin.clear();
+			cin.ignore(1000, '\n');
+			return 0;
+		}
+	}
+	else { //procura por id
+		u->setID(id);
+		if (sequentialSearch(Users, u) != -1)
+			pos = sequentialSearch(Users, u);
+		else {
+			ut.setcolor(4); cerr << "> User not found." << endl; ut.setcolor(15);
+			ut.red(); cout << "\n Press any key to go back."; ut.white();
+			cin.clear();
+			cin.ignore(1000, '\n');
+			return 0;
+		}
+	}
+
+	ut.clearScreen();
+	ut.menuHeader();
+	cout << "|~~~                     ";  ut.setcolor(7); cout << "User Info";  ut.setcolor(15); cout << "                     ~~~|" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+	ut.setcolor(7); cout << setw(5) << "ID" << setw(10) << "User" << setw(16) << "Name" << setw(16) << "Balance" << setw(10) << "Driver" << endl;
+	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
+	ut.white();
+	cout << setw(5) << Users.at(pos)->getID();
+	cout << setw(10) << Users.at(pos)->getUsername();
+	cout << setw(20) << Users.at(pos)->getName();
+	cout << setw(10) << setprecision(2) << fixed << Users.at(pos)->getBalance();
+
+	if (Users.at(pos)->car())
+		cout << setw(10) << "[X]" << endl;
+	else cout << setw(10) << "[ ]" << endl;
+
+	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl; ut.setcolor(15);
+	ut.red(); cout << "\n Press any key to go back."; ut.white();
+	cin.clear();
+	cin.ignore(1000, '\n');
+	return 0;
+
+}
+
+int Agency::menuSearchTransaction() {
+
+	ut.clearScreen();
+	ut.menuHeader();
+	cout << "|~~~                     ";  ut.setcolor(7); cout << "SEARCH TRANSACTION";  ut.setcolor(15); cout << "                   ~~~|" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+
+	int id;
+	string input;
+	int pos;
+
+
+	cout << endl << "ID of the user you are searching for: ";  cin << id;
+	cout << endl;
+
+	while (cin.fail())
+	{
+		if (cin.eof())
+		{
+			cin.clear();
+			return 0;
+		}
+
+		cin.clear();
+		cin.ignore(1000, '\n');
+		ut.setcolor(4); cout << "> Invalid Input!" << endl;
+		ut.setcolor(15); cout << "Try again: ";
+		cin >> input;
+	}
+
+	Transaction t;
+
+	if (id == 0) { //procuda por username
+		t.setID(id);
+		if (sequentialSearch(Transactions, t) != -1)
+			pos = sequentialSearch(Transactions, t);
+		else {
+			ut.setcolor(4); cerr << "> User not found." << endl; ut.setcolor(15);
+			ut.red(); cout << "\n Press any key to go back."; ut.white();
+			cin.clear();
+			cin.ignore(1000, '\n');
+			return 0;
+		}
+	}
+	else { //procura por id
+		u->setID(id);
+		if (sequentialSearch(Users, u) != -1)
+			pos = sequentialSearch(Users, u);
+		else {
+			ut.setcolor(4); cerr << "> User not found." << endl; ut.setcolor(15);
+			ut.red(); cout << "\n Press any key to go back."; ut.white();
+			cin.clear();
+			cin.ignore(1000, '\n');
+			return 0;
+		}
+	}
+
+	ut.clearScreen();
+	ut.menuHeader();
+	cout << "|~~~                     ";  ut.setcolor(7); cout << "User Info";  ut.setcolor(15); cout << "                     ~~~|" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+	ut.setcolor(7); cout << setw(5) << "ID" << setw(10) << "User" << setw(16) << "Name" << setw(16) << "Balance" << setw(10) << "Driver" << endl;
+	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
+	ut.white();
+	cout << setw(5) << Users.at(pos)->getID();
+	cout << setw(10) << Users.at(pos)->getUsername();
+	cout << setw(20) << Users.at(pos)->getName();
+	cout << setw(10) << setprecision(2) << fixed << Users.at(pos)->getBalance();
+
+	if (Users.at(pos)->car())
+		cout << setw(10) << "[X]" << endl;
+	else cout << setw(10) << "[ ]" << endl;
+
+	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl; ut.setcolor(15);
+	ut.red(); cout << "\n Press any key to go back."; ut.white();
+	cin.clear();
+	cin.ignore(1000, '\n');
+	return 0;
+
+}
+
+
 
 
 /* MENUS USER */
