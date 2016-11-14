@@ -22,7 +22,6 @@ COORD max_size = GetLargestConsoleWindowSize(screen);
 
 int welcomeMenu() {
 
-	//Menu - Welcome
 	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
 		<< "|~~~                      "; u.blue(); cout << "ShareIt"; u.white(); cout << "                      ~~~| " << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
