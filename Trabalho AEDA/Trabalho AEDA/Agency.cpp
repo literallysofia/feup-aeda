@@ -603,7 +603,6 @@ void Agency::menuSearchUserByID() {
 	ut.red(); cout << "\n Press enter to go back."; ut.white(); getchar(); getchar();
 	cin.clear();
 	cin.ignore(1000, '\n');
-	return 0;
 	//TODO: VER MELHOR
 }
 
@@ -637,7 +636,7 @@ int Agency::menuSearchUser() {
 
 		ut.red(); cout << "> Invalid Input!" << endl;
 		ut.white(); cout << "Try again: ";
-		cin >> input;
+		cin >> option;
 	}
 
 	return option;
