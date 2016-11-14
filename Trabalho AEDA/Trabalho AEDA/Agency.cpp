@@ -984,18 +984,20 @@ void Agency::saveBuddies()
 	{
 		for (unsigned int i = 0; i < Users.size(); i++)
 		{
-			BuddiesFile << Users.at(i)->getID() << ";";
+			if (!Users.at(i)->getBuddies().empty()) {
+				BuddiesFile << Users.at(i)->getID() << ";";
 
-			string buddies_s;
+				string buddies_s;
 
-			for (unsigned int j = 0; j < Users.at(i)->getBuddies().size(); j++)
-			{
-				buddies_s.append(to_string(Users.at(i)->getBuddies().at(j)->getID()));
-				buddies_s.append(",");
+				for (unsigned int j = 0; j < Users.at(i)->getBuddies().size(); j++)
+				{
+					buddies_s.append(to_string(Users.at(i)->getBuddies().at(j)->getID()));
+					buddies_s.append(",");
+				}
+
+				buddies_s.erase(buddies_s.size() - 1, 1); //apaga a ultima virgula
+				BuddiesFile << buddies_s << endl;
 			}
-
-			buddies_s.erase(buddies_s.size() - 1, 1); //apaga a ultima virgula
-			BuddiesFile << buddies_s << endl;
 		}
 		BuddiesFile.close();
 	}
@@ -1170,7 +1172,7 @@ void Agency::extractActive()
 
 			string idT_s = line.substr(0, pos1); //string id trip
 			string idD_s = str1.substr(0, pos2); //string id driver
-			string stops_s = str2.substr(pos3+1, pos4-1); //string stops
+			string stops_s = str2.substr(pos3 + 1, pos4 - 1); //string stops
 			string date_s = str3.substr(0, pos5); //strind data
 			string horaStart_s = str4.substr(0, pos6); //string start
 			string horaEnd_s = str4.substr(pos6 + 1); //string end
@@ -1187,15 +1189,15 @@ void Agency::extractActive()
 
 			while (!(stops_s.empty()))
 			{
-			
+
 				size_t pos1 = stops_s.find(";");
 				string estaparagem = stops_s.substr(0, pos1);
 
 				size_t pos2 = estaparagem.find(",");
 
-				string code = estaparagem.substr(0, pos2); 
-				string nro_s = estaparagem.substr(pos2 + 1); 
-				
+				string code = estaparagem.substr(0, pos2);
+				string nro_s = estaparagem.substr(pos2 + 1);
+
 				int nro = stoi(nro_s, nullptr, 10); // passa o numero de lugares de string para int
 
 				Stop s(code, nro);
