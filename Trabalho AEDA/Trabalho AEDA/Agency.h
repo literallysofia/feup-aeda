@@ -89,6 +89,8 @@ public:
 	void menuDisplayStops();
 	void menuDisplayRecord();
 
+	void menuSearchUserByID();
+
 	int menuSearchUser();
 	void optionsMenuSearchUser();
 
