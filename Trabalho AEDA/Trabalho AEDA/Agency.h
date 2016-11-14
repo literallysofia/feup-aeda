@@ -97,6 +97,7 @@ public:
 
 	int menuAccount();
 	void optionsMenuAccount();
+	void menuAddBuddy();
 
 	int menuCreateTrip();
 	int menuJoinTrip();
@@ -131,6 +132,7 @@ public:
 
 	//Functions
 	void addUser(User* u);
+	void addBuddy();
 	void addTrip();
 	void joinTrip();
 	vector<Trip> searchTrip(vector<string> &stopCodes, Date &tripDate);

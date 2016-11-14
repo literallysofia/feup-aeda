@@ -119,24 +119,27 @@ void Agency::registerUser()
 	ut.menuHeader();
 	cout << "|                      ";  ut.grey(); cout << "CREATE ACCOUNT";  ut.white(); cout << "                     |" << endl;
 	ut.blue(); cout << "-----------------------------------------------------------" << endl; ut.white();
-	cout << "    Types of accounts:\n      - Driver: You need to register your car and host\n      trips. You'll also earn some money.\n      - Passenger: You can only join existing trips.\n\n";
-	ut.grey(); cout << "    > Do you want to register as a Driver? (y/n) "; ut.white(); cin >> type;  cout << endl;
+	ut.grey(); cout << " Types of accounts:\n\n";
+	ut.blue(); cout << " - Driver: "; ut.grey(); cout << "You need to register your car and host trips.\n           You'll also earn some money.\n\n";
+	ut.blue(); cout << " - Passenger: "; ut.grey(); cout << "You can only join existing trips.\n\n\n";
+	ut.yellow(); cout << " > "; ut.grey(); cout << "Do you want to register as a Driver? (y/n) "; ut.white(); cin >> type;  cout << endl;
 
 	while (cin.fail() || ((type != "y") && (type != "Y") && (type != "n") && (type != "N")))
 	{
 		if (cin.eof())
 		{
 			cin.clear();
+			ut.clearScreen();
 			return;
 		}
 		cin.clear();
 		cin.ignore(1000, '\n');
-		ut.red(); cout << "> Invalid choice!" << endl;
-		ut.white(); cout << "Please try again: ";
+		ut.red(); cout << " > Invalid choice!" << endl;
+		ut.white(); cout << " Please try again: ";
 		cin >> type; cout << endl;
 	}
 
-	ut.grey(); cout << "    > Enter username: "; ut.white(); cin >> username;
+	ut.yellow(); cout << "    > "; ut.grey(); cout << "Enter username: "; ut.white(); cin >> username;
 
 	while (cin.fail() || validUser(username)) {
 		if (cin.eof())
@@ -147,22 +150,22 @@ void Agency::registerUser()
 		}
 		cin.clear();
 		cin.ignore(1000, '\n');
-		ut.red(); cout << "\n> That username is taken!" << endl;
-		ut.white(); cout << "Please try again: ";
+		ut.red(); cout << "\n Username taken!" << endl;
+		ut.white(); cout << " Please type another one: ";
 		cin >> username;
 	}
 
 	bool a = false;
 	while (!a) {
-		ut.grey(); cout << "\n    > Enter password: "; ut.white();
+		ut.yellow(); cout << "    > "; ut.grey(); cout << "Enter password: "; ut.white();
 		password = t.insertPassword();
-		ut.grey(); cout << "\n    > Confirm password: "; ut.white();
+		ut.yellow(); cout << "\n    > "; ut.grey(); cout << "Confirm password: "; ut.white();
 		if (t.sameString(password, t.insertPassword()))
 			a = true;
-		else { ut.red(); cout << "\n> Password doesnt match! Try again.\n"; }
+		else { ut.red(); cout << "\n Password does not match! Try again.\n\n"; }
 	}
 
-	ut.grey(); cout << "\n\n    > Enter name: "; ut.white(); cin.ignore(); getline(cin, name);
+	ut.yellow(); cout << "\n\n    > "; ut.grey(); cout << "Enter name: "; ut.white(); cin.ignore(); getline(cin, name);
 
 	int nID = getLastId() + 1;
 
@@ -177,7 +180,7 @@ void Agency::registerUser()
 
 	this->sessionID = nID;
 	this->sessionPos = (int)Users.size() - 1;
-	ut.yellow(); cout << "\n\n> Success! You just created your account!\n"; Sleep(2500); ut.white();
+	ut.yellow(); cout << "\n\n Success! You just created your account!\n"; Sleep(2500); ut.white();
 
 	optionsMainMenu_User();
 
@@ -195,7 +198,7 @@ void Agency::loginUser()
 	ut.menuHeader();
 	cout << "|                          ";  ut.grey(); cout << "LOGIN";  ut.white(); cout << "                          |" << endl;
 	ut.blue(); cout << "-----------------------------------------------------------" << endl;
-	ut.grey(); cout << "    > Enter username: "; ut.white(); cin >> username;
+	ut.yellow(); cout << "    > "; ut.grey(); cout << "Enter username: "; ut.white(); cin >> username;
 
 	while (cin.fail() || (validUser(username) == false && username != "admin"))
 	{
@@ -207,13 +210,13 @@ void Agency::loginUser()
 		}
 		cin.clear();
 		cin.ignore(1000, '\n');
-		ut.red(); cout << "> Login failed!" << endl;
-		ut.white(); cout << "Please try again.\n\n";
-		ut.grey(); cout << "    > Enter username: "; ut.white(); cin >> username;
+		ut.red(); cout << " Login failed!" << endl;
+		ut.white(); cout << " Please try again.\n\n";
+		ut.yellow(); cout << "    > "; ut.grey(); cout << "Enter username: "; ut.white(); cin >> username;
 	}
 
 	if (username == "admin") {
-		ut.grey(); cout << "\n    > Enter password: "; ut.white();
+		ut.yellow(); cout << "\n    > "; ut.grey(); cout << "Enter password: "; ut.white();
 		if (t.insertPassword() == "admin") {
 			ut.yellow(); cout << "\n\n> Login as admin succeeded!\n"; Sleep(2000); ut.white();
 			optionsMainMenu_Admin();
@@ -228,16 +231,16 @@ void Agency::loginUser()
 	else {
 		id = findID(username);
 
-		ut.grey(); cout << "\n    > Enter password: "; ut.white();
+		ut.yellow(); cout << "\n    > "; ut.grey(); cout << "Enter password: "; ut.white();
 		password = t.insertPassword();
 		if (validPassword(getPos(id), password)) {
 			this->sessionID = id;
 			this->sessionPos = getPos(sessionID);
-			ut.yellow(); cout << "\n\n> Login succeeded!!\n"; Sleep(2000); ut.white();
+			ut.yellow(); cout << "\n\n > Login succeeded!\n"; Sleep(2000); ut.white();
 			optionsMainMenu_User();
 		}
 		else {
-			ut.red(); cout << "\n\n> Login failed!" << endl; ut.white();
+			ut.red(); cout << "\n\n Login failed..." << endl; ut.white();
 			Sleep(2000);
 			ut.clearScreen();
 			return;
@@ -319,12 +322,12 @@ int Agency::menuDisplayUsers() {
 	ut.menuHeader();
 	cout << "|                          ";  ut.grey(); cout << "USERS";  ut.white(); cout << "                          |" << endl;
 	ut.blue(); cout << "-----------------------------------------------------------" << endl;
-	ut.setcolor(7); cout << setw(5) << "ID" << setw(10) << "User" << setw(16) << "Name" << setw(16) << "Balance" << setw(10) << "Driver" << endl;
-	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
-	ut.setcolor(15);  displayUsers();
-	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;  ut.setcolor(7);
+	ut.grey(); cout << setw(5) << "ID" << setw(10) << "User" << setw(16) << "Name" << setw(16) << "Balance" << setw(10) << "Driver" << endl;
+	ut.blue(); cout << "-----------------------------------------------------------" << endl;
+	ut.white();  displayUsers();
+	ut.blue(); cout << "-----------------------------------------------------------" << endl;  ut.grey();
 	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
-		<< "|~~~                                 ";  ut.setcolor(7); cout << "< 0. Return >";  ut.setcolor(15); cout << "     ~~~|" << endl
+		<< "|~~~                                 ";  ut.grey(); cout << "< 0. Return >";  ut.white(); cout << "     ~~~|" << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl << endl;
 
 	unsigned short int option;
@@ -424,10 +427,10 @@ void Agency::optionsMenuSearch() {
 void Agency::menuDisplayBuddies() {
 	ut.clearScreen();
 	ut.menuHeader();
-	cout << "|                      ";  ut.grey(); cout << "RELATIONSHIPS";  ut.white(); cout << "                      |" << endl;
+	cout << "|                      ";  ut.grey(); cout << "RELATIONSHIPS";  ut.white(); cout << "                     white() |" << endl;
 	ut.blue(); cout << "-----------------------------------------------------------" << endl;
-	ut.setcolor(15);  displayBuddies();
-	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
+	ut.white();  displayBuddies();
+	ut.blue(); cout << "-----------------------------------------------------------" << endl;
 	ut.red(); cout << "\n Press enter to go back."; ut.white(); getchar(); getchar();
 	return;
 }
@@ -435,12 +438,12 @@ void Agency::menuDisplayBuddies() {
 void Agency::menuDisplayTransactions() {
 	ut.clearScreen();
 	ut.menuHeader();
-	cout << "|~~~                     ";  ut.setcolor(7); cout << "TRANSACTIONS";  ut.setcolor(15); cout << "                  ~~~|" << endl
+	cout << "|~~~                     ";  ut.grey(); cout << "TRANSACTIONS";  ut.white(); cout << "                  ~~~|" << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-	ut.setcolor(7); cout << setw(5) << "ID" << setw(27) << "Date" << setw(22) << "Value" << endl;
-	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
-	ut.setcolor(15);  displayTransactions();
-	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
+	ut.grey(); cout << setw(5) << "ID" << setw(27) << "Date" << setw(22) << "Value" << endl;
+	ut.blue(); cout << "-----------------------------------------------------------" << endl;
+	ut.white();  displayTransactions();
+	ut.blue(); cout << "-----------------------------------------------------------" << endl;
 	ut.red(); cout << "\n Press enter to go back."; ut.white(); getchar(); getchar();
 	return;
 }
@@ -448,12 +451,12 @@ void Agency::menuDisplayTransactions() {
 void Agency::menuDisplayStops() {
 	ut.clearScreen();
 	ut.menuHeader();
-	cout << "|~~~                       ";  ut.setcolor(7); cout << "STOPS";  ut.setcolor(15); cout << "                       ~~~|" << endl
+	cout << "|~~~                       ";  ut.grey(); cout << "STOPS";  ut.white(); cout << "                       ~~~|" << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-	ut.setcolor(7); cout << setw(15) << "Code" << setw(35) << "Name" << endl;
-	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
-	ut.setcolor(15);  displayStops();
-	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
+	ut.grey(); cout << setw(15) << "Code" << setw(35) << "Name" << endl;
+	ut.blue(); cout << "-----------------------------------------------------------" << endl;
+	ut.white();  displayStops();
+	ut.blue(); cout << "-----------------------------------------------------------" << endl;
 	ut.red(); cout << "\n Press enter to go back."; ut.white(); getchar(); getchar();
 	return;
 }
@@ -462,12 +465,12 @@ void Agency::menuDisplayRecord()
 {
 	ut.clearScreen();
 	ut.menuHeader();
-	cout << "|~~~                     ";  ut.setcolor(7); cout << "TRIP RECORD";  ut.setcolor(15); cout << "                   ~~~|" << endl
+	cout << "|~~~                     ";  ut.grey(); cout << "TRIP RECORD";  ut.white(); cout << "                   ~~~|" << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-	ut.setcolor(7); cout << setw(3) << "ID" << setw(8) << "Driver" << setw(8) << "Origin" << setw(10) << "Destiny" << setw(9) << "Date" << setw(11) << "Start" << setw(7) << "End" << endl;
-	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
-	ut.setcolor(15);  displayRecord();
-	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
+	ut.grey(); cout << setw(3) << "ID" << setw(8) << "Driver" << setw(8) << "Origin" << setw(10) << "Destiny" << setw(9) << "Date" << setw(11) << "Start" << setw(7) << "End" << endl;
+	ut.blue(); cout << "-----------------------------------------------------------" << endl;
+	ut.white();  displayRecord();
+	ut.blue(); cout << "-----------------------------------------------------------" << endl;
 	ut.red(); cout << "\n Press enter to go back."; ut.white(); getchar(); getchar();
 	return;
 }
@@ -478,7 +481,7 @@ int Agency::menuSearchUser() {
 
 	ut.clearScreen();
 	ut.menuHeader();
-	cout << "|~~~                     ";  ut.setcolor(7); cout << "SEARCH USER";  ut.setcolor(15); cout << "                   ~~~|" << endl
+	cout << "|~~~                     ";  ut.grey(); cout << "SEARCH USER";  ut.white(); cout << "                   ~~~|" << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
 
 	int id;
@@ -499,8 +502,8 @@ int Agency::menuSearchUser() {
 
 		cin.clear();
 		cin.ignore(1000, '\n');
-		ut.setcolor(4); cout << "> Invalid Input!" << endl;
-		ut.setcolor(15); cout << "Try again: ";
+		ut.red(); cout << "> Invalid Input!" << endl;
+		ut.white(); cout << "Try again: ";
 		cin >> input;
 	}
 
@@ -515,7 +518,7 @@ int Agency::menuSearchUser() {
 		if (sequentialSearch(Users, u) != -1)
 			pos = sequentialSearch(Users, u);
 		else {
-			ut.setcolor(4); cerr << "> User not found." << endl; ut.setcolor(15);
+			ut.red(); cerr << "> User not found." << endl; ut.white();
 			ut.red(); cout << "\n Press any key to go back."; ut.white();
 			cin.clear();
 			cin.ignore(1000, '\n');
@@ -527,7 +530,7 @@ int Agency::menuSearchUser() {
 		if (sequentialSearch(Users, u) != -1)
 			pos = sequentialSearch(Users, u);
 		else {
-			ut.setcolor(4); cerr << "> User not found." << endl; ut.setcolor(15);
+			ut.red(); cerr << "> User not found." << endl; ut.white();
 			ut.red(); cout << "\n Press any key to go back."; ut.white();
 			cin.clear();
 			cin.ignore(1000, '\n');
@@ -537,10 +540,10 @@ int Agency::menuSearchUser() {
 
 	ut.clearScreen();
 	ut.menuHeader();
-	cout << "|~~~                     ";  ut.setcolor(7); cout << "User Info";  ut.setcolor(15); cout << "                     ~~~|" << endl
+	cout << "|~~~                     ";  ut.grey(); cout << "User Info";  ut.white(); cout << "                     ~~~|" << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-	ut.setcolor(7); cout << setw(5) << "ID" << setw(10) << "User" << setw(16) << "Name" << setw(16) << "Balance" << setw(10) << "Driver" << endl;
-	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
+	ut.grey(); cout << setw(5) << "ID" << setw(10) << "User" << setw(16) << "Name" << setw(16) << "Balance" << setw(10) << "Driver" << endl;
+	ut.blue(); cout << "-----------------------------------------------------------" << endl;
 	ut.white();
 	cout << setw(5) << Users.at(pos)->getID();
 	cout << setw(10) << Users.at(pos)->getUsername();
@@ -551,7 +554,7 @@ int Agency::menuSearchUser() {
 		cout << setw(10) << "[X]" << endl;
 	else cout << setw(10) << "[ ]" << endl;
 
-	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl; ut.setcolor(15);
+	ut.blue(); cout << "-----------------------------------------------------------" << endl; ut.white();
 	ut.red(); cout << "\n Press any key to go back."; ut.white();
 	cin.clear();
 	cin.ignore(1000, '\n');
@@ -564,7 +567,7 @@ int Agency::menuSearchTransaction() {
 
 	ut.clearScreen();
 	ut.menuHeader();
-	cout << "|~~~                     ";  ut.setcolor(7); cout << "SEARCH TRANSACTION";  ut.setcolor(15); cout << "                   ~~~|" << endl
+	cout << "|~~~                     ";  ut.grey(); cout << "SEARCH TRANSACTION";  ut.white(); cout << "                   ~~~|" << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
 
 	int id;
@@ -585,8 +588,8 @@ int Agency::menuSearchTransaction() {
 
 		cin.clear();
 		cin.ignore(1000, '\n');
-		ut.setcolor(4); cout << "> Invalid Input!" << endl;
-		ut.setcolor(15); cout << "Try again: ";
+		ut.red(); cout << "> Invalid Input!" << endl;
+		ut.white(); cout << "Try again: ";
 		cin >> input;
 	}
 
@@ -597,7 +600,7 @@ int Agency::menuSearchTransaction() {
 		if (sequentialSearch(Transactions, t) != -1)
 			pos = sequentialSearch(Transactions, t);
 		else {
-			ut.setcolor(4); cerr << "> User not found." << endl; ut.setcolor(15);
+			ut.red(); cerr << "> User not found." << endl; ut.white();
 			ut.red(); cout << "\n Press any key to go back."; ut.white();
 			cin.clear();
 			cin.ignore(1000, '\n');
@@ -609,7 +612,7 @@ int Agency::menuSearchTransaction() {
 		if (sequentialSearch(Users, u) != -1)
 			pos = sequentialSearch(Users, u);
 		else {
-			ut.setcolor(4); cerr << "> User not found." << endl; ut.setcolor(15);
+			ut.red(); cerr << "> User not found." << endl; ut.white();
 			ut.red(); cout << "\n Press any key to go back."; ut.white();
 			cin.clear();
 			cin.ignore(1000, '\n');
@@ -619,10 +622,10 @@ int Agency::menuSearchTransaction() {
 
 	ut.clearScreen();
 	ut.menuHeader();
-	cout << "|~~~                     ";  ut.setcolor(7); cout << "User Info";  ut.setcolor(15); cout << "                     ~~~|" << endl
+	cout << "|~~~                     ";  ut.grey(); cout << "User Info";  ut.white(); cout << "                     ~~~|" << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-	ut.setcolor(7); cout << setw(5) << "ID" << setw(10) << "User" << setw(16) << "Name" << setw(16) << "Balance" << setw(10) << "Driver" << endl;
-	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl;
+	ut.grey(); cout << setw(5) << "ID" << setw(10) << "User" << setw(16) << "Name" << setw(16) << "Balance" << setw(10) << "Driver" << endl;
+	ut.blue(); cout << "-----------------------------------------------------------" << endl;
 	ut.white();
 	cout << setw(5) << Users.at(pos)->getID();
 	cout << setw(10) << Users.at(pos)->getUsername();
@@ -633,7 +636,7 @@ int Agency::menuSearchTransaction() {
 		cout << setw(10) << "[X]" << endl;
 	else cout << setw(10) << "[ ]" << endl;
 
-	ut.setcolor(3); cout << "-----------------------------------------------------------" << endl; ut.setcolor(15);
+	ut.blue(); cout << "-----------------------------------------------------------" << endl; ut.white();
 	ut.red(); cout << "\n Press any key to go back."; ut.white();
 	cin.clear();
 	cin.ignore(1000, '\n');
@@ -672,7 +675,7 @@ int Agency::mainMenu_User() {
 	cout << "Type your choice: ";
 	cin >> option;
 
-	while (cin.fail() || (option > 2) || (option < 0))
+	while (cin.fail() || (option > 3) || (option < 0))
 	{
 		if (cin.eof())
 		{
@@ -708,7 +711,7 @@ void Agency::optionsMainMenu_User() {
 			else menuJoinTrip();
 			break;
 		case 3:
-			//TODO add buddy
+			menuAddBuddy();
 			break;
 		}
 }
@@ -768,6 +771,16 @@ void Agency::optionsMenuAccount()
 			//idk
 			break;
 		}
+}
+
+void Agency::menuAddBuddy()
+{
+	ut.clearScreen();
+	ut.menuHeader();
+	cout << "|                        ";  ut.grey(); cout << "ADD BUDDY";  ut.white(); cout << "                        |" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+	addBuddy();
+	return;
 }
 
 int Agency::menuCreateTrip()
@@ -1288,6 +1301,80 @@ void Agency::addUser(User * u)
 	Users.push_back(u);
 }
 
+void Agency::addBuddy() {
+	string buddyUsername, type;
+
+	ut.yellow(); cout << "\n > "; ut.grey(); cout << "Please enter the username of the user\n   you want to add as buddy: "; ut.white(); cin >> buddyUsername;
+
+	if ((!validUser(buddyUsername)) || (buddyUsername == Users.at(sessionPos)->getUsername())) {
+		ut.red();
+		if (buddyUsername == Users.at(sessionPos)->getUsername())
+		{
+			cout << "\n Sorry, you can't add yourself!\n";
+		}
+		else {
+			cout << "\n Sorry, user not found!\n";
+		}
+		ut.white();
+		Sleep(2000);
+		cin.clear();
+		cin.ignore(1000, '\n');
+		return;
+	}
+	else {
+		ut.green(); cout << "\n The following user was found:\n\n";
+		ut.grey(); cout << setw(10) << "ID" << setw(20) << "User" << setw(20) << "Name" << endl;
+		ut.blue(); cout << "-----------------------------------------------------------" << endl; ut.white();
+		cout << setw(10) << Users.at(getPos(findID(buddyUsername)))->getID() << setw(20) << Users.at(getPos(findID(buddyUsername)))->getUsername() << setw(23) <<
+			Users.at(getPos(findID(buddyUsername)))->getName() << endl;
+
+		ut.yellow(); cout << "\n > "; ut.grey(); cout << "You want to add this user as your buddy? (y/n) "; ut.white(); cin >> type; cout << endl;
+
+		while (cin.fail() || ((type != "y") && (type != "Y") && (type != "n") && (type != "N")))
+		{
+			if (cin.eof())
+			{
+				cin.clear();
+				return;
+			}
+			cin.clear();
+			cin.ignore(1000, '\n');
+			ut.red(); cout << "> Invalid choice!" << endl;
+			ut.white(); cout << "Please try again: ";
+			cin >> type; cout << endl;
+		}
+
+		if (type == "Y" || type == "y") {
+
+			//TODO buddy repetido
+			//if (notBuddy(buddyUsername)) {
+			Users.at(sessionPos)->addBuddy(Users.at(getPos(findID(buddyUsername)))); //adiciona buddy ao user
+			Users.at(getPos(findID(buddyUsername)))->addBuddy(Users.at(sessionPos));//adiciona user como buddy ao buddy 
+			ut.yellow(); cout << " Success! This user is now your buddy!\n"; ut.white();
+			Sleep(2000);
+			cin.clear();
+			cin.ignore(1000, '\n');
+			return;
+			/*}
+			else {
+				ut.red(); cout << " This user already is your buddy!\n"; ut.white();
+				Sleep(2000);
+				cin.clear();
+				cin.ignore(1000, '\n');
+				return;
+			}*/
+		}
+		else {
+			ut.red(); cout << " You did not add a new buddy...\n"; ut.white();
+			Sleep(2000);
+			cin.clear();
+			cin.ignore(1000, '\n');
+			return;
+		}
+	}
+
+}
+
 void Agency::displayUsers() {
 
 	for (unsigned int i = 0; i < Users.size(); i++)
@@ -1309,9 +1396,9 @@ void Agency::displayBuddies() {
 
 	for (unsigned int i = 0; i < Users.size(); i++)
 	{
-		ut.setcolor(7); cout << setw(10) << "   USER"; ut.blue(); cout << " | ";
+		ut.grey(); cout << setw(10) << "   USER"; ut.blue(); cout << " | ";
 		ut.white(); cout << Users.at(i)->getName() << endl;
-		ut.setcolor(7); cout << setw(10) << "BUDDIES"; ut.blue(); cout << " | ";
+		ut.grey(); cout << setw(10) << "BUDDIES"; ut.blue(); cout << " | ";
 		ut.white();
 		for (unsigned int j = 0; j < Users.at(i)->getBuddies().size(); j++)
 		{
@@ -1595,7 +1682,6 @@ void Agency::joinTrip()
 	int stopNumber = 1;
 
 	ut.yellow(); cout << " > "; ut.grey(); cout << "Please enter your trip:\n"; ut.white();
-
 
 	while (1)
 	{
