@@ -77,7 +77,7 @@ void Trip::setStops(int pos, int userID)
 			stops.at(i).decAvailableSeats();
 			stops.at(i).addPassenger(userID);
 		}
-			
+
 	}
 	return;
 }
@@ -112,11 +112,27 @@ void Trip::saveAT(ofstream & out) const {
 	out << getID() << ";"
 		<< getDriver() << ";[";
 
+
 	for (unsigned int i = 0; i < stops.size(); i++) {
-		if (i == 0)
-			out << stops[i].getCode() << "," << stops[i].getAvailableSeats();
-		else
-			out << ";" << stops[i].getCode() << "," << stops[i].getAvailableSeats();
+
+		if (i != 0)
+			out << ";";
+
+		out << stops[i].getCode() << "," << stops[i].getAvailableSeats() << ",(";
+
+
+		if (stops[i].getPassengers().size() != 0)
+		{
+
+			for (unsigned int j = 0; j < stops[i].getPassengers().size(); j++) {
+
+				if (j != 0)
+					out << ",";
+				out << stops[i].getPassengers()[j];
+			}
+		}
+
+		out << ")";
 	}
 	out << "];"
 		<< getDate() << ";"
