@@ -38,12 +38,11 @@ public:
 	void deposit(float value);
 	virtual bool car() const;
 	virtual void addTrip(int tripID, string first, string last) {};
-	//virtual bool searchTrip(vector<Trip> &vec);
 	virtual string getFirst() const;
 	virtual string getLast() const;
 	
 	virtual void payment();
-	void addBuddy(User * user) { buddies.push_back(user); };
+	void addBuddy(User * user);
 	void deleteBuddies() { buddies.clear(); }
 	vector<User *> getBuddies() const { return buddies; };
 	bool User::operator ==(const User *u) const;

@@ -66,6 +66,11 @@ void User::payment()
 	return;
 }
 
+void User::addBuddy(User * user)
+{
+	buddies.push_back(user);
+}
+
 bool User::car() const
 {
 	return false;

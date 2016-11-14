@@ -672,7 +672,7 @@ int Agency::mainMenu_User() {
 	cout << "Type your choice: ";
 	cin >> option;
 
-	while (cin.fail() || (option > 2) || (option < 0))
+	while (cin.fail() || (option > 3) || (option < 0))
 	{
 		if (cin.eof())
 		{
@@ -708,7 +708,7 @@ void Agency::optionsMainMenu_User() {
 			else menuJoinTrip();
 			break;
 		case 3:
-			//TODO add buddy
+			menuAddBuddy();
 			break;
 		}
 }
@@ -768,6 +768,16 @@ void Agency::optionsMenuAccount()
 			//idk
 			break;
 		}
+}
+
+void Agency::menuAddBuddy()
+{
+	ut.clearScreen();
+	ut.menuHeader();
+	cout << "|                        ";  ut.grey(); cout << "ADD BUDDY";  ut.white(); cout << "                        |" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+	addBuddy();
+	return;
 }
 
 int Agency::menuCreateTrip()
@@ -1286,6 +1296,80 @@ bool Agency::checkStop(string s) {
 void Agency::addUser(User * u)
 {
 	Users.push_back(u);
+}
+
+void Agency::addBuddy() {
+	string buddyUsername, type;
+
+	ut.yellow(); cout << "\n > "; ut.grey(); cout << "Please enter the username of the user\n   you want to add as buddy: "; ut.white(); cin >> buddyUsername;
+
+	if ((!validUser(buddyUsername)) || (buddyUsername == Users.at(sessionPos)->getUsername())) {
+		ut.red();
+		if (buddyUsername == Users.at(sessionPos)->getUsername())
+		{
+			cout << "\n Sorry, you can't add yourself!\n";
+		}
+		else {
+			cout << "\n Sorry, user not found!\n";
+		}
+		ut.white();
+		Sleep(2000);
+		cin.clear();
+		cin.ignore(1000, '\n');
+		return;
+	}
+	else {
+		ut.green(); cout << "\n The following user was found:\n\n";
+		ut.grey(); cout << setw(10) << "ID" << setw(20) << "User" << setw(20) << "Name" << endl;
+		ut.blue(); cout << "-----------------------------------------------------------" << endl; ut.white();
+		cout << setw(10) << Users.at(getPos(findID(buddyUsername)))->getID() << setw(20) << Users.at(getPos(findID(buddyUsername)))->getUsername() << setw(23) <<
+			Users.at(getPos(findID(buddyUsername)))->getName() << endl;
+
+		ut.yellow(); cout << "\n > "; ut.grey(); cout << "You want to add this user as your buddy? (y/n) "; ut.white(); cin >> type; cout << endl;
+
+		while (cin.fail() || ((type != "y") && (type != "Y") && (type != "n") && (type != "N")))
+		{
+			if (cin.eof())
+			{
+				cin.clear();
+				return;
+			}
+			cin.clear();
+			cin.ignore(1000, '\n');
+			ut.red(); cout << " > Invalid choice!" << endl;
+			ut.white(); cout << " Please try again: ";
+			cin >> type; cout << endl;
+		}
+
+		if (type == "Y" || type == "y") {
+
+			//TODO buddy repetido
+			//if (notBuddy(buddyUsername)) {
+			Users.at(sessionPos)->addBuddy(Users.at(getPos(findID(buddyUsername)))); //adiciona buddy ao user
+			Users.at(getPos(findID(buddyUsername)))->addBuddy(Users.at(sessionPos));//adiciona user como buddy ao buddy 
+			ut.yellow(); cout << " Success! This user is now your buddy!\n"; ut.white();
+			Sleep(2000);
+			cin.clear();
+			cin.ignore(1000, '\n');
+			return;
+			/*}
+			else {
+				ut.red(); cout << " This user already is your buddy!\n"; ut.white();
+				Sleep(2000);
+				cin.clear();
+				cin.ignore(1000, '\n');
+				return;
+			}*/
+		}
+		else {
+			ut.red(); cout << " You did not add a new buddy...\n"; ut.white();
+			Sleep(2000);
+			cin.clear();
+			cin.ignore(1000, '\n');
+			return;
+		}
+	}
+
 }
 
 void Agency::displayUsers() {
