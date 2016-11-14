@@ -89,12 +89,14 @@ string User::getLast() const
 
 bool User::operator ==(const User *u) const {
 
-	if (this->username == u->getUsername())
+	if (this->ID == u->ID)
 		return true;
 	else
 		return false;
 
 }
+
+
 
 /*DRIVER CLASS*/
 Driver::Driver(int ID, string name, float balance, string username, string password) : User(ID, name, balance, username, password) {

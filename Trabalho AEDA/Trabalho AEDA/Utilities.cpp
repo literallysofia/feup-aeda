@@ -99,7 +99,7 @@ int Utilities::readInt(int min, int max) {
 
 void Utilities::clearScreen_param(int x) {
 
-	COORD upperLeftCorner = { 0, x };
+	COORD upperLeftCorner = { 0, (short)x };
 	DWORD charsWritten;
 	DWORD conSize;
 	HANDLE hCon = GetStdHandle(STD_OUTPUT_HANDLE);
