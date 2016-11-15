@@ -90,6 +90,7 @@ public:
 	void menuDisplayRecord();
 
 	void menuSearchUserByID();
+	void menuSearchUserByUsername();
 
 	int menuSearchUser();
 	void optionsMenuSearchUser();

@@ -540,8 +540,6 @@ void Agency::menuDisplayRecord()
 
 void Agency::menuSearchUserByID() {
 
-	//TODO: NAO FUNCIONA O VETOR NAO � BEM PASSADO
-
 	ut.clearScreen();
 	ut.menuHeader();
 	cout << "|~~~                     ";  ut.grey(); cout << "SEARCH USER";  ut.white(); cout << "                   ~~~|" << endl
@@ -600,11 +598,79 @@ void Agency::menuSearchUserByID() {
 	else cout << setw(10) << "[ ]" << endl;
 
 	ut.blue(); cout << "-----------------------------------------------------------" << endl;
-	ut.red(); cout << "\n Press enter to go back."; ut.white(); getchar(); getchar();
+	ut.red(); cout << "\n Press any key to go back."; ut.white(); getchar(); getchar();
 	cin.clear();
 	cin.ignore(1000, '\n');
 	//TODO: VER MELHOR
 }
+
+void Agency::menuSearchUserByUsername() {
+
+	ut.clearScreen();
+	ut.menuHeader();
+	cout << "|~~~                     ";  ut.grey(); cout << "SEARCH USER";  ut.white(); cout << "                   ~~~|" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+
+	int  pos;
+	string input;
+
+	cout << endl << "Username of the person you are searching for: ";  cin >> input ;
+	cout << endl;
+
+	while (cin.fail())
+	{
+		if (cin.eof())
+		{
+			cin.clear();
+			return;
+		}
+
+		cin.clear();
+		cin.ignore(1000, '\n');
+		ut.red(); cout << "> Invalid Input!" << endl;
+		ut.white(); cout << "Try again: ";
+		cin >> input;
+	}
+
+
+	User *u = new User();
+	u->setUsername(input);
+
+	if (sequentialSearch(Users, u) != -1)
+		pos = sequentialSearch(Users, u);
+	else {
+		ut.red(); cerr << "> User with that username not found." << endl; ut.white();
+		Sleep(2000);
+		cin.clear();
+		cin.ignore(1000, '\n');
+		return;
+	}
+
+	ut.clearScreen();
+	ut.menuHeader();
+	cout << "|~~~                     ";  ut.grey(); cout << "User Info";  ut.white(); cout << "                     ~~~|" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+	ut.grey(); cout << setw(5) << "ID" << setw(10) << "User" << setw(16) << "Name" << setw(16) << "Balance" << setw(10) << "Driver" << endl;
+	ut.blue(); cout << "-----------------------------------------------------------" << endl;
+	ut.white();
+	cout << setw(5) << Users.at(pos)->getID();
+	cout << setw(10) << Users.at(pos)->getUsername();
+	cout << setw(20) << Users.at(pos)->getName();
+	cout << setw(10) << setprecision(2) << fixed << Users.at(pos)->getBalance();
+
+	if (Users.at(pos)->car())
+		cout << setw(10) << "[X]" << endl;
+	else cout << setw(10) << "[ ]" << endl;
+
+	ut.blue(); cout << "-----------------------------------------------------------" << endl;
+	ut.red(); cout << "\n Press any key to go back."; ut.white(); getchar(); getchar();
+	cin.clear();
+	cin.ignore(1000, '\n');
+	//TODO: VER MELHOR
+}
+
+
+
 
 
 int Agency::menuSearchUser() {
@@ -655,7 +721,7 @@ void Agency::optionsMenuSearchUser() {
 			menuSearchUserByID();
 			break;
 		case 2:
-			//by username
+			menuSearchUserByUsername();
 			break;
 		}
 }

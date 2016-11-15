@@ -94,7 +94,7 @@ string User::getLast() const
 
 bool User::operator ==(const User *u) const {
 
-	if (this->ID == u->ID)
+	if (this->ID == u->ID||this->username==u->username)
 		return true;
 	else
 		return false;
