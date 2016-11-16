@@ -28,6 +28,21 @@ int Guest::getID() const
 	return guestID;
 }
 
+int Guest::getNumStops() const
+{
+	return numStops;
+}
+
+void Guest::updateNumStops()
+{
+	numStops++;
+}
+
+void Guest::setNumStopsFirst()
+{
+	numStops = 1;
+}
+
 /*
 bool Guest::searchTrip(vector<Trip> &vec)  //vec = vetor das viagens da agencia
 {

@@ -88,6 +88,7 @@ public:
 	void menuDisplayTransactions();
 	void menuDisplayStops();
 	void menuDisplayRecord();
+	void menuRunTrip();
 
 	void menuSearchUserByID();
 
@@ -151,7 +152,7 @@ public:
 	bool availableSpace(Trip &possibleTrip, vector<string> &stopCodes);
 	bool hasBuddies(Trip &recTrip);
 	void choseTrip(vector<Trip> &recTrips, vector<Trip> &buddieTrips, vector<string> &stopCodes);
-	//void runTrip(int tripID);
+	void runTrip(int tripID);
 	float deposit();
 	time_t getUnixCode(Date &d, Hour &h);
 
@@ -161,6 +162,7 @@ public:
 	void displayTransactions();
 	void displayStops();
 	void displayRecord();
+	void displayActiveTrips();
 
 	/*
 	void imprimeTrips();					//function that uses the Trips class' operator<< method to
