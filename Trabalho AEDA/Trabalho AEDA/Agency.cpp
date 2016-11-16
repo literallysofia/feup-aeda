@@ -598,7 +598,7 @@ void Agency::menuSearchUserByID() {
 	else cout << setw(10) << "[ ]" << endl;
 
 	ut.blue(); cout << "-----------------------------------------------------------" << endl;
-	ut.red(); cout << "\n Press any key to go back."; ut.white(); getchar(); getchar();
+	ut.red(); cout << "\n Press any key to go back."; ut.white(); getchar();
 	cin.clear();
 	cin.ignore(1000, '\n');
 	//TODO: VER MELHOR
@@ -614,7 +614,7 @@ void Agency::menuSearchUserByUsername() {
 	int  pos;
 	string input;
 
-	cout << endl << "Username of the person you are searching for: ";  cin >> input ;
+	cout << endl << "Username of the person you are searching for: ";  cin >> input;
 	cout << endl;
 
 	while (cin.fail())
@@ -663,7 +663,7 @@ void Agency::menuSearchUserByUsername() {
 	else cout << setw(10) << "[ ]" << endl;
 
 	ut.blue(); cout << "-----------------------------------------------------------" << endl;
-	ut.red(); cout << "\n Press any key to go back."; ut.white(); getchar(); getchar();
+	ut.red(); cout << "\n Press any key to go back."; ut.white(); getchar();
 	cin.clear();
 	cin.ignore(1000, '\n');
 	//TODO: VER MELHOR
@@ -730,11 +730,10 @@ int Agency::menuSearchTrip() {
 
 	ut.clearScreen();
 	ut.menuHeader();
-	cout << "|~~~                    ";  ut.grey(); cout << "SEARCH TRIP";  ut.white(); cout << "                    ~~~|" << endl
+	cout << "|~~~                   ";  ut.grey(); cout << "SEARCH TRIPS";  ut.white(); cout << "                    ~~~|" << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
-		<< setw(23) << "1. By User ID" << endl
-		<< setw(20) << "2. By Date" << endl
-		<< setw(26) << "3. Between Dates" << endl;
+		<< setw(22) << "1. By Driver" << endl
+		<< setw(21) << "2. By Month" << endl
 	ut.blue(); cout << "-----------------------------------------------------------" << endl;  ut.white();
 	cout << "|~~~                               ";  ut.grey(); cout << "< 0. Return >";  ut.white(); cout << "       ~~~|" << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl << endl;
@@ -770,16 +769,150 @@ void Agency::optionsMenuSearchTrip() {
 		switch (option)
 		{
 		case 1:
-			//by user
+			menuSearchTripByDriver();
 			break;
 		case 2:
-			//by date
-			break;
-		case 3:
-			//between dates
+			menuSearchTripByMonth();
 			break;
 		}
 }
+
+void Agency::menuSearchTripByDriver() {
+
+	ut.clearScreen();
+	ut.menuHeader();
+	cout << "|~~~              ";  ut.grey(); cout << "SEARCH TRIPS BY DRIVER";  ut.white(); cout << "               ~~~|" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+
+	int id;
+
+	cout << endl << "ID of the driver: ";  cin >> id;
+	cout << endl;
+
+	while (cin.fail())
+	{
+		if (cin.eof())
+		{
+			cin.clear();
+			return;
+		}
+
+		cin.clear();
+		cin.ignore(1000, '\n');
+		ut.red(); cout << "> Invalid Input!" << endl;
+		ut.white(); cout << "Try again: ";
+		cin >> id;
+	}
+
+	bool b = false;
+
+	for (unsigned int i = 0; i < Trips.size(); i++) {
+		if (Trips.at(i).getID() == id)
+			b = true;
+	}
+
+	if (!b)
+	{
+		ut.red(); cerr << "> Trip with that driver not found." << endl; ut.white();
+		Sleep(2000);
+		cin.clear();
+		cin.ignore(1000, '\n');
+		return;
+	}
+
+	ut.clearScreen();
+	ut.menuHeader();
+	cout << "|~~~              ";  ut.grey(); cout << "SEARCH TRIPS BY DRIVER";  ut.white(); cout << "               ~~~|" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+	ut.grey(); cout << setw(3) << "ID" << setw(8) << "Driver" << setw(8) << "Origin" << setw(10) << "Destiny" << setw(9) << "Date" << setw(11) << "Start" << setw(7) << "End" << endl;
+	ut.blue(); cout << "-----------------------------------------------------------" << endl;
+	ut.white();
+
+	for (unsigned int i = 0; i < Trips.size(); i++)
+	{
+		if (Trips.at(i).getID() == id)
+			cout << Trips.at(i);
+	}
+
+	ut.blue(); cout << "-----------------------------------------------------------" << endl;
+	ut.red(); cout << "\n Press any key to go back."; ut.white();
+	getchar();
+	cin.clear();
+	cin.ignore(1000, '\n');
+	//TODO: VER MELHOR
+}
+
+void Agency::menuSearchTripByMonth() {
+
+	ut.clearScreen();
+	ut.menuHeader();
+	cout << "|~~~               ";  ut.grey(); cout << "SEARCH TRIPS BY MONTH";  ut.white(); cout << "               ~~~|" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+
+	int month;
+
+	cout << endl << "Month of the trip you are searching for: ";  cin >> month;
+	cout << endl;
+
+	while (cin.fail() || month < 1 || month > 12)
+	{
+		if (cin.eof())
+		{
+			cin.clear();
+			return;
+		}
+
+		cin.clear();
+		cin.ignore(1000, '\n');
+		ut.red(); cout << "> Invalid Date!" << endl;
+		ut.white(); cout << "Try again: ";
+		cin >> month;
+	}
+
+	bool b = false;
+
+	for (unsigned int i = 0; i < Trips.size(); i++)
+	{
+		if (Trips.at(i).getDate().getMonth() == month)
+		{
+			b = true;
+			break;
+		}
+	}
+
+
+	if (!b)
+	{
+		ut.red(); cerr << "> There were no trips in that month." << endl; ut.white();
+		Sleep(2000);
+		cin.clear();
+		cin.ignore(1000, '\n');
+		return;
+	}
+
+
+	ut.clearScreen();
+	ut.menuHeader();
+	cout << "|~~~               ";  ut.grey(); cout << "SEARCH TRIPS BY MONTH";  ut.white(); cout << "               ~~~|" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+	ut.grey(); cout << setw(3) << "ID" << setw(8) << "Driver" << setw(8) << "Origin" << setw(10) << "Destiny" << setw(9) << "Date" << setw(11) << "Start" << setw(7) << "End" << endl;
+	ut.blue(); cout << "-----------------------------------------------------------" << endl;
+	ut.white();
+
+	for (unsigned int i = 0; i < Trips.size(); i++)
+	{
+		if (Trips.at(i).getDate().getMonth() == month)
+			cout << Trips.at(i);
+	}
+
+	ut.blue(); cout << "-----------------------------------------------------------" << endl;
+	ut.red(); cout << "\n Press any key to go back."; ut.white();
+	getchar();
+	cin.clear();
+	cin.ignore(1000, '\n');
+	//TODO: VER MELHOR
+}
+
 
 int Agency::menuSearchTransaction() {
 

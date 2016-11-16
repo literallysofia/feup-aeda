@@ -89,14 +89,16 @@ public:
 	void menuDisplayStops();
 	void menuDisplayRecord();
 
-	void menuSearchUserByID();
-	void menuSearchUserByUsername();
 
 	int menuSearchUser();
 	void optionsMenuSearchUser();
+	void menuSearchUserByID();
+	void menuSearchUserByUsername();
 
 	int menuSearchTrip();
 	void optionsMenuSearchTrip();
+	void menuSearchTripByDriver();
+	void menuSearchTripByMonth();
 
 	int menuSearchTransaction();
 	void optionsMenuSearchTransaction();

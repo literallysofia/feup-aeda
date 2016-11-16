@@ -101,8 +101,6 @@ bool User::operator ==(const User *u) const {
 
 }
 
-
-
 /*DRIVER CLASS*/
 Driver::Driver(int ID, string name, float balance, string username, string password) : User(ID, name, balance, username, password) {
 }

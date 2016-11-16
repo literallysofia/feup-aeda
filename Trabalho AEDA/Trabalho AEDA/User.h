@@ -45,7 +45,7 @@ public:
 	void addBuddy(User * user);
 	void deleteBuddies() { buddies.clear(); }
 	vector<User *> getBuddies() const { return buddies; };
-	bool User::operator ==(const User *u) const;
+	bool operator ==(const User *u) const;
 };
 
 class Driver :
