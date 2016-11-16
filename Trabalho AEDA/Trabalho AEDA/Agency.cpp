@@ -2288,7 +2288,7 @@ void Agency::runTrip(int tripID) {
 					}
 					else
 					{
-						cout << "  > Guest" << usersAway[j] * -1 << endl;
+						cout << "  > Guest" <<  endl;
 					}
 				}
 
@@ -2345,7 +2345,7 @@ void Agency::runTrip(int tripID) {
 						}
 						else
 						{
-							cout << "  > Guest" << usersOnBoard[l] * -1 << endl;
+							cout << "  > Guest" << endl;
 						}
 					}
 
