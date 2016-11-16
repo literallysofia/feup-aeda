@@ -19,7 +19,6 @@ private:
 	Hour endTime;
 	vector<int> passengers;
 	//int carSeats;
-	//vector<string> stops;
 	//bool active;
 public:
 	Trip();
