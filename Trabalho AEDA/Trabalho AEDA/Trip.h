@@ -17,7 +17,6 @@ private:
 	Date date;
 	Hour startTime;
 	Hour endTime;
-	vector<int> passengers;
 	//int carSeats;
 	//vector<string> stops;
 	//bool active;
@@ -33,8 +32,6 @@ public:
 	Hour getEnd() const;
 	string getOrigin() const;
 	string getDestination() const;
-	vector<int> getPassengers() const;
-	void addPassenger(int idp);
 	void setStops(int pos, int userID);
 	void save(ofstream & out) const;
 	void saveAT(ofstream & out) const;

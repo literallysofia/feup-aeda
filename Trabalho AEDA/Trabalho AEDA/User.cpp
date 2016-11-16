@@ -136,11 +136,6 @@ int Passenger::getNumTrips() const
 	return numTrips;
 }
 
-vector<pTrip> Passenger::getPTrips()
-{
-	return pTrips;
-}
-
 void Passenger::setNumTrips()
 {
 	numTrips++;
@@ -159,16 +154,6 @@ bool Passenger::car() const
 void Passenger::resetTrips(void)
 {
 	numTrips = 0;
-}
-
-void Passenger::addTrip(int tripID, string first, string last)
-{
-	pTrip pt;
-	pt.id = tripID;
-	pt.first = first;
-	pt.last = last;
-	pTrips.push_back(pt);
-	numTrips++;
 }
 
 /*bool Passenger::searchTrip(vector<Trip> &vec)  //vec = vetor das viagens da agencia
