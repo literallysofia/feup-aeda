@@ -12,6 +12,7 @@ private:
 public:
 	Stop();
 	Stop(string code, int seats);
+	Stop(string code, int seats, vector <int> vpass);
 	~Stop();
 	string getCode() const;
 	int getAvailableSeats() const;

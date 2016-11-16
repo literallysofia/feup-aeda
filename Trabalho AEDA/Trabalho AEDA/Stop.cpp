@@ -14,6 +14,13 @@ Stop::Stop(string code, int seats)
 	availableSeats = seats;
 }
 
+Stop::Stop(string code, int seats, vector<int> vpass)
+{
+	this->code = code;
+	availableSeats = seats;
+	passengers = vpass;
+}
+
 string Stop::getCode() const
 {
 	return code;
