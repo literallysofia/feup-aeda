@@ -139,6 +139,7 @@ public:
 	int getPos(int id); //retorna posicao no vetor de users de id UTIL!!!
 	int getLastId();
 	bool checkStop(string s);
+	bool notBuddy(string bUsername);
 
 
 	//Functions

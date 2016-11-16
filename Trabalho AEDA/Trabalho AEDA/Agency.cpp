@@ -1444,6 +1444,17 @@ bool Agency::checkStop(string s) {
 	return exists;
 }
 
+bool Agency::notBuddy(string bUsername)
+{
+	int buddyID = findID(bUsername);
+
+	for (unsigned int i = 0; i < Users.at(sessionPos)->getBuddies().size(); i++) {
+		if (buddyID == Users.at(sessionPos)->getBuddies().at(i)->getID())
+			return false;
+	}
+	return true;
+}
+
 void Agency::addUser(User * u)
 {
 	Users.push_back(u);
@@ -1454,14 +1465,16 @@ void Agency::addBuddy() {
 
 	ut.yellow(); cout << "\n > "; ut.grey(); cout << "Please enter the username of the user\n   you want to add as buddy: "; ut.white(); cin >> buddyUsername;
 
-	if ((!validUser(buddyUsername)) || (buddyUsername == Users.at(sessionPos)->getUsername())) {
+	//caso o username inserido: nao exista OU seja o proprio OU ja seja buddy -> NAO ADICIONA
+	if ((!validUser(buddyUsername)) || (buddyUsername == Users.at(sessionPos)->getUsername()) || (notBuddy(buddyUsername) == false)) {
 		ut.red();
 		if (buddyUsername == Users.at(sessionPos)->getUsername())
-		{
 			cout << "\n Sorry, you can't add yourself!\n";
-		}
 		else {
-			cout << "\n Sorry, user not found!\n";
+			if (notBuddy(buddyUsername) == false)
+				cout << "\n This user already is your buddy!\n";
+			else
+				cout << "\n Sorry, user not found!\n";
 		}
 		ut.white();
 		Sleep(2000);
@@ -1469,6 +1482,8 @@ void Agency::addBuddy() {
 		cin.ignore(1000, '\n');
 		return;
 	}
+
+	//tudo ok
 	else {
 		ut.green(); cout << "\n The following user was found:\n\n";
 		ut.grey(); cout << setw(10) << "ID" << setw(20) << "User" << setw(20) << "Name" << endl;
@@ -1494,8 +1509,6 @@ void Agency::addBuddy() {
 
 		if (type == "Y" || type == "y") {
 
-			//TODO buddy repetido
-			//if (notBuddy(buddyUsername)) {
 			Users.at(sessionPos)->addBuddy(Users.at(getPos(findID(buddyUsername)))); //adiciona buddy ao user
 			Users.at(getPos(findID(buddyUsername)))->addBuddy(Users.at(sessionPos));//adiciona user como buddy ao buddy 
 			ut.yellow(); cout << " Success! This user is now your buddy!\n"; ut.white();
@@ -1503,14 +1516,6 @@ void Agency::addBuddy() {
 			cin.clear();
 			cin.ignore(1000, '\n');
 			return;
-			/*}
-			else {
-				ut.red(); cout << " This user already is your buddy!\n"; ut.white();
-				Sleep(2000);
-				cin.clear();
-				cin.ignore(1000, '\n');
-				return;
-			}*/
 		}
 		else {
 			ut.red(); cout << " You did not add a new buddy...\n"; ut.white();
@@ -1621,17 +1626,17 @@ void Agency::addTrip() {
 			{
 				//se a paragem existe
 				if (checkStop(stopCode)) {
-					//se a paragem ja foi inserida lan�a a exce�ao
+					//se a paragem ja foi inserida lanca a excecao
 					if (find(stopCodes.begin(), stopCodes.end(), stopCode) != stopCodes.end()) {
 						throw RepeatedStop(stopCode);
 					}
-					//caso corra tudo bem � adicionada ao vetor
+					//caso corra tudo bem, adiciona ao vetor
 					else {
 						stopCodes.push_back(stopCode);
 						stopNumber++;
 					}
 				}
-				//se nao existe lan�a a exce�ao
+				//se nao existe lanca a excecao
 				else
 					throw NonexistentStop(stopCode);
 
@@ -1764,7 +1769,7 @@ void Agency::addTrip() {
 						int hourE, minutesE;
 						ut.yellow(); cout << "\n > "; ut.grey(); cout << "Please enter finish time:\n "; cin.clear(); ut.white();
 
-						cout << "> Hour: "; cin >> hourE; cout << "> Minutes: "; cin >> minutesE;
+						cout << "> Hour: "; cin >> hourE; cout << " > Minutes: "; cin >> minutesE;
 
 						endHour.setHour(hourE); endHour.setMinutes(minutesE);
 
@@ -2031,7 +2036,7 @@ bool Agency::hasBuddies(Trip &recTrip)
 		for (unsigned int j = 0; j < recTrip.getStops().at(i).getPassengers().size(); j++) {
 			if (find(tripids.begin(), tripids.end(), recTrip.getStops().at(i).getPassengers().at(j)) != tripids.end())
 				tripids.push_back(recTrip.getStops().at(i).getPassengers().at(j));
-		}	
+		}
 	}
 
 	tripids.push_back(recTrip.getDriver());

@@ -77,5 +77,4 @@ public:
 	void payment();
 	bool car() const;
 	void resetTrips(void);
-	//bool searchTrip(vector<Trip> &vec);
 };
