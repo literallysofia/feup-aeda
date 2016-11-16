@@ -376,6 +376,7 @@ void Agency::menuDisplayUsersByUsername() {
 
 	ut.clearScreen();
 	vector<User*> UsersV = Users;
+
 	sort(UsersV.begin(), UsersV.end(), [](User* a, User* b) {return a->getUsername() < b->getUsername(); });
 
 	ut.menuHeader();
@@ -733,7 +734,7 @@ int Agency::menuSearchTrip() {
 	cout << "|~~~                   ";  ut.grey(); cout << "SEARCH TRIPS";  ut.white(); cout << "                    ~~~|" << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
 		<< setw(22) << "1. By Driver" << endl
-		<< setw(21) << "2. By Month" << endl
+		<< setw(21) << "2. By Month" << endl;
 	ut.blue(); cout << "-----------------------------------------------------------" << endl;  ut.white();
 	cout << "|~~~                               ";  ut.grey(); cout << "< 0. Return >";  ut.white(); cout << "       ~~~|" << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl << endl;
@@ -807,7 +808,7 @@ void Agency::menuSearchTripByDriver() {
 	bool b = false;
 
 	for (unsigned int i = 0; i < Trips.size(); i++) {
-		if (Trips.at(i).getID() == id)
+		if (Trips.at(i).getDriver() == id)
 			b = true;
 	}
 
@@ -830,7 +831,7 @@ void Agency::menuSearchTripByDriver() {
 
 	for (unsigned int i = 0; i < Trips.size(); i++)
 	{
-		if (Trips.at(i).getID() == id)
+		if (Trips.at(i).getDriver() == id)
 			cout << Trips.at(i);
 	}
 
@@ -864,7 +865,7 @@ void Agency::menuSearchTripByMonth() {
 
 		cin.clear();
 		cin.ignore(1000, '\n');
-		ut.red(); cout << "> Invalid Date!" << endl;
+		ut.red(); cout << "> Invalid Month!" << endl;
 		ut.white(); cout << "Try again: ";
 		cin >> month;
 	}
@@ -921,9 +922,8 @@ int Agency::menuSearchTransaction() {
 
 	cout << "|~~~                ";  ut.grey(); cout << "SEARCH TRANSACTION";  ut.white(); cout << "                 ~~~|" << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
-		<< setw(23) << "1. By User ID" << endl
-		<< setw(20) << "2. By Date" << endl
-		<< setw(26) << "3. Between Dates" << endl;
+		<< setw(20) << "1. By User" << endl
+		<< setw(21) << "2. By Month" << endl;
 	ut.blue(); cout << "-----------------------------------------------------------" << endl;  ut.white();
 	cout << "|~~~                               ";  ut.grey(); cout << "< 0. Return >";  ut.white(); cout << "       ~~~|" << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl << endl;
@@ -961,17 +961,148 @@ void Agency::optionsMenuSearchTransaction() {
 		switch (option)
 		{
 		case 1:
-			//by user
+			menuSearchTransactionByUser();
 			break;
 		case 2:
-			//by date
-			break;
-		case 3:
-			//between dates
+			menuSearchTransactionByMonth();
 			break;
 		}
 }
 
+void Agency::menuSearchTransactionByUser() {
+
+	ut.clearScreen();
+	ut.menuHeader();
+	cout << "|~~~            ";  ut.grey(); cout << "SEARCH TRANSACTION BY USER";  ut.white(); cout << "             ~~~|" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+
+	int id;
+
+	cout << endl << "User ID: ";  cin >> id;
+	cout << endl;
+
+	while (cin.fail())
+	{
+		if (cin.eof())
+		{
+			cin.clear();
+			return;
+		}
+
+		cin.clear();
+		cin.ignore(1000, '\n');
+		ut.red(); cout << "> Invalid Input!" << endl;
+		ut.white(); cout << "Try again: ";
+		cin >> id;
+	}
+
+	bool b = false;
+
+	for (unsigned int i = 0; i < Transactions.size(); i++) {
+		if (Transactions.at(i).GetId() == id)
+			b = true;
+	}
+
+	if (!b)
+	{
+		ut.red(); cerr << "> Transaction with that User ID not found." << endl; ut.white();
+		Sleep(2000);
+		cin.clear();
+		cin.ignore(1000, '\n');
+		return;
+	}
+
+	ut.clearScreen();
+	ut.menuHeader();
+	cout << "|~~~            ";  ut.grey(); cout << "SEARCH TRANSACTION BY USER";  ut.white(); cout << "             ~~~|" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+	ut.grey(); cout << setw(5) << "ID" << setw(25) << "Date" << setw(26) << "Value" << endl;
+	ut.blue(); cout << "-----------------------------------------------------------" << endl;
+	ut.white();
+
+	for (unsigned int i = 0; i < Transactions.size(); i++)
+	{
+		if (Transactions.at(i).GetId() == id)
+			cout << Transactions.at(i);
+	}
+
+	ut.blue(); cout << "-----------------------------------------------------------" << endl;
+	ut.red(); cout << "\n Press any key to go back."; ut.white();
+	getchar();
+	cin.clear();
+	cin.ignore(1000, '\n');
+	//TODO: VER MELHOR
+}
+
+void Agency::menuSearchTransactionByMonth() {
+
+	ut.clearScreen();
+	ut.menuHeader();
+	cout << "|~~~            ";  ut.grey(); cout << "SEARCH TRANSACTION BY MONTH";  ut.white(); cout << "            ~~~|" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+	int month;
+
+	cout << endl << "Month: ";  cin >> month;
+	cout << endl;
+
+	while (cin.fail() || month < 1 || month > 12)
+	{
+		if (cin.eof())
+		{
+			cin.clear();
+			return;
+		}
+
+		cin.clear();
+		cin.ignore(1000, '\n');
+		ut.red(); cout << "> Invalid Month!" << endl;
+		ut.white(); cout << "Try again: ";
+		cin >> month;
+	}
+
+	bool b = false;
+
+	for (unsigned int i = 0; i < Transactions.size(); i++)
+	{
+		if (Transactions.at(i).GetDate().getMonth() == month)
+		{
+			b = true;
+			break;
+		}
+	}
+
+
+	if (!b)
+	{
+		ut.red(); cerr << "> There were no transactions in that month." << endl; ut.white();
+		Sleep(2000);
+		cin.clear();
+		cin.ignore(1000, '\n');
+		return;
+	}
+
+
+	ut.clearScreen();
+	ut.menuHeader();
+	cout << "|~~~            ";  ut.grey(); cout << "SEARCH TRANSACTION BY MONTH";  ut.white(); cout << "            ~~~|" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+	ut.grey(); cout << setw(5) << "ID" << setw(25) << "Date" << setw(26) << "Value" << endl;
+	ut.blue(); cout << "-----------------------------------------------------------" << endl;
+	ut.white();
+
+	for (unsigned int i = 0; i < Transactions.size(); i++)
+	{
+		if (Transactions.at(i).GetDate().getMonth() == month)
+			cout << Transactions.at(i);
+	}
+
+	ut.blue(); cout << "-----------------------------------------------------------" << endl;
+	ut.red(); cout << "\n Press any key to go back."; ut.white();
+	getchar();
+	cin.clear();
+	cin.ignore(1000, '\n');
+	//TODO: VER MELHOR
+}
 
 
 /* MENUS USER */

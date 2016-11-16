@@ -102,7 +102,8 @@ public:
 
 	int menuSearchTransaction();
 	void optionsMenuSearchTransaction();
-
+	void menuSearchTransactionByUser();
+	void menuSearchTransactionByMonth();
 
 
 	//User Only
