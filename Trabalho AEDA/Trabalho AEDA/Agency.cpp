@@ -2628,10 +2628,10 @@ void Agency::runTrip(int tripID) {
 			<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
 		ut.grey(); cout << setw(10) << "Origin" << setw(20) << "Destiny" << setw(20) << "Driver" << setw(11) << endl;
 		ut.blue(); cout << "-----------------------------------------------------------" << endl;
-		ut.white(); cout << setw(9) << ActiveTrips[tripIndex].getOrigin() << setw(19) << ActiveTrips[tripIndex].getDestination() << setw(25) << Users[getPos(t.getDriver())]->getName() << setw(11) << endl;
+		ut.white(); cout << setw(9) << ActiveTrips[tripIndex].getOrigin() << setw(19) << ActiveTrips.at(tripIndex).getDestination() << setw(25) << Users[getPos(t.getDriver())]->getName() << setw(11) << endl;
 		ut.blue(); cout << "-----------------------------------------------------------" << endl;
 
-		ut.yellow(); cout << "\n > "; ut.grey(); cout << "Current stop: "; ut.white(); cout << currentStop << endl;
+		ut.yellow(); cout << "\n > "; ut.grey(); cout << "CURRENT STOP: "; ut.white(); cout << currentStop << endl;
 
 		
 
@@ -2753,9 +2753,11 @@ void Agency::runTrip(int tripID) {
 				}
 				newPass = (int)usersOnBoard.size();
 				//se houve alguma entrada de passageiros
+
+				ut.yellow(); cout << "\n > "; ut.grey(); cout << "Passengers who got in: "; ut.white();
+
 				if (usersOnBoard.size() != 0)
 				{
-					ut.yellow(); cout << "\n > "; ut.grey(); cout << "Passengers who got in: "; ut.white();
 					for (size_t l = 0; l < usersOnBoard.size(); l++)
 					{
 						if (usersOnBoard[l] > 0)
@@ -2772,10 +2774,11 @@ void Agency::runTrip(int tripID) {
 							cout << ", ";
 						}
 					}
-
-					cout << endl;
 				}
-
+				else {
+					cout << "none.";
+				}
+				cout << endl;
 
 				if (usersWhoExited.size() == 0 && newPass == 0)
 				{
@@ -2785,7 +2788,7 @@ void Agency::runTrip(int tripID) {
 
 			if (stops.at(stopIt).getPassengers().size() != 0)
 			{
-				ut.green();  cout << "\n  Passengers onboard: "; ut.grey();
+				ut.yellow(); cout << "\n > "; ut.grey(); cout << "Passengers onboard: "; ut.white();
 
 				for (size_t i = 0; i < stops.at(stopIt).getPassengers().size(); i++)
 				{
