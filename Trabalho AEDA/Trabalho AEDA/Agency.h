@@ -48,7 +48,7 @@ public:
 	Agency();
 	~Agency();
 
-	//Cria uma nova inst�ncia.
+	//Cria uma nova instancia.
 	static Agency* instance()
 	{
 		if (!singleton_instance)
@@ -57,7 +57,7 @@ public:
 		return singleton_instance;
 	}
 
-	//Elimina a inst�ncia atual e cria outra.
+	//Elimina a instancia atual e cria outra.
 	/*void logout() {
 	delete singleton_instance;
 	singleton_instance = NULL;
@@ -85,22 +85,27 @@ public:
 	void optionsMenuSearch();
 
 	void menuDisplayBuddies();
-	void menuDisplayTransactions();
 	void menuDisplayStops();
 	void menuDisplayRecord();
 	void menuRunTrip();
 
-	void menuSearchUserByID();
+	int menuDisplayTransactions();
+	void optionsMenuDTrans();
 
 	int menuSearchUser();
 	void optionsMenuSearchUser();
+	void menuSearchUserByID();
+	void menuSearchUserByUsername();
 
 	int menuSearchTrip();
 	void optionsMenuSearchTrip();
+	void menuSearchTripByDriver();
+	void menuSearchTripByMonth();
 
 	int menuSearchTransaction();
 	void optionsMenuSearchTransaction();
-
+	void menuSearchTransactionByUser();
+	void menuSearchTransactionByMonth();
 
 
 	//User Only
@@ -113,7 +118,7 @@ public:
 
 	int menuCreateTrip();
 	int menuJoinTrip();
-	void showRecTrips(vector<Trip> recTrips, vector<Trip> buddieTrips, vector<string> &stopCodes);
+	void showRecTrips(vector<Trip> &recTrips, vector<Trip> &buddieTrips, vector<string> &stopCodes);
 
 
 	//Files
@@ -140,6 +145,7 @@ public:
 	int getPos(int id); //retorna posicao no vetor de users de id UTIL!!!
 	int getLastId();
 	bool checkStop(string s);
+	bool notBuddy(string bUsername);
 
 
 	//Functions
@@ -151,9 +157,10 @@ public:
 	vector<Trip> availableTrips(vector<Trip> &possibleTrips, vector<string> &stopCodes);
 	bool availableSpace(Trip &possibleTrip, vector<string> &stopCodes);
 	bool hasBuddies(Trip &recTrip);
-	void choseTrip(vector<Trip> &recTrips, vector<Trip> &buddieTrips, vector<string> &stopCodes);
+	void chooseTrip(vector<Trip> &recTrips, vector<Trip> &buddieTrips, vector<string> &stopCodes);
 	void runTrip(int tripID);
 	float deposit();
+	void endMonth();
 	time_t getUnixCode(Date &d, Hour &h);
 
 	//Displays
@@ -170,9 +177,6 @@ public:
 	void readUsers(std::ifstream & infile);    //TODO
 
 	void readTrips(std::ifstream & infile);
-
-
-	float endMonth();
 	*/
 
 };

@@ -1,7 +1,7 @@
 #include "User.h"
 
 /*USER CLASS*/
-int User::maintenanceFee = 20;
+float User::maintenanceFee = 10;
 
 User::User()
 {
@@ -11,10 +11,11 @@ User::User(string name) :name(name)
 {
 }
 
-User::User(int ID, string name, float balance, string username, string password) : ID(ID), name(name) {
+User::User(int ID, string name, float balance, string username, string password, int nt) : ID(ID), name(name) {
 	this->username = username;
 	this->password = password;
 	this->balance = balance;
+	ntrips = 0;
 }
 
 User::~User()
@@ -56,14 +57,29 @@ float User::getBalance() const
 	return balance;
 }
 
+int User::getNtrips() const
+{
+	return ntrips;
+}
+
+void User::setNtrips()
+{
+	ntrips++;
+}
+
 void User::deposit(float value)
 {
 	balance += value;
 }
 
-void User::payment()
+float User::payment()
 {
-	return;
+	return 0.00;
+}
+
+void User::resetTrips()
+{
+	ntrips = 0;
 }
 
 void User::addBuddy(User * user)
@@ -76,12 +92,6 @@ bool User::car() const
 	return false;
 }
 
-/*
-bool User::searchTrip(vector<Trip>& vec)
-{
-	return false;
-}
-*/
 string User::getFirst() const
 {
 	return string();
@@ -94,17 +104,15 @@ string User::getLast() const
 
 bool User::operator ==(const User *u) const {
 
-	if (this->ID == u->ID)
+	if (this->ID == u->ID||this->username==u->username)
 		return true;
 	else
 		return false;
 
 }
 
-
-
 /*DRIVER CLASS*/
-Driver::Driver(int ID, string name, float balance, string username, string password) : User(ID, name, balance, username, password) {
+Driver::Driver(int ID, string name, float balance, string username, string password, int nt) : User(ID, name, balance, username, password,nt) {
 }
 
 int Driver::getNumSeats() const
@@ -112,9 +120,11 @@ int Driver::getNumSeats() const
 	return numSeats;
 }
 
-void Driver::payment()
+float Driver::payment()
 {
 	balance -= maintenanceFee;
+	
+	return maintenanceFee;
 }
 
 bool Driver::car() const
@@ -127,76 +137,16 @@ bool Driver::car() const
 Passenger::Passenger(string name) : User(name) {
 }
 
-Passenger::Passenger(int ID, string name, float balance, string username, string password) : User(ID, name, balance, username, password) {
-	numTrips = 0;
+Passenger::Passenger(int ID, string name, float balance, string username, string password, int nt) : User(ID, name, balance, username, password, nt) {
 }
 
-int Passenger::getNumTrips() const
+float Passenger::payment()
 {
-	return numTrips;
-}
-
-vector<pTrip> Passenger::getPTrips()
-{
-	return pTrips;
-}
-
-void Passenger::setNumTrips()
-{
-	numTrips++;
-}
-
-void Passenger::payment()
-{
-	balance -= (maintenanceFee + numTrips); //TODO metodo de pagamento estupido
+	balance -= (maintenanceFee + (ntrips * 2)); //paga 2 euros por viagem - desconto de socio
+	return (maintenanceFee + (ntrips * 2));
 }
 
 bool Passenger::car() const
 {
 	return false;
 }
-
-void Passenger::resetTrips(void)
-{
-	numTrips = 0;
-}
-
-void Passenger::addTrip(int tripID, string first, string last)
-{
-	pTrip pt;
-	pt.id = tripID;
-	pt.first = first;
-	pt.last = last;
-	pTrips.push_back(pt);
-	numTrips++;
-}
-
-/*bool Passenger::searchTrip(vector<Trip> &vec)  //vec = vetor das viagens da agencia
-{
-	unsigned int posBeg = -1, posEnd = -1;
-	for (size_t i = 0; i < vec.size(); i++)
-	{
-		vector<string> stops = vec[i].getStops();
-		for (unsigned int j = 0; j < stops.size(); i++)
-		{
-			if (stops[j] == this->first)
-				posBeg = j;
-
-			if (stops[j] == this->last)
-				posEnd = j;
-		}
-
-		//se ambos os indices foram atualizados
-		if (posBeg != -1 && posEnd != -1)
-			//se a paragem inicial do guest vem antes da final, para a viagem indicada, return true;
-			if (posBeg < posEnd) {
-				this->currentTrip = vec[i].getID();
-				vec[i].addPassenger(this->ID);
-				return true;
-			}
-
-	}
-
-	//nenhuma das condiçoes de aceitação foi obtida
-	return false;
-}*/

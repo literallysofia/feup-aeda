@@ -6,12 +6,6 @@
 
 using namespace std;
 
-struct pTrip {
-	int id;
-	string first;
-	string last;
-};
-
 class User
 {
 protected:
@@ -20,13 +14,14 @@ protected:
 	string username;
 	string password;
 	float balance; //saldo disponivel na conta
-	static int maintenanceFee;
+	static float maintenanceFee;
+	int ntrips;
 	vector <User *> buddies;
 	
 public:
 	User();
 	User(string name);
-	User(int ID, string name, float balance, string username, string password);
+	User(int ID, string name, float balance, string username, string password,int nt);
 	~User();
 	void setUsername(string username);
 	void setID(int ID);
@@ -35,50 +30,43 @@ public:
 	string getUsername() const;
 	string getPassword() const;
 	float getBalance() const;
+	int getNtrips() const;
+	void setNtrips();
 	void deposit(float value);
 	virtual bool car() const;
 	virtual void addTrip(int tripID, string first, string last) {};
 	virtual string getFirst() const;
 	virtual string getLast() const;
 	
-	virtual void payment();
+	virtual float payment();
+	void resetTrips();
 	void addBuddy(User * user);
 	void deleteBuddies() { buddies.clear(); }
 	vector<User *> getBuddies() const { return buddies; };
-	bool User::operator ==(const User *u) const;
+	bool operator ==(const User *u) const;
 };
 
 class Driver :
 	public User
 {
 private:
-	int numSeats;
+	int numSeats; //TODO nao preciso disto
 public:
-	Driver(int ID, string name, float balance, string username, string password);
+	Driver(int ID, string name, float balance, string username, string password,int nt);
 	int getNumSeats() const;		//apenas retorna o numero de lugares dados pelo utilizador,
-	void payment();
+	float payment();
 	bool car() const;
 	/*
-	void setNumSeats(unsigned int num) { numSeats = num; };   //é perguntado ao utilizador aquando de inscricao
-	void resetTrips() {};					//nao faz nada se for Driver quando chamada por um iterador
+	void setNumSeats(unsigned int num) { numSeats = num; };   //ï¿½ perguntado ao utilizador aquando de inscricao
 	*/
 };
 
 class Passenger :
 	public User
 {
-private:
-	int numTrips;
-	vector<pTrip> pTrips; //vetor com a estrutura pTrip que diz o ID da trip na qual esta, e origem e destino do trecho
 public:
 	Passenger(string name);
-	Passenger(int ID, string name, float balance, string username, string password);
-	int getNumTrips() const;
-	vector<pTrip> getPTrips();
-	void setNumTrips();
-	void payment();
+	Passenger(int ID, string name, float balance, string username, string password,int nt);
+	float payment();
 	bool car() const;
-	void resetTrips(void);
-	void addTrip(int tripID, string first, string last);
-	//bool searchTrip(vector<Trip> &vec);
 };
