@@ -2602,6 +2602,8 @@ void Agency::runTrip(int tripID) {
 
 	Trip t;
 	int tripIndex;
+	vector<int> usersWhoExited;
+	vector<int> usersWhoExitedAfter;
 
 	for (unsigned int i = 0; i < ActiveTrips.size(); i++)
 	{
@@ -2615,6 +2617,9 @@ void Agency::runTrip(int tripID) {
 
 	for (size_t stopIt = 0; stopIt < stops.size(); stopIt++)
 	{
+		usersWhoExited = usersWhoExitedAfter;
+		usersWhoExitedAfter.clear();
+
 		string currentStop = stops.at(stopIt).getCode();
 
 		ut.clearScreen();
@@ -2626,26 +2631,9 @@ void Agency::runTrip(int tripID) {
 		ut.white(); cout << setw(9) << ActiveTrips[tripIndex].getOrigin() << setw(19) << ActiveTrips[tripIndex].getDestination() << setw(25) << Users[getPos(t.getDriver())]->getName() << setw(11) << endl;
 		ut.blue(); cout << "-----------------------------------------------------------" << endl;
 
-		ut.yellow(); cout << "\n > "; ut.grey(); cout << "Current stop: "; ut.white(); cout << currentStop;
+		ut.yellow(); cout << "\n > "; ut.grey(); cout << "Current stop: "; ut.white(); cout << currentStop << endl;
 
-		if (stopIt == 0) {
-			ut.yellow(); cout << "\n\n > "; ut.grey(); cout << "Passengers onboard: "; ut.white();
-
-			if (stops.at(stopIt).getPassengers().size() == 0) {
-				cout << "none.";
-			}
-			else {
-				for (size_t i = 0; i < stops.at(stopIt).getPassengers().size(); i++)
-				{
-					cout << Users[getPos(stops.at(stopIt).getPassengers().at(i))]->getName();
-					if (i != stops.at(stopIt).getPassengers().size() - 1)
-					{
-						cout << ", ";
-					}
-				}
-			}
-			cout << endl;
-		}
+		
 
 		if (stopIt == stops.size() - 1)
 		{
@@ -2654,8 +2642,8 @@ void Agency::runTrip(int tripID) {
 		else {
 
 			vector<int> usersNextStop = stops.at(stopIt + 1).getPassengers();
+			
 			//saida de passageiros
-			vector<int> usersAway;
 			unsigned int indice = 0;
 			for (unsigned int indice = 0; indice < stops.at(stopIt).getPassengers().size(); indice++)
 			{
@@ -2670,7 +2658,7 @@ void Agency::runTrip(int tripID) {
 					//se esta na proxima paragem nao acontece nada
 					if (CHECK == -1)
 					{	//se nao esta é porque saiu nesta
-						usersAway.push_back(id);
+						usersWhoExitedAfter.push_back(id);
 					}
 				}
 
@@ -2692,7 +2680,7 @@ void Agency::runTrip(int tripID) {
 								//se nao esta é porque saiu nesta
 								Transaction trans(id, ActiveTrips[tripIndex].getDate(), (float)Guests[j]->getNumStops()); //TODO: multiplicar por valor
 								Transactions.push_back(trans);
-								usersAway.push_back(id);
+								usersWhoExitedAfter.push_back(id);
 
 							}
 						}
@@ -2701,23 +2689,23 @@ void Agency::runTrip(int tripID) {
 			}
 
 			//se houve alguma saida de passageiros
-			if (usersAway.size() != 0)
+			if (usersWhoExited.size() != 0)
 			{
-				ut.yellow(); cout << "\n\n > "; ut.grey(); cout << "Passengers who left: "; ut.white();
-				for (size_t j = 0; j < usersAway.size(); j++)
+				ut.yellow(); cout << "\n > "; ut.grey(); cout << "Passengers who left: "; ut.white();
+				for (size_t j = 0; j < usersWhoExited.size(); j++)
 				{
-					int id = usersAway.at(j);
+					int id = usersWhoExited.at(j);
 
 					if (id > 0)
 					{
-						cout << Users[getPos(usersAway[j])]->getName();
+						cout << Users[getPos(usersWhoExited[j])]->getName();
 					}
 					else
 					{
 						cout << "Guest";
 					}
 
-					if (j != usersAway.size() - 1)
+					if (j != usersWhoExited.size() - 1)
 					{
 						cout << ", ";
 					}
@@ -2789,14 +2777,32 @@ void Agency::runTrip(int tripID) {
 				}
 
 
-				if (usersAway.size() == 0 && newPass == 0)
+				if (usersWhoExited.size() == 0 && newPass == 0)
 				{
 					ut.yellow(); cout << "\n\n > "; ut.grey(); cout << "No passengers exited or entered at this stop.\n"; ut.white();
 				}
 			}
 
+			if (stops.at(stopIt).getPassengers().size() != 0)
+			{
+				ut.green();  cout << "\n  Passengers onboard: "; ut.grey();
+
+				for (size_t i = 0; i < stops.at(stopIt).getPassengers().size(); i++)
+				{
+					cout << Users[getPos(stops.at(stopIt).getPassengers().at(i))]->getName();
+					if (i != stops.at(stopIt).getPassengers().size() - 1)
+					{
+						cout << ", ";
+					}
+				}
+			}
+			else
+			{
+				ut.grey(); cout << "\n\n > No passengers onboard.\n"; ut.white();
+			}
+
 			//espera pelo input da tecla Enter para passar a proxima paragem
-			ut.green(); cout << "\n -> ENTER to go to the next stop <-"; ut.white();
+			ut.green(); cout << "\n\n -> ENTER to go to the next stop <-"; ut.white();
 			ut.getEnter();
 		}
 	}
