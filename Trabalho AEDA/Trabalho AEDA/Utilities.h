@@ -14,7 +14,6 @@ void setcolor(int ForgC);
 void clearScreen();
 int readInt(int min, int max);
 void getEnter();
-void clearScreen_param(int x);
 
 void white();
 void blue();

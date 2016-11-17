@@ -32,10 +32,11 @@ class Agency
 private:
 	static Agency* singleton_instance;
 
+	//Formas de acesso
 	int sessionID;
 	int sessionPos;
 
-	//Global Vectors
+	//Vetores globais
 	vector<User *> Users;
 	vector<Trip> Trips;
 	vector<Trip> ActiveTrips;
@@ -55,13 +56,6 @@ public:
 		return singleton_instance;
 	}
 
-	//Elimina a instancia atual e cria outra.
-	/*void logout() {
-	delete singleton_instance;
-	singleton_instance = NULL;
-	instance()->importInfo();
-	}*/
-
 	//Menu's
 
 	void registerUser();
@@ -69,6 +63,7 @@ public:
 	void loginGuest();
 
 	//Admin Only
+
 	int mainMenu_Admin();
 	void optionsMainMenu_Admin();
 
@@ -84,7 +79,6 @@ public:
 	void menuDisplayBuddies();
 	void menuDisplayStops();
 	void menuDisplayRecord();
-	void menuRunTrip();
 
 	int menuDisplayTransactions();
 	void optionsMenuDTrans();
@@ -103,6 +97,8 @@ public:
 	void optionsMenuSearchTransaction();
 	void menuSearchTransactionByUser();
 	void menuSearchTransactionByMonth();
+
+	void menuRunTrip();
 
 
 	//User Only
