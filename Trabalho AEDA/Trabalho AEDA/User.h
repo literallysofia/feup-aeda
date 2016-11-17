@@ -6,12 +6,6 @@
 
 using namespace std;
 
-struct pTrip {
-	int id;
-	string first;
-	string last;
-};
-
 class User
 {
 protected:
@@ -37,6 +31,7 @@ public:
 	string getPassword() const;
 	float getBalance() const;
 	int getNtrips() const;
+	void setNtrips();
 	void deposit(float value);
 	virtual bool car() const;
 	virtual void addTrip(int tripID, string first, string last) {};
@@ -63,20 +58,15 @@ public:
 	bool car() const;
 	/*
 	void setNumSeats(unsigned int num) { numSeats = num; };   //� perguntado ao utilizador aquando de inscricao
-	void resetTrips() {};					//nao faz nada se for Driver quando chamada por um iterador
 	*/
 };
 
 class Passenger :
 	public User
 {
-private:
-	int numTrips;
 public:
 	Passenger(string name);
 	Passenger(int ID, string name, float balance, string username, string password,int nt);
-	int getNumTrips() const;
-	void setNumTrips();
 	float payment();
 	bool car() const;
 };
