@@ -9,6 +9,8 @@
 
 using namespace std;
 
+//TODO deixar a classe lmao
+
 class Utilities
 {
 public:

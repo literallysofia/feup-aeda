@@ -115,7 +115,8 @@ public:
 
 	void menuCreateTrip();
 	void menuJoinTrip();
-	void showRecTrips(vector<Trip> &recTrips, vector<Trip> &buddieTrips, vector<string> &stopCodes);
+	void showRecTrips(vector<Trip> recTrips, vector<Trip> buddieTrips, vector<string> stopCodes);
+	void showRecTripsGuest(vector<Trip> recTrips, vector<string> stopCodes);
 
 
 	//Files
@@ -155,13 +156,14 @@ public:
 	//Trip Related
 	void addTrip();
 	void joinTrip();
-	vector<Trip> searchTrip(vector<string> &stopCodes, Date &tripDate);
-	vector<Trip> availableTrips(vector<Trip> &possibleTrips, vector<string> &stopCodes);
-	bool availableSpace(Trip &possibleTrip, vector<string> &stopCodes);
-	bool hasBuddies(Trip &recTrip);
-	void chooseTrip(vector<Trip> &recTrips, vector<Trip> &buddieTrips, vector<string> &stopCodes);
+	vector<Trip> searchTrip(vector<string> stopCodes, Date tripDate);
+	vector<Trip> availableTrips(vector<Trip> possibleTrips, vector<string> stopCodes);
+	bool availableSpace(Trip possibleTrip, vector<string> stopCodes);
+	bool hasBuddies(Trip recTrip);
+	void chooseTrip(vector<Trip> recTrips, vector<Trip> buddieTrips, vector<string> stopCodes);
 	void runTrip(int tripID);
 	void joinTripGuest();
+	void chooseTripGuest(vector<Trip> recTrips, vector<string> stopCodes);
 
 	//Displays
 	void displayUsers();
