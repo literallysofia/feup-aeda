@@ -9,26 +9,18 @@
 
 using namespace std;
 
-//TODO deixar a classe lmao
+void menuHeader();
+void setcolor(int ForgC);
+void clearScreen();
+int readInt(int min, int max);
+void getEnter();
+void clearScreen_param(int x);
 
-class Utilities
-{
-public:
-	Utilities();
-	~Utilities();
+void white();
+void blue();
+void grey();
+void red();
+void green();
+void yellow();
 
-	void menuHeader();
-	void setcolor(int ForgC);
-	void clearScreen();
-	int readInt(int min, int max);
-	void getEnter();
-	void clearScreen_param(int x);
-
-	void white();
-	void blue();
-	void grey();
-	void red();
-	void green();
-	void yellow();
-};
 

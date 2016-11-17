@@ -15,9 +15,9 @@ private:
 	float value;
 public:
 	Transaction();
-	Transaction (unsigned int id, Date date, float value);
+	Transaction (int id, Date date, float value);
 	void setID(int ID);
-	unsigned int GetId() const;
+	int GetId() const;
 	Date GetDate() const;
 	float GetValue() const;
 	void save(ofstream & out) const;

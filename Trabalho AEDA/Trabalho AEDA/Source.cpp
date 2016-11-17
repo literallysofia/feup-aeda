@@ -10,8 +10,6 @@ using namespace std;
 
 Agency* Agency::singleton_instance = 0;
 
-Utilities u;
-
 //Abre janela de controlo no meio do ecra
 HWND hwnd = GetConsoleWindow();
 RECT desktop;
@@ -23,14 +21,14 @@ COORD max_size = GetLargestConsoleWindowSize(screen);
 int welcomeMenu() {
 
 	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
-		<< "|~~~                      "; u.blue(); cout << "ShareIt"; u.white(); cout << "                      ~~~| " << endl
+		<< "|~~~                      "; blue(); cout << "ShareIt"; white(); cout << "                      ~~~| " << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
-		<< "|                       ";  u.grey(); cout << "::WELCOME::";  u.white(); cout << "                       |" << endl;
-	u.blue(); cout << "-----------------------------------------------------------" << endl;
-	u.grey(); cout << "   Choose one of the following options:\n\n";
-	u.white(); cout << setw(36) << "1. Register\n" << setw(33) << "2. Login\n" << setw(33) << "3. Guest\n";
-	u.blue(); cout << "-----------------------------------------------------------" << endl;  u.white();
-	cout << "|~~~                                ";  u.grey(); cout << "< 0. Close >";  u.white(); cout << "       ~~~|" << endl
+		<< "|                       ";  grey(); cout << "::WELCOME::";  white(); cout << "                       |" << endl;
+	blue(); cout << "-----------------------------------------------------------" << endl;
+	grey(); cout << "   Choose one of the following options:\n\n";
+	white(); cout << setw(36) << "1. Register\n" << setw(33) << "2. Login\n" << setw(33) << "3. Guest\n";
+	blue(); cout << "-----------------------------------------------------------" << endl;  white();
+	cout << "|~~~                                ";  grey(); cout << "< 0. Close >";  white(); cout << "       ~~~|" << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl << endl;
 
 	unsigned short int choice;
@@ -47,8 +45,8 @@ int welcomeMenu() {
 
 		cin.clear();
 		cin.ignore(1000, '\n');
-		u.red(); cout << "> Invalid choice!" << endl;
-		u.white(); cout << "Please try again: ";
+		red(); cout << "> Invalid choice!" << endl;
+		white(); cout << "Please try again: ";
 		cin >> choice;
 	}
 
