@@ -170,11 +170,11 @@ void Agency::registerUser()
 	int nID = getLastId() + 1;
 
 	if ((type == "y") || (type == "Y")) {
-		User *u1 = new Driver(nID, name, 0.00, username, password);
+		User *u1 = new Driver(nID, name, 0.00, username, password, 0);
 		addUser(u1);
 	}
 	else {
-		User *u1 = new Passenger(nID, name, 0.00, username, password);
+		User *u1 = new Passenger(nID, name, 0.00, username, password, 0);
 		addUser(u1);
 	}
 
@@ -1335,21 +1335,24 @@ void Agency::extractUsers()
 		{
 
 			size_t pos1 = line.find(";"); //posi�ao 1
-			string str1 = line.substr(pos1 + 1); //nome+balance+carro+user+pass
+			string str1 = line.substr(pos1 + 1); //nome+balance+carro+user+pass+nt
 			size_t pos2 = str1.find(";"); //posi�ao 2
-			string str2 = str1.substr(pos2 + 1); //balance+carro+user+pass
+			string str2 = str1.substr(pos2 + 1); //balance+carro+user+pass+nt
 			size_t pos3 = str2.find(";"); //posi�ao 3
-			string str3 = str2.substr(pos3 + 1); //balance+user+pass
+			string str3 = str2.substr(pos3 + 1); //balance+user+pass+nt
 			size_t pos4 = str3.find(";"); //posi�ao 4
-			string str4 = str3.substr(pos4 + 1); //user+pass
+			string str4 = str3.substr(pos4 + 1); //user+pass+nt
 			size_t pos5 = str4.find(";"); //posi�ao 5
+			string str5 = str4.substr(pos5 + 1); //pass+nt
+			size_t pos6 = str5.find(";"); //posi�ao 5
 
 			string ids = line.substr(0, pos1); //string id
 			string nome = str1.substr(0, pos2);
 			string scar = str2.substr(0, pos3); //string carro
 			string sbalance = str3.substr(0, pos4); //string balance
 			string user = str4.substr(0, pos5);
-			string pass = str4.substr(pos5 + 1);
+			string pass = str5.substr(0, pos6);
+			string nt_s = str5.substr(pos6 + 1); //string nro de trips
 
 			int idi = stoi(ids, nullptr, 10); //passa o id de string para int
 			bool bcar;
@@ -1359,16 +1362,18 @@ void Agency::extractUsers()
 
 			float balancef = stof(sbalance, NULL); //passa o balance de string para float
 
+			int nt = stoi(nt_s, nullptr, 10); //passa o id de string para int
+
 			if (bcar)
 			{
 				//se o User tiver carro, adiciona um novo driver
-				User *d1 = new Driver(idi, nome, balancef, user, pass);
+				User *d1 = new Driver(idi, nome, balancef, user, pass,nt);
 				Users.push_back(d1);
 			}
 			else
 			{
 				//caso contrario adiciona um novo passenger
-				User *p1 = new Passenger(idi, nome, balancef, user, pass);
+				User *p1 = new Passenger(idi, nome, balancef, user, pass,nt);
 				Users.push_back(p1);
 			}
 		}
@@ -1391,7 +1396,7 @@ void Agency::saveUsers()
 				UserFile << "1";
 			else UserFile << "0";
 
-			UserFile << ";" << Users.at(i)->getBalance() << ";" << Users.at(i)->getUsername() << ";" << Users.at(i)->getPassword() << endl;
+			UserFile << ";" << Users.at(i)->getBalance() << ";" << Users.at(i)->getUsername() << ";" << Users.at(i)->getPassword() << ";" << Users.at(i)->getNtrips() << endl;
 		}
 		UserFile.close();
 	}

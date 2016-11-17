@@ -20,13 +20,14 @@ protected:
 	string username;
 	string password;
 	float balance; //saldo disponivel na conta
+	int ntrips;
 	static int maintenanceFee;
 	vector <User *> buddies;
 	
 public:
 	User();
 	User(string name);
-	User(int ID, string name, float balance, string username, string password);
+	User(int ID, string name, float balance, string username, string password,int nt);
 	~User();
 	void setUsername(string username);
 	void setID(int ID);
@@ -35,6 +36,7 @@ public:
 	string getUsername() const;
 	string getPassword() const;
 	float getBalance() const;
+	int getNtrips() const;
 	void deposit(float value);
 	virtual bool car() const;
 	virtual void addTrip(int tripID, string first, string last) {};
@@ -54,7 +56,7 @@ class Driver :
 private:
 	int numSeats;
 public:
-	Driver(int ID, string name, float balance, string username, string password);
+	Driver(int ID, string name, float balance, string username, string password,int nt);
 	int getNumSeats() const;		//apenas retorna o numero de lugares dados pelo utilizador,
 	void payment();
 	bool car() const;
@@ -72,7 +74,7 @@ private:
 	vector<pTrip> pTrips; //vetor com a estrutura pTrip que diz o ID da trip na qual esta, e origem e destino do trecho
 public:
 	Passenger(string name);
-	Passenger(int ID, string name, float balance, string username, string password);
+	Passenger(int ID, string name, float balance, string username, string password,int nt);
 	int getNumTrips() const;
 	vector<pTrip> getPTrips();
 	void setNumTrips();

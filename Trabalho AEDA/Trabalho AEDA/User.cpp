@@ -11,10 +11,11 @@ User::User(string name) :name(name)
 {
 }
 
-User::User(int ID, string name, float balance, string username, string password) : ID(ID), name(name) {
+User::User(int ID, string name, float balance, string username, string password, int nt) : ID(ID), name(name) {
 	this->username = username;
 	this->password = password;
 	this->balance = balance;
+	ntrips = nt;
 }
 
 User::~User()
@@ -54,6 +55,11 @@ string User::getPassword() const
 float User::getBalance() const
 {
 	return balance;
+}
+
+int User::getNtrips() const
+{
+	return ntrips;
 }
 
 void User::deposit(float value)
@@ -102,7 +108,7 @@ bool User::operator ==(const User *u) const {
 }
 
 /*DRIVER CLASS*/
-Driver::Driver(int ID, string name, float balance, string username, string password) : User(ID, name, balance, username, password) {
+Driver::Driver(int ID, string name, float balance, string username, string password, int nt) : User(ID, name, balance, username, password,nt) {
 }
 
 int Driver::getNumSeats() const
@@ -125,7 +131,7 @@ bool Driver::car() const
 Passenger::Passenger(string name) : User(name) {
 }
 
-Passenger::Passenger(int ID, string name, float balance, string username, string password) : User(ID, name, balance, username, password) {
+Passenger::Passenger(int ID, string name, float balance, string username, string password, int nt) : User(ID, name, balance, username, password, nt) {
 	numTrips = 0;
 }
 
