@@ -20,8 +20,8 @@ protected:
 	string username;
 	string password;
 	float balance; //saldo disponivel na conta
+	static float maintenanceFee;
 	int ntrips;
-	static int maintenanceFee;
 	vector <User *> buddies;
 	
 public:
@@ -43,7 +43,8 @@ public:
 	virtual string getFirst() const;
 	virtual string getLast() const;
 	
-	virtual void payment();
+	virtual float payment();
+	void resetTrips();
 	void addBuddy(User * user);
 	void deleteBuddies() { buddies.clear(); }
 	vector<User *> getBuddies() const { return buddies; };
@@ -54,14 +55,14 @@ class Driver :
 	public User
 {
 private:
-	int numSeats;
+	int numSeats; //TODO nao preciso disto
 public:
 	Driver(int ID, string name, float balance, string username, string password,int nt);
 	int getNumSeats() const;		//apenas retorna o numero de lugares dados pelo utilizador,
-	void payment();
+	float payment();
 	bool car() const;
 	/*
-	void setNumSeats(unsigned int num) { numSeats = num; };   //é perguntado ao utilizador aquando de inscricao
+	void setNumSeats(unsigned int num) { numSeats = num; };   //ï¿½ perguntado ao utilizador aquando de inscricao
 	void resetTrips() {};					//nao faz nada se for Driver quando chamada por um iterador
 	*/
 };
@@ -71,16 +72,11 @@ class Passenger :
 {
 private:
 	int numTrips;
-	vector<pTrip> pTrips; //vetor com a estrutura pTrip que diz o ID da trip na qual esta, e origem e destino do trecho
 public:
 	Passenger(string name);
 	Passenger(int ID, string name, float balance, string username, string password,int nt);
 	int getNumTrips() const;
-	vector<pTrip> getPTrips();
 	void setNumTrips();
-	void payment();
+	float payment();
 	bool car() const;
-	void resetTrips(void);
-	void addTrip(int tripID, string first, string last);
-	//bool searchTrip(vector<Trip> &vec);
 };

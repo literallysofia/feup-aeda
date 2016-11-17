@@ -60,16 +60,6 @@ string Trip::getDestination() const
 	return stops.at(stops.size() - 1).getCode();
 }
 
-vector<int> Trip::getPassengers() const
-{
-	return passengers;
-}
-
-void Trip::addPassenger(int idp)
-{
-	passengers.push_back(idp);
-}
-
 void Trip::setDriver(int id)
 {
 	driver = id;
@@ -87,7 +77,6 @@ void Trip::setStops(int pos, int userID)
 			stops.at(i).decAvailableSeats();
 			stops.at(i).addPassenger(userID);
 		}
-
 	}
 	return;
 }

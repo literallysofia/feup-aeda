@@ -11,6 +11,7 @@ Transaction::Transaction(unsigned int id, Date date, float value)
 	this->value = value;
 }
 
+//TODO: para que?
 void Transaction::setID(int ID)
 {
 	this->id = ID;
