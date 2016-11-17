@@ -120,7 +120,7 @@ bool operator > (Date& d1, Date& d2) {
 
 bool Date::valid() const {
 
-	if (year/1000.0 < 0.2 != 0) return false;
+	if (year/2000 < 1) return false;
 	if (year < 0) return false;
 	if (month >12 || month <1) return false;
 	if (day >31 || day <1) return false;

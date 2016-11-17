@@ -15,7 +15,7 @@ User::User(int ID, string name, float balance, string username, string password,
 	this->username = username;
 	this->password = password;
 	this->balance = balance;
-	ntrips = nt;
+	ntrips = 0;
 }
 
 User::~User()
@@ -62,6 +62,11 @@ int User::getNtrips() const
 	return ntrips;
 }
 
+void User::setNtrips()
+{
+	ntrips++;
+}
+
 void User::deposit(float value)
 {
 	balance += value;
@@ -74,7 +79,7 @@ float User::payment()
 
 void User::resetTrips()
 {
-	//numTrips = 0;
+	ntrips = 0;
 }
 
 void User::addBuddy(User * user)
@@ -87,12 +92,6 @@ bool User::car() const
 	return false;
 }
 
-/*
-bool User::searchTrip(vector<Trip>& vec)
-{
-	return false;
-}
-*/
 string User::getFirst() const
 {
 	return string();
@@ -139,23 +138,12 @@ Passenger::Passenger(string name) : User(name) {
 }
 
 Passenger::Passenger(int ID, string name, float balance, string username, string password, int nt) : User(ID, name, balance, username, password, nt) {
-	numTrips = 0;
-}
-
-int Passenger::getNumTrips() const
-{
-	return numTrips;
-}
-
-void Passenger::setNumTrips()
-{
-	numTrips++;
 }
 
 float Passenger::payment()
 {
-	balance -= (maintenanceFee + (numTrips * 2)); //paga 2 euros por viagem - desconto de socio
-	return (maintenanceFee + (numTrips * 2));
+	balance -= (maintenanceFee + (ntrips * 2)); //paga 2 euros por viagem - desconto de socio
+	return (maintenanceFee + (ntrips * 2));
 }
 
 bool Passenger::car() const
