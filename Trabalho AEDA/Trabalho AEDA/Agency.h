@@ -12,7 +12,6 @@
 #include "Utilities.h"
 #include "Tools.h"
 #include "User.h"
-#include "Guest.h"
 #include "Trip.h"
 #include "Transactions.h"
 #include "Stop.h"
@@ -39,7 +38,6 @@ private:
 	//Global Vectors
 	vector<User *> Users;
 	vector<Trip> Trips;
-	vector<Guest *> Guests;
 	vector<Trip> ActiveTrips;
 	vector<Transaction> Transactions;
 	vector<stop> stopsAvailable;
@@ -63,13 +61,12 @@ public:
 	singleton_instance = NULL;
 	instance()->importInfo();
 	}*/
-	
-	vector<User *> getUsers();
 
 	//Menu's
 
 	void registerUser();
 	void loginUser();
+	void loginGuest();
 
 	//Admin Only
 	int mainMenu_Admin();
@@ -116,9 +113,10 @@ public:
 	void optionsMenuAccount();
 	void menuAddBuddy();
 
-	int menuCreateTrip();
-	int menuJoinTrip();
-	void showRecTrips(vector<Trip> &recTrips, vector<Trip> &buddieTrips, vector<string> &stopCodes);
+	void menuCreateTrip();
+	void menuJoinTrip();
+	void showRecTrips(vector<Trip> recTrips, vector<Trip> buddieTrips, vector<string> stopCodes);
+	void showRecTripsGuest(vector<Trip> recTrips, vector<string> stopCodes);
 
 
 	//Files
@@ -151,17 +149,21 @@ public:
 	//Functions
 	void addUser(User* u);
 	void addBuddy();
-	void addTrip();
-	void joinTrip();
-	vector<Trip> searchTrip(vector<string> &stopCodes, Date &tripDate);
-	vector<Trip> availableTrips(vector<Trip> &possibleTrips, vector<string> &stopCodes);
-	bool availableSpace(Trip &possibleTrip, vector<string> &stopCodes);
-	bool hasBuddies(Trip &recTrip);
-	void chooseTrip(vector<Trip> &recTrips, vector<Trip> &buddieTrips, vector<string> &stopCodes);
-	void runTrip(int tripID);
 	float deposit();
 	void endMonth();
 	time_t getUnixCode(Date &d, Hour &h);
+
+	//Trip Related
+	void addTrip();
+	void joinTrip();
+	vector<Trip> searchTrip(vector<string> stopCodes, Date tripDate);
+	vector<Trip> availableTrips(vector<Trip> possibleTrips, vector<string> stopCodes);
+	bool availableSpace(Trip possibleTrip, vector<string> stopCodes);
+	bool hasBuddies(Trip recTrip);
+	void chooseTrip(vector<Trip> recTrips, vector<Trip> buddieTrips, vector<string> stopCodes);
+	void runTrip(int tripID);
+	void joinTripGuest();
+	void chooseTripGuest(vector<Trip> recTrips, vector<string> stopCodes);
 
 	//Displays
 	void displayUsers();

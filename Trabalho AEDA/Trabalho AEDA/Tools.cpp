@@ -1,22 +1,13 @@
 #include "Tools.h"
-Utilities uu;
 
-Tools::Tools()
-{
-}
-
-Tools::~Tools()
-{
-}
-
-bool Tools::outputName(string output)
+bool outputName(string output)
 {
 	if ((int)output.at(0) >= 48 && (int)output.at(0) <= 57) // verifica se o primeiro elemento da string corresponde a um inteiro no codigo ascii (entre 0 e 9)
 		return false;
 	else return true;
 }
 
-string Tools::insertPassword() {
+string insertPassword() {
 	string password;
 	char pass[32];
 	char x;
@@ -42,18 +33,17 @@ string Tools::insertPassword() {
 	}
 	password = pass;
 	cin.clear();
-	//cin.ignore();
 	return password;
 }
 
-bool Tools::sameString(string a, string b)
+bool sameString(string a, string b)
 {
 	if (a == b)
 		return true;
 	return false;
 }
 
-string Tools::convertUpper(string code)
+string convertUpper(string code)
 {
 	transform(code.begin(), code.end(), code.begin(), toupper);
 	return code;

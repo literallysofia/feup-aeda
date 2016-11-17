@@ -1,22 +1,13 @@
 #include "Utilities.h"
 
-Utilities::Utilities()
-{
-}
-
-
-Utilities::~Utilities()
-{
-}
-
-void Utilities::menuHeader()
+void menuHeader()
 {
 	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
 		<< "|~~~                      "; blue(); cout << "ShareIt"; white(); cout << "                      ~~~| " << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
 }
 
-void Utilities::setcolor(int ForgC)
+void setcolor(int ForgC)
 {
 	WORD wColor;
 
@@ -35,7 +26,7 @@ void Utilities::setcolor(int ForgC)
 
 
 
-void Utilities::clearScreen() {
+void clearScreen() {
 
 	HANDLE                     hStdOut;
 	CONSOLE_SCREEN_BUFFER_INFO csbi;
@@ -73,7 +64,7 @@ void Utilities::clearScreen() {
 }
 
 //para ler um numero entre um minimo e maximo
-int Utilities::readInt(int min, int max) {
+int readInt(int min, int max) {
 
 	bool validInput = false;
 	int option;
@@ -97,7 +88,7 @@ int Utilities::readInt(int min, int max) {
 
 }
 
-void Utilities::clearScreen_param(int x) {
+void clearScreen_param(int x) {
 
 	COORD upperLeftCorner = { 0, (short)x };
 	DWORD charsWritten;
@@ -122,7 +113,7 @@ void Utilities::clearScreen_param(int x) {
 
 
 // espera que o utilizador prima ENTER
-void Utilities::getEnter() {
+void getEnter() {
 
 	int ENTER = 13;
 	//FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
@@ -139,31 +130,31 @@ void Utilities::getEnter() {
 }
 
 
-void Utilities::white()
+void white()
 {
 	setcolor(15);
 }
 
-void Utilities::blue()
+void blue()
 {
 	setcolor(3);
 }
 
-void Utilities::grey()
+void grey()
 {
 	setcolor(7);
 }
 
-void Utilities::red()
+void red()
 {
 	setcolor(4);
 }
-void Utilities::green()
+void green()
 {
 	setcolor(2);
 }
 
-void Utilities::yellow()
+void yellow()
 {
 	setcolor(14);
 }

@@ -10,7 +10,7 @@ using namespace std;
 class Trip
 {
 private:
-	static int counter;
+	static int counter; //TODO wtf
 	int ID;
 	int driver;
 	vector<Stop> stops;

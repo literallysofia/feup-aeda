@@ -4,7 +4,7 @@ Transaction::Transaction()
 {
 }
 
-Transaction::Transaction(unsigned int id, Date date, float value)
+Transaction::Transaction(int id, Date date, float value)
 {
 	this->id = id;
 	this->date = date;
@@ -17,7 +17,7 @@ void Transaction::setID(int ID)
 	this->id = ID;
 }
 
-unsigned int Transaction::GetId() const
+int Transaction::GetId() const
 {
 	return id;
 }
