@@ -90,17 +90,21 @@ public:
 	void menuDisplayRecord();
 	void menuRunTrip();
 
-	void menuSearchUserByID();
 
 	int menuSearchUser();
 	void optionsMenuSearchUser();
+	void menuSearchUserByID();
+	void menuSearchUserByUsername();
 
 	int menuSearchTrip();
 	void optionsMenuSearchTrip();
+	void menuSearchTripByDriver();
+	void menuSearchTripByMonth();
 
 	int menuSearchTransaction();
 	void optionsMenuSearchTransaction();
-
+	void menuSearchTransactionByUser();
+	void menuSearchTransactionByMonth();
 
 
 	//User Only

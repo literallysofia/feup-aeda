@@ -34,8 +34,11 @@ public:
 	string getDestination() const;
 	vector<int> getPassengers() const;
 	void addPassenger(int idp);
+	void setDriver(int id);
+	void setDate(Date d);
 	void setStops(int pos, int userID);
 	void save(ofstream & out) const;
 	void saveAT(ofstream & out) const;
 	friend ostream& operator<<(ostream& out, const Trip &t);
+	bool operator ==(const Trip t) const;
 };
