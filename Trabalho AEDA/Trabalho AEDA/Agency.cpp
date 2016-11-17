@@ -2880,26 +2880,13 @@ void Agency::runTrip(int tripID) {
 				//se o ID � negativo, procura-se no vetor de Guest
 				if (id < 0)
 				{
-					/*for (size_t j = 0; j < Guests.size(); j++)
+					//se está na proxima paragem continua e atualiza-se o numero de stops do guest
+					if (CHECK == -1)
 					{
-						//encontrado o guest do ID respetivo
-						if (Guests[j]->getID() == id)
-						{
-							//se está na proxima paragem continua e atualiza-se o numero de stops do guest
-							if (CHECK != -1)
-							{
-								Guests[j]->updateNumStops();
-							}
-							else
-							{
-								//se nao esta é porque saiu nesta
-								Transaction trans(id, ActiveTrips[tripIndex].getDate(), (float)Guests[j]->getNumStops()); //TODO: multiplicar por valor
-								Transactions.push_back(trans);
-								usersWhoExitedAfter.push_back(id);
+						//se nao esta é porque saiu nesta
+						usersWhoExitedAfter.push_back(id);
+					}
 
-							}
-						}
-					}*/
 				}
 			}
 
@@ -3007,7 +2994,15 @@ void Agency::runTrip(int tripID) {
 
 				for (size_t i = 0; i < stops.at(stopIt).getPassengers().size(); i++)
 				{
-					cout << Users[getPos(stops.at(stopIt).getPassengers().at(i))]->getName();
+					if (stops.at(stopIt).getPassengers()[i] == -1)
+					{
+						cout << "Guest";
+					}
+					else
+					{
+						cout << Users[getPos(stops.at(stopIt).getPassengers().at(i))]->getName();
+					}
+
 					if (i != stops.at(stopIt).getPassengers().size() - 1)
 					{
 						cout << ", ";
