@@ -61,13 +61,12 @@ public:
 	singleton_instance = NULL;
 	instance()->importInfo();
 	}*/
-	
-	vector<User *> getUsers();
 
 	//Menu's
 
 	void registerUser();
 	void loginUser();
+	void loginGuest();
 
 	//Admin Only
 	int mainMenu_Admin();
@@ -114,8 +113,8 @@ public:
 	void optionsMenuAccount();
 	void menuAddBuddy();
 
-	int menuCreateTrip();
-	int menuJoinTrip();
+	void menuCreateTrip();
+	void menuJoinTrip();
 	void showRecTrips(vector<Trip> &recTrips, vector<Trip> &buddieTrips, vector<string> &stopCodes);
 
 
@@ -149,6 +148,11 @@ public:
 	//Functions
 	void addUser(User* u);
 	void addBuddy();
+	float deposit();
+	void endMonth();
+	time_t getUnixCode(Date &d, Hour &h);
+
+	//Trip Related
 	void addTrip();
 	void joinTrip();
 	vector<Trip> searchTrip(vector<string> &stopCodes, Date &tripDate);
@@ -157,9 +161,7 @@ public:
 	bool hasBuddies(Trip &recTrip);
 	void chooseTrip(vector<Trip> &recTrips, vector<Trip> &buddieTrips, vector<string> &stopCodes);
 	void runTrip(int tripID);
-	float deposit();
-	void endMonth();
-	time_t getUnixCode(Date &d, Hour &h);
+	void joinTripGuest();
 
 	//Displays
 	void displayUsers();

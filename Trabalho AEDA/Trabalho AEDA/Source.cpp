@@ -71,14 +71,12 @@ void optionsWelcomeMenu()
 		{
 		case 1:
 			Agency::instance()->registerUser();
-			//TODO register link
 			break;
 		case 2:
 			Agency::instance()->loginUser();
-			//TODO login link
 			break;
 		case 3:
-			//TODO guest link
+			Agency::instance()->loginGuest();
 			break;
 		}
 }
