@@ -301,7 +301,7 @@ void Agency::optionsMainMenu_Admin() {
 			menuDisplayRecord();
 			break;
 		case 3:
-			menuDisplayTransactions();
+			optionsMenuDTrans();
 			break;
 		case 4:
 			menuDisplayBuddies();
@@ -498,19 +498,6 @@ void Agency::menuDisplayBuddies() {
 	return;
 }
 
-void Agency::menuDisplayTransactions() {
-	ut.clearScreen();
-	ut.menuHeader();
-	cout << "|~~~                     ";  ut.grey(); cout << "TRANSACTIONS";  ut.white(); cout << "                  ~~~|" << endl
-		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-	ut.grey(); cout << setw(5) << "ID" << setw(27) << "Date" << setw(22) << "Value" << endl;
-	ut.blue(); cout << "-----------------------------------------------------------" << endl;
-	ut.white();  displayTransactions();
-	ut.blue(); cout << "-----------------------------------------------------------" << endl;
-	ut.red(); cout << "\n Press enter to go back."; ut.white(); getchar(); getchar();
-	return;
-}
-
 void Agency::menuDisplayStops() {
 	ut.clearScreen();
 	ut.menuHeader();
@@ -535,6 +522,57 @@ void Agency::menuDisplayRecord()
 	ut.white();  displayRecord();
 	ut.blue(); cout << "-----------------------------------------------------------" << endl;
 	ut.red(); cout << "\n Press enter to go back."; ut.white(); getchar(); getchar();
+	return;
+}
+
+int Agency::menuDisplayTransactions() {
+	ut.clearScreen();
+	ut.menuHeader();
+	cout << "|~~~                     ";  ut.grey(); cout << "TRANSACTIONS";  ut.white(); cout << "                  ~~~|" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+	ut.grey(); cout << setw(5) << "ID" << setw(27) << "Date" << setw(22) << "Value" << endl;
+	ut.blue(); cout << "-----------------------------------------------------------" << endl;
+	ut.white();  displayTransactions();
+	ut.blue(); cout << "-----------------------------------------------------------" << endl; ut.white();
+	cout << setw(23) << "1. Collect Payment\n";
+	ut.blue(); cout << "-----------------------------------------------------------" << endl;  ut.white();
+	cout << "|~~~                               ";  ut.grey(); cout << "< 0. Return >";  ut.white(); cout << "       ~~~|" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl << endl;
+
+	unsigned short int option;
+	cout << "Type your choice: ";
+	cin >> option;
+
+	while (cin.fail() || (option > 1) || (option < 0))
+	{
+		if (cin.eof())
+		{
+			cin.clear();
+			return 0;
+		}
+		cin.clear();
+		cin.ignore(1000, '\n');
+		ut.red(); cout << "> Invalid choice!" << endl;
+		ut.white(); cout << "Please try again: ";
+		cin >> option;
+	}
+
+
+	if (option == 0)
+		return 0;
+	return option;
+}
+
+void Agency::optionsMenuDTrans()
+{
+	unsigned short int option;
+	while (option = menuDisplayTransactions())
+		switch (option)
+		{
+		case 1:
+			endMonth();
+			break;
+		}
 	return;
 }
 
@@ -857,16 +895,20 @@ int Agency::menuAccount()
 		Users.at(getPos(sessionID))->getName() << setw(13) << Users.at(getPos(sessionID))->getBalance() << setw(12) << 1 << endl;
 
 	ut.blue(); cout << "-----------------------------------------------------------" << endl;  ut.grey();
-	cout << setw(20) << "1. Deposit" << setw(31) << "2. smth else" << endl; ut.white();
+	cout << setw(15) << "1. Deposit\n"; ut.white();
 	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
 		<< "|~~~                                 ";  ut.grey(); cout << "< 0. Return >";  ut.white(); cout << "     ~~~|" << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl << endl;
+
+	if (Users.at(getPos(sessionID))->getBalance() <= 0) {
+		ut.red(); cout << "WARNING: You need to deposit in your account!\n\n\n"; ut.white();
+	}
 
 	unsigned short int option;
 	cout << "Type your choice: ";
 	cin >> option;
 
-	while (cin.fail() || (option < 0) || ((option > 2)))
+	while (cin.fail() || (option < 0) || ((option > 1)))
 	{
 		if (cin.eof())
 		{
@@ -894,10 +936,8 @@ void Agency::optionsMenuAccount()
 		case 1:
 			deposit();
 			break;
-		case 2:
-			//idk
-			break;
 		}
+	return;
 }
 
 void Agency::menuAddBuddy()
@@ -2124,11 +2164,12 @@ void Agency::chooseTrip(vector<Trip> &recTrips, vector<Trip> &buddieTrips, vecto
 float Agency::deposit()
 {
 	float value;
-	ut.yellow(); cout << "\n > "; ut.grey(); cout << "Insert the amount of money you want to deposit in your account: "; ut.white();
+	ut.yellow(); cout << "\n > "; ut.grey(); cout << "Insert the amount of money you want to deposit in your account (max 200): "; ut.white();
 	cin >> value;
 
-	if ((value > 0) && (value < 500)) {
+	if ((value > 0) && (value < 201)) {
 		Users.at(sessionPos)->deposit(value);
+		//TODO: adicionar transacao
 		ut.yellow(); cout << "\n Success!"; ut.white();
 	}
 	else {
@@ -2138,6 +2179,35 @@ float Agency::deposit()
 	cin.clear();
 	cin.ignore(1000, '\n');
 	return 0;
+}
+
+
+//retorna o total do mes
+void Agency::endMonth() {
+
+	typename vector<User *>::iterator it;
+	float totalMonth = 0;
+
+	for (it = Users.begin(); it != Users.end(); it++) {
+
+		totalMonth += (*it)->payment();
+
+		//criar e adicionar transacao
+		int id = Transactions.at(Transactions.size() - 1).GetId() + 1;
+		Date currentDate;
+		currentDate.setCurrent();
+
+		Transaction trans(id, currentDate, totalMonth);
+		Transactions.push_back(trans);
+		(*it)->resetTrips();
+		totalMonth = 0;
+	}
+
+	ut.yellow(); cout << "\n Success! All the transactions were made!\n"; ut.white();
+	Sleep(2000);
+	cin.clear();
+	cin.ignore(1000, '\n');
+	return;
 }
 
 /*
@@ -2293,23 +2363,7 @@ ut.getEnter();
 }
 */
 
-/*
-//retorna o total do mes
-float Agency::endMonth() {
 
-typename vector<User *>::iterator it;
-float totalMonth = 0;
-
-for (it = users.begin(); it != users.end(); it++) {
-
-totalMonth += (*it)->payment();
-(*it)->resetTrips();   //s� tem efeito nos passenger
-
-}
-
-return totalMonth;
-}
-*/
 time_t Agency::getUnixCode(Date &d, Hour &h) {
 
 	time_t ret;

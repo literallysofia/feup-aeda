@@ -20,7 +20,7 @@ protected:
 	string username;
 	string password;
 	float balance; //saldo disponivel na conta
-	static int maintenanceFee;
+	static float maintenanceFee;
 	vector <User *> buddies;
 	
 public:
@@ -41,7 +41,8 @@ public:
 	virtual string getFirst() const;
 	virtual string getLast() const;
 	
-	virtual void payment();
+	virtual float payment();
+	void resetTrips();
 	void addBuddy(User * user);
 	void deleteBuddies() { buddies.clear(); }
 	vector<User *> getBuddies() const { return buddies; };
@@ -56,7 +57,7 @@ private:
 public:
 	Driver(int ID, string name, float balance, string username, string password);
 	int getNumSeats() const;		//apenas retorna o numero de lugares dados pelo utilizador,
-	void payment();
+	float payment();
 	bool car() const;
 	/*
 	void setNumSeats(unsigned int num) { numSeats = num; };   //é perguntado ao utilizador aquando de inscricao
@@ -74,7 +75,6 @@ public:
 	Passenger(int ID, string name, float balance, string username, string password);
 	int getNumTrips() const;
 	void setNumTrips();
-	void payment();
+	float payment();
 	bool car() const;
-	void resetTrips(void);
 };

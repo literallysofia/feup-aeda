@@ -85,9 +85,11 @@ public:
 	void optionsMenuSearch();
 
 	void menuDisplayBuddies();
-	void menuDisplayTransactions();
 	void menuDisplayStops();
 	void menuDisplayRecord();
+
+	int menuDisplayTransactions();
+	void optionsMenuDTrans();
 
 	void menuSearchUserByID();
 
@@ -154,6 +156,7 @@ public:
 	void chooseTrip(vector<Trip> &recTrips, vector<Trip> &buddieTrips, vector<string> &stopCodes);
 	//void runTrip(int tripID);
 	float deposit();
+	void endMonth();
 	time_t getUnixCode(Date &d, Hour &h);
 
 	//Displays
@@ -169,9 +172,6 @@ public:
 	void readUsers(std::ifstream & infile);    //TODO
 
 	void readTrips(std::ifstream & infile);
-
-
-	float endMonth();
 	*/
 
 };

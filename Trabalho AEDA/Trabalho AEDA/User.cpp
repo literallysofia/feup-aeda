@@ -1,7 +1,7 @@
 #include "User.h"
 
 /*USER CLASS*/
-int User::maintenanceFee = 20;
+float User::maintenanceFee = 10;
 
 User::User()
 {
@@ -61,9 +61,14 @@ void User::deposit(float value)
 	balance += value;
 }
 
-void User::payment()
+float User::payment()
 {
-	return;
+	return 0.00;
+}
+
+void User::resetTrips()
+{
+	//numTrips = 0;
 }
 
 void User::addBuddy(User * user)
@@ -112,9 +117,11 @@ int Driver::getNumSeats() const
 	return numSeats;
 }
 
-void Driver::payment()
+float Driver::payment()
 {
 	balance -= maintenanceFee;
+	
+	return maintenanceFee;
 }
 
 bool Driver::car() const
@@ -141,47 +148,13 @@ void Passenger::setNumTrips()
 	numTrips++;
 }
 
-void Passenger::payment()
+float Passenger::payment()
 {
-	balance -= (maintenanceFee + numTrips); //TODO metodo de pagamento estupido
+	balance -= (maintenanceFee + (numTrips * 2)); //paga 2 euros por viagem - desconto de socio
+	return (maintenanceFee + (numTrips * 2));
 }
 
 bool Passenger::car() const
 {
 	return false;
 }
-
-void Passenger::resetTrips(void)
-{
-	numTrips = 0;
-}
-
-/*bool Passenger::searchTrip(vector<Trip> &vec)  //vec = vetor das viagens da agencia
-{
-	unsigned int posBeg = -1, posEnd = -1;
-	for (size_t i = 0; i < vec.size(); i++)
-	{
-		vector<string> stops = vec[i].getStops();
-		for (unsigned int j = 0; j < stops.size(); i++)
-		{
-			if (stops[j] == this->first)
-				posBeg = j;
-
-			if (stops[j] == this->last)
-				posEnd = j;
-		}
-
-		//se ambos os indices foram atualizados
-		if (posBeg != -1 && posEnd != -1)
-			//se a paragem inicial do guest vem antes da final, para a viagem indicada, return true;
-			if (posBeg < posEnd) {
-				this->currentTrip = vec[i].getID();
-				vec[i].addPassenger(this->ID);
-				return true;
-			}
-
-	}
-
-	//nenhuma das condiçoes de aceitação foi obtida
-	return false;
-}*/
