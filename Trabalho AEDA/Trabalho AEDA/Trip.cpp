@@ -60,6 +60,16 @@ string Trip::getDestination() const
 	return stops.at(stops.size() - 1).getCode();
 }
 
+void Trip::setDriver(int id)
+{
+	driver = id;
+}
+
+void Trip::setDate(Date d)
+{
+	this->date = d;
+}
+
 void Trip::setStops(int pos, int userID)
 {
 	for (unsigned int i = 0; i < stops.size(); i++) {
@@ -67,7 +77,6 @@ void Trip::setStops(int pos, int userID)
 			stops.at(i).decAvailableSeats();
 			stops.at(i).addPassenger(userID);
 		}
-
 	}
 	return;
 }
@@ -128,4 +137,15 @@ void Trip::saveAT(ofstream & out) const {
 		<< getDate() << ";"
 		<< getStart() << ";"
 		<< getEnd() << endl;
+}
+
+bool Trip::operator ==(const Trip t) const {
+
+	if (this->ID == t.ID || this->driver == t.driver 
+		//||this->date == t.date)
+		)
+		return true;
+	else
+		return false;
+
 }

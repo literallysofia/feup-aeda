@@ -170,11 +170,11 @@ void Agency::registerUser()
 	int nID = getLastId() + 1;
 
 	if ((type == "y") || (type == "Y")) {
-		User *u1 = new Driver(nID, name, 0.00, username, password);
+		User *u1 = new Driver(nID, name, 0.00, username, password, 0);
 		addUser(u1);
 	}
 	else {
-		User *u1 = new Passenger(nID, name, 0.00, username, password);
+		User *u1 = new Passenger(nID, name, 0.00, username, password, 0);
 		addUser(u1);
 	}
 
@@ -257,9 +257,10 @@ int Agency::mainMenu_Admin() {
 	ut.menuHeader();
 	cout << "|~~~                   ";  ut.grey(); cout << "ADMINISTRATION";  ut.white(); cout << "                  ~~~|" << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
-		<< setw(18) << "1. Users" << setw(30) << "4. Relationships" << endl
-		<< setw(24) << "2. Trip Record" << setw(16) << "5. Stops" << endl
-		<< setw(25) << "3. Transactions" << setw(16) << "6. Search" << endl;
+		<< setw(18) << "1. Users" << setw(21) << "5. Stops" << endl
+		<< setw(24) << "2. Trip Record" << setw(16) << "6. Search" << endl
+		<< setw(25) << "3. Transactions" << setw(23) << "7. Run Trip by ID" << endl
+		<< setw(26) << "4. Relationships" << setw(30) << endl;
 	ut.blue(); cout << "-----------------------------------------------------------" << endl;  ut.white();
 	cout << "|~~~                               ";  ut.grey(); cout << "< 0. Logout >";  ut.white(); cout << "       ~~~|" << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl << endl;
@@ -268,7 +269,7 @@ int Agency::mainMenu_Admin() {
 	cout << "Type your choice: ";
 	cin >> option;
 
-	while (cin.fail() || (option > 6) || (option < 0))
+	while (cin.fail() || (option > 7) || (option < 0))
 	{
 		if (cin.eof())
 		{
@@ -311,6 +312,9 @@ void Agency::optionsMainMenu_Admin() {
 			break;
 		case 6:
 			optionsMenuSearch();
+			break;
+		case 7:
+			menuRunTrip();
 			break;
 		}
 	return;
@@ -376,6 +380,7 @@ void Agency::menuDisplayUsersByUsername() {
 
 	ut.clearScreen();
 	vector<User*> UsersV = Users;
+
 	sort(UsersV.begin(), UsersV.end(), [](User* a, User* b) {return a->getUsername() < b->getUsername(); });
 
 	ut.menuHeader();
@@ -525,6 +530,7 @@ void Agency::menuDisplayRecord()
 	return;
 }
 
+
 int Agency::menuDisplayTransactions() {
 	ut.clearScreen();
 	ut.menuHeader();
@@ -576,9 +582,44 @@ void Agency::optionsMenuDTrans()
 	return;
 }
 
-void Agency::menuSearchUserByID() {
+void Agency::menuRunTrip()
+{
+	ut.clearScreen();
+	ut.menuHeader();
+	cout << "|~~~                     ";  ut.grey(); cout << "RUN TRIP";  ut.white(); cout << "                   ~~~|" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+	ut.grey(); cout << setw(3) << "ID" << setw(8) << "Driver" << setw(8) << "Origin" << setw(10) << "Destination" << setw(9) << "Date" << setw(11) << "Start" << setw(7) << "End" << endl;
+	ut.blue(); cout << "-----------------------------------------------------------" << endl;
+	ut.white();  displayActiveTrips();
+	ut.blue(); cout << "-----------------------------------------------------------" << endl;
+	ut.yellow(); cout << "\n Choose a trip to run: "; ut.white();
+	
+	int TripID;
+	vector<int> tripsAvailableID;
 
-	//TODO: NAO FUNCIONA O VETOR NAO � BEM PASSADO
+	for (size_t i = 0; i < ActiveTrips.size(); i++)
+	{
+		tripsAvailableID.push_back(ActiveTrips[i].getID());
+	}
+
+	while (1)
+	{
+		cin >> TripID;
+
+		if (find(tripsAvailableID.begin() , tripsAvailableID.end() , TripID) != tripsAvailableID.end())
+		{
+			runTrip(TripID);
+			return;
+		}
+		else
+		{
+			ut.red(); cout << "[ERROR] No active trip with that ID. Try again.\n"; ut.white(); 
+			cin.clear();
+		}
+	}
+}
+
+void Agency::menuSearchUserByID() {
 
 	ut.clearScreen();
 	ut.menuHeader();
@@ -638,11 +679,79 @@ void Agency::menuSearchUserByID() {
 	else cout << setw(10) << "[ ]" << endl;
 
 	ut.blue(); cout << "-----------------------------------------------------------" << endl;
-	ut.red(); cout << "\n Press enter to go back."; ut.white(); getchar(); getchar();
+	ut.red(); cout << "\n Press any key to go back."; ut.white(); getchar();
 	cin.clear();
 	cin.ignore(1000, '\n');
 	//TODO: VER MELHOR
 }
+
+void Agency::menuSearchUserByUsername() {
+
+	ut.clearScreen();
+	ut.menuHeader();
+	cout << "|~~~                     ";  ut.grey(); cout << "SEARCH USER";  ut.white(); cout << "                   ~~~|" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+
+	int  pos;
+	string input;
+
+	cout << endl << "Username of the person you are searching for: ";  cin >> input;
+	cout << endl;
+
+	while (cin.fail())
+	{
+		if (cin.eof())
+		{
+			cin.clear();
+			return;
+		}
+
+		cin.clear();
+		cin.ignore(1000, '\n');
+		ut.red(); cout << "> Invalid Input!" << endl;
+		ut.white(); cout << "Try again: ";
+		cin >> input;
+	}
+
+
+	User *u = new User();
+	u->setUsername(input);
+
+	if (sequentialSearch(Users, u) != -1)
+		pos = sequentialSearch(Users, u);
+	else {
+		ut.red(); cerr << "> User with that username not found." << endl; ut.white();
+		Sleep(2000);
+		cin.clear();
+		cin.ignore(1000, '\n');
+		return;
+	}
+
+	ut.clearScreen();
+	ut.menuHeader();
+	cout << "|~~~                     ";  ut.grey(); cout << "User Info";  ut.white(); cout << "                     ~~~|" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+	ut.grey(); cout << setw(5) << "ID" << setw(10) << "User" << setw(16) << "Name" << setw(16) << "Balance" << setw(10) << "Driver" << endl;
+	ut.blue(); cout << "-----------------------------------------------------------" << endl;
+	ut.white();
+	cout << setw(5) << Users.at(pos)->getID();
+	cout << setw(10) << Users.at(pos)->getUsername();
+	cout << setw(20) << Users.at(pos)->getName();
+	cout << setw(10) << setprecision(2) << fixed << Users.at(pos)->getBalance();
+
+	if (Users.at(pos)->car())
+		cout << setw(10) << "[X]" << endl;
+	else cout << setw(10) << "[ ]" << endl;
+
+	ut.blue(); cout << "-----------------------------------------------------------" << endl;
+	ut.red(); cout << "\n Press any key to go back."; ut.white(); getchar();
+	cin.clear();
+	cin.ignore(1000, '\n');
+	//TODO: VER MELHOR
+}
+
+
+
 
 
 int Agency::menuSearchUser() {
@@ -693,7 +802,7 @@ void Agency::optionsMenuSearchUser() {
 			menuSearchUserByID();
 			break;
 		case 2:
-			//by username
+			menuSearchUserByUsername();
 			break;
 		}
 }
@@ -702,11 +811,10 @@ int Agency::menuSearchTrip() {
 
 	ut.clearScreen();
 	ut.menuHeader();
-	cout << "|~~~                    ";  ut.grey(); cout << "SEARCH TRIP";  ut.white(); cout << "                    ~~~|" << endl
+	cout << "|~~~                   ";  ut.grey(); cout << "SEARCH TRIPS";  ut.white(); cout << "                    ~~~|" << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
-		<< setw(23) << "1. By User ID" << endl
-		<< setw(20) << "2. By Date" << endl
-		<< setw(26) << "3. Between Dates" << endl;
+		<< setw(22) << "1. By Driver" << endl
+		<< setw(21) << "2. By Month" << endl;
 	ut.blue(); cout << "-----------------------------------------------------------" << endl;  ut.white();
 	cout << "|~~~                               ";  ut.grey(); cout << "< 0. Return >";  ut.white(); cout << "       ~~~|" << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl << endl;
@@ -742,16 +850,150 @@ void Agency::optionsMenuSearchTrip() {
 		switch (option)
 		{
 		case 1:
-			//by user
+			menuSearchTripByDriver();
 			break;
 		case 2:
-			//by date
-			break;
-		case 3:
-			//between dates
+			menuSearchTripByMonth();
 			break;
 		}
 }
+
+void Agency::menuSearchTripByDriver() {
+
+	ut.clearScreen();
+	ut.menuHeader();
+	cout << "|~~~              ";  ut.grey(); cout << "SEARCH TRIPS BY DRIVER";  ut.white(); cout << "               ~~~|" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+
+	int id;
+
+	cout << endl << "ID of the driver: ";  cin >> id;
+	cout << endl;
+
+	while (cin.fail())
+	{
+		if (cin.eof())
+		{
+			cin.clear();
+			return;
+		}
+
+		cin.clear();
+		cin.ignore(1000, '\n');
+		ut.red(); cout << "> Invalid Input!" << endl;
+		ut.white(); cout << "Try again: ";
+		cin >> id;
+	}
+
+	bool b = false;
+
+	for (unsigned int i = 0; i < Trips.size(); i++) {
+		if (Trips.at(i).getDriver() == id)
+			b = true;
+	}
+
+	if (!b)
+	{
+		ut.red(); cerr << "> Trip with that driver not found." << endl; ut.white();
+		Sleep(2000);
+		cin.clear();
+		cin.ignore(1000, '\n');
+		return;
+	}
+
+	ut.clearScreen();
+	ut.menuHeader();
+	cout << "|~~~              ";  ut.grey(); cout << "SEARCH TRIPS BY DRIVER";  ut.white(); cout << "               ~~~|" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+	ut.grey(); cout << setw(3) << "ID" << setw(8) << "Driver" << setw(8) << "Origin" << setw(10) << "Destiny" << setw(9) << "Date" << setw(11) << "Start" << setw(7) << "End" << endl;
+	ut.blue(); cout << "-----------------------------------------------------------" << endl;
+	ut.white();
+
+	for (unsigned int i = 0; i < Trips.size(); i++)
+	{
+		if (Trips.at(i).getDriver() == id)
+			cout << Trips.at(i);
+	}
+
+	ut.blue(); cout << "-----------------------------------------------------------" << endl;
+	ut.red(); cout << "\n Press any key to go back."; ut.white();
+	getchar();
+	cin.clear();
+	cin.ignore(1000, '\n');
+	//TODO: VER MELHOR
+}
+
+void Agency::menuSearchTripByMonth() {
+
+	ut.clearScreen();
+	ut.menuHeader();
+	cout << "|~~~               ";  ut.grey(); cout << "SEARCH TRIPS BY MONTH";  ut.white(); cout << "               ~~~|" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+
+	int month;
+
+	cout << endl << "Month of the trip you are searching for: ";  cin >> month;
+	cout << endl;
+
+	while (cin.fail() || month < 1 || month > 12)
+	{
+		if (cin.eof())
+		{
+			cin.clear();
+			return;
+		}
+
+		cin.clear();
+		cin.ignore(1000, '\n');
+		ut.red(); cout << "> Invalid Month!" << endl;
+		ut.white(); cout << "Try again: ";
+		cin >> month;
+	}
+
+	bool b = false;
+
+	for (unsigned int i = 0; i < Trips.size(); i++)
+	{
+		if (Trips.at(i).getDate().getMonth() == month)
+		{
+			b = true;
+			break;
+		}
+	}
+
+
+	if (!b)
+	{
+		ut.red(); cerr << "> There were no trips in that month." << endl; ut.white();
+		Sleep(2000);
+		cin.clear();
+		cin.ignore(1000, '\n');
+		return;
+	}
+
+
+	ut.clearScreen();
+	ut.menuHeader();
+	cout << "|~~~               ";  ut.grey(); cout << "SEARCH TRIPS BY MONTH";  ut.white(); cout << "               ~~~|" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+	ut.grey(); cout << setw(3) << "ID" << setw(8) << "Driver" << setw(8) << "Origin" << setw(10) << "Destiny" << setw(9) << "Date" << setw(11) << "Start" << setw(7) << "End" << endl;
+	ut.blue(); cout << "-----------------------------------------------------------" << endl;
+	ut.white();
+
+	for (unsigned int i = 0; i < Trips.size(); i++)
+	{
+		if (Trips.at(i).getDate().getMonth() == month)
+			cout << Trips.at(i);
+	}
+
+	ut.blue(); cout << "-----------------------------------------------------------" << endl;
+	ut.red(); cout << "\n Press any key to go back."; ut.white();
+	getchar();
+	cin.clear();
+	cin.ignore(1000, '\n');
+	//TODO: VER MELHOR
+}
+
 
 int Agency::menuSearchTransaction() {
 
@@ -760,9 +1002,8 @@ int Agency::menuSearchTransaction() {
 
 	cout << "|~~~                ";  ut.grey(); cout << "SEARCH TRANSACTION";  ut.white(); cout << "                 ~~~|" << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
-		<< setw(23) << "1. By User ID" << endl
-		<< setw(20) << "2. By Date" << endl
-		<< setw(26) << "3. Between Dates" << endl;
+		<< setw(20) << "1. By User" << endl
+		<< setw(21) << "2. By Month" << endl;
 	ut.blue(); cout << "-----------------------------------------------------------" << endl;  ut.white();
 	cout << "|~~~                               ";  ut.grey(); cout << "< 0. Return >";  ut.white(); cout << "       ~~~|" << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl << endl;
@@ -800,17 +1041,148 @@ void Agency::optionsMenuSearchTransaction() {
 		switch (option)
 		{
 		case 1:
-			//by user
+			menuSearchTransactionByUser();
 			break;
 		case 2:
-			//by date
-			break;
-		case 3:
-			//between dates
+			menuSearchTransactionByMonth();
 			break;
 		}
 }
 
+void Agency::menuSearchTransactionByUser() {
+
+	ut.clearScreen();
+	ut.menuHeader();
+	cout << "|~~~            ";  ut.grey(); cout << "SEARCH TRANSACTION BY USER";  ut.white(); cout << "             ~~~|" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+
+	int id;
+
+	cout << endl << "User ID: ";  cin >> id;
+	cout << endl;
+
+	while (cin.fail())
+	{
+		if (cin.eof())
+		{
+			cin.clear();
+			return;
+		}
+
+		cin.clear();
+		cin.ignore(1000, '\n');
+		ut.red(); cout << "> Invalid Input!" << endl;
+		ut.white(); cout << "Try again: ";
+		cin >> id;
+	}
+
+	bool b = false;
+
+	for (unsigned int i = 0; i < Transactions.size(); i++) {
+		if (Transactions.at(i).GetId() == id)
+			b = true;
+	}
+
+	if (!b)
+	{
+		ut.red(); cerr << "> Transaction with that User ID not found." << endl; ut.white();
+		Sleep(2000);
+		cin.clear();
+		cin.ignore(1000, '\n');
+		return;
+	}
+
+	ut.clearScreen();
+	ut.menuHeader();
+	cout << "|~~~            ";  ut.grey(); cout << "SEARCH TRANSACTION BY USER";  ut.white(); cout << "             ~~~|" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+	ut.grey(); cout << setw(5) << "ID" << setw(25) << "Date" << setw(26) << "Value" << endl;
+	ut.blue(); cout << "-----------------------------------------------------------" << endl;
+	ut.white();
+
+	for (unsigned int i = 0; i < Transactions.size(); i++)
+	{
+		if (Transactions.at(i).GetId() == id)
+			cout << Transactions.at(i);
+	}
+
+	ut.blue(); cout << "-----------------------------------------------------------" << endl;
+	ut.red(); cout << "\n Press any key to go back."; ut.white();
+	getchar();
+	cin.clear();
+	cin.ignore(1000, '\n');
+	//TODO: VER MELHOR
+}
+
+void Agency::menuSearchTransactionByMonth() {
+
+	ut.clearScreen();
+	ut.menuHeader();
+	cout << "|~~~            ";  ut.grey(); cout << "SEARCH TRANSACTION BY MONTH";  ut.white(); cout << "            ~~~|" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+	int month;
+
+	cout << endl << "Month: ";  cin >> month;
+	cout << endl;
+
+	while (cin.fail() || month < 1 || month > 12)
+	{
+		if (cin.eof())
+		{
+			cin.clear();
+			return;
+		}
+
+		cin.clear();
+		cin.ignore(1000, '\n');
+		ut.red(); cout << "> Invalid Month!" << endl;
+		ut.white(); cout << "Try again: ";
+		cin >> month;
+	}
+
+	bool b = false;
+
+	for (unsigned int i = 0; i < Transactions.size(); i++)
+	{
+		if (Transactions.at(i).GetDate().getMonth() == month)
+		{
+			b = true;
+			break;
+		}
+	}
+
+
+	if (!b)
+	{
+		ut.red(); cerr << "> There were no transactions in that month." << endl; ut.white();
+		Sleep(2000);
+		cin.clear();
+		cin.ignore(1000, '\n');
+		return;
+	}
+
+
+	ut.clearScreen();
+	ut.menuHeader();
+	cout << "|~~~            ";  ut.grey(); cout << "SEARCH TRANSACTION BY MONTH";  ut.white(); cout << "            ~~~|" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+	ut.grey(); cout << setw(5) << "ID" << setw(25) << "Date" << setw(26) << "Value" << endl;
+	ut.blue(); cout << "-----------------------------------------------------------" << endl;
+	ut.white();
+
+	for (unsigned int i = 0; i < Transactions.size(); i++)
+	{
+		if (Transactions.at(i).GetDate().getMonth() == month)
+			cout << Transactions.at(i);
+	}
+
+	ut.blue(); cout << "-----------------------------------------------------------" << endl;
+	ut.red(); cout << "\n Press any key to go back."; ut.white();
+	getchar();
+	cin.clear();
+	cin.ignore(1000, '\n');
+	//TODO: VER MELHOR
+}
 
 
 /* MENUS USER */
@@ -1045,21 +1417,24 @@ void Agency::extractUsers()
 		{
 
 			size_t pos1 = line.find(";"); //posi�ao 1
-			string str1 = line.substr(pos1 + 1); //nome+balance+carro+user+pass
+			string str1 = line.substr(pos1 + 1); //nome+balance+carro+user+pass+nt
 			size_t pos2 = str1.find(";"); //posi�ao 2
-			string str2 = str1.substr(pos2 + 1); //balance+carro+user+pass
+			string str2 = str1.substr(pos2 + 1); //balance+carro+user+pass+nt
 			size_t pos3 = str2.find(";"); //posi�ao 3
-			string str3 = str2.substr(pos3 + 1); //balance+user+pass
+			string str3 = str2.substr(pos3 + 1); //balance+user+pass+nt
 			size_t pos4 = str3.find(";"); //posi�ao 4
-			string str4 = str3.substr(pos4 + 1); //user+pass
+			string str4 = str3.substr(pos4 + 1); //user+pass+nt
 			size_t pos5 = str4.find(";"); //posi�ao 5
+			string str5 = str4.substr(pos5 + 1); //pass+nt
+			size_t pos6 = str5.find(";"); //posi�ao 5
 
 			string ids = line.substr(0, pos1); //string id
 			string nome = str1.substr(0, pos2);
 			string scar = str2.substr(0, pos3); //string carro
 			string sbalance = str3.substr(0, pos4); //string balance
 			string user = str4.substr(0, pos5);
-			string pass = str4.substr(pos5 + 1);
+			string pass = str5.substr(0, pos6);
+			string nt_s = str5.substr(pos6 + 1); //string nro de trips
 
 			int idi = stoi(ids, nullptr, 10); //passa o id de string para int
 			bool bcar;
@@ -1069,16 +1444,18 @@ void Agency::extractUsers()
 
 			float balancef = stof(sbalance, NULL); //passa o balance de string para float
 
+			int nt = stoi(nt_s, nullptr, 10); //passa o id de string para int
+
 			if (bcar)
 			{
 				//se o User tiver carro, adiciona um novo driver
-				User *d1 = new Driver(idi, nome, balancef, user, pass);
+				User *d1 = new Driver(idi, nome, balancef, user, pass,nt);
 				Users.push_back(d1);
 			}
 			else
 			{
 				//caso contrario adiciona um novo passenger
-				User *p1 = new Passenger(idi, nome, balancef, user, pass);
+				User *p1 = new Passenger(idi, nome, balancef, user, pass,nt);
 				Users.push_back(p1);
 			}
 		}
@@ -1101,7 +1478,7 @@ void Agency::saveUsers()
 				UserFile << "1";
 			else UserFile << "0";
 
-			UserFile << ";" << Users.at(i)->getBalance() << ";" << Users.at(i)->getUsername() << ";" << Users.at(i)->getPassword() << endl;
+			UserFile << ";" << Users.at(i)->getBalance() << ";" << Users.at(i)->getUsername() << ";" << Users.at(i)->getPassword() << ";" << Users.at(i)->getNtrips() << endl;
 		}
 		UserFile.close();
 	}
@@ -1631,6 +2008,14 @@ void Agency::displayRecord()
 	for (unsigned int i = 0; i < Trips.size(); i++)
 	{
 		cout << Trips.at(i);
+	}
+}
+
+void Agency::displayActiveTrips()
+{
+	for (size_t i = 0; i < ActiveTrips.size(); i++)
+	{
+		cout << ActiveTrips.at(i) << endl;
 	}
 }
 
@@ -2181,8 +2566,6 @@ float Agency::deposit()
 	return 0;
 }
 
-
-//retorna o total do mes
 void Agency::endMonth() {
 
 	typename vector<User *>::iterator it;
@@ -2210,158 +2593,197 @@ void Agency::endMonth() {
 	return;
 }
 
-/*
 void Agency::runTrip(int tripID) {
 
-Trip t;
-int tripIndex;
-vector<int> passengersID;
+	Trip t;
+	int tripIndex;
 
-for (unsigned int i = 0; i < Trips.size(); i++)
-{
-if (Trips[i].getID() == tripID) {
-t = Trips[i];
-tripIndex = i;
-break;
-}
+	for (unsigned int i = 0; i < ActiveTrips.size(); i++)
+	{
+		if (ActiveTrips[i].getID() == tripID) {
+			t = ActiveTrips[i];
+			tripIndex = i;
+		}
+	}
+
+	vector<Stop> stops = ActiveTrips.at(tripIndex).getStops();
+
+	for (size_t stopIt = 0; stopIt < stops.size(); stopIt++)
+	{
+		string currentStop = stops.at(stopIt).getCode();
+
+		ut.clearScreen();
+		ut.menuHeader();
+		cout << "|~~~              ";  ut.grey(); cout << "RUNNING TRIP #" << ActiveTrips[tripIndex].getID();  ut.white(); cout << "            ~~~|" << endl
+			<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+		ut.blue(); cout << setw(8) << "Origin" << setw(20) << "Destination" << setw(20) << "Driver" << setw(11) << endl;
+		ut.blue(); cout << "-----------------------------------------------------------" << endl;
+		ut.white(); cout << setw(8) << ActiveTrips[tripIndex].getOrigin() << setw(18) << ActiveTrips[tripIndex].getDestination() << setw(20) << Users[getPos(t.getDriver())]->getName() << setw(11) << endl;
+
+
+		ut.green();  cout << "\n| CURRENT STOP | "; ut.white(); cout << currentStop << "\n";
+		
+		if (stopIt == 0) {
+			ut.green();  cout << "\n  Passengers onboard: "; ut.grey();
+
+			for (size_t i = 0; i < stops.at(stopIt).getPassengers().size(); i++)
+			{
+				cout << Users[getPos(stops.at(stopIt).getPassengers().at(i))]->getName();
+				if (i != stops.at(stopIt).getPassengers().size() - 1)
+				{
+					cout << ", ";
+				}
+			}
+		}
+
+		if (stopIt == stops.size() - 1)
+		{
+			ut.grey(); cout << "\n\n> Final destination reached!\n"; ut.white();
+		}
+		else {
+
+			vector<int> usersNextStop = stops.at(stopIt + 1).getPassengers();
+			//saida de passageiros
+			vector<int> usersAway;
+			unsigned int indice = 0;
+			for (unsigned int indice = 0; indice < stops.at(stopIt).getPassengers().size(); indice++)
+			{
+				int id = stops.at(stopIt).getPassengers().at(indice);
+				unsigned int vectorPos = getPos(id);
+				int CHECK = sequentialSearchNoPointer(usersNextStop, id);  //verifica que se esta na proxima paragem
+
+				//se o ID � positivo, procura-se no vetor Users
+				if (id > 0)
+				{
+
+					//se esta na proxima paragem nao acontece nada
+					if (CHECK == -1)
+					{	//se nao esta é porque saiu nesta
+						usersAway.push_back(id);
+					}
+				}
+
+				//se o ID � negativo, procura-se no vetor de Guest
+				if (id < 0)
+				{
+					for (size_t j = 0; j < Guests.size(); j++)
+					{
+						//encontrado o guest do ID respetivo
+						if (Guests[j]->getID() == id)
+						{
+							//se está na proxima paragem continua e atualiza-se o numero de stops do guest
+							if (CHECK != -1)
+							{
+								Guests[j]->updateNumStops();
+							}
+							else
+							{
+								//se nao esta é porque saiu nesta
+								Transaction trans(id, ActiveTrips[tripIndex].getDate(), (float)Guests[j]->getNumStops()); //TODO: multiplicar por valor
+								Transactions.push_back(trans);
+								usersAway.push_back(id);
+
+							}
+						}
+					}
+				}
+			}
+
+			//se houve alguma saida de passageiros
+			if (usersAway.size() != 0)
+			{
+				ut.red(); cout << "\n  ->Exited:\n\n"; ut.white();
+				for (size_t j = 0; j < usersAway.size(); j++)
+				{
+					int id = usersAway.at(j);
+
+					if (id > 0)
+					{
+						cout << "  > " << Users[getPos(usersAway[j])]->getName() << endl;
+					}
+					else
+					{
+						cout << "  > Guest" <<  endl;
+					}
+				}
+
+				cout << endl;
+
+			}
+
+			int newPass = 0;
+			if (stopIt != 0) {
+
+				vector<int> usersPreviousStop = stops[stopIt - 1].getPassengers();
+
+				///entrada de passageiros///
+				vector<int> usersOnBoard;
+
+				for (size_t k = 0; k < stops[stopIt].getPassengers().size(); k++)
+				{
+					int id = stops[stopIt].getPassengers()[k];
+					unsigned int vectorPos = getPos(id);
+
+					int CHECK = sequentialSearchNoPointer(usersPreviousStop, id);
+
+					//se o ID � positivo, procura-se no vetor Users
+					if (id > 0)
+					{
+						if (CHECK == -1)
+						{
+							//se nao estava é porque entrou nesta
+							usersOnBoard.push_back(id);
+						}
+					}
+
+					//se o ID � negativo, procura-se no vetor de Guest
+					if (id < 0)
+					{
+						if (CHECK == -1)
+						{
+							//se nao esta é porque entrou nesta
+							usersOnBoard.push_back(id);
+						}
+
+					}
+				}
+				newPass = usersOnBoard.size();
+				//se houve alguma entrada de passageiros
+				if (usersOnBoard.size() != 0)
+				{
+					ut.green(); cout << "\n->Entered:\n\n"; ut.white();
+					for (size_t l = 0; l < usersOnBoard.size(); l++)
+					{
+						if (usersOnBoard[l] > 0)
+						{
+							cout << "  > " << Users[getPos(usersOnBoard[l])]->getName() << endl;
+						}
+						else
+						{
+							cout << "  > Guest" << endl;
+						}
+					}
+
+					cout << endl;
+				}
+
+
+				if (usersAway.size() == 0 && newPass == 0)
+				{
+					ut.grey(); cout << "\n\n  > No passengers exited or entered at this stop.\n"; ut.white();
+				}
+			}
+		}
+	
+
+		//espera pelo input da tecla Enter para passar � proxima paragem
+		ut.yellow(); cout << "\n\n-> ENTER to go to the next stop <-"; ut.white();
+		ut.getEnter();
+	}
+
+	ActiveTrips.erase(ActiveTrips.begin() + tripIndex);
 }
 
-passengersID = t.getPassengers();
-vector<string> stops = t.getStops();
-
-for (size_t i = 0; i < stops.size(); i++)
-{
-string currentStop = stops.at(i);
-
-ut.clearScreen();
-ut.green(); cout << "Running trip # " << t.getID() << " :\n";
-ut.grey(); cout << "Origin: " << t.getOrigin() << endl; cout << "Destination: " << t.getDestination() << endl;
-cout << "\nDriver: " << Users[getPos(t.getID())]->getName() << " \n";
-ut.white();  cout << "\nCurrent stop is " << currentStop << "\n";
-
-if (i == t.getStops().size() - 1)
-{
-ut.blue(); cout << "Final destination reached!\n"; ut.white();
-}
-else {
-//saida de passageiros
-vector<User *> usersAway;
-
-for (size_t i = 0; i < passengersID.size(); i++)
-{
-unsigned int vectorPos = getPos(passengersID[i]);
-
-//se o ID � positivo, procura-se no vetor Users
-if (passengersID[i] > 0)
-{
-//se a ultima paragem � a atual, ele sai
-if (Users[vectorPos]->getLast() == currentStop)
-{
-usersAway.push_back(Users[vectorPos]);
-}
-}
-
-//se o ID � negativo, procura-se no vetor de Guest
-if (passengersID[i] < 0)
-{
-for (size_t j = 0; j < Guests.size(); j++)
-{
-//encontrado o guest do ID respetivo
-if (Guests[j]->getID() == passengersID[i])
-{
-//se a paragem final � a atual, ele sai
-if (Guests[j]->getEnd() == currentStop)
-{
-//criacao de um user local para ser adicionado ao vetor de entradas
-User *u = new Passenger(Guests[j]->getName());
-usersAway.push_back(u);
-//TODO: quando sair adicionar transacao
-}
-}
-}
-}
-}
-
-//se houve alguma saida de passageiros
-if (usersAway.size() > 0)
-{
-ut.red(); cout << "\n->Exited:\n"; ut.white();
-for (size_t i = 0; i < usersAway.size(); i++)
-{
-cout << usersAway[i]->getName() << endl;
-}
-
-cout << endl;
-//atualizacao do numero de lugares disponiveis
-t.setAvailableSeats(t.getNumSeats() + (int)usersAway.size());
-}
-
-///entrada de passageiros///
-vector<User *> usersOnBoard;
-
-if (t.getNumSeats() > 0)
-{
-for (size_t i = 0; i < passengersID.size(); i++)
-{
-unsigned int vectorPos = getPos(passengersID[i]);
-
-//se o ID � positivo, procura-se no vetor Users
-if (passengersID[i] > 0)
-{
-//se a primeira paragem � a atual, ele entra
-if (Users[vectorPos]->getFirst() == currentStop)
-{
-usersOnBoard.push_back(Users[vectorPos]);
-}
-}
-
-//se o ID � negativo, procura-se no vetor de Guest
-if (passengersID[i] < 0)
-{
-for (size_t j = 0; j < Guests.size(); j++)
-{
-//encontrado o guest do ID respetivo
-if (Guests[j]->getID() == passengersID[i])
-{
-//se a paragem inicial � a atual
-if (Guests[j]->getStart() == currentStop)
-{
-//criacao de um user local para ser adicionado ao vetor de entradas
-User *u = new Passenger(Guests[j]->getName());
-usersOnBoard.push_back(u);
-}
-}
-}
-}
-}
-
-//se houve alguma entrada de passageiros
-if (usersOnBoard.size() > 0)
-{
-ut.green(); cout << "\n->Entered:\n"; ut.white();
-for (size_t i = 0; i < usersOnBoard.size(); i++)
-{
-cout << usersOnBoard[i]->getName() << endl;
-}
-
-cout << endl;
-t.setAvailableSeats(t.getNumSeats() - (int)usersOnBoard.size());
-}
-}
-
-else
-{
-cout << "All seats are full at this stop.\n";
-}
-
-}
-
-//espera pelo input da tecla Enter para passar � proxima paragem
-cout << "\n\n-> ENTER to go to the next stop <-";
-ut.getEnter();
-}
-}
-*/
 
 
 time_t Agency::getUnixCode(Date &d, Hour &h) {

@@ -18,7 +18,6 @@ private:
 	Hour startTime;
 	Hour endTime;
 	//int carSeats;
-	//vector<string> stops;
 	//bool active;
 public:
 	Trip();
@@ -32,8 +31,11 @@ public:
 	Hour getEnd() const;
 	string getOrigin() const;
 	string getDestination() const;
+	void setDriver(int id);
+	void setDate(Date d);
 	void setStops(int pos, int userID);
 	void save(ofstream & out) const;
 	void saveAT(ofstream & out) const;
 	friend ostream& operator<<(ostream& out, const Trip &t);
+	bool operator ==(const Trip t) const;
 };

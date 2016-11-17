@@ -48,7 +48,7 @@ public:
 	Agency();
 	~Agency();
 
-	//Cria uma nova inst�ncia.
+	//Cria uma nova instancia.
 	static Agency* instance()
 	{
 		if (!singleton_instance)
@@ -57,7 +57,7 @@ public:
 		return singleton_instance;
 	}
 
-	//Elimina a inst�ncia atual e cria outra.
+	//Elimina a instancia atual e cria outra.
 	/*void logout() {
 	delete singleton_instance;
 	singleton_instance = NULL;
@@ -87,21 +87,25 @@ public:
 	void menuDisplayBuddies();
 	void menuDisplayStops();
 	void menuDisplayRecord();
+	void menuRunTrip();
 
 	int menuDisplayTransactions();
 	void optionsMenuDTrans();
 
-	void menuSearchUserByID();
-
 	int menuSearchUser();
 	void optionsMenuSearchUser();
+	void menuSearchUserByID();
+	void menuSearchUserByUsername();
 
 	int menuSearchTrip();
 	void optionsMenuSearchTrip();
+	void menuSearchTripByDriver();
+	void menuSearchTripByMonth();
 
 	int menuSearchTransaction();
 	void optionsMenuSearchTransaction();
-
+	void menuSearchTransactionByUser();
+	void menuSearchTransactionByMonth();
 
 
 	//User Only
@@ -154,7 +158,7 @@ public:
 	bool availableSpace(Trip &possibleTrip, vector<string> &stopCodes);
 	bool hasBuddies(Trip &recTrip);
 	void chooseTrip(vector<Trip> &recTrips, vector<Trip> &buddieTrips, vector<string> &stopCodes);
-	//void runTrip(int tripID);
+	void runTrip(int tripID);
 	float deposit();
 	void endMonth();
 	time_t getUnixCode(Date &d, Hour &h);
@@ -165,6 +169,7 @@ public:
 	void displayTransactions();
 	void displayStops();
 	void displayRecord();
+	void displayActiveTrips();
 
 	/*
 	void imprimeTrips();					//function that uses the Trips class' operator<< method to

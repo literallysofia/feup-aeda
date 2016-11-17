@@ -21,12 +21,13 @@ protected:
 	string password;
 	float balance; //saldo disponivel na conta
 	static float maintenanceFee;
+	int ntrips;
 	vector <User *> buddies;
 	
 public:
 	User();
 	User(string name);
-	User(int ID, string name, float balance, string username, string password);
+	User(int ID, string name, float balance, string username, string password,int nt);
 	~User();
 	void setUsername(string username);
 	void setID(int ID);
@@ -35,6 +36,7 @@ public:
 	string getUsername() const;
 	string getPassword() const;
 	float getBalance() const;
+	int getNtrips() const;
 	void deposit(float value);
 	virtual bool car() const;
 	virtual void addTrip(int tripID, string first, string last) {};
@@ -46,7 +48,7 @@ public:
 	void addBuddy(User * user);
 	void deleteBuddies() { buddies.clear(); }
 	vector<User *> getBuddies() const { return buddies; };
-	bool User::operator ==(const User *u) const;
+	bool operator ==(const User *u) const;
 };
 
 class Driver :
@@ -55,12 +57,12 @@ class Driver :
 private:
 	int numSeats; //TODO nao preciso disto
 public:
-	Driver(int ID, string name, float balance, string username, string password);
+	Driver(int ID, string name, float balance, string username, string password,int nt);
 	int getNumSeats() const;		//apenas retorna o numero de lugares dados pelo utilizador,
 	float payment();
 	bool car() const;
 	/*
-	void setNumSeats(unsigned int num) { numSeats = num; };   //é perguntado ao utilizador aquando de inscricao
+	void setNumSeats(unsigned int num) { numSeats = num; };   //ï¿½ perguntado ao utilizador aquando de inscricao
 	void resetTrips() {};					//nao faz nada se for Driver quando chamada por um iterador
 	*/
 };
@@ -72,7 +74,7 @@ private:
 	int numTrips;
 public:
 	Passenger(string name);
-	Passenger(int ID, string name, float balance, string username, string password);
+	Passenger(int ID, string name, float balance, string username, string password,int nt);
 	int getNumTrips() const;
 	void setNumTrips();
 	float payment();
