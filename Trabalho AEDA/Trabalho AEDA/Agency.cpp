@@ -2665,7 +2665,7 @@ void Agency::runTrip(int tripID) {
 				//se o ID � negativo, procura-se no vetor de Guest
 				if (id < 0)
 				{
-					for (size_t j = 0; j < Guests.size(); j++)
+					/*for (size_t j = 0; j < Guests.size(); j++)
 					{
 						//encontrado o guest do ID respetivo
 						if (Guests[j]->getID() == id)
@@ -2684,7 +2684,7 @@ void Agency::runTrip(int tripID) {
 
 							}
 						}
-					}
+					}*/
 				}
 			}
 

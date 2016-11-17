@@ -12,7 +12,6 @@
 #include "Utilities.h"
 #include "Tools.h"
 #include "User.h"
-#include "Guest.h"
 #include "Trip.h"
 #include "Transactions.h"
 #include "Stop.h"
@@ -39,7 +38,6 @@ private:
 	//Global Vectors
 	vector<User *> Users;
 	vector<Trip> Trips;
-	vector<Guest *> Guests;
 	vector<Trip> ActiveTrips;
 	vector<Transaction> Transactions;
 	vector<stop> stopsAvailable;
