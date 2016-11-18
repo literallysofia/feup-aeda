@@ -25,7 +25,7 @@ string insertPassword() {
 			cout << "\b \b";
 			--i;
 		}
-		if (x == '\r')
+		if (x == '\r' && i >= 5)
 		{
 			pass[i] = '\0';
 			break;

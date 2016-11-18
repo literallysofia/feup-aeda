@@ -153,6 +153,7 @@ void Agency::registerUser()
 
 	bool a = false;
 	while (!a) {
+		red(); cout << "\n WARNING: "; grey(); cout << "Password lenght should be at least 5.\n\n";
 		yellow(); cout << "    > "; grey(); cout << "Enter password: "; white();
 		password = insertPassword();
 		yellow(); cout << "\n    > "; grey(); cout << "Confirm password: "; white();
@@ -162,6 +163,20 @@ void Agency::registerUser()
 	}
 
 	yellow(); cout << "\n\n    > "; grey(); cout << "Enter name: "; white(); cin.ignore(); getline(cin, name);
+
+	while (cin.fail() || name.empty()) {
+
+		if (cin.eof())
+		{
+			cin.clear();
+			clearScreen();
+			return;
+		}
+		cin.clear();
+		red(); cout << "\n Not a valid name!" << endl;
+		white(); cout << " Please try again: ";
+		getline(cin, name);
+	}
 
 	int nID = getLastId() + 1;
 
