@@ -1,4 +1,4 @@
-1;Teste Um;1;4.4;test1;ptest1;1
+1;Teste Um;1;4.4;test1;ptest1;0
 2;Teste Dois;0;0;test2;ptest2;0
 3;Teste Tres;1;0;test3;ptest3;0
 4;Teste Quatro;1;0;test4;ptest4;0

@@ -272,7 +272,7 @@ int Agency::mainMenu_Admin() {
 		<< setw(18) << "1. Users" << setw(21) << "5. Stops" << endl
 		<< setw(24) << "2. Trip Record" << setw(16) << "6. Search" << endl
 		<< setw(25) << "3. Transactions" << setw(23) << "7. Run Trip by ID" << endl
-		<< setw(26) << "4. Relationships" << setw(30) << endl;
+		<< setw(24) << "4. Friendships" << setw(30) << endl;
 	blue(); cout << "-----------------------------------------------------------" << endl;  white();
 	cout << "|~~~                               ";  grey(); cout << "< 0. Logout >";  white(); cout << "       ~~~|" << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl << endl;
@@ -500,7 +500,7 @@ void Agency::optionsMenuSearch() {
 void Agency::menuDisplayBuddies() {
 	clearScreen();
 	menuHeader();
-	cout << "|                      ";  grey(); cout << "RELATIONSHIPS";  white(); cout << "                      |" << endl;
+	cout << "|                       ";  grey(); cout << "FRIENDSHIPS";  white(); cout << "                       |" << endl;
 	blue(); cout << "-----------------------------------------------------------" << endl;
 	white();  displayBuddies();
 	blue(); cout << "-----------------------------------------------------------" << endl;
@@ -1225,14 +1225,20 @@ int Agency::menuAccount()
 {
 	clearScreen();
 	menuHeader();
-	cout << "|                          ";  grey(); cout << "ACCOUNT";  white(); cout << "                          |" << endl
+	cout << "|                        ";  grey(); cout << "ACCOUNT";  white(); cout << "                          |" << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-	grey(); cout << setw(5) << "ID" << setw(10) << "User" << setw(13) << "Name" << setw(15) << "Balance" << setw(13) << "Num Cars" << endl;
+	grey(); cout << setw(5) << "ID" << setw(10) << "User" << setw(16) << "Name" << setw(16) << "Balance" << setw(10) << "Driver" << endl;
 	blue(); cout << "-----------------------------------------------------------" << endl;
 	white();
 
-	cout << setw(5) << Users.at(getPos(sessionID))->getID() << setw(10) << Users.at(getPos(sessionID))->getUsername() << setw(15) <<
-		Users.at(getPos(sessionID))->getName() << setw(13) << Users.at(getPos(sessionID))->getBalance() << setw(12) << 1 << endl;
+	cout << setw(5) << Users.at(getPos(sessionID))->getID();
+	cout << setw(10) << Users.at(getPos(sessionID))->getUsername();
+	cout << setw(20) << Users.at(getPos(sessionID))->getName();
+	cout << setw(10) << setprecision(2) << fixed << Users.at(getPos(sessionID))->getBalance();
+
+	if (Users.at(getPos(sessionID))->car())
+		cout << setw(10) << "[X]" << endl;
+	else cout << setw(10) << "[ ]" << endl;
 
 	blue(); cout << "-----------------------------------------------------------" << endl;  grey();
 	cout << setw(15) << "1. Deposit\n"; white();
