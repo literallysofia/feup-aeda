@@ -117,6 +117,7 @@ Driver::Driver(int ID, string name, float balance, string username, string passw
 float Driver::payment()
 {
 	balance -= maintenanceFee;
+	balance += ntrips;
 	
 	return maintenanceFee;
 }

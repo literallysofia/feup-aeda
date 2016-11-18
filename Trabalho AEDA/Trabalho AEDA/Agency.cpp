@@ -410,7 +410,7 @@ void Agency::menuDisplayUsersByUsername() {
 	}
 
 	blue(); cout << "-----------------------------------------------------------" << endl;
-	red(); cout << "\n Press enter to go back."; white(); getchar(); getchar();
+	red(); cout << "\n Press enter to go back."; white(); getEnter();
 	return;
 }
 
@@ -439,7 +439,7 @@ void Agency::menuDisplayUsersByName() {
 	}
 
 	blue(); cout << "-----------------------------------------------------------" << endl;
-	red(); cout << "\n Press enter to go back."; white(); getchar(); getchar();
+	red(); cout << "\n Press enter to go back."; white(); getEnter();
 	return;
 }
 
@@ -504,7 +504,7 @@ void Agency::menuDisplayBuddies() {
 	blue(); cout << "-----------------------------------------------------------" << endl;
 	white();  displayBuddies();
 	blue(); cout << "-----------------------------------------------------------" << endl;
-	red(); cout << "\n Press enter to go back."; white(); getchar(); getchar();
+	red(); cout << "\n Press enter to go back."; white(); getEnter();
 	return;
 }
 
@@ -517,7 +517,7 @@ void Agency::menuDisplayStops() {
 	blue(); cout << "-----------------------------------------------------------" << endl;
 	white();  displayStops();
 	blue(); cout << "-----------------------------------------------------------" << endl;
-	red(); cout << "\n Press enter to go back."; white(); getchar(); getchar();
+	red(); cout << "\n Press enter to go back."; white(); getEnter();
 	return;
 }
 
@@ -531,7 +531,7 @@ void Agency::menuDisplayRecord()
 	blue(); cout << "-----------------------------------------------------------" << endl;
 	white();  displayRecord();
 	blue(); cout << "-----------------------------------------------------------" << endl;
-	red(); cout << "\n Press enter to go back."; white(); getchar(); getchar();
+	red(); cout << "\n Press enter to go back."; white(); getEnter();
 	return;
 }
 
@@ -692,9 +692,7 @@ void Agency::menuSearchUserByID() {
 	else cout << setw(10) << "[ ]" << endl;
 
 	blue(); cout << "-----------------------------------------------------------" << endl;
-	red(); cout << "\n Press any key to go back."; white(); getchar();
-	cin.clear();
-	cin.ignore(1000, '\n');
+	red(); cout << "\n Press any key to go back."; white(); getEnter();
 	return;
 }
 
@@ -756,9 +754,7 @@ void Agency::menuSearchUserByUsername() {
 	else cout << setw(10) << "[ ]" << endl;
 
 	blue(); cout << "-----------------------------------------------------------" << endl;
-	red(); cout << "\n Press any key to go back."; white(); getchar();
-	cin.clear();
-	cin.ignore(1000, '\n');
+	red(); cout << "\n Press any key to go back."; white(); getEnter();
 	return;
 }
 
@@ -867,10 +863,7 @@ void Agency::menuSearchTripByDriver() {
 	}
 
 	blue(); cout << "-----------------------------------------------------------" << endl;
-	red(); cout << "\n Press any key to go back."; white();
-	getchar();
-	cin.clear();
-	cin.ignore(1000, '\n');
+	red(); cout << "\n Press any key to go back."; white(); getEnter();
 	return;
 }
 
@@ -937,10 +930,7 @@ void Agency::menuSearchTripByMonth() {
 	}
 
 	blue(); cout << "-----------------------------------------------------------" << endl;
-	red(); cout << "\n Press any key to go back."; white();
-	getchar();
-	cin.clear();
-	cin.ignore(1000, '\n');
+	red(); cout << "\n Press any key to go back."; white(); getEnter();
 	return;
 }
 
@@ -1052,10 +1042,7 @@ void Agency::menuSearchTransactionByUser() {
 	}
 
 	blue(); cout << "-----------------------------------------------------------" << endl;
-	red(); cout << "\n Press any key to go back."; white();
-	getchar();
-	cin.clear();
-	cin.ignore(1000, '\n');
+	red(); cout << "\n Press any key to go back."; white(); getEnter();
 	return;
 }
 
@@ -1121,10 +1108,7 @@ void Agency::menuSearchTransactionByMonth() {
 	}
 
 	blue(); cout << "-----------------------------------------------------------" << endl;
-	red(); cout << "\n Press any key to go back."; white();
-	getchar();
-	cin.clear();
-	cin.ignore(1000, '\n');
+	red(); cout << "\n Press any key to go back."; white(); getEnter();
 	return;
 }
 
