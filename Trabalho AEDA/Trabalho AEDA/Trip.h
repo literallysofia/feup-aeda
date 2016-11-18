@@ -10,15 +10,12 @@ using namespace std;
 class Trip
 {
 private:
-	static int counter; //TODO wtf
 	int ID;
 	int driver;
 	vector<Stop> stops;
 	Date date;
 	Hour startTime;
 	Hour endTime;
-	//int carSeats;
-	//bool active;
 public:
 	Trip();
 	Trip(int ID, int driver, vector<Stop> stops, Date date, Hour start, Hour end);

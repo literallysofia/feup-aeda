@@ -1,6 +1,5 @@
 #include "User.h"
 
-/*USER CLASS*/
 float User::maintenanceFee = 10;
 
 User::User()
@@ -115,14 +114,10 @@ bool User::operator ==(const User *u) const {
 Driver::Driver(int ID, string name, float balance, string username, string password, int nt) : User(ID, name, balance, username, password,nt) {
 }
 
-int Driver::getNumSeats() const
-{
-	return numSeats;
-}
-
 float Driver::payment()
 {
 	balance -= maintenanceFee;
+	balance += ntrips;
 	
 	return maintenanceFee;
 }

@@ -34,13 +34,4 @@ public:
 	bool valid() const;
 	int daysBetween(Date &other);
 	void setCurrent();
-	//friend bool operator>= (Date& d1, Date& d2); // operador de comparacao (maior ou igual)	
-	//friend bool operator!= (Date& d1, Date& d2); // operador de desigualdade
-	//friend bool validade2datas(Date& d1, Date& d2);
-	// verifica a validade das datas fornecidas
-	// @param d1 - primeira data
-	// @param d2 - segunda data	
-	// @return bool - true se ambas as datas sao validas, ou false, em caso contrario
-	// verifica se a data e valida
-	// @return bool - true se a data for valida, false caso contrario
 };

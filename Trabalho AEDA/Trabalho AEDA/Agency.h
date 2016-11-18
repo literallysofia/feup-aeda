@@ -32,10 +32,11 @@ class Agency
 private:
 	static Agency* singleton_instance;
 
+	//Formas de acesso
 	int sessionID;
 	int sessionPos;
 
-	//Global Vectors
+	//Vetores globais
 	vector<User *> Users;
 	vector<Trip> Trips;
 	vector<Trip> ActiveTrips;
@@ -55,13 +56,6 @@ public:
 		return singleton_instance;
 	}
 
-	//Elimina a instancia atual e cria outra.
-	/*void logout() {
-	delete singleton_instance;
-	singleton_instance = NULL;
-	instance()->importInfo();
-	}*/
-
 	//Menu's
 
 	void registerUser();
@@ -69,6 +63,7 @@ public:
 	void loginGuest();
 
 	//Admin Only
+
 	int mainMenu_Admin();
 	void optionsMainMenu_Admin();
 
@@ -84,7 +79,6 @@ public:
 	void menuDisplayBuddies();
 	void menuDisplayStops();
 	void menuDisplayRecord();
-	void menuRunTrip();
 
 	int menuDisplayTransactions();
 	void optionsMenuDTrans();
@@ -104,13 +98,17 @@ public:
 	void menuSearchTransactionByUser();
 	void menuSearchTransactionByMonth();
 
+	void menuRunTrip();
+
 
 	//User Only
+
 	int mainMenu_User();
 	void optionsMainMenu_User();
 
 	int menuAccount();
 	void optionsMenuAccount();
+
 	void menuAddBuddy();
 
 	void menuCreateTrip();
@@ -119,7 +117,7 @@ public:
 	void showRecTripsGuest(vector<Trip> recTrips, vector<string> stopCodes);
 
 
-	//Files
+	//Ficheiros
 
 	void extractData();
 	void saveData();
@@ -135,7 +133,7 @@ public:
 	void extractActive();
 	void saveActive();
 
-	//Basic Functions
+	//Funcoes Base
 
 	bool validUser(string username); //existe user
 	bool validPassword(int pos, string password); //verifica se password esta correta
@@ -146,10 +144,10 @@ public:
 	bool notBuddy(string bUsername);
 
 
-	//Functions
+	//Funcoes
 	void addUser(User* u);
 	void addBuddy();
-	float deposit();
+	void deposit();
 	void endMonth();
 	time_t getUnixCode(Date &d, Hour &h);
 
@@ -161,9 +159,10 @@ public:
 	bool availableSpace(Trip possibleTrip, vector<string> stopCodes);
 	bool hasBuddies(Trip recTrip);
 	void chooseTrip(vector<Trip> recTrips, vector<Trip> buddieTrips, vector<string> stopCodes);
-	void runTrip(int tripID);
 	void joinTripGuest();
 	void chooseTripGuest(vector<Trip> recTrips, vector<string> stopCodes);
+
+	void runTrip(int tripID);
 
 	//Displays
 	void displayUsers();

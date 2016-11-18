@@ -11,12 +11,6 @@ Transaction::Transaction(int id, Date date, float value)
 	this->value = value;
 }
 
-//TODO: para que?
-void Transaction::setID(int ID)
-{
-	this->id = ID;
-}
-
 int Transaction::GetId() const
 {
 	return id;
@@ -35,7 +29,11 @@ float Transaction::GetValue() const
 ostream& operator<<(ostream & out, const Transaction & t) {
 
 	out << setw(5) << t.GetId();
-	out << setw(20) << t.GetDate();
+
+	if (t.GetDate().getDay() < 10)
+		out << setw(19) << t.GetDate();
+	else out << setw(20) << t.GetDate();
+
 	out << setw(22) << setprecision(2) << fixed << t.GetValue();
 	out << endl; return out;
 }

@@ -49,16 +49,10 @@ public:
 class Driver :
 	public User
 {
-private:
-	int numSeats; //TODO nao preciso disto
 public:
 	Driver(int ID, string name, float balance, string username, string password,int nt);
-	int getNumSeats() const;		//apenas retorna o numero de lugares dados pelo utilizador,
 	float payment();
 	bool car() const;
-	/*
-	void setNumSeats(unsigned int num) { numSeats = num; };   //� perguntado ao utilizador aquando de inscricao
-	*/
 };
 
 class Passenger :
