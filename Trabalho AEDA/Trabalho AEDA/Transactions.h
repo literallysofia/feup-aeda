@@ -16,7 +16,6 @@ private:
 public:
 	Transaction();
 	Transaction (int id, Date date, float value);
-	void setID(int ID);
 	int GetId() const;
 	Date GetDate() const;
 	float GetValue() const;

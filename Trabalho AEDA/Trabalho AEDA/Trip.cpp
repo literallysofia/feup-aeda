@@ -1,7 +1,5 @@
 #include "Trip.h"
 
-int Trip::counter = 1;
-
 Trip::Trip()
 {
 }
@@ -149,12 +147,8 @@ void Trip::saveAT(ofstream & out) const {
 }
 
 bool Trip::operator ==(const Trip t) const {
-
-	if (this->ID == t.ID || this->driver == t.driver
-		//||this->date == t.date)
-		)
+	if (this->ID == t.ID || this->driver == t.driver)
 		return true;
 	else
 		return false;
-
 }

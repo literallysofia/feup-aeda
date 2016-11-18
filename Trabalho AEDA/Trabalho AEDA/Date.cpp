@@ -180,6 +180,4 @@ void Date::setCurrent() {
 	int ano = atoi(nova_data_string.substr(6, 2).c_str()) + 2000;
 
 	this->setDay(dia); this->setMonth(mes); this->setYear(ano);
-
-	///////////////
 }
