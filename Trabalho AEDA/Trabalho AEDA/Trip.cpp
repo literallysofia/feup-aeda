@@ -87,9 +87,18 @@ ostream& operator<<(ostream& out, const Trip &t) {
 	out << setw(5) << t.getDriver();
 	out << setw(9) << t.getOrigin();
 	out << setw(10) << t.getDestination();
-	out << setw(5) << t.getDate();
-	out << setw(5) << t.getStart();
-	out << setw(5) << t.getEnd();
+
+	if (t.getDate().getDay() < 10)
+		out << setw(4) << t.getDate();
+	else out << setw(5) << t.getDate();
+
+	if (t.getStart().getHour() < 10)
+		out << setw(4) << t.getStart();
+	else out << setw(5) << t.getStart();
+
+	if (t.getEnd().getHour() < 10)
+		out << setw(4) << t.getEnd();
+	else out << setw(5) << t.getEnd();
 	out << endl;
 
 	return out;
@@ -141,7 +150,7 @@ void Trip::saveAT(ofstream & out) const {
 
 bool Trip::operator ==(const Trip t) const {
 
-	if (this->ID == t.ID || this->driver == t.driver 
+	if (this->ID == t.ID || this->driver == t.driver
 		//||this->date == t.date)
 		)
 		return true;

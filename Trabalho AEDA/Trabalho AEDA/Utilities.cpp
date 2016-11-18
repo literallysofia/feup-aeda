@@ -88,29 +88,6 @@ int readInt(int min, int max) {
 
 }
 
-void clearScreen_param(int x) {
-
-	COORD upperLeftCorner = { 0, (short)x };
-	DWORD charsWritten;
-	DWORD conSize;
-	HANDLE hCon = GetStdHandle(STD_OUTPUT_HANDLE);
-	CONSOLE_SCREEN_BUFFER_INFO  csbi;
-
-	GetConsoleScreenBufferInfo(hCon, &csbi);
-	conSize = csbi.dwSize.X * csbi.dwSize.Y;
-
-	// fill with spaces
-	FillConsoleOutputCharacter(hCon, TEXT(' '), conSize, upperLeftCorner, &charsWritten);
-	GetConsoleScreenBufferInfo(hCon, &csbi);
-	FillConsoleOutputAttribute(hCon, csbi.wAttributes, conSize, upperLeftCorner, &charsWritten);
-
-	// cursor to upper left corner
-	SetConsoleCursorPosition(hCon, upperLeftCorner);
-
-}
-
-
-
 
 // espera que o utilizador prima ENTER
 void getEnter() {
