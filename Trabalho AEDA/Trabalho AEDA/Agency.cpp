@@ -1,8 +1,8 @@
 #include "Agency.h"
 
-/////////////////////
-// EXCECOES /////
-///////////////////
+/*/////////////////
+//// EXCECOES /////
+/////////////////*/
 
 class NonexistentStop
 {
@@ -89,7 +89,7 @@ ostream & operator<<(ostream &out, const PassedHour &obj)
 	out << obj.minutes << "' as passed already.\n"; return out;
 };
 
-/// PRINT DA STRUCT STOP
+// PRINT DA STRUCT STOP
 ostream & operator<<(ostream &out, const stop &e) {
 	out << "ERROR: " << e.code << " - " << e.name << endl; return out;
 };
@@ -102,9 +102,9 @@ Agency::~Agency()
 {
 }
 
-/* 
-----------------------------------------------------  MENUS
-*/
+/*///////////
+   MENUS
+//////////*/
 
 void Agency::registerUser()
 {
@@ -1212,12 +1212,7 @@ int Agency::mainMenu_User() {
 		white(); cout << "Please try again: ";
 		cin >> option;
 	}
-
-	if (option == 0) {
-		return 0;
-	}
-	else
-		return option;
+	return option;
 }
 
 void Agency::optionsMainMenu_User() {
@@ -1238,7 +1233,9 @@ void Agency::optionsMainMenu_User() {
 			menuAddBuddy();
 			break;
 		}
+	return;
 }
+
 
 int Agency::menuAccount()
 {
@@ -1280,9 +1277,6 @@ int Agency::menuAccount()
 		white(); cout << "Please try again: ";
 		cin >> option;
 	}
-
-	if (option == 0)
-		return 0;
 	return option;
 }
 
@@ -1299,6 +1293,7 @@ void Agency::optionsMenuAccount()
 	return;
 }
 
+
 void Agency::menuAddBuddy()
 {
 	clearScreen();
@@ -1308,6 +1303,7 @@ void Agency::menuAddBuddy()
 	addBuddy();
 	return;
 }
+
 
 void Agency::menuCreateTrip()
 {
@@ -1384,7 +1380,10 @@ void Agency::showRecTripsGuest(vector<Trip> recTrips, vector<string> stopCodes)
 	return;
 }
 
-/*FILES*/
+
+/*///////////
+  FICHEIROS
+///////////*/
 
 /* EXTRACT AND SAVE */
 void Agency::extractData() {
@@ -1813,7 +1812,9 @@ void Agency::saveActive()
 }
 
 
-/* FUNCTIONS */
+/*/////////
+  FUNCOES
+ ////////*/
 
 bool Agency::validUser(string username) {
 	for (unsigned int i = 0; i < Users.size(); i++) {
@@ -1874,6 +1875,8 @@ bool Agency::notBuddy(string bUsername)
 	return true;
 }
 
+
+
 void Agency::addUser(User * u)
 {
 	Users.push_back(u);
@@ -1886,6 +1889,11 @@ void Agency::addBuddy() {
 
 	//caso o username inserido: nao exista OU seja o proprio OU ja seja buddy -> NAO ADICIONA
 	if ((!validUser(buddyUsername)) || (buddyUsername == Users.at(sessionPos)->getUsername()) || (notBuddy(buddyUsername) == false)) {
+		if (cin.eof())
+		{
+			cin.clear();
+			return;
+		}
 		red();
 		if (buddyUsername == Users.at(sessionPos)->getUsername())
 			cout << "\n Sorry, you can't add yourself!\n";
@@ -1944,82 +1952,82 @@ void Agency::addBuddy() {
 			return;
 		}
 	}
-
-}
-
-void Agency::displayUsers() {
-
-	for (unsigned int i = 0; i < Users.size(); i++)
-	{
-		cout << setw(5) << Users.at(i)->getID();
-		cout << setw(10) << Users.at(i)->getUsername();
-		cout << setw(20) << Users.at(i)->getName();
-		cout << setw(10) << setprecision(2) << fixed << Users.at(i)->getBalance();
-
-		if (Users.at(i)->car())
-			cout << setw(10) << "[X]" << endl;
-		else cout << setw(10) << "[ ]" << endl;
-	}
-
 	return;
 }
 
-void Agency::displayBuddies() {
-
-	for (unsigned int i = 0; i < Users.size(); i++)
-	{
-		grey(); cout << setw(10) << "   USER"; blue(); cout << " | ";
-		white(); cout << Users.at(i)->getName() << endl;
-		grey(); cout << setw(10) << "BUDDIES"; blue(); cout << " | ";
-		white();
-		for (unsigned int j = 0; j < Users.at(i)->getBuddies().size(); j++)
-		{
-			cout << Users.at(i)->getBuddies().at(j)->getName() << ", ";
-		}
-
-		cout << endl << endl;
-	}
-
-	return;
-}
-
-void Agency::displayTransactions() {
-
-	sort(Transactions.begin(), Transactions.end(), [](Transaction &a, Transaction &b) {return a.GetDate() < b.GetDate(); });
-
-	for (unsigned int i = 0; i < Transactions.size(); i++)
-	{
-		cout << Transactions.at(i);
-	}
-
-	return;
-}
-
-void Agency::displayStops() {
-	for (unsigned int i = 0; i < stopsAvailable.size(); i++)
-	{
-		cout << setw(15) << stopsAvailable.at(i).code;
-		cout << setw(35) << stopsAvailable.at(i).name;
-		cout << endl;
-	}
-	return;
-}
-
-void Agency::displayRecord()
+void Agency::deposit()
 {
-	for (unsigned int i = 0; i < Trips.size(); i++)
+	float value;
+	yellow(); cout << "\n > "; grey(); cout << "Insert the amount of money you want to deposit in your account (max 200): "; white();
+	cin >> value;
+
+	if (cin.eof())
 	{
-		cout << Trips.at(i);
+		cin.clear();
+		return;
 	}
+
+	if ((value > 0) && (value < 201)) {
+		Users.at(sessionPos)->deposit(value);
+		yellow(); cout << "\n Success!"; white();
+	}
+	else {
+		red(); cout << "\n Not a valid value!"; white();
+	}
+	Sleep(2000);
+	cin.clear();
+	cin.ignore(1000, '\n');
+	return;
 }
 
-void Agency::displayActiveTrips()
-{
-	for (size_t i = 0; i < ActiveTrips.size(); i++)
-	{
-		cout << ActiveTrips.at(i);
+void Agency::endMonth() {
+
+	typename vector<User *>::iterator it;
+	float totalMonth = 0;
+
+	for (it = Users.begin(); it != Users.end(); it++) {
+
+		totalMonth += (*it)->payment();
+
+		//criar e adicionar transacao
+		int id = (*it)->getID();
+		Date currentDate;
+		currentDate.setCurrent();
+
+		Transaction trans(id, currentDate, totalMonth);
+		Transactions.push_back(trans);
+		(*it)->resetTrips();
+		totalMonth = 0;
 	}
+
+	yellow(); cout << "\n Success! All the transactions were made!\n"; white();
+	Sleep(2000);
+	cin.clear();
+	cin.ignore(1000, '\n');
+	return;
 }
+
+time_t Agency::getUnixCode(Date &d, Hour &h) {
+
+	time_t ret;
+	struct tm info;
+
+	info.tm_year = d.getYear() - 1900;
+	info.tm_mon = d.getMonth() - 1;
+	info.tm_mday = d.getDay();
+	info.tm_hour = h.getHour();
+	info.tm_min = h.getMinutes();
+	info.tm_sec = 0;
+	info.tm_isdst = -1;
+
+	ret = (int)mktime(&info);
+	return ret;
+}
+
+
+/*/////////////
+ TRIP RELATED
+/////////////*/
 
 void Agency::addTrip() {
 
@@ -2111,6 +2119,11 @@ void Agency::addTrip() {
 						cout << "> Day: "; cin >> day; cout << " > Month: "; cin >> month; cout << " > Year: "; cin >> year;
 						tripDate.setDay(day); tripDate.setMonth(month); tripDate.setYear(year);
 
+						if (cin.eof())
+						{
+							cin.clear();
+							return;
+						}
 
 						//se a data nao � valida
 						if (!tripDate.valid())
@@ -2157,6 +2170,13 @@ void Agency::addTrip() {
 						int hourS, minutesS;
 						yellow(); cout << "\n > "; grey(); cout << "Enter starting time:\n "; cin.clear(); white();
 						cout << "> Hour: "; cin >> hourS; cout << " > Minutes: "; cin >> minutesS;
+
+						if (cin.eof())
+						{
+							cin.clear();
+							return;
+						}
+
 						startHour.setHour(hourS); startHour.setMinutes(minutesS);
 
 						startUnix = getUnixCode(tripDate, startHour);
@@ -2198,6 +2218,12 @@ void Agency::addTrip() {
 
 						cout << "> Hour: "; cin >> hourE; cout << " > Minutes: "; cin >> minutesE;
 
+						if (cin.eof())
+						{
+							cin.clear();
+							return;
+						}
+
 						endHour.setHour(hourE); endHour.setMinutes(minutesE);
 
 						endUnix = getUnixCode(tripDate, endHour);
@@ -2231,14 +2257,6 @@ void Agency::addTrip() {
 
 				green();  cout << "\n\nStops and number of seats successfully added to your trip.\n\n"; white();
 				Sleep(2500);
-
-				/*for (unsigned int i = 0; i < Trips.size(); i++) {
-					cout << Trips.at(i).getID() << endl;
-					for (unsigned int j = 0; j < Trips.at(i).getStops().size(); j++) {
-						cout << Trips.at(i).getStops().at(j).getCode() << endl;
-					}
-				}
-				system("pause");*/
 			}
 			break;
 		}
@@ -2275,6 +2293,12 @@ void Agency::joinTrip()
 			cout << " To: ";
 			cin >> stopCode;
 			stopCode = convertUpper(stopCode);
+		}
+
+		if (cin.eof())
+		{
+			cin.clear();
+			return;
 		}
 
 		//enquanto nao tiver sido inserido o inicio e o fim (duas stops)
@@ -2320,6 +2344,13 @@ void Agency::joinTrip()
 					int day, month, year;
 					yellow(); cout << "\n > "; grey(); cout << "Enter your trip's date:\n "; cin.clear(); white();
 					cout << "> Day: "; cin >> day; cout << " > Month: "; cin >> month; cout << " > Year: "; cin >> year;
+
+					if (cin.eof())
+					{
+						cin.clear();
+						return;
+					}
+
 					tripDate.setDay(day); tripDate.setMonth(month); tripDate.setYear(year);
 
 					//se a data nao � valida
@@ -2447,7 +2478,6 @@ bool Agency::availableSpace(Trip possibleTrip, vector<string> stopCodes) { //rec
 	if (a == stopCounter)
 		return true;
 	else return false;
-
 }
 
 bool Agency::hasBuddies(Trip recTrip)
@@ -2525,15 +2555,6 @@ void Agency::chooseTrip(vector<Trip> recTrips, vector<Trip> buddieTrips, vector<
 			}
 		}
 	}
-
-	/*for (unsigned int i = 0; i < ActiveTrips.size(); i++) {
-		if (id == ActiveTrips.at(i).getID()) {
-			for (unsigned int j = 0; j < ActiveTrips.at(i).getStops().size(); j++) {
-				cout << ActiveTrips.at(i).getStops().at(j).getCode() << "/" << ActiveTrips.at(i).getStops().at(j).getAvailableSeats() << "/" <<
-					 ActiveTrips.at(i).getStops().at(j).getPassengers().size() << endl;
-			}
-		}
-	}*/
 
 	Users.at(sessionPos)->setNtrips(); //adiciona uma viagem
 	yellow(); cout << "\n Success! You were added to the trip!\n"; white();
@@ -2623,7 +2644,6 @@ void Agency::joinTripGuest() {
 					int day, month, year;
 					yellow(); cout << "\n > "; grey(); cout << "Enter your trip's date:\n "; cin.clear(); white();
 					cout << "> Day: "; cin >> day; cout << " > Month: "; cin >> month; cout << " > Year: "; cin >> year;
-					tripDate.setDay(day); tripDate.setMonth(month); tripDate.setYear(year);
 
 					if (cin.eof())
 					{
@@ -2631,6 +2651,8 @@ void Agency::joinTripGuest() {
 						clearScreen();
 						return;
 					}
+
+					tripDate.setDay(day); tripDate.setMonth(month); tripDate.setYear(year);
 
 					//se a data nao � valida
 					if (!tripDate.valid())
@@ -2762,56 +2784,6 @@ void Agency::chooseTripGuest(vector<Trip> recTrips, vector<string> stopCodes)
 	return;
 }
 
-
-
-
-
-
-float Agency::deposit()
-{
-	float value;
-	yellow(); cout << "\n > "; grey(); cout << "Insert the amount of money you want to deposit in your account (max 200): "; white();
-	cin >> value;
-
-	if ((value > 0) && (value < 201)) {
-		Users.at(sessionPos)->deposit(value);
-		yellow(); cout << "\n Success!"; white();
-	}
-	else {
-		red(); cout << "\n Not a valid value!"; white();
-	}
-	Sleep(2000);
-	cin.clear();
-	cin.ignore(1000, '\n');
-	return 0;
-}
-
-void Agency::endMonth() {
-
-	typename vector<User *>::iterator it;
-	float totalMonth = 0;
-
-	for (it = Users.begin(); it != Users.end(); it++) {
-
-		totalMonth += (*it)->payment();
-
-		//criar e adicionar transacao
-		int id = (*it)->getID();
-		Date currentDate;
-		currentDate.setCurrent();
-
-		Transaction trans(id, currentDate, totalMonth);
-		Transactions.push_back(trans);
-		(*it)->resetTrips();
-		totalMonth = 0;
-	}
-
-	yellow(); cout << "\n Success! All the transactions were made!\n"; white();
-	Sleep(2000);
-	cin.clear();
-	cin.ignore(1000, '\n');
-	return;
-}
 
 void Agency::runTrip(int tripID) {
 
@@ -3027,21 +2999,80 @@ void Agency::runTrip(int tripID) {
 	return;
 }
 
+/*/////////
+  DISPLAYS
+/////////*/
 
+void Agency::displayUsers() {
 
-time_t Agency::getUnixCode(Date &d, Hour &h) {
+	for (unsigned int i = 0; i < Users.size(); i++)
+	{
+		cout << setw(5) << Users.at(i)->getID();
+		cout << setw(10) << Users.at(i)->getUsername();
+		cout << setw(20) << Users.at(i)->getName();
+		cout << setw(10) << setprecision(2) << fixed << Users.at(i)->getBalance();
 
-	time_t ret;
-	struct tm info;
+		if (Users.at(i)->car())
+			cout << setw(10) << "[X]" << endl;
+		else cout << setw(10) << "[ ]" << endl;
+	}
 
-	info.tm_year = d.getYear() - 1900;
-	info.tm_mon = d.getMonth() - 1;
-	info.tm_mday = d.getDay();
-	info.tm_hour = h.getHour();
-	info.tm_min = h.getMinutes();
-	info.tm_sec = 0;
-	info.tm_isdst = -1;
+	return;
+}
 
-	ret = (int)mktime(&info);
-	return ret;
+void Agency::displayBuddies() {
+
+	for (unsigned int i = 0; i < Users.size(); i++)
+	{
+		grey(); cout << setw(10) << "   USER"; blue(); cout << " | ";
+		white(); cout << Users.at(i)->getName() << endl;
+		grey(); cout << setw(10) << "BUDDIES"; blue(); cout << " | ";
+		white();
+		for (unsigned int j = 0; j < Users.at(i)->getBuddies().size(); j++)
+		{
+			cout << Users.at(i)->getBuddies().at(j)->getName() << ", ";
+		}
+
+		cout << endl << endl;
+	}
+
+	return;
+}
+
+void Agency::displayTransactions() {
+
+	sort(Transactions.begin(), Transactions.end(), [](Transaction &a, Transaction &b) {return a.GetDate() < b.GetDate(); });
+
+	for (unsigned int i = 0; i < Transactions.size(); i++)
+	{
+		cout << Transactions.at(i);
+	}
+
+	return;
+}
+
+void Agency::displayStops() {
+	for (unsigned int i = 0; i < stopsAvailable.size(); i++)
+	{
+		cout << setw(15) << stopsAvailable.at(i).code;
+		cout << setw(35) << stopsAvailable.at(i).name;
+		cout << endl;
+	}
+	return;
+}
+
+void Agency::displayRecord()
+{
+	for (unsigned int i = 0; i < Trips.size(); i++)
+	{
+		cout << Trips.at(i);
+	}
+}
+
+void Agency::displayActiveTrips()
+{
+	for (size_t i = 0; i < ActiveTrips.size(); i++)
+	{
+		cout << ActiveTrips.at(i);
+	}
 }
