@@ -14,7 +14,7 @@ User::User(int ID, string name, float balance, string username, string password,
 	this->username = username;
 	this->password = password;
 	this->balance = balance;
-	this->ntrips = ntrips;
+	ntrips = nt;
 }
 
 User::~User()
