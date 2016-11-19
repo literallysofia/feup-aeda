@@ -1,0 +1,18 @@
+AMR;Amarante
+BAO;Baiao
+FGR;Felgueiras
+GDR;Gondomar
+LSD;Lousada
+MAI;Maia
+MDC;Marco de Canaveses
+MTS;Matosinhos
+PDF;Pacos de Ferreira
+PDV;Povoa de Varzim
+PFL;Penafiel
+PRD;Paredes
+PRT;Porto
+STR;Santo tirso
+TRF;Trofa
+VDC;Vila do Conde
+VLG;Valongo
+VNG;Vila Nova de Gaia
