@@ -89,6 +89,17 @@ ostream & operator<<(ostream &out, const PassedHour &obj)
 	out << obj.minutes << "' as passed already.\n"; return out;
 };
 
+class Error
+{
+public:
+	int m;
+	Error(int n) { m = n; };
+};
+ostream & operator<<(ostream &out, const Error &obj)
+{
+	out << "ERROR: Invalid Input. Try again\n"; return out;
+};
+
 // PRINT DA STRUCT STOP
 ostream & operator<<(ostream &out, const stop &e) {
 	out << "ERROR: " << e.code << " - " << e.name << endl; return out;
@@ -103,7 +114,7 @@ Agency::~Agency()
 }
 
 /*///////////
-   MENUS
+MENUS
 //////////*/
 
 void Agency::registerUser()
@@ -1387,7 +1398,7 @@ void Agency::showRecTripsGuest(vector<Trip> recTrips, vector<string> stopCodes)
 
 
 /*///////////
-  FICHEIROS
+FICHEIROS
 ///////////*/
 
 /* EXTRACT AND SAVE */
@@ -1411,7 +1422,7 @@ void Agency::saveData() {
 
 void Agency::extractUsers()
 {
-	ifstream Userfile("Users.txt");
+	ifstream Userfile("FICHEIROS\\Users.txt");
 	string line;
 
 
@@ -1472,7 +1483,7 @@ void Agency::extractUsers()
 
 void Agency::saveUsers()
 {
-	ofstream UserFile("Users.txt", ios::trunc);
+	ofstream UserFile("FICHEIROS\\Users.txt", ios::trunc);
 
 	if (UserFile.is_open())
 	{
@@ -1493,7 +1504,7 @@ void Agency::saveUsers()
 
 void Agency::extractBuddies()
 {
-	ifstream Buddiesfile("Buddies.txt");
+	ifstream Buddiesfile("FICHEIROS\\Buddies.txt");
 	string line;
 
 	if (Buddiesfile.is_open())
@@ -1540,7 +1551,7 @@ void Agency::extractBuddies()
 
 void Agency::saveBuddies()
 {
-	ofstream BuddiesFile("Buddies.txt", ios::trunc);
+	ofstream BuddiesFile("FICHEIROS\\Buddies.txt", ios::trunc);
 
 
 	if (BuddiesFile.is_open())
@@ -1569,7 +1580,7 @@ void Agency::saveBuddies()
 
 void Agency::extractTransactions() {
 
-	ifstream Transfile("Transactions.txt");
+	ifstream Transfile("FICHEIROS\\Transactions.txt");
 	string line;
 
 	int i = 0;
@@ -1609,7 +1620,7 @@ void Agency::extractTransactions() {
 
 void Agency::saveTransactions() {
 
-	ofstream TransFile("Transactions.txt", ios::trunc);
+	ofstream TransFile("FICHEIROS\\Transactions.txt", ios::trunc);
 
 	if (TransFile.is_open())
 	{
@@ -1624,7 +1635,7 @@ void Agency::saveTransactions() {
 
 void Agency::extractStops() {
 
-	ifstream Stopsfile("Stops.txt");
+	ifstream Stopsfile("FICHEIROS\\Stops.txt");
 	string line;
 
 	if (Stopsfile.is_open())
@@ -1648,7 +1659,7 @@ void Agency::extractStops() {
 void Agency::extractRecord()
 {
 
-	ifstream Recfile("Record.txt");
+	ifstream Recfile("FICHEIROS\\Record.txt");
 	string line;
 
 	if (Recfile.is_open())
@@ -1698,7 +1709,7 @@ void Agency::extractRecord()
 
 void Agency::saveRecord() {
 
-	ofstream RecordFile("Record.txt", ios::trunc);
+	ofstream RecordFile("FICHEIROS\\Record.txt", ios::trunc);
 
 	if (RecordFile.is_open())
 	{
@@ -1714,7 +1725,7 @@ void Agency::saveRecord() {
 void Agency::extractActive()
 {
 
-	ifstream Activefile("ActiveTrips.txt");
+	ifstream Activefile("FICHEIROS\\ActiveTrips.txt");
 	string line;
 
 	if (Activefile.is_open())
@@ -1802,7 +1813,7 @@ void Agency::extractActive()
 void Agency::saveActive()
 {
 
-	ofstream ActiveFile("ActiveTrips.txt", ios::trunc);
+	ofstream ActiveFile("FICHEIROS\\ActiveTrips.txt", ios::trunc);
 
 	if (ActiveFile.is_open())
 	{
@@ -1818,8 +1829,8 @@ void Agency::saveActive()
 
 
 /*/////////
-  FUNCOES
- ////////*/
+FUNCOES
+////////*/
 
 bool Agency::validUser(string username) {
 	for (unsigned int i = 0; i < Users.size(); i++) {
@@ -2012,6 +2023,13 @@ void Agency::endMonth() {
 	return;
 }
 
+void Agency::handleInput()
+{
+	cin.clear();
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	throw Error(0);
+}
+
 time_t Agency::getUnixCode(Date &d, Hour &h) {
 
 	time_t ret;
@@ -2031,7 +2049,7 @@ time_t Agency::getUnixCode(Date &d, Hour &h) {
 
 
 /*/////////////
- TRIP RELATED
+TRIP RELATED
 /////////////*/
 
 void Agency::addTrip() {
@@ -2121,7 +2139,10 @@ void Agency::addTrip() {
 						//data da viagem
 						int day, month, year;
 						yellow(); cout << "\n > "; grey(); cout << "Enter your trip's date:\n "; cin.clear(); white();
-						cout << "> Day: "; cin >> day; cout << " > Month: "; cin >> month; cout << " > Year: "; cin >> year;
+						cout << "> Day: "; cin >> day; if (cin.fail()) handleInput();
+						cout << " > Month: "; cin >> month; if (cin.fail()) handleInput();
+						cout << " > Year: "; cin >> year; if (cin.fail()) handleInput();
+
 						tripDate.setDay(day); tripDate.setMonth(month); tripDate.setYear(year);
 
 						if (cin.eof())
@@ -2161,6 +2182,10 @@ void Agency::addTrip() {
 					{
 						red(); cout << e; white();
 					}
+					catch (const Error &e)
+					{
+						red(); cout << e; white();
+					}
 
 				}
 
@@ -2174,7 +2199,8 @@ void Agency::addTrip() {
 						//hora inicio
 						int hourS, minutesS;
 						yellow(); cout << "\n > "; grey(); cout << "Enter starting time:\n "; cin.clear(); white();
-						cout << "> Hour: "; cin >> hourS; cout << " > Minutes: "; cin >> minutesS;
+						cout << "> Hour: "; cin >> hourS; if (cin.fail()) handleInput();
+						cout << " > Minutes: "; cin >> minutesS; if (cin.fail()) handleInput();
 
 						if (cin.eof())
 						{
@@ -2211,6 +2237,10 @@ void Agency::addTrip() {
 					{
 						red(); cout << e; white();
 					}
+					catch (const Error &e)
+					{
+						red(); cout << e; white();
+					}
 				}
 
 				while (1) {
@@ -2221,7 +2251,8 @@ void Agency::addTrip() {
 						int hourE, minutesE;
 						yellow(); cout << "\n > "; grey(); cout << "Please enter finish time:\n "; cin.clear(); white();
 
-						cout << "> Hour: "; cin >> hourE; cout << " > Minutes: "; cin >> minutesE;
+						cout << "> Hour: "; cin >> hourE; if (cin.fail()) handleInput();
+						cout << " > Minutes: "; cin >> minutesE; if (cin.fail()) handleInput();
 
 						if (cin.eof())
 						{
@@ -2277,7 +2308,7 @@ void Agency::joinTrip()
 	vector<Trip> possibleTrips; // que verificam data, origem e destino
 	vector<Trip> recTrips; //trips recomendadas, que tem espaco (originam da de cima)
 	vector<Trip> buddieTrips; //trips recomendadas com buddies
-	//initialize current system's date
+							  //initialize current system's date
 	currentDate.setCurrent();
 	Hour endHour, startHour, currentHour;
 	//initialize current system's date
@@ -2348,7 +2379,9 @@ void Agency::joinTrip()
 					//data da viagem
 					int day, month, year;
 					yellow(); cout << "\n > "; grey(); cout << "Enter your trip's date:\n "; cin.clear(); white();
-					cout << "> Day: "; cin >> day; cout << " > Month: "; cin >> month; cout << " > Year: "; cin >> year;
+					cout << "> Day: "; cin >> day; if (cin.fail()) handleInput();
+					cout << " > Month: "; cin >> month; if (cin.fail()) handleInput();
+					cout << " > Year: "; cin >> year; if (cin.fail()) handleInput();
 
 					if (cin.eof())
 					{
@@ -2386,6 +2419,10 @@ void Agency::joinTrip()
 					red(); cout << e; white();
 				}
 				catch (const TooLong &e)
+				{
+					red(); cout << e; white();
+				}
+				catch (const Error &e)
 				{
 					red(); cout << e; white();
 				}
@@ -2576,7 +2613,7 @@ void Agency::joinTripGuest() {
 	Date tripDate, currentDate;
 	vector<Trip> possibleTrips; // que verificam data, origem e destino
 	vector<Trip> recTrips; //trips recomendadas, que tem espaco (originam da de cima)
-	//initialize current system's date
+						   //initialize current system's date
 	currentDate.setCurrent();
 	Hour endHour, startHour, currentHour;
 	//initialize current system's date
@@ -2648,7 +2685,9 @@ void Agency::joinTripGuest() {
 					//data da viagem
 					int day, month, year;
 					yellow(); cout << "\n > "; grey(); cout << "Enter your trip's date:\n "; cin.clear(); white();
-					cout << "> Day: "; cin >> day; cout << " > Month: "; cin >> month; cout << " > Year: "; cin >> year;
+					cout << "> Day: "; cin >> day; if (cin.fail()) handleInput();
+					cout << " > Month: "; cin >> month; if (cin.fail()) handleInput();
+					cout << " > Year: "; cin >> year; if (cin.fail()) handleInput();
 
 					if (cin.eof())
 					{
@@ -2687,6 +2726,10 @@ void Agency::joinTripGuest() {
 					red(); cout << e; white();
 				}
 				catch (const TooLong &e)
+				{
+					red(); cout << e; white();
+				}
+				catch (const Error &e)
 				{
 					red(); cout << e; white();
 				}
@@ -2843,7 +2886,7 @@ void Agency::runTrip(int tripID) {
 				unsigned int vectorPos = getPos(id);
 				int CHECK = sequentialSearchNoPointer(usersNextStop, id);  //verifica que se esta na proxima paragem
 
-				//se o ID � positivo, procura-se no vetor Users
+																		   //se o ID � positivo, procura-se no vetor Users
 				if (id > 0)
 				{
 
@@ -3005,7 +3048,7 @@ void Agency::runTrip(int tripID) {
 }
 
 /*/////////
-  DISPLAYS
+DISPLAYS
 /////////*/
 
 void Agency::displayUsers() {
@@ -3035,7 +3078,13 @@ void Agency::displayBuddies() {
 		white();
 		for (unsigned int j = 0; j < Users.at(i)->getBuddies().size(); j++)
 		{
-			cout << Users.at(i)->getBuddies().at(j)->getName() << ", ";
+			cout << Users.at(i)->getBuddies().at(j)->getName();
+
+			if (j != Users.at(i)->getBuddies().size() - 1)
+			{
+				cout << ", ";
+			}
+		
 		}
 
 		cout << endl << endl;
