@@ -14,7 +14,7 @@ User::User(int ID, string name, float balance, string username, string password,
 	this->username = username;
 	this->password = password;
 	this->balance = balance;
-	ntrips = 0;
+	this->ntrips = ntrips;
 }
 
 User::~User()
@@ -89,16 +89,6 @@ void User::addBuddy(User * user)
 bool User::car() const
 {
 	return false;
-}
-
-string User::getFirst() const
-{
-	return string();
-}
-
-string User::getLast() const
-{
-	return string();
 }
 
 bool User::operator ==(const User *u) const {
