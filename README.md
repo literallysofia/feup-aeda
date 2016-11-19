@@ -7,11 +7,11 @@ AEDA1617_2MIEIC1_E
 Requisitos Obrigatórios:
 ------------------------
 - [X] Visualização dos Users
-- [ ] Visualização do histórico de viagens
-- [ ] Ficheiro: Users
-- [ ] Ficheiro: Relationships ("buddies")
-- [ ] Ficheiro: Trip Record (histórico de viagens realizadas)
-- [ ] Associar buddies
+- [X] Visualização do histórico de viagens
+- [X] Ficheiro: Users
+- [X] Ficheiro: Relationships ("buddies")
+- [X] Ficheiro: Trip Record (histórico de viagens realizadas)
+- [X] Associar buddies
 ...
 
 
