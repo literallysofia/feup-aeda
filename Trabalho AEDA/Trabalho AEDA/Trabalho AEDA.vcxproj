@@ -43,12 +43,12 @@
     <ClInclude Include="Utilities.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="ActiveTrips.txt" />
-    <Text Include="Buddies.txt" />
-    <Text Include="Record.txt" />
-    <Text Include="Stops.txt" />
-    <Text Include="Transactions.txt" />
-    <Text Include="Users.txt" />
+    <Text Include="FICHEIROS\ActiveTrips.txt" />
+    <Text Include="FICHEIROS\Buddies.txt" />
+    <Text Include="FICHEIROS\Record.txt" />
+    <Text Include="FICHEIROS\Stops.txt" />
+    <Text Include="FICHEIROS\Transactions.txt" />
+    <Text Include="FICHEIROS\Users.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F8A05EB7-9F4C-44EC-B9AD-4C55343CA238}</ProjectGuid>
