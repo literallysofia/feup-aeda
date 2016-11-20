@@ -1422,7 +1422,7 @@ void Agency::saveData() {
 
 void Agency::extractUsers()
 {
-	ifstream Userfile("FICHEIROS\\Users.txt");
+	ifstream Userfile("Users.txt");
 	string line;
 
 
@@ -1483,7 +1483,7 @@ void Agency::extractUsers()
 
 void Agency::saveUsers()
 {
-	ofstream UserFile("FICHEIROS\\Users.txt", ios::trunc);
+	ofstream UserFile("Users.txt", ios::trunc);
 
 	if (UserFile.is_open())
 	{
@@ -1504,7 +1504,7 @@ void Agency::saveUsers()
 
 void Agency::extractBuddies()
 {
-	ifstream Buddiesfile("FICHEIROS\\Buddies.txt");
+	ifstream Buddiesfile("Buddies.txt");
 	string line;
 
 	if (Buddiesfile.is_open())
@@ -1551,7 +1551,7 @@ void Agency::extractBuddies()
 
 void Agency::saveBuddies()
 {
-	ofstream BuddiesFile("FICHEIROS\\Buddies.txt", ios::trunc);
+	ofstream BuddiesFile("Buddies.txt", ios::trunc);
 
 
 	if (BuddiesFile.is_open())
@@ -1580,7 +1580,7 @@ void Agency::saveBuddies()
 
 void Agency::extractTransactions() {
 
-	ifstream Transfile("FICHEIROS\\Transactions.txt");
+	ifstream Transfile("Transactions.txt");
 	string line;
 
 	int i = 0;
@@ -1620,7 +1620,7 @@ void Agency::extractTransactions() {
 
 void Agency::saveTransactions() {
 
-	ofstream TransFile("FICHEIROS\\Transactions.txt", ios::trunc);
+	ofstream TransFile("Transactions.txt", ios::trunc);
 
 	if (TransFile.is_open())
 	{
@@ -1635,7 +1635,7 @@ void Agency::saveTransactions() {
 
 void Agency::extractStops() {
 
-	ifstream Stopsfile("FICHEIROS\\Stops.txt");
+	ifstream Stopsfile("Stops.txt");
 	string line;
 
 	if (Stopsfile.is_open())
@@ -1659,7 +1659,7 @@ void Agency::extractStops() {
 void Agency::extractRecord()
 {
 
-	ifstream Recfile("FICHEIROS\\Record.txt");
+	ifstream Recfile("Record.txt");
 	string line;
 
 	if (Recfile.is_open())
@@ -1709,7 +1709,7 @@ void Agency::extractRecord()
 
 void Agency::saveRecord() {
 
-	ofstream RecordFile("FICHEIROS\\Record.txt", ios::trunc);
+	ofstream RecordFile("Record.txt", ios::trunc);
 
 	if (RecordFile.is_open())
 	{
@@ -1725,7 +1725,7 @@ void Agency::saveRecord() {
 void Agency::extractActive()
 {
 
-	ifstream Activefile("FICHEIROS\\ActiveTrips.txt");
+	ifstream Activefile("ActiveTrips.txt");
 	string line;
 
 	if (Activefile.is_open())
@@ -1813,7 +1813,7 @@ void Agency::extractActive()
 void Agency::saveActive()
 {
 
-	ofstream ActiveFile("FICHEIROS\\ActiveTrips.txt", ios::trunc);
+	ofstream ActiveFile("ActiveTrips.txt", ios::trunc);
 
 	if (ActiveFile.is_open())
 	{

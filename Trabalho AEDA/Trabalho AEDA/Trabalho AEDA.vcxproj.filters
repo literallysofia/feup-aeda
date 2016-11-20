@@ -79,22 +79,22 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="FICHEIROS\ActiveTrips.txt">
+    <Text Include="ActiveTrips.txt">
       <Filter>Source Files\Resource Files</Filter>
     </Text>
-    <Text Include="FICHEIROS\Buddies.txt">
+    <Text Include="Buddies.txt">
       <Filter>Source Files\Resource Files</Filter>
     </Text>
-    <Text Include="FICHEIROS\Record.txt">
+    <Text Include="Record.txt">
       <Filter>Source Files\Resource Files</Filter>
     </Text>
-    <Text Include="FICHEIROS\Stops.txt">
+    <Text Include="Stops.txt">
       <Filter>Source Files\Resource Files</Filter>
     </Text>
-    <Text Include="FICHEIROS\Transactions.txt">
+    <Text Include="Transactions.txt">
       <Filter>Source Files\Resource Files</Filter>
     </Text>
-    <Text Include="FICHEIROS\Users.txt">
+    <Text Include="Users.txt">
       <Filter>Source Files\Resource Files</Filter>
     </Text>
   </ItemGroup>
