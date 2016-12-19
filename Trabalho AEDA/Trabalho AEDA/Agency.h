@@ -24,6 +24,8 @@
 #include "Stop.h"
 #include "Date.h"
 #include "SearchAndSort.h"
+#include "BST.h"
+#include "Vehicle.h"
 
 using namespace std;
 
@@ -87,6 +89,8 @@ private:
 	*/
 	vector<stop> stopsAvailable;
 	/** @} end of Agency's Info Vectors */
+
+	//BST<Vehicle> vehicles;
 
 public:
 
