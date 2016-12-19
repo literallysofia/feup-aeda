@@ -1195,10 +1195,10 @@ int Agency::mainMenu_User() {
 	cout << setw(18) << "1. Account" << setw(30) << "3. Add Buddy" << endl;
 
 	if (Users.at(sessionPos)->car()) { //caso seja driver
-		cout << setw(23) << "2. Create Trip\n";
+		cout << setw(22) << "2. Create Trip" << setw(29) << "4. Car Details\n"; 
 	}
 	else { // caso seja passenger
-		cout << setw(21) << "2. Join Trip\n";
+		cout << setw(20) << "2. Join Trip" << setw(31) << "4. Search Cars\n";
 	}
 
 	blue(); cout << "-----------------------------------------------------------" << endl;  white();
@@ -1209,7 +1209,7 @@ int Agency::mainMenu_User() {
 	cout << "Type your choice: ";
 	cin >> option;
 
-	while (cin.fail() || (option > 3) || (option < 0))
+	while (cin.fail() || (option > 4) || (option < 0))
 	{
 		if (cin.eof())
 		{
@@ -1241,6 +1241,11 @@ void Agency::optionsMainMenu_User() {
 			break;
 		case 3:
 			menuAddBuddy();
+			break;
+		case 4:
+			if (Users.at(sessionPos)->car())
+				optionsMenuCar();
+			//TODO: else searchcar
 			break;
 		}
 	return;
@@ -3130,3 +3135,87 @@ void Agency::displayActiveTrips()
 		cout << ActiveTrips.at(i);
 	}
 }
+
+void Agency::optionsMenuCar()
+{
+	unsigned short int option;
+
+	while (option = MenuCar())
+		switch (option)
+		{
+		case 1:
+			addCar();
+			break;
+		case 2:
+			//TODO: removeCar();
+			break;
+		case 3:
+			break;
+		}
+	return;
+}
+
+int Agency::MenuCar()
+{
+	clearScreen();
+	menuHeader();
+	cout << "|                       ";  grey(); cout << "CAR DETAILS";  white(); cout << "                       |" << endl;
+	blue(); cout << "-----------------------------------------------------------" << endl;
+
+	grey(); cout << setw(15) << "Brand" << setw(18) << "Model" << setw(20) << "Year" << endl;
+	blue(); cout << "-----------------------------------------------------------" << endl;
+	white();  displayCar();
+	blue(); cout << "-----------------------------------------------------------" << endl;  grey();
+	cout << setw(21) << "1. Add Car" << setw(29) << "3. Modify Car" << endl;
+	cout << setw(24) << "2. Delete Car" << endl;
+
+	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
+		<< "|~~~                                 ";  grey(); cout << "< 0. Return >";  white(); cout << "     ~~~|" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl << endl;
+
+	unsigned short int option;
+	cout << "Type your choice: ";
+	cin >> option;
+
+	while (cin.fail() || (option < 0) || ((option > 3)))
+	{
+		if (cin.eof())
+		{
+			cin.clear();
+			return 0;
+		}
+		cin.clear();
+		cin.ignore(1000, '\n');
+		red(); cout << "> Invalid choice!" << endl;
+		white(); cout << "Please try again: ";
+		cin >> option;
+	}
+	return option;
+}
+
+void Agency::displayCar() {
+	int counter = 0;
+	BSTItrIn<Vehicle> it(vehicles);
+
+	while (!it.isAtEnd()) {
+		Vehicle v1 = it.retrieve();
+		User *driver = v1.getUser();
+
+		if (driver->getID() == sessionID) {
+			cout << v1 << endl;
+			counter++;
+		}
+		it.advance();
+	}
+
+	if (counter == 0) {
+		red();
+		cout << setw(13) << "Warning: "; white();
+		cout << "You have no cars! Please add one!\n";
+	}
+
+	return;
+}
+
+//TODO: nao deixar criar viagens se nao tiver carro
+//TODO: adicionar o carro à viagem?

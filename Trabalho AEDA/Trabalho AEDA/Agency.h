@@ -647,4 +647,9 @@ public:
 	void addVehicle(Vehicle &v1) {
 		vehicles.insert(v1);
 	}
+
+	void optionsMenuCar();
+	int MenuCar();
+
+	void displayCar();
 };
