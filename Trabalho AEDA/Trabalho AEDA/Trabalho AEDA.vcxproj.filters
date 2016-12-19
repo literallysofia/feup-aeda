@@ -106,5 +106,8 @@
     <Text Include="Users.txt">
       <Filter>Source Files\Resource Files</Filter>
     </Text>
+    <Text Include="Vehicles.txt">
+      <Filter>Source Files\Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

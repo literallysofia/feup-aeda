@@ -1,0 +1,31 @@
+Audi;A3 (2)
+Audi;A8 (5)
+Audi;Q7 (7)
+Mercedes;Classe A
+Mercedes;Classe B
+Mercedes;Classe C
+BMW;Serie 1 (5)
+BMW;X3
+BMW;
+Fiat;500
+Fiat;
+Fiat;
+Honda;
+Honda;
+Honda;
+Jaguar;
+Jaguar;
+Jaguar;
+Jeep;
+Jeep;
+Jeep;
+Mini;
+Mini;
+Mini;
+Renault;
+Renault;
+Renault;
+Smart;
+Volvo;
+Volvo;
+Volvo;
