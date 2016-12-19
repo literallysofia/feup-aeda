@@ -1,10 +1,11 @@
 #include "Vehicle.h"
 
-Vehicle::Vehicle(string brand, string model, int year)
+Vehicle::Vehicle(string brand, string model, int year, User *driver)
 {
 	this->brand = brand;
 	this->model = model;
 	this->year = year;
+	this->driver = driver;
 }
 
 
