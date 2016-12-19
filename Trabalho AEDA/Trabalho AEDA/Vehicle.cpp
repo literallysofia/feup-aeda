@@ -13,6 +13,16 @@ Vehicle::~Vehicle()
 {
 }
 
+User * Vehicle::getUser() const
+{
+	return driver;
+}
+
+void Vehicle::setUser(User * d1)
+{
+	driver = d1;
+}
+
 bool Vehicle::operator<(const Vehicle & v1) const
 {
 	if ((brand == v1.brand) && (model == v1.model)) {
