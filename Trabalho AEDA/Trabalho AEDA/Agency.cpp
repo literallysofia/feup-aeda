@@ -105,7 +105,7 @@ ostream & operator<<(ostream &out, const stop &e) {
 	out << "ERROR: " << e.code << " - " << e.name << endl; return out;
 };
 
-Agency::Agency()
+Agency::Agency() : vehicles(Vehicle("","",0))
 {
 }
 

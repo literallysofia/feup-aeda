@@ -90,7 +90,7 @@ private:
 	vector<stop> stopsAvailable;
 	/** @} end of Agency's Info Vectors */
 
-	//BST<Vehicle> vehicles;
+	BST<Vehicle> vehicles;
 
 public:
 
@@ -639,4 +639,12 @@ public:
 	*/
 	void displayActiveTrips();
 	/** @} end of Display Functions */
+
+	BST<Vehicle> getVehicles() const {
+		return vehicles;
+	}
+
+	void addVehicle(Vehicle &v1) {
+		vehicles.insert(v1);
+	}
 };
