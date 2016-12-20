@@ -40,6 +40,12 @@ struct stop {
 };
 /** @} end of Stop Struct */
 
+struct cars {
+	string brand;
+	string model;
+	int seats;
+};
+
 class Agency
 {
 private:
@@ -89,6 +95,8 @@ private:
 	*/
 	vector<stop> stopsAvailable;
 	/** @} end of Agency's Info Vectors */
+
+	vector<cars> Cars;
 
 	BST<Vehicle> vehicles;
 
@@ -651,5 +659,10 @@ public:
 	void optionsMenuCar();
 	int MenuCar();
 
-	void displayCar();
+	void displayCar(); //display dos carros respetivos de um driver(user)
+	void displayCars(); //display de todos os carros reconhecidos pela agencia
+	bool carExists(string model);
+	void addCar();
+
+	void extractVehicles();
 };

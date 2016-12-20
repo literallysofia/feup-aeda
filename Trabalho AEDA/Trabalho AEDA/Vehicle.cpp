@@ -13,6 +13,21 @@ Vehicle::~Vehicle()
 {
 }
 
+string Vehicle::getBrand() const
+{
+	return brand;
+}
+
+string Vehicle::getModel() const
+{
+	return model;
+}
+
+int Vehicle::getYear() const
+{
+	return year;
+}
+
 User * Vehicle::getUser() const
 {
 	return driver;

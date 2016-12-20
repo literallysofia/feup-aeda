@@ -15,6 +15,9 @@ public:
 	Vehicle(string brand, string model, int year, User *driver);
 	~Vehicle();
 
+	string getBrand() const;
+	string getModel() const;
+	int getYear() const;
 	User* getUser() const;
 	void setUser(User* d1);
 	bool operator<(const Vehicle& v1) const;

@@ -100,12 +100,22 @@ ostream & operator<<(ostream &out, const Error &obj)
 	out << "ERROR: Invalid Input. Try again\n"; return out;
 };
 
+class NonexistentCar
+{
+public:
+	NonexistentCar() {};
+};
+ostream & operator<<(ostream &out, const NonexistentCar &obj)
+{
+	out << "ERROR: The car you tried to add isn't valid.\n"; return out;
+}
+
 // PRINT DA STRUCT STOP
 ostream & operator<<(ostream &out, const stop &e) {
 	out << "ERROR: " << e.code << " - " << e.name << endl; return out;
 };
 
-Agency::Agency() : vehicles(Vehicle("","",0, NULL))
+Agency::Agency() : vehicles(Vehicle("", "", 0, NULL))
 {
 }
 
@@ -1195,7 +1205,7 @@ int Agency::mainMenu_User() {
 	cout << setw(18) << "1. Account" << setw(30) << "3. Add Buddy" << endl;
 
 	if (Users.at(sessionPos)->car()) { //caso seja driver
-		cout << setw(22) << "2. Create Trip" << setw(29) << "4. Car Details\n"; 
+		cout << setw(22) << "2. Create Trip" << setw(29) << "4. Car Details\n";
 	}
 	else { // caso seja passenger
 		cout << setw(20) << "2. Join Trip" << setw(31) << "4. Search Cars\n";
@@ -1414,6 +1424,7 @@ void Agency::extractData() {
 	extractTransactions();
 	extractRecord();
 	extractActive();
+	extractVehicles();
 }
 
 void Agency::saveData() {
@@ -1832,6 +1843,45 @@ void Agency::saveActive()
 
 }
 
+void Agency::extractVehicles() {
+	ifstream Vehiclesfile("Vehicles.txt");
+	string line;
+
+	int i = 0;
+
+	if (Vehiclesfile.is_open())
+	{
+		if (!Cars.empty()) Cars.clear();
+
+		while (getline(Vehiclesfile, line))
+		{
+
+			size_t pos1 = line.find(";"); //posicao 1
+			string str1 = line.substr(pos1 + 1); //brand+model+seats
+			size_t pos2 = str1.find(";"); //posicao 2
+			string str2 = str1.substr(pos2 + 1); //model+seats
+			size_t pos3 = str2.find(";"); //posicao 3
+
+
+			string brand = line.substr(0, pos1);
+			string model = str1.substr(0, pos2);
+			string seats = str2.substr(0, pos3);
+
+			int num = stoi(seats, nullptr, 10);
+
+			cars someCar;
+			someCar.brand = brand;
+			someCar.model = model;
+			someCar.seats = num;
+
+			Cars.push_back(someCar); //cria um novo elemento no vector
+			i++;
+		}
+
+		Vehiclesfile.close();
+	}
+	else { red(); cerr << "ERROR: unable to open file." << endl; white(); }
+}
 
 /*/////////
 FUNCOES
@@ -3089,7 +3139,7 @@ void Agency::displayBuddies() {
 			{
 				cout << ", ";
 			}
-		
+
 		}
 
 		cout << endl << endl;
@@ -3144,7 +3194,7 @@ void Agency::optionsMenuCar()
 		switch (option)
 		{
 		case 1:
-			//TODO: addCar();
+			addCar();
 			break;
 		case 2:
 			//TODO: removeCar();
@@ -3202,7 +3252,7 @@ void Agency::displayCar() {
 		User *driver = v1.getUser();
 
 		if (driver->getID() == sessionID) {
-			cout << v1 << endl;
+			cout << setw(15) << v1.getBrand() << setw(18) << v1.getModel() << setw(20) << v1.getYear() << endl;
 			counter++;
 		}
 		it.advance();
@@ -3214,6 +3264,72 @@ void Agency::displayCar() {
 		cout << "You have no cars! Please add one!\n";
 	}
 
+	return;
+}
+
+void Agency::displayCars() {
+	for (unsigned int i = 0; i < Cars.size(); i++) {
+		cout << setw(15) << Cars.at(i).brand << setw(18) << Cars.at(i).model << setw(20) << Cars.at(i).seats << endl;
+	}
+	return;
+}
+
+bool Agency::carExists(string model) {
+	for (unsigned int i = 0; i < Cars.size(); i++) {
+		if (model == Cars.at(i).model)
+			return true;
+	}
+	return false;
+}
+
+void Agency::addCar() {
+	clearScreen();
+	menuHeader();
+	cout << "|~~~                       ";  grey(); cout << "VEHICLES";  white(); cout << "                       ~~~|" << endl
+		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+	grey(); cout << setw(15) << "Brand" << setw(18) << "Model" << setw(20) << "Seats" << endl;
+	blue(); cout << "-----------------------------------------------------------" << endl;
+	white();  displayCars();
+	blue(); cout << "-----------------------------------------------------------" << endl << endl;
+
+	yellow(); cout << " > "; grey(); cout << "Please enter your vehicle's model: "; white();
+
+	string model;
+	cin.ignore(); getline(cin, model);
+
+	try {
+		if (!carExists(model))
+			throw NonexistentCar();
+		else {
+			yellow(); cout << " > "; grey(); cout << "Please enter your vehicle's year: "; white();
+			int year;
+			cin >> year;
+
+			if (!(year > 1900 && year <= 2017))
+				throw NonexistentCar();
+			else {
+				string brand;
+
+				for (unsigned int i = 0; i < Cars.size(); i++) {
+					if (model == Cars.at(i).model)
+						brand = Cars.at(i).brand;
+				}
+
+				Vehicle v1 = Vehicle(brand, model, year, Users.at(sessionPos));
+				addVehicle(v1);
+
+				yellow(); cout << "\n Success!\n"; white();
+			}
+
+		}
+	}
+	catch (const NonexistentCar &e)
+	{
+		cout << endl;
+		red(); cout << e; white();
+	}
+
+	Sleep(2000);
 	return;
 }
 

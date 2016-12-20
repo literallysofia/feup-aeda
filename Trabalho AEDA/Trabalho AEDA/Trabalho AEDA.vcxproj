@@ -53,6 +53,7 @@
     <Text Include="Transactions.txt" />
     <Text Include="Users.txt" />
     <Text Include="Vehicles.txt" />
+    <Text Include="VehiclesTree.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F8A05EB7-9F4C-44EC-B9AD-4C55343CA238}</ProjectGuid>

@@ -1,31 +1,25 @@
-Audi;A3 (2)
-Audi;A8 (5)
-Audi;Q7 (7)
-Mercedes;Classe A
-Mercedes;Classe B
-Mercedes;Classe C
-BMW;Serie 1 (5)
-BMW;X3
-BMW;
-Fiat;500
-Fiat;
-Fiat;
-Honda;
-Honda;
-Honda;
-Jaguar;
-Jaguar;
-Jaguar;
-Jeep;
-Jeep;
-Jeep;
-Mini;
-Mini;
-Mini;
-Renault;
-Renault;
-Renault;
-Smart;
-Volvo;
-Volvo;
-Volvo;
+audi;a3;2
+audi;a8;5
+audi;q7;7
+mercedes;class a;5
+mercedes;class b;5
+bmw;serie 1;5
+bmw;x3;7
+bmw;serie 3 cabrio;4
+fiat;500;4
+fiat;punto;5
+fiat;freemont;7
+honda;civic;5
+jaguar;xe;5
+jaguar;f-pace;6
+jeep;wrangler;4
+jeep;cherokee;7
+mazda;sedan;5
+mini;cooper;4
+mini;countryman;5
+renault;clio;5
+renault;alaskan;5
+renault;symbol;7
+smart;fortwo;2
+volvo;c30;4
+volvo;xc90;7
