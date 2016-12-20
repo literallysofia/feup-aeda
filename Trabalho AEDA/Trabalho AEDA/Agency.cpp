@@ -1425,6 +1425,7 @@ void Agency::extractData() {
 	extractRecord();
 	extractActive();
 	extractVehicles();
+	extractVehiclesTree();
 }
 
 void Agency::saveData() {
@@ -1433,6 +1434,7 @@ void Agency::saveData() {
 	saveTransactions();
 	saveRecord();
 	saveActive();
+	saveTree();
 	return;
 }
 
@@ -3331,6 +3333,74 @@ void Agency::addCar() {
 
 	Sleep(2000);
 	return;
+}
+
+void Agency::extractVehiclesTree() {
+	ifstream Vehiclesfile("VehiclesTree.txt");
+	string line;
+
+	if (Vehiclesfile.is_open())
+	{
+		if (!vehicles.isEmpty()) vehicles.makeEmpty();
+
+		while (getline(Vehiclesfile, line))
+		{
+
+			size_t pos1 = line.find(";"); //posicao 1
+			string str1 = line.substr(pos1 + 1); //brand+model+year+driver
+			size_t pos2 = str1.find(";"); //posicao 2
+			string str2 = str1.substr(pos2 + 1); //model+year+driver
+			size_t pos3 = str2.find(";"); //posicao 3
+			string str3 = str2.substr(pos3 + 1); //year+driver
+			size_t pos4 = str3.find(";"); //posicao 4
+
+
+			string brand = line.substr(0, pos1);
+			string model = str1.substr(0, pos2);
+			string year = str2.substr(0, pos3);
+			string driver = str3.substr(0, pos4);
+
+			int yr = stoi(year, nullptr, 10);
+			int id = stoi(driver, nullptr, 10);
+
+			User *someDriver = new User;
+
+			for (unsigned int i = 0; i < Users.size(); i++) {
+				if (Users.at(i)->getID() == id) {
+					someDriver = Users.at(i);
+					break;
+				}
+			}
+
+			Vehicle v1 = Vehicle(brand, model, yr, someDriver);
+			addVehicle(v1);
+		}
+
+		Vehiclesfile.close();
+	}
+	else { red(); cerr << "ERROR: unable to open file." << endl; white(); }
+}
+
+void Agency::saveTree() {
+	ofstream File("VehiclesTree.txt", ios::trunc);
+	BSTItrIn<Vehicle> it(vehicles);
+
+	if (File.is_open())
+	{
+
+		while (!it.isAtEnd()) {
+			Vehicle v1 = it.retrieve();
+			User *driver = v1.getUser();
+
+			File << v1.getBrand() << ";" << v1.getModel() << ";" << v1.getYear() << ";" << driver->getID() << endl;
+
+			it.advance();
+		}
+		File.close();
+	}
+	else { red(); cerr << "ERROR: unable to open file." << endl; white(); }
+
+	return;	
 }
 
 //TODO: nao deixar criar viagens se nao tiver carro

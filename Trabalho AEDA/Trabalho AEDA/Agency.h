@@ -665,4 +665,6 @@ public:
 	void addCar();
 
 	void extractVehicles();
+	void extractVehiclesTree();
+	void saveTree();
 };

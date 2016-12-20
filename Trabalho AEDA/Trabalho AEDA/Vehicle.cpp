@@ -46,12 +46,15 @@ bool Vehicle::operator<(const Vehicle & v1) const
 		else return false;
 	}
 	else {
-		if (brand < v1.brand) {
+		if (brand == v1.brand) {
 			if (model < v1.model)
 				return true;
 			else return false;
 		}
-		else
-			return false;
+		else {
+			if (brand < v1.brand)
+				return true;
+			else return false;
+		}
 	}
 }
