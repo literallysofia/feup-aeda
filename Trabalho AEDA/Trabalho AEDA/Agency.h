@@ -663,6 +663,7 @@ public:
 	void displayCars(); //display de todos os carros reconhecidos pela agencia
 	bool carExists(string model);
 	void addCar();
+	void removeCar();
 
 	void extractVehicles();
 	void extractVehiclesTree();

@@ -3192,18 +3192,29 @@ void Agency::optionsMenuCar()
 {
 	unsigned short int option;
 
-	while (option = MenuCar())
-		switch (option)
-		{
-		case 1:
-			addCar();
-			break;
-		case 2:
-			//TODO: removeCar();
-			break;
-		case 3:
-			break;
-		}
+	try {
+		while (option = MenuCar())
+			switch (option)
+			{
+			case 1:
+				addCar();
+				break;
+			case 2:
+				removeCar();
+				break;
+			case 3:
+				break;
+			}
+	}
+	catch (const NonexistentCar &e)
+	{
+		cout << endl;
+		red(); cout << e; white();
+		Sleep(2000);
+		cin.clear();
+		cin.ignore(1000, '\n');
+	}
+
 	return;
 }
 
@@ -3299,36 +3310,65 @@ void Agency::addCar() {
 	string model;
 	cin.ignore(); getline(cin, model);
 
-	try {
-		if (!carExists(model))
+	if (!carExists(model))
+		throw NonexistentCar();
+	else {
+		yellow(); cout << " > "; grey(); cout << "Please enter your vehicle's year: "; white();
+		int year;
+		cin >> year;
+
+		if (!(year > 1900 && year <= 2017))
 			throw NonexistentCar();
 		else {
-			yellow(); cout << " > "; grey(); cout << "Please enter your vehicle's year: "; white();
-			int year;
-			cin >> year;
+			string brand;
 
-			if (!(year > 1900 && year <= 2017))
-				throw NonexistentCar();
-			else {
-				string brand;
-
-				for (unsigned int i = 0; i < Cars.size(); i++) {
-					if (model == Cars.at(i).model)
-						brand = Cars.at(i).brand;
-				}
-
-				Vehicle v1 = Vehicle(brand, model, year, Users.at(sessionPos));
-				addVehicle(v1);
-
-				yellow(); cout << "\n Success!\n"; white();
+			for (unsigned int i = 0; i < Cars.size(); i++) {
+				if (model == Cars.at(i).model)
+					brand = Cars.at(i).brand;
 			}
 
+			Vehicle v1 = Vehicle(brand, model, year, Users.at(sessionPos));
+			addVehicle(v1);
+
+			yellow(); cout << "\n Success!\n"; white();
 		}
+
 	}
-	catch (const NonexistentCar &e)
-	{
-		cout << endl;
-		red(); cout << e; white();
+
+	Sleep(2000);
+	return;
+}
+
+void Agency::removeCar()
+{
+	BSTItrIn<Vehicle> it(vehicles);
+	int flag = 0;
+
+	yellow(); cout << "\n > "; grey(); cout << "In order to remove, we need the following information. ";
+	yellow(); cout << "\n > "; grey(); cout << "Vehicle's model: "; white();
+
+	string model;
+	cin.ignore(); getline(cin, model);
+
+	yellow(); cout << "\n > "; grey(); cout << "Vehicle's year: "; white();
+	int year;
+	cin >> year;
+
+	while (!it.isAtEnd()) {
+		Vehicle v1 = it.retrieve();
+
+		if (v1.getModel() == model && v1.getYear() == year) {
+			vehicles.remove(v1);
+			flag = 1;
+			break;
+		}
+		it.advance();
+	}
+
+	if (!flag)
+		throw NonexistentCar();
+	else {
+		yellow(); cout << "\n Success!\n"; white();
 	}
 
 	Sleep(2000);
@@ -3400,7 +3440,7 @@ void Agency::saveTree() {
 	}
 	else { red(); cerr << "ERROR: unable to open file." << endl; white(); }
 
-	return;	
+	return;
 }
 
 //TODO: nao deixar criar viagens se nao tiver carro
