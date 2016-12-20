@@ -28,6 +28,7 @@ protected:
 	static float maintenanceFee;
 	int ntrips;
 	vector <User *> buddies;
+	Date lastAccess;
 	/** @} end of User data-members */
 	
 public:
@@ -87,6 +88,20 @@ public:
 	* @return int id
 	*/
 	int getID() const;
+
+	/**
+	* @brief Sets object's last access date
+	*
+	* @param Date date to set the last access to, read from file
+	*/
+	void setLastAccess(Date dt);
+
+	/**
+	* @brief Retrieves object's last access date
+	*
+	* @return Date
+	*/
+	Date getLastAccess() const;
 
 	/**
 	* @brief Retrieves object's name
@@ -248,9 +263,17 @@ public:
 	float payment();
 
 	/**
-	* @brief CHecks if object is a driver
+	* @brief Checks if object is a driver
 	*
 	* @return bool true if User has a car, false otherwise
 	*/
 	bool car() const;
+
+};
+
+/**
+* @brief struct used for hash insertion
+*/
+struct userPtr {
+	User *user;
 };

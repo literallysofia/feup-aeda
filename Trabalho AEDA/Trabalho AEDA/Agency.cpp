@@ -3130,3 +3130,43 @@ void Agency::displayActiveTrips()
 		cout << ActiveTrips.at(i);
 	}
 }
+
+void Agency::displayInactiveUsers()
+{
+	for (auto it = inactiveUsers.begin() ; it != inactiveUsers.end(); it++)
+	{
+		cout << setw(5) << it->user->getName();
+		cout << setw(10) << it->user->getUsername();
+		cout << setw(20) << it->user->getName();
+		cout << setw(10) << setprecision(2) << fixed << it->user->getBalance();
+
+		if (it->user->car())
+			cout << setw(10) << "[X]" << endl;
+		else cout << setw(10) << "[ ]" << endl;
+	}
+
+	return;
+}
+
+void Agency::addInactive(User *us1)
+{
+	userPtr ptr1;
+	ptr1.user = us1;
+	inactiveUsers.insert(ptr1);
+}
+
+void Agency::generateTable()
+{
+	Date today; today.setCurrent();
+
+	for (size_t i = 0; i < Users.size(); i++)
+	{
+		if (Users[i]->getLastAccess().daysBetween(today) > 5)
+			addInactive(Users[i]);
+	}
+}
+
+tabHInactive Agency::getInactive() const
+{
+	return tabHInactive();
+}

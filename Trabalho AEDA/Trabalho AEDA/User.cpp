@@ -36,6 +36,16 @@ int User::getID() const
 	return ID;
 }
 
+void User::setLastAccess(Date dt)
+{
+	lastAccess = dt;
+}
+
+Date User::getLastAccess() const
+{
+	return lastAccess;
+}
+
 string User::getName() const
 {
 	return name;
@@ -64,6 +74,16 @@ int User::getNtrips() const
 void User::setNtrips()
 {
 	ntrips++;
+}
+
+void User::setInactive()
+{
+	isInactive = true;
+}
+
+void User::setActive()
+{
+	isInactive = false;
 }
 
 void User::deposit(float value)
