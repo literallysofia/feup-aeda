@@ -30,7 +30,6 @@ private:
 	Hour endTime;
 	/** @} end of Trip data-members */
 
-	//priority_queue<Candidate> tripCandidates;
 
 public:
 
