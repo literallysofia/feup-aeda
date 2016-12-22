@@ -45,6 +45,9 @@
     <ClCompile Include="Stop.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Vehicle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Agency.h">
@@ -77,6 +80,12 @@
     <ClInclude Include="SearchAndSort.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BST.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vehicle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ActiveTrips.txt">
@@ -95,6 +104,12 @@
       <Filter>Source Files\Resource Files</Filter>
     </Text>
     <Text Include="Users.txt">
+      <Filter>Source Files\Resource Files</Filter>
+    </Text>
+    <Text Include="Vehicles.txt">
+      <Filter>Source Files\Resource Files</Filter>
+    </Text>
+    <Text Include="VehiclesTree.txt">
       <Filter>Source Files\Resource Files</Filter>
     </Text>
   </ItemGroup>

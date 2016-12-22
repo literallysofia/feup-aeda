@@ -24,6 +24,8 @@
 #include "Stop.h"
 #include "Date.h"
 #include "SearchAndSort.h"
+#include "BST.h"
+#include "Vehicle.h"
 
 using namespace std;
 
@@ -37,6 +39,12 @@ struct stop {
 	string name;
 };
 /** @} end of Stop Struct */
+
+struct cars {
+	string brand;
+	string model;
+	int seats;
+};
 
 class Agency
 {
@@ -87,6 +95,10 @@ private:
 	*/
 	vector<stop> stopsAvailable;
 	/** @} end of Agency's Info Vectors */
+
+	vector<cars> Cars;
+
+	BST<Vehicle> vehicles;
 
 public:
 
@@ -635,4 +647,25 @@ public:
 	*/
 	void displayActiveTrips();
 	/** @} end of Display Functions */
+
+	BST<Vehicle> getVehicles() const {
+		return vehicles;
+	}
+
+	void addVehicle(Vehicle &v1) {
+		vehicles.insert(v1);
+	}
+
+	void optionsMenuCar();
+	int MenuCar();
+
+	void displayCar(); //display dos carros respetivos de um driver(user)
+	void displayCars(); //display de todos os carros reconhecidos pela agencia
+	bool carExists(string model);
+	void addCar();
+	void removeCar();
+
+	void extractVehicles();
+	void extractVehiclesTree();
+	void saveTree();
 };
