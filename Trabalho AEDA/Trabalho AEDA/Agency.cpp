@@ -3479,3 +3479,39 @@ void Agency::extractDistances() {
 	}
 	else { red(); cerr << "ERROR: unable to open file." << endl; white(); }
 }
+
+float Agency::distanceBetweenTwoPoints(string pnt1, string pnt2) {
+
+	for (int i = 0; i < distancesVec.size(); i++) {
+
+		if ((distancesVec.at(i).pnt1 == pnt1 && distancesVec.at(i).pnt2 == pnt2) || 
+			(distancesVec.at(i).pnt1 == pnt2 && distancesVec.at(i).pnt2 == pnt1))
+		{
+			return distancesVec.at(i).km;
+		}
+	}
+
+	return -1;
+
+}
+
+float Agency::distanceRide(vector<string> v1, string pnt1) {
+
+	int j;
+
+	for (int i = 0; i < v1.size(); i++) {
+		if (v1.at(i) == pnt1) {
+			j = i;
+			break;
+		}
+	}
+
+	float sum = 0;
+
+	for (int k = 0; k + 1 <= j; k++) {
+		sum = sum + distanceBetweenTwoPoints(v1.at(k), v1.at(k + 1));
+	}
+
+	return sum;
+
+}

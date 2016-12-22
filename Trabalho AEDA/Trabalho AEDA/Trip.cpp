@@ -12,6 +12,7 @@ Trip::Trip(int ID, int driver, vector<Stop> stops, Date date, Hour start, Hour e
 	this->date = date;
 	this->startTime = start;
 	this->endTime = end;
+
 }
 
 Trip::~Trip()

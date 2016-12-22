@@ -12,6 +12,7 @@
 #include "Stop.h"
 #include "Date.h"
 #include "Hour.h"
+#include "CandidateTrip.h"
 using namespace std;
 
 class Trip
@@ -29,6 +30,8 @@ private:
 	Hour startTime;
 	Hour endTime;
 	/** @} end of Trip data-members */
+
+	priority_queue<CandidateTrip> candidateQueue;
 
 
 public:

@@ -1,18 +1,21 @@
 #include "CandidateTrip.h"
 
-CandidateTrip::CandidateTrip(User * u, User * d, float dist)
+using namespace std;
+
+
+CandidateTrip::CandidateTrip(User *u, User *d, float dist)
 {
-	user = u;
+	passanger = u;
 	driver = d;
 	distance = dist;
 }
 
-User * CandidateTrip::getUser()
+User *CandidateTrip::getPassanger()
 {
-	return user;
+	return passanger;
 }
 
-User * CandidateTrip::getDriver()
+User *CandidateTrip::getDriver()
 {
 	return driver;
 }
@@ -24,8 +27,8 @@ float CandidateTrip::getDistance() {
 
 bool CandidateTrip::areBuddies() {
 
-	for (int i; i < this->driver->getBuddies().size(); i++) {
-		if (this->driver->getBuddies().at(i) == this->user)
+	for (int i=0; i < driver->getBuddies().size(); i++) {
+		if (driver->getBuddies().at(i) == this->passanger)
 			return true;
 	}
 

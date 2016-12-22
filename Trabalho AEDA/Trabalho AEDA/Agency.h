@@ -679,4 +679,6 @@ public:
 	void saveTree();
 
 	void extractDistances();
+	float distanceBetweenTwoPoints(string pnt1, string pnt2);
+	float distanceRide(vector<string> v1, string pnt1);
 };
