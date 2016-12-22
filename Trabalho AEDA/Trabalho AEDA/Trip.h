@@ -8,6 +8,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <queue>
 #include "Stop.h"
 #include "Date.h"
 #include "Hour.h"
@@ -28,6 +29,8 @@ private:
 	Hour startTime;
 	Hour endTime;
 	/** @} end of Trip data-members */
+
+	//priority_queue<Candidate> tripCandidates;
 
 public:
 

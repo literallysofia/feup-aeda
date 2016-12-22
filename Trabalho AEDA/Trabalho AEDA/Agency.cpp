@@ -3445,3 +3445,37 @@ void Agency::saveTree() {
 
 //TODO: nao deixar criar viagens se nao tiver carro
 //TODO: adicionar o carro à viagem?
+
+
+void Agency::extractDistances() {
+
+	ifstream Distancesfile("Distances.txt");
+	string line;
+
+	if (Distancesfile.is_open())
+	{
+
+		while (getline(Distancesfile, line))
+		{
+
+			size_t pos1 = line.find(";"); //posi?ao 1
+			string str1 = line.substr(pos1 + 1); //pnt2 + km
+			size_t pos2 = str1.find(";"); //posi?ao 1
+
+			string pnt1 = line.substr(0, pos1);
+			string pnt2 = str1.substr(0, pos2);
+			string skm = str1.substr(pos2 + 1); //string de km
+
+
+			float fkm = stof(skm, NULL); //passa os km de string para float 
+
+			distanceStruct d;
+			d.pnt1 = pnt1;
+			d.pnt2 = pnt2;
+			d.km = fkm;
+			distancesVec.push_back(d);
+		}
+		Distancesfile.close();
+	}
+	else { red(); cerr << "ERROR: unable to open file." << endl; white(); }
+}
