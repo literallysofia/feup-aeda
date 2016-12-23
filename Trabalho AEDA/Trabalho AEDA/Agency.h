@@ -671,8 +671,10 @@ public:
 	void displayCar(); //display dos carros respetivos de um driver(user)
 	void displayCars(); //display de todos os carros reconhecidos pela agencia
 	bool carExists(string model);
-	void addCar();
-	void removeCar();
+	void rentCar();
+	void discardCar();
+	void tradeCar();
+	void searchCar();
 
 	void extractVehicles();
 	void extractVehiclesTree();
