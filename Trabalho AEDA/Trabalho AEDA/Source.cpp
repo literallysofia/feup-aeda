@@ -81,7 +81,7 @@ void optionsWelcomeMenu()
 
 int main()
 {
-	/*
+	
 	//Janela//
 	HWND consoleWindow = GetConsoleWindow();
 	SetWindowPos(consoleWindow, 0, 310, 150, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
@@ -89,26 +89,13 @@ int main()
 	Agency::instance()->extractData();
 
 	optionsWelcomeMenu();
-	*/
+	
 
-	//TESTES
+	//TODO: APAGAR 
+	//TESTES 
 
-	/*
-	Agency::instance()->extractDistances();
-
-	vector <string> v1;
-
-	v1.push_back("AMR");
-	v1.push_back("BAO");
-	v1.push_back("MAI");
-	v1.push_back("FGR");
-
-	float a = Agency::instance()->distanceRide(v1, "MAI");
-	cout << a << endl;*/
-
-
-	Agency::instance()->extractDistances();
-	Agency::instance()->teste();
+	//Agency::instance()->extractDistances();
+	//Agency::instance()->teste();
 
 	return 0;
 }

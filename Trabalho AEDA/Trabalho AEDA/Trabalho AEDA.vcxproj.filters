@@ -121,5 +121,8 @@
     <Text Include="Distances.txt">
       <Filter>Source Files\Resource Files</Filter>
     </Text>
+    <Text Include="CandidatesQueues.txt">
+      <Filter>Source Files\Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

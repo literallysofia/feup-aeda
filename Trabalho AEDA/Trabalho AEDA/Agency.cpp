@@ -1426,6 +1426,8 @@ void Agency::extractData() {
 	extractActive();
 	extractVehicles();
 	extractVehiclesTree();
+	extractDistances();
+	extractCandidatesQueues();
 }
 
 void Agency::saveData() {
@@ -1435,6 +1437,7 @@ void Agency::saveData() {
 	saveRecord();
 	saveActive();
 	saveTree();
+	saveCandidatesQueues();
 	return;
 }
 
@@ -3491,7 +3494,7 @@ float Agency::distanceBetweenTwoPoints(string pnt1, string pnt2) {
 		}
 	}
 
-	return -1;
+	return 0;
 
 }
 
@@ -3515,6 +3518,137 @@ float Agency::distanceRide(vector<string> v1, string pnt1) {
 	return sum;
 
 }
+
+void Agency::extractCandidatesQueues() {
+
+	ifstream Queuesfile("CandidatesQueues.txt");
+	string line;
+
+	if (Queuesfile.is_open())
+	{
+		while (getline(Queuesfile, line))
+		{
+
+			size_t pos1 = line.find(";"); //posi�ao 1
+			string str1 = line.substr(pos1 + 1); //id do driver + (id , distance)*
+			size_t pos2 = str1.find(";"); //posi�ao 2
+			string str2 = str1.substr(pos2 + 1);//(id , distance)*
+
+			string sidtrip = line.substr(0, pos1); //string id da trip
+			string siddriver = str1.substr(0, pos2); //string id do driver
+
+			string spasseng = str2;
+
+			int iidtrip = stoi(sidtrip, nullptr, 10); //passa o id de string para int
+			int iiddriver = stoi(siddriver, nullptr, 10); //passa o id de string para int
+
+			spasseng.append(";");
+
+			vector <pair <int, float>> v1;
+
+			while (!spasseng.empty()) {
+
+				size_t pos3 = spasseng.find(",");
+				string str3 = spasseng.substr(pos3 + 1);
+				size_t pos4 = str3.find(";");
+				size_t pos5 = spasseng.find(";");
+
+				int idpass = stoi(spasseng.substr(0, pos3));
+				float dist = stof(str3.substr(0, pos4), NULL);
+
+				v1.push_back(make_pair(idpass, dist));
+				spasseng.erase(0, pos5 + 1);
+			}
+
+
+			for (int m = 0; m < ActiveTrips.size(); m++) {
+
+				if (ActiveTrips.at(m).getID() == iidtrip) { // encontra a viagem
+
+					for (int i = 0; i < Users.size(); i++) {
+
+						if (Users.at(i)->getID() == iiddriver) { // encontra o driver
+
+							for (int j = 0; j < v1.size(); j++) {
+
+								for (int k = 0; k < Users.size(); k++) {
+
+									if (Users.at(k)->getID() == v1.at(j).first) { // encontra o passenger
+										CandidateTrip ct1(Users.at(k), Users.at(i), v1.at(j).second);
+										ActiveTrips.at(m).addCandidate(ct1);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+
+
+			/*
+			for (int i = 0; i < Users.size(); i++) { //corre o vertor Users
+
+				if (Users.at(i)->getID() == iiddriver) { // encontra o driver
+
+					for (int j = 0; j < v1.size(); j++) {
+
+						for (int k = 0; k < Users.size(); i++) {
+
+							if (Users.at(k)->getID() == v1.at(j).first) { // encontra o passenger
+
+								CandidateTrip ct1(Users.at(k), Users.at(i), v1.at(j).second);
+
+								for (int m = 0; m < ActiveTrips.size(); m++) {
+
+									if (ActiveTrips.at(m).getID() == iidtrip) { // encontra a viagem
+
+										//ActiveTrips.at(m).addCandidate(ct1);
+
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			*/
+		}
+
+		Queuesfile.close();
+	}
+	else { red(); cerr << "ERROR: unable to open file." << endl; white(); }
+
+}
+
+
+void Agency::saveCandidatesQueues() {
+
+	ofstream Queuesfile("CandidatesQueues.txt");
+
+	if (Queuesfile.is_open())
+	{
+		for (unsigned int i = 0; i < ActiveTrips.size(); i++)
+		{
+			priority_queue <CandidateTrip> temp = ActiveTrips.at(i).getCandidateQueue();
+
+			if (!temp.empty()) { //se nao está inicialmente vazia
+
+				Queuesfile << ActiveTrips.at(i).getID() << ";" << temp.top().getDriver()->getID();
+
+				while (!temp.empty()) {
+
+					Queuesfile << ";" << temp.top().getPassanger()->getID() << "," << temp.top().getDistance();
+					temp.pop();
+				}
+				Queuesfile << endl;
+			}
+		}
+		Queuesfile.close();
+	}
+	else { red(); cerr << "ERROR: unable to open file." << endl; white(); }
+
+}
+
 
 void Agency::teste() {
 
@@ -3556,7 +3690,7 @@ void Agency::teste() {
 	startHour.setHour(14); startHour.setMinutes(00);
 	endHour.setHour(15); endHour.setMinutes(00);
 
-	Trip t1 (0, 0, tripPlan, tripDate, startHour, endHour);
+	Trip t1(0, 0, tripPlan, tripDate, startHour, endHour);
 	Trips.push_back(t1);
 
 	vector <string> v1;
@@ -3576,10 +3710,10 @@ void Agency::teste() {
 
 	cout << "f1: " << f1 << "  f2: " << f2 << "  f3: " << f3 << "  f4: " << f4 << endl << endl;
 
-	CandidateTrip ct1 (p1, d1, f1);
-	CandidateTrip ct2 (p2, d1, f2);
-	CandidateTrip ct3 (p3, d1, f3);
-	CandidateTrip ct4 (p4, d1, f4);
+	CandidateTrip ct1(p1, d1, f1);
+	CandidateTrip ct2(p2, d1, f2);
+	CandidateTrip ct3(p3, d1, f3);
+	CandidateTrip ct4(p4, d1, f4);
 
 	//associar à fila de prioridade
 
