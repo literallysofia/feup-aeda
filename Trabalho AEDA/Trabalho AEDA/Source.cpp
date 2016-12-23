@@ -81,6 +81,7 @@ void optionsWelcomeMenu()
 
 int main()
 {
+	
 	//Janela//
 	HWND consoleWindow = GetConsoleWindow();
 	SetWindowPos(consoleWindow, 0, 310, 150, 0, 0, SWP_NOSIZE | SWP_NOZORDER);

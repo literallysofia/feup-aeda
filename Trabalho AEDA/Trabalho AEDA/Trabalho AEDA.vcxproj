@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Agency.cpp" />
+    <ClCompile Include="CandidateTrip.cpp" />
     <ClCompile Include="Date.cpp" />
     <ClCompile Include="Hour.cpp" />
     <ClCompile Include="Source.cpp" />
@@ -34,6 +35,7 @@
   <ItemGroup>
     <ClInclude Include="Agency.h" />
     <ClInclude Include="BST.h" />
+    <ClInclude Include="CandidateTrip.h" />
     <ClInclude Include="Date.h" />
     <ClInclude Include="Hour.h" />
     <ClInclude Include="SearchAndSort.h" />
@@ -48,6 +50,8 @@
   <ItemGroup>
     <Text Include="ActiveTrips.txt" />
     <Text Include="Buddies.txt" />
+    <Text Include="CandidatesQueues.txt" />
+    <Text Include="Distances.txt" />
     <Text Include="Record.txt" />
     <Text Include="Stops.txt" />
     <Text Include="Transactions.txt" />

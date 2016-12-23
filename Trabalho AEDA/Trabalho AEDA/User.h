@@ -7,7 +7,6 @@
 */
 #include <string>
 #include <vector>
-#include "Trip.h"
 #include "Transactions.h"
 
 using namespace std;
