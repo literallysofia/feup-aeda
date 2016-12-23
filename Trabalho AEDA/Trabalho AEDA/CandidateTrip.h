@@ -16,11 +16,11 @@ private:
 
 public:
 	CandidateTrip(User *u, User *d, float dist);
-	User *getPassanger();
-	User *getDriver();
-	float getDistance();
-	bool areBuddies();
-	bool operator<(CandidateTrip & ct1); 
+	User *getPassanger() const;
+	User *getDriver() const;
+	float getDistance() const;
+	bool areBuddies() const;
+	bool operator<(const CandidateTrip & ct1) const; 
 };
 
 

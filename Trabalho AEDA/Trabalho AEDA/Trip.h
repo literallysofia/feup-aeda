@@ -180,4 +180,11 @@ public:
 	*/
 	bool operator ==(const Trip t) const;
 	/** @} end of Trip Operators Functions */
+
+
+
+	priority_queue<CandidateTrip> getCandidateQueue() const;
+	void addCandidate(CandidateTrip ct);
+
 };
+

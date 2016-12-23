@@ -153,3 +153,13 @@ bool Trip::operator ==(const Trip t) const {
 	else
 		return false;
 }
+
+priority_queue<CandidateTrip> Trip::getCandidateQueue() const
+{
+	return candidateQueue;
+}
+
+void Trip::addCandidate(CandidateTrip ct)
+{
+	candidateQueue.push(ct);
+}

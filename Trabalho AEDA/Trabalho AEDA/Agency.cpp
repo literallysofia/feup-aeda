@@ -3484,7 +3484,7 @@ float Agency::distanceBetweenTwoPoints(string pnt1, string pnt2) {
 
 	for (int i = 0; i < distancesVec.size(); i++) {
 
-		if ((distancesVec.at(i).pnt1 == pnt1 && distancesVec.at(i).pnt2 == pnt2) || 
+		if ((distancesVec.at(i).pnt1 == pnt1 && distancesVec.at(i).pnt2 == pnt2) ||
 			(distancesVec.at(i).pnt1 == pnt2 && distancesVec.at(i).pnt2 == pnt1))
 		{
 			return distancesVec.at(i).km;
@@ -3513,5 +3513,92 @@ float Agency::distanceRide(vector<string> v1, string pnt1) {
 	}
 
 	return sum;
+
+}
+
+void Agency::teste() {
+
+	//criar driver
+
+	User *d1 = new Driver(0, "Julieta", 0.0, "julieta", "julieta", 0);
+
+	//criar user 1
+	//criar user 2
+	//criar user 3
+	//criar user 4
+
+	User *p1 = new Passenger(1, "Teste Um", 0.0, "teste1", "pteste1", 0); // MTS - AMR
+	User *p2 = new Passenger(2, "Teste Dois", 0.0, "teste2", "pteste2", 0); //AMR - VNG
+	User *p3 = new Passenger(3, "Teste Tres", 0.0, "teste3", "pteste3", 0); //TRF - VNG
+	User *p4 = new Passenger(4, "Teste Quatro", 0.0, "teste4", "pteste4", 0); //MTS - AMR
+
+	//associar user 1 como buddy
+	//associar user 2 como buddy
+
+	d1->addBuddy(p1);
+	d1->addBuddy(p2);
+
+	//criar trip
+
+	vector<Stop> tripPlan;
+	vector<string> stopCodes;
+	string stopCode;
+	Date tripDate, currentDate;
+	Hour endHour, startHour, currentHour;
+
+
+	tripPlan.push_back(Stop("MTS", 6));
+	tripPlan.push_back(Stop("TRF", 6));
+	tripPlan.push_back(Stop("AMR", 6));
+	tripPlan.push_back(Stop("VNG", 6));
+
+	tripDate.setDay(23); tripDate.setMonth(12); tripDate.setYear(2016);
+	startHour.setHour(14); startHour.setMinutes(00);
+	endHour.setHour(15); endHour.setMinutes(00);
+
+	Trip t1 (0, 0, tripPlan, tripDate, startHour, endHour);
+	Trips.push_back(t1);
+
+	vector <string> v1;
+	for (int i = 0; i < tripPlan.size(); i++) {
+		v1.push_back(tripPlan.at(i).getCode());
+	}
+
+	//criar candidate trip 1
+	//criar candidate trip 2
+	//criar candidate trip 3
+	//criar candidate trip 4
+
+	float f1 = distanceRide(v1, "MTS");
+	float f2 = distanceRide(v1, "AMR");
+	float f3 = distanceRide(v1, "TRF");
+	float f4 = distanceRide(v1, "MTS");
+
+	cout << "f1: " << f1 << "  f2: " << f2 << "  f3: " << f3 << "  f4: " << f4 << endl << endl;
+
+	CandidateTrip ct1 (p1, d1, f1);
+	CandidateTrip ct2 (p2, d1, f2);
+	CandidateTrip ct3 (p3, d1, f3);
+	CandidateTrip ct4 (p4, d1, f4);
+
+	//associar à fila de prioridade
+
+	t1.addCandidate(ct1);
+	t1.addCandidate(ct2);
+	t1.addCandidate(ct3);
+	t1.addCandidate(ct4);
+
+	//imprimir fila de prioridade
+
+	priority_queue<CandidateTrip> temp;
+
+	temp = t1.getCandidateQueue();
+
+	cout << "DRIVE: " << temp.top().getDriver()->getID() << endl;
+
+	while (!temp.empty()) {
+		cout << temp.top().getPassanger()->getID() << endl;
+		temp.pop();
+	}
 
 }

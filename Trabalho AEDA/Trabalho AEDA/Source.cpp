@@ -93,6 +93,7 @@ int main()
 
 	//TESTES
 
+	/*
 	Agency::instance()->extractDistances();
 
 	vector <string> v1;
@@ -103,7 +104,11 @@ int main()
 	v1.push_back("FGR");
 
 	float a = Agency::instance()->distanceRide(v1, "MAI");
-	cout << a << endl;
+	cout << a << endl;*/
+
+
+	Agency::instance()->extractDistances();
+	Agency::instance()->teste();
 
 	return 0;
 }
