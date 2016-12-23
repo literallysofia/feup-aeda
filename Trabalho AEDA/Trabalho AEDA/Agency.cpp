@@ -3583,35 +3583,6 @@ void Agency::extractCandidatesQueues() {
 					}
 				}
 			}
-
-
-			/*
-			for (int i = 0; i < Users.size(); i++) { //corre o vertor Users
-
-				if (Users.at(i)->getID() == iiddriver) { // encontra o driver
-
-					for (int j = 0; j < v1.size(); j++) {
-
-						for (int k = 0; k < Users.size(); i++) {
-
-							if (Users.at(k)->getID() == v1.at(j).first) { // encontra o passenger
-
-								CandidateTrip ct1(Users.at(k), Users.at(i), v1.at(j).second);
-
-								for (int m = 0; m < ActiveTrips.size(); m++) {
-
-									if (ActiveTrips.at(m).getID() == iidtrip) { // encontra a viagem
-
-										//ActiveTrips.at(m).addCandidate(ct1);
-
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-			*/
 		}
 
 		Queuesfile.close();
@@ -3650,6 +3621,8 @@ void Agency::saveCandidatesQueues() {
 }
 
 
+//TODO: APAGAR
+//testa priority queue
 void Agency::teste() {
 
 	//criar driver

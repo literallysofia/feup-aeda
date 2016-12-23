@@ -89,13 +89,6 @@ int main()
 	Agency::instance()->extractData();
 
 	optionsWelcomeMenu();
-	
-
-	//TODO: APAGAR 
-	//TESTES 
-
-	//Agency::instance()->extractDistances();
-	//Agency::instance()->teste();
 
 	return 0;
 }
