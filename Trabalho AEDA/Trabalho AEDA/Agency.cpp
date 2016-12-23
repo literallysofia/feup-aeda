@@ -1426,6 +1426,8 @@ void Agency::extractData() {
 	extractActive();
 	extractVehicles();
 	extractVehiclesTree();
+	extractDistances();
+	extractCandidatesQueues();
 }
 
 void Agency::saveData() {
@@ -1435,6 +1437,7 @@ void Agency::saveData() {
 	saveRecord();
 	saveActive();
 	saveTree();
+	saveCandidatesQueues();
 	return;
 }
 
@@ -3445,3 +3448,264 @@ void Agency::saveTree() {
 
 //TODO: nao deixar criar viagens se nao tiver carro
 //TODO: adicionar o carro à viagem?
+
+
+void Agency::extractDistances() {
+
+	ifstream Distancesfile("Distances.txt");
+	string line;
+
+	if (Distancesfile.is_open())
+	{
+
+		while (getline(Distancesfile, line))
+		{
+
+			size_t pos1 = line.find(";"); //posi?ao 1
+			string str1 = line.substr(pos1 + 1); //pnt2 + km
+			size_t pos2 = str1.find(";"); //posi?ao 1
+
+			string pnt1 = line.substr(0, pos1);
+			string pnt2 = str1.substr(0, pos2);
+			string skm = str1.substr(pos2 + 1); //string de km
+
+
+			float fkm = stof(skm, NULL); //passa os km de string para float 
+
+			distanceStruct d;
+			d.pnt1 = pnt1;
+			d.pnt2 = pnt2;
+			d.km = fkm;
+			distancesVec.push_back(d);
+		}
+		Distancesfile.close();
+	}
+	else { red(); cerr << "ERROR: unable to open file." << endl; white(); }
+}
+
+float Agency::distanceBetweenTwoPoints(string pnt1, string pnt2) {
+
+	for (int i = 0; i < distancesVec.size(); i++) {
+
+		if ((distancesVec.at(i).pnt1 == pnt1 && distancesVec.at(i).pnt2 == pnt2) ||
+			(distancesVec.at(i).pnt1 == pnt2 && distancesVec.at(i).pnt2 == pnt1))
+		{
+			return distancesVec.at(i).km;
+		}
+	}
+
+	return 0;
+
+}
+
+float Agency::distanceRide(vector<string> v1, string pnt1) {
+
+	int j;
+
+	for (int i = 0; i < v1.size(); i++) {
+		if (v1.at(i) == pnt1) {
+			j = i;
+			break;
+		}
+	}
+
+	float sum = 0;
+
+	for (int k = 0; k + 1 <= j; k++) {
+		sum = sum + distanceBetweenTwoPoints(v1.at(k), v1.at(k + 1));
+	}
+
+	return sum;
+
+}
+
+void Agency::extractCandidatesQueues() {
+
+	ifstream Queuesfile("CandidatesQueues.txt");
+	string line;
+
+	if (Queuesfile.is_open())
+	{
+		while (getline(Queuesfile, line))
+		{
+
+			size_t pos1 = line.find(";"); //posi�ao 1
+			string str1 = line.substr(pos1 + 1); //id do driver + (id , distance)*
+			size_t pos2 = str1.find(";"); //posi�ao 2
+			string str2 = str1.substr(pos2 + 1);//(id , distance)*
+
+			string sidtrip = line.substr(0, pos1); //string id da trip
+			string siddriver = str1.substr(0, pos2); //string id do driver
+
+			string spasseng = str2;
+
+			int iidtrip = stoi(sidtrip, nullptr, 10); //passa o id de string para int
+			int iiddriver = stoi(siddriver, nullptr, 10); //passa o id de string para int
+
+			spasseng.append(";");
+
+			vector <pair <int, float>> v1;
+
+			while (!spasseng.empty()) {
+
+				size_t pos3 = spasseng.find(",");
+				string str3 = spasseng.substr(pos3 + 1);
+				size_t pos4 = str3.find(";");
+				size_t pos5 = spasseng.find(";");
+
+				int idpass = stoi(spasseng.substr(0, pos3));
+				float dist = stof(str3.substr(0, pos4), NULL);
+
+				v1.push_back(make_pair(idpass, dist));
+				spasseng.erase(0, pos5 + 1);
+			}
+
+
+			for (int m = 0; m < ActiveTrips.size(); m++) {
+
+				if (ActiveTrips.at(m).getID() == iidtrip) { // encontra a viagem
+
+					for (int i = 0; i < Users.size(); i++) {
+
+						if (Users.at(i)->getID() == iiddriver) { // encontra o driver
+
+							for (int j = 0; j < v1.size(); j++) {
+
+								for (int k = 0; k < Users.size(); k++) {
+
+									if (Users.at(k)->getID() == v1.at(j).first) { // encontra o passenger
+										CandidateTrip ct1(Users.at(k), Users.at(i), v1.at(j).second);
+										ActiveTrips.at(m).addCandidate(ct1);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		Queuesfile.close();
+	}
+	else { red(); cerr << "ERROR: unable to open file." << endl; white(); }
+
+}
+
+
+void Agency::saveCandidatesQueues() {
+
+	ofstream Queuesfile("CandidatesQueues.txt");
+
+	if (Queuesfile.is_open())
+	{
+		for (unsigned int i = 0; i < ActiveTrips.size(); i++)
+		{
+			priority_queue <CandidateTrip> temp = ActiveTrips.at(i).getCandidateQueue();
+
+			if (!temp.empty()) { //se nao está inicialmente vazia
+
+				Queuesfile << ActiveTrips.at(i).getID() << ";" << temp.top().getDriver()->getID();
+
+				while (!temp.empty()) {
+
+					Queuesfile << ";" << temp.top().getPassanger()->getID() << "," << temp.top().getDistance();
+					temp.pop();
+				}
+				Queuesfile << endl;
+			}
+		}
+		Queuesfile.close();
+	}
+	else { red(); cerr << "ERROR: unable to open file." << endl; white(); }
+
+}
+
+
+//TODO: APAGAR
+//testa priority queue
+void Agency::teste() {
+
+	//criar driver
+
+	User *d1 = new Driver(0, "Julieta", 0.0, "julieta", "julieta", 0);
+
+	//criar user 1
+	//criar user 2
+	//criar user 3
+	//criar user 4
+
+	User *p1 = new Passenger(1, "Teste Um", 0.0, "teste1", "pteste1", 0); // MTS - AMR
+	User *p2 = new Passenger(2, "Teste Dois", 0.0, "teste2", "pteste2", 0); //AMR - VNG
+	User *p3 = new Passenger(3, "Teste Tres", 0.0, "teste3", "pteste3", 0); //TRF - VNG
+	User *p4 = new Passenger(4, "Teste Quatro", 0.0, "teste4", "pteste4", 0); //MTS - AMR
+
+	//associar user 1 como buddy
+	//associar user 2 como buddy
+
+	d1->addBuddy(p1);
+	d1->addBuddy(p2);
+
+	//criar trip
+
+	vector<Stop> tripPlan;
+	vector<string> stopCodes;
+	string stopCode;
+	Date tripDate, currentDate;
+	Hour endHour, startHour, currentHour;
+
+
+	tripPlan.push_back(Stop("MTS", 6));
+	tripPlan.push_back(Stop("TRF", 6));
+	tripPlan.push_back(Stop("AMR", 6));
+	tripPlan.push_back(Stop("VNG", 6));
+
+	tripDate.setDay(23); tripDate.setMonth(12); tripDate.setYear(2016);
+	startHour.setHour(14); startHour.setMinutes(00);
+	endHour.setHour(15); endHour.setMinutes(00);
+
+	Trip t1(0, 0, tripPlan, tripDate, startHour, endHour);
+	Trips.push_back(t1);
+
+	vector <string> v1;
+	for (int i = 0; i < tripPlan.size(); i++) {
+		v1.push_back(tripPlan.at(i).getCode());
+	}
+
+	//criar candidate trip 1
+	//criar candidate trip 2
+	//criar candidate trip 3
+	//criar candidate trip 4
+
+	float f1 = distanceRide(v1, "MTS");
+	float f2 = distanceRide(v1, "AMR");
+	float f3 = distanceRide(v1, "TRF");
+	float f4 = distanceRide(v1, "MTS");
+
+	cout << "f1: " << f1 << "  f2: " << f2 << "  f3: " << f3 << "  f4: " << f4 << endl << endl;
+
+	CandidateTrip ct1(p1, d1, f1);
+	CandidateTrip ct2(p2, d1, f2);
+	CandidateTrip ct3(p3, d1, f3);
+	CandidateTrip ct4(p4, d1, f4);
+
+	//associar à fila de prioridade
+
+	t1.addCandidate(ct1);
+	t1.addCandidate(ct2);
+	t1.addCandidate(ct3);
+	t1.addCandidate(ct4);
+
+	//imprimir fila de prioridade
+
+	priority_queue<CandidateTrip> temp;
+
+	temp = t1.getCandidateQueue();
+
+	cout << "DRIVE: " << temp.top().getDriver()->getID() << endl;
+
+	while (!temp.empty()) {
+		cout << temp.top().getPassanger()->getID() << endl;
+		temp.pop();
+	}
+
+}

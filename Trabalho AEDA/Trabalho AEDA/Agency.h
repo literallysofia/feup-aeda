@@ -40,10 +40,17 @@ struct stop {
 };
 /** @} end of Stop Struct */
 
+
 struct cars {
 	string brand;
 	string model;
 	int seats;
+};
+
+struct distanceStruct {
+	string pnt1;
+	string pnt2;
+	float km;
 };
 
 class Agency
@@ -91,7 +98,7 @@ private:
 	vector<Transaction> Transactions;
 
 	/**
-	* @brief vector with all available stops of the application
+	* @brief vector with all available stops of the application 
 	*/
 	vector<stop> stopsAvailable;
 	/** @} end of Agency's Info Vectors */
@@ -99,6 +106,8 @@ private:
 	vector<cars> Cars;
 
 	BST<Vehicle> vehicles;
+
+	vector<distanceStruct> distancesVec;
 
 public:
 
@@ -668,4 +677,15 @@ public:
 	void extractVehicles();
 	void extractVehiclesTree();
 	void saveTree();
+
+	void extractDistances();
+	float distanceBetweenTwoPoints(string pnt1, string pnt2);
+	float distanceRide(vector<string> v1, string pnt1);
+
+	void saveCandidatesQueues();
+	void extractCandidatesQueues();
+
+
+
+	void teste(); //TODO: APAGAR
 };

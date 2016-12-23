@@ -12,6 +12,7 @@ Trip::Trip(int ID, int driver, vector<Stop> stops, Date date, Hour start, Hour e
 	this->date = date;
 	this->startTime = start;
 	this->endTime = end;
+
 }
 
 Trip::~Trip()
@@ -151,4 +152,14 @@ bool Trip::operator ==(const Trip t) const {
 		return true;
 	else
 		return false;
+}
+
+priority_queue<CandidateTrip> Trip::getCandidateQueue() const
+{
+	return candidateQueue;
+}
+
+void Trip::addCandidate(CandidateTrip ct)
+{
+	candidateQueue.push(ct);
 }
