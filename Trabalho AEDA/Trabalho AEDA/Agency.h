@@ -674,6 +674,7 @@ public:
 	void rentCar();
 	void discardCar();
 	void tradeCar();
+	void searchCar();
 
 	void extractVehicles();
 	void extractVehiclesTree();

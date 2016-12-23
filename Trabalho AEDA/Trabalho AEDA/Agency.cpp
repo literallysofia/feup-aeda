@@ -1208,7 +1208,7 @@ int Agency::mainMenu_User() {
 		cout << setw(22) << "2. Create Trip" << setw(29) << "4. Car Details\n";
 	}
 	else { // caso seja passenger
-		cout << setw(20) << "2. Join Trip" << setw(31) << "4. Search Cars\n";
+		cout << setw(20) << "2. Join Trip\n";
 	}
 
 	blue(); cout << "-----------------------------------------------------------" << endl;  white();
@@ -1219,7 +1219,13 @@ int Agency::mainMenu_User() {
 	cout << "Type your choice: ";
 	cin >> option;
 
-	while (cin.fail() || (option > 4) || (option < 0))
+	int max;
+
+	if (Users.at(sessionPos)->car())
+		max = 4;
+	else max = 3;
+
+	while (cin.fail() || (option > max) || (option < 0))
 	{
 		if (cin.eof())
 		{
@@ -1255,7 +1261,6 @@ void Agency::optionsMainMenu_User() {
 		case 4:
 			if (Users.at(sessionPos)->car())
 				optionsMenuCar();
-			//TODO: else searchcar
 			break;
 		}
 	return;
@@ -3208,6 +3213,9 @@ void Agency::optionsMenuCar()
 			case 3:
 				tradeCar();
 				break;
+			case 4:
+				searchCar();
+				break;
 			}
 	}
 	catch (const NonexistentCar &e)
@@ -3234,7 +3242,7 @@ int Agency::MenuCar()
 	white();  displayCar();
 	blue(); cout << "-----------------------------------------------------------" << endl;  grey();
 	cout << setw(21) << "1. Rent Car" << setw(29) << "3. Trade Car" << endl;
-	cout << setw(24) << "2. Discard Car" << endl;
+	cout << setw(24) << "2. Discard Car" << setw(27) << "4. Search Car" << endl;
 
 	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
 		<< "|~~~                                 ";  grey(); cout << "< 0. Return >";  white(); cout << "     ~~~|" << endl
@@ -3244,7 +3252,7 @@ int Agency::MenuCar()
 	cout << "Type your choice: ";
 	cin >> option;
 
-	while (cin.fail() || (option < 0) || ((option > 3)))
+	while (cin.fail() || (option < 0) || ((option > 4)))
 	{
 		if (cin.eof())
 		{
@@ -3480,6 +3488,56 @@ void Agency::tradeCar()
 			return;
 		}
 	}
+	return;
+}
+
+void Agency::searchCar()
+{
+	BSTItrIn<Vehicle> it(vehicles);
+	int flag = 0;
+	string brand, model;
+
+	yellow(); cout << "\n > "; grey(); cout << "Vehicle's brand: "; white();
+	cin.ignore(); getline(cin, brand);
+
+	yellow(); cout << "\n > "; grey(); cout << "Vehicle's model: "; white();
+	getline(cin, model);
+
+	yellow(); cout << "\n > "; grey(); cout << "Vehicle's year: "; white();
+	int year;
+	cin >> year;
+
+	while (!it.isAtEnd()) {
+		Vehicle v1 = it.retrieve();
+
+		if (v1.getBrand() == brand && v1.getModel() == model && v1.getYear() == year) {
+			flag = 1;
+			break;
+		}
+		it.advance();
+	}
+
+	if (flag) {
+		it = vehicles;
+		cout << endl << endl;
+		grey(); cout << setw(10) << "Brand" << setw(10) << "Model" << setw(10) << "Year" << setw(15) << "User" << endl;
+		blue(); cout << "-----------------------------------------------------------" << endl; white();
+
+		while (!it.isAtEnd()) {
+			Vehicle v1 = it.retrieve();
+
+			if (v1.getBrand() == brand && v1.getModel() == model && v1.getYear() == year) {
+
+				cout << setw(10) << v1.getBrand() << setw(10) << v1.getModel() << setw(10) << v1.getYear() << setw(20) << v1.getUser()->getName() << endl;
+			}
+			it.advance();
+		}
+
+		blue(); cout << "-----------------------------------------------------------" << endl;
+		red(); cout << "\n Press enter to go back."; white(); getEnter();
+	} else
+		throw NonexistentCar();
+
 	return;
 }
 
