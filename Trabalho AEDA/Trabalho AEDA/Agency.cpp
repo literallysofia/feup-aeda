@@ -3610,7 +3610,6 @@ void Agency::saveTree() {
 }
 
 //TODO: nao deixar criar viagens se nao tiver carro
-//TODO: adicionar o carro à viagem?
 
 
 void Agency::extractDistances() {
