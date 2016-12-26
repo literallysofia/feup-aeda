@@ -1288,7 +1288,8 @@ int Agency::menuAccount()
 	else cout << setw(10) << "[ ]" << endl;
 
 	blue(); cout << "-----------------------------------------------------------" << endl;  grey();
-	cout << setw(15) << "1. Deposit\n"; white();
+	cout << setw(18) << "1. Deposit" << setw(32) << "3. Change Password\n"; 
+	cout << setw(27) << "2. Change Username\n"; white();
 	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
 		<< "|~~~                                 ";  grey(); cout << "< 0. Return >";  white(); cout << "     ~~~|" << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl << endl;
@@ -1301,7 +1302,7 @@ int Agency::menuAccount()
 	cout << "Type your choice: ";
 	cin >> option;
 
-	while (cin.fail() || (option < 0) || ((option > 1)))
+	while (cin.fail() || (option < 0) || ((option > 3)))
 	{
 		if (cin.eof())
 		{
@@ -1325,6 +1326,12 @@ void Agency::optionsMenuAccount()
 		{
 		case 1:
 			deposit();
+			break;
+		case 2:
+			changeUsername();
+			break;
+		case 3:
+			changePassword();
 			break;
 		}
 	return;
@@ -3711,6 +3718,57 @@ void Agency::saveTree() {
 	}
 	else { red(); cerr << "ERROR: unable to open file." << endl; white(); }
 
+	return;
+}
+
+void Agency::changeUsername()
+{
+	cin.clear();
+	cin.ignore(1000, '\n');
+	string username;
+	yellow(); cout << "\n > "; grey(); cout << "Insert your new username: "; white();
+	getline(cin, username);
+
+	while (cin.fail() || validUser(username)) {
+
+		if (cin.eof())
+		{
+			cin.clear();
+			clearScreen();
+			return;
+		}
+		cin.clear();
+		red(); cout << "\n Username taken!" << endl;
+		white(); cout << " Please type another one: ";
+		cin >> username;
+	}
+
+	Users.at(sessionPos)->setUsername(username);
+	yellow(); cout << "\n Success!\n"; white();
+	Sleep(2000);
+	return;
+}
+
+void Agency::changePassword()
+{
+	cin.clear();
+	cin.ignore(1000, '\n');
+	string password;
+	bool a = false;
+	while (!a) {
+		red(); cout << "\n WARNING: "; grey(); cout << "Password lenght should be at least 5.\n\n";
+		yellow(); cout << "    > "; grey(); cout << "Enter password: "; white();
+		password = insertPassword();
+		yellow(); cout << "\n    > "; grey(); cout << "Confirm password: "; white();
+		if (sameString(password, insertPassword()))
+			a = true;
+		else { red(); cout << "\n Password does not match! Try again.\n\n"; }
+	}
+
+	Users.at(sessionPos)->setPassword(password);
+
+	yellow(); cout << "\n Success!\n"; white();
+	Sleep(2000);
 	return;
 }
 

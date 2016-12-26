@@ -100,6 +100,12 @@ bool User::operator ==(const User *u) const {
 
 }
 
+void User::setPassword(string password)
+{
+	this->password = password;
+}
+
+
 /*DRIVER CLASS*/
 Driver::Driver(int ID, string name, float balance, string username, string password, int nt) : User(ID, name, balance, username, password,nt) {
 }

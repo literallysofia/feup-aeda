@@ -682,6 +682,9 @@ public:
 	void extractVehiclesTree();
 	void saveTree();
 
+	void changeUsername();
+	void changePassword();
+
 	void extractDistances();
 	float distanceBetweenTwoPoints(string pnt1, string pnt2);
 	float distanceRide(vector<string> v1, string pnt1);

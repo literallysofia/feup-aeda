@@ -181,6 +181,8 @@ public:
 	* @return bool true if ID or Username between User u matches the object's
 	*/
 	bool operator ==(const User *u) const;
+
+	void setPassword(string password);
 };
 
 class Driver :
