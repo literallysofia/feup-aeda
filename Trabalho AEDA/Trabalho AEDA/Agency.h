@@ -692,7 +692,8 @@ public:
 	void saveCandidatesQueues();
 	void extractCandidatesQueues();
 
+	void candidateTrip(vector<Trip> recTrips, vector<Trip> buddieTrips, vector<string> stopCodes);
 
+	void scheduledTrips();
 
-	void teste(); //TODO: APAGAR
 };
