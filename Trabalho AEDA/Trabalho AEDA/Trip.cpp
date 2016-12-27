@@ -163,3 +163,9 @@ void Trip::addCandidate(CandidateTrip ct)
 {
 	candidateQueue.push(ct);
 }
+
+void Trip::removeCandidate(int ID)
+{
+
+	return;
+}

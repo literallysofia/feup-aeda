@@ -687,6 +687,7 @@ public:
 
 	void changeUsername();
 	void changePassword();
+	void deleteAccount();
 
 	void extractDistances();
 	float distanceBetweenTwoPoints(string pnt1, string pnt2);

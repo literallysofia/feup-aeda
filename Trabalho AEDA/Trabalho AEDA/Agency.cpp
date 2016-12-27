@@ -110,6 +110,16 @@ ostream & operator<<(ostream &out, const NonexistentCar &obj)
 	out << "ERROR: The car you typed isn't valid.\n"; return out;
 }
 
+class userGone
+{
+public:
+	userGone() {};
+};
+ostream & operator<<(ostream &out, const userGone &obj)
+{
+	out << "WARNING: Your account was deleted.\n"; return out;
+}
+
 // PRINT DA STRUCT STOP
 ostream & operator<<(ostream &out, const stop &e) {
 	out << "ERROR: " << e.code << " - " << e.name << endl; return out;
@@ -1244,25 +1254,35 @@ int Agency::mainMenu_User() {
 void Agency::optionsMainMenu_User() {
 	unsigned short int option;
 
-	while (option = mainMenu_User())
-		switch (option)
-		{
-		case 1:
-			optionsMenuAccount();
-			break;
-		case 2:
-			if (Users.at(sessionPos)->car())
-				menuCreateTrip();
-			else menuJoinTrip();
-			break;
-		case 3:
-			menuAddBuddy();
-			break;
-		case 4:
-			if (Users.at(sessionPos)->car())
-				optionsMenuCar();
-			break;
-		}
+	try {
+		while (option = mainMenu_User())
+			switch (option)
+			{
+			case 1:
+				optionsMenuAccount();
+				break;
+			case 2:
+				if (Users.at(sessionPos)->car())
+					menuCreateTrip();
+				else menuJoinTrip();
+				break;
+			case 3:
+				menuAddBuddy();
+				break;
+			case 4:
+				if (Users.at(sessionPos)->car())
+					optionsMenuCar();
+				break;
+			}
+	}
+	catch (const userGone &e)
+	{
+		cout << endl;
+		red(); cout << e; white();
+		Sleep(2000);
+		cin.clear();
+		cin.ignore(1000, '\n');
+	}
 
 	return;
 }
@@ -1289,7 +1309,7 @@ int Agency::menuAccount()
 
 	blue(); cout << "-----------------------------------------------------------" << endl;  grey();
 	cout << setw(18) << "1. Deposit" << setw(32) << "3. Change Password\n";
-	cout << setw(27) << "2. Change Username\n"; white();
+	cout << setw(26) << "2. Change Username" << setw(23) << "4. Delete Account\n"; white();
 	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
 		<< "|~~~                                 ";  grey(); cout << "< 0. Return >";  white(); cout << "     ~~~|" << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl << endl;
@@ -1302,7 +1322,7 @@ int Agency::menuAccount()
 	cout << "Type your choice: ";
 	cin >> option;
 
-	while (cin.fail() || (option < 0) || ((option > 3)))
+	while (cin.fail() || (option < 0) || ((option > 4)))
 	{
 		if (cin.eof())
 		{
@@ -1332,6 +1352,9 @@ void Agency::optionsMenuAccount()
 			break;
 		case 3:
 			changePassword();
+			break;
+		case 4:
+			deleteAccount();
 			break;
 		}
 	return;
@@ -3399,7 +3422,7 @@ void Agency::displayCars() {
 bool Agency::carExists(string model, int year) {
 	for (unsigned int i = 0; i < Cars.size(); i++) {
 		if (model == Cars.at(i).model && year == Cars.at(i).year) {
-			if(Cars.at(i).available > 0)
+			if (Cars.at(i).available > 0)
 				return true;
 			else return false;
 		}
@@ -3819,6 +3842,78 @@ void Agency::changePassword()
 
 	yellow(); cout << "\n Success!\n"; white();
 	Sleep(2000);
+	return;
+}
+
+void Agency::deleteAccount()
+{
+	string type;
+
+	red(); cout << "\n WARNING: "; grey(); cout << "Do you really want to delete your account? (y/n)\n";
+	yellow(); cout << "    > "; white(); cin >> type;
+
+	while (cin.fail() || ((type != "y") && (type != "Y") && (type != "n") && (type != "N")))
+	{
+		if (cin.eof())
+		{
+			cin.clear();
+			return;
+		}
+		cin.clear();
+		cin.ignore(1000, '\n');
+		red(); cout << "> Invalid choice!" << endl;
+		white(); cout << "Please try again: ";
+		cin >> type; cout << endl;
+	}
+
+	if (type == "Y" || type == "y") {
+
+		//delete cars from data and free them
+		if (hasCar() > 0) {
+
+			BSTItrIn<Vehicle> it(vehicles);
+
+			while (!it.isAtEnd()) {
+				Vehicle v1 = it.retrieve();
+
+				if (v1.getUser()->getID() == sessionID) {
+
+					for (unsigned int i = 0; i < Cars.size(); i++) {
+						if (Cars.at(i).model == v1.getModel() && Cars.at(i).year == v1.getYear())
+							Cars.at(i).available++;
+					}
+
+					vehicles.remove(v1);
+					it = vehicles;
+				}
+				else
+					it.advance();
+			}
+		}
+
+		//delete as buddy
+		for (unsigned int i = 0; i < Users.size(); i++) {
+			Users.at(i)->removeBuddy(sessionID);
+		}
+
+		//TODO: ELIMINAR USER - tanto pode ser driver como nao - da candidates queue or wtv
+
+		//caso seja driver, elimina viagens ativas
+		if (Users.at(sessionPos)->car()) {
+			for (unsigned int i = 0; i < ActiveTrips.size(); i++) {
+				if (ActiveTrips.at(i).getDriver() == sessionID) {
+					ActiveTrips.erase(ActiveTrips.begin() + i);
+					i--;
+				}
+			}
+		}
+
+		//por fim, elimina user
+		Users.erase(Users.begin() + sessionPos);
+
+		throw userGone();
+	}
+
 	return;
 }
 
