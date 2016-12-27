@@ -694,4 +694,6 @@ public:
 
 	void candidateTrip(vector<Trip> recTrips, vector<Trip> buddieTrips, vector<string> stopCodes);
 
+	void scheduledTrips();
+
 };

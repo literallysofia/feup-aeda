@@ -1206,6 +1206,7 @@ int Agency::mainMenu_User() {
 
 	if (Users.at(sessionPos)->car()) { //caso seja driver
 		cout << setw(22) << "2. Create Trip" << setw(29) << "4. Car Details\n";
+		cout << setw(22) << "5. SCHEDULE TRIPS" << endl;
 	}
 	else { // caso seja passenger
 		cout << setw(20) << "2. Join Trip\n";
@@ -1223,7 +1224,7 @@ int Agency::mainMenu_User() {
 	int max;
 
 	if (Users.at(sessionPos)->car())
-		max = 4;
+		max = 5;
 	else max = 3;
 
 	while (cin.fail() || (option > max) || (option < 0))
@@ -1262,6 +1263,11 @@ void Agency::optionsMainMenu_User() {
 		case 4:
 			if (Users.at(sessionPos)->car())
 				optionsMenuCar();
+			break;
+
+		case 5:
+			if (Users.at(sessionPos)->car())
+				scheduledTrips();
 			break;
 		}
 
@@ -4005,7 +4011,7 @@ void Agency::candidateTrip(vector<Trip> recTrips, vector<Trip> buddieTrips, vect
 								v1.push_back(ActiveTrips.at(j).getStops().at(m).getCode());
 							}
 
-							float dist = distanceRide( v1, first);
+							float dist = distanceRide(v1, first);
 
 							CandidateTrip ct1(Users.at(i), Users.at(k), dist, first, last);
 							ActiveTrips.at(j).addCandidate(ct1);
@@ -4046,6 +4052,262 @@ void Agency::candidateTrip(vector<Trip> recTrips, vector<Trip> buddieTrips, vect
 	return;
 
 }
+
+void Agency::scheduledTrips() {
+
+	clearScreen();
+
+	cout << "YOUR ID: " << sessionID << endl << endl;
+	cout << "YOUR TRIPS: " << endl;
+
+	cout << "TRIP ID      FROM          TO         DATE" << endl;
+
+	vector <int> abc;
+
+	for (int i = 0; i < ActiveTrips.size(); i++) {
+		if (ActiveTrips.at(i).getDriver() == sessionID) {
+			abc.push_back(ActiveTrips.at(i).getID());
+			cout << ActiveTrips.at(i).getID() << "            " <<
+				ActiveTrips.at(i).getStops().at(0).getCode() << "         " <<
+				ActiveTrips.at(i).getStops().at(ActiveTrips.at(i).getStops().size() - 1).getCode() << "         " <<
+				ActiveTrips.at(i).getDate().getDay() << "/" << ActiveTrips.at(i).getDate().getMonth() << "/" << ActiveTrips.at(i).getDate().getYear() << endl; //TODO: display da data correto
+		}
+	}
+
+	int idtrip;
+
+	cout << "CHOOSE TRIP TO MANAGE: ";
+	cin >> idtrip;
+
+	//TODO: ID NAO DISPONIVEL
+	/*
+	if (find(abc.begin(), abc.end(), idtrip) == abc.end()) {
+		cout << "TRIP NOT AVAILABLE" << endl;
+	}*/
+
+	cout << endl << endl;
+
+	cout << "TRIP TO MANAGE" << endl;
+	cout << "TRIP ID      FROM          TO         DATE" << endl;
+
+	for (int i = 0; i < ActiveTrips.size(); i++) {
+		if (ActiveTrips.at(i).getID() == idtrip) {
+			cout << ActiveTrips.at(i).getID() << "            " <<
+				ActiveTrips.at(i).getStops().at(0).getCode() << "         " <<
+				ActiveTrips.at(i).getStops().at(ActiveTrips.at(i).getStops().size() - 1).getCode() << "         " <<
+				ActiveTrips.at(i).getDate().getDay() << "/" << ActiveTrips.at(i).getDate().getMonth() << "/" << ActiveTrips.at(i).getDate().getYear() << endl; //TODO: display da data correto
+			break;
+		}
+	}
+
+	cout << endl;
+
+	int choice;
+	cout << "1 to cancel de trip, 2 to choose candidate: ";
+	cin >> choice;
+
+	cout << endl;
+
+	if (choice == 1) {
+		string YN;
+		cout << "Are you sure you want to cancel this trip? ";
+		cin >> YN;
+
+		if (YN == "Y" || YN == "y") {
+
+			for (int i = 0; i < ActiveTrips.size(); i++) {
+				if (ActiveTrips.at(i).getID() == idtrip) {
+					ActiveTrips.erase(ActiveTrips.begin() + i);
+				}
+			}
+			cout << "TRIP SUCCESSFULLY CANCELED!" << endl;
+		}
+	}
+
+	if (choice == 2) {
+
+		//TODO: NAO HA CANDIDATOS
+
+		bool b = false;
+
+		for (int i = 0; i < ActiveTrips.size(); i++) {
+
+			if (ActiveTrips.at(i).getID() == idtrip) {
+
+				for (int j = 0; j < ActiveTrips.at(i).getStops().size(); j++) {
+
+					if (!ActiveTrips.at(i).getStops().at(j).getPassengers().empty()) {
+
+						b = true;
+
+					}
+				}
+			}
+		}
+
+		bool b2 = false;
+
+		if (b) {
+			string YNA;
+			cout << "YOU ALREADY CHOSE CANDIDATES FOR THIS TRIP. DO YOU WANT TP CHANGE?";
+			cin >> YNA;
+
+			if (YNA == "Y" || YNA == "y") {
+
+				b2 = true;
+
+				//TODO: YOU CAN ONLY DO THIS ONCE
+				
+			}
+
+		}
+
+		if (!b || (b && b2)) {
+
+
+			cout << "CANDIDATES TO THIS TRIP:" << endl;
+			cout << endl;
+
+			cout << "ID    IS BUDDY     FIRST STOP      LAST STOP" << endl;
+
+			priority_queue <CandidateTrip> coutQueue;
+			vector <CandidateTrip> vectorQueue;
+			vector <int> possibleIDs;
+
+
+			for (int i = 0; i < ActiveTrips.size(); i++) {
+
+				if (ActiveTrips.at(i).getID() == idtrip) {
+
+					coutQueue = ActiveTrips.at(i).getCandidateQueue();
+
+					while (!coutQueue.empty()) {
+
+						possibleIDs.push_back(coutQueue.top().getPassanger()->getID());
+						vectorQueue.push_back(coutQueue.top());
+
+						cout << coutQueue.top().getPassanger()->getID() << "           ";
+
+						if (coutQueue.top().areBuddies())
+							cout << "[X]";
+						else cout << "[ ]";
+
+						cout << "           " << coutQueue.top().getInitStop() << "           " << coutQueue.top().getEndStop() << endl;
+
+						coutQueue.pop();
+
+					}
+				}
+			}
+
+			int n;
+
+			for (int i = 0; i < ActiveTrips.size(); i++) {
+
+				if (ActiveTrips.at(i).getID() == idtrip) {
+					n = ActiveTrips.at(i).getStops().at(0).getAvailableSeats() + ActiveTrips.at(i).getStops().at(0).getPassengers().size();
+				}
+			}
+
+
+			cout << endl << endl;
+			cout << "Number of free seats in your car: ";
+			cout << n << endl;
+
+			cout << "CANDIDATES ID YOU WANT TO CHOOSE (max: number of free seats in your car): " << endl;
+
+			int cnt = n;
+			int candidateNumber = 1;
+			int idcand;
+			vector <int> candidatesIDS;
+
+			//candidateNumber < cnt
+			//TODO: POR OS 2 NO WHILE
+			while (!cin.eof() && cnt >= candidateNumber)
+			{
+				cout << " Candidate # " << candidateNumber << " : ";
+
+				cin >> idcand;
+
+				//enquanto o utilizador nao inserir ctrl+z
+				if (!cin.eof())
+				{
+					if (find(candidatesIDS.begin(), candidatesIDS.end(), idcand) != candidatesIDS.end()) {
+						cout << "YOU ALREADY SAID THAT CANDIDATE" << endl;
+					}
+
+					if (find(possibleIDs.begin(), possibleIDs.end(), idcand) == possibleIDs.end()) {
+						cout << "CANDIDATE NOT AVAILABLE" << endl;
+					}
+
+					else {
+						candidatesIDS.push_back(idcand);
+						candidateNumber++;
+					}
+
+				}
+
+			}
+
+			cout << endl;
+
+			cout << "CANDIDATES YOU CHOSE: ";
+
+			for (int i = 0; i < candidatesIDS.size(); i++)
+				cout << candidatesIDS.at(i) << "    ";
+
+			cout << endl << endl;
+
+			cin.clear();
+			string YNT;
+			cout << "Are you sure you want to add these candidates to your trip? ";
+			cin >> YNT;
+
+
+			if (YNT == "Y" || YNT == "y") {
+
+				int idi, idf;
+
+				for (int k = 0; k < candidatesIDS.size(); k++) {
+
+					for (int d = 0; d < vectorQueue.size(); d++) {
+
+						if (vectorQueue.at(d).getPassanger()->getID() == candidatesIDS.at(k)) {
+
+							for (unsigned int i = 0; i < ActiveTrips.size(); i++) {
+
+								if (idtrip == ActiveTrips.at(i).getID()) {
+
+									for (unsigned int j = 0; j < ActiveTrips.at(i).getStops().size(); j++) {
+										if (vectorQueue.at(d).getInitStop() == ActiveTrips.at(i).getStops().at(j).getCode()) //obtem id inicial ; idi
+											idi = j;
+										if (vectorQueue.at(d).getEndStop() == ActiveTrips.at(i).getStops().at(j).getCode()) //obtem id final ; idf
+											idf = j;
+									}
+
+									for (idi; idi < idf; idi++) { //verifica se ha lugares disponiveis em cada paragem, menos na final, visto que user sai nessa
+
+										ActiveTrips.at(i).setStops(idi, candidatesIDS.at(k)); //decrementa e adiciona user a viagem nas stops
+									}
+								}
+							}
+
+							vectorQueue.at(d).getPassanger()->setNtrips(); //adiciona uma viagem
+						}
+
+					}
+				}
+
+				cout << "SUCCESS" << endl;
+			}
+		}
+
+	}
+
+	getEnter();
+
+}
+
 
 //TODO: JULIETA TO DO LIST
 
