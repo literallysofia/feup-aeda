@@ -185,6 +185,7 @@ public:
 
 	priority_queue<CandidateTrip> getCandidateQueue() const;
 	void addCandidate(CandidateTrip ct);
+	void removeCandidate(int ID);
 
 };
 
