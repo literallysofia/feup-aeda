@@ -1,15 +1,15 @@
-audi;a3;2015;10
+audi;a3;2014;10
 audi;a3;2011;2
 audi;a3;2011;3
-bmw;serie 3 cabrio;2014;13
+bmw;serie 3 cabrio;2016;13
 fiat;500;2016;2
-fiat;freemont;2010;15
-fiat;punto;2014;13
-honda;civic;2013;10
-jaguar;f-pace;2009;12
-jeep;cherokee;2013;3
+fiat;freemont;2013;15
+fiat;punto;2010;13
+honda;civic;2014;10
+jeep;cherokee;2016;3
+jeep;wrangler;2014;12
 mazda;sedan;2014;2
-mini;cooper;2011;7
-mini;countryman;2016;3
-renault;clio;2007;8
-smart;fortwo;2015;12
+mini;cooper;2012;7
+mini;countryman;2013;3
+renault;clio;2014;8
+smart;fortwo;2016;12

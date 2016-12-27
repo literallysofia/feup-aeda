@@ -45,6 +45,8 @@ struct cars {
 	string brand;
 	string model;
 	int seats;
+	int year;
+	int available;
 };
 
 struct distanceStruct {
@@ -669,21 +671,23 @@ public:
 	int MenuCar();
 
 	void displayCar(); //display dos carros respetivos de um driver(user)
-	void displayCars(); //display de todos os carros reconhecidos pela agencia
-	bool carExists(string model);
+	void displayCars(); //display de todos os carros que a agencia aluga
+	bool carExists(string model, int year);
 	int hasCar();
 	void rentCar();
 	void discardCar();
 	void tradeCar();
 	void searchCar();
-	int getNumSeats(string model);
+	int getNumSeats(string model, int year);
 
 	void extractVehicles();
 	void extractVehiclesTree();
 	void saveTree();
+	void saveVehicles();
 
 	void changeUsername();
 	void changePassword();
+	void deleteAccount();
 
 	void extractDistances();
 	float distanceBetweenTwoPoints(string pnt1, string pnt2);

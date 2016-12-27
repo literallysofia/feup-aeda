@@ -183,6 +183,8 @@ public:
 	bool operator ==(const User *u) const;
 
 	void setPassword(string password);
+
+	void removeBuddy(int ID);
 };
 
 class Driver :

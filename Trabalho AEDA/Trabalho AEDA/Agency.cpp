@@ -110,6 +110,16 @@ ostream & operator<<(ostream &out, const NonexistentCar &obj)
 	out << "ERROR: The car you typed isn't valid.\n"; return out;
 }
 
+class userGone
+{
+public:
+	userGone() {};
+};
+ostream & operator<<(ostream &out, const userGone &obj)
+{
+	out << "WARNING: Your account was deleted.\n"; return out;
+}
+
 // PRINT DA STRUCT STOP
 ostream & operator<<(ostream &out, const stop &e) {
 	out << "ERROR: " << e.code << " - " << e.name << endl; return out;
@@ -1246,30 +1256,40 @@ int Agency::mainMenu_User() {
 void Agency::optionsMainMenu_User() {
 	unsigned short int option;
 
-	while (option = mainMenu_User())
-		switch (option)
-		{
-		case 1:
-			optionsMenuAccount();
-			break;
-		case 2:
-			if (Users.at(sessionPos)->car())
-				menuCreateTrip();
-			else menuJoinTrip();
-			break;
-		case 3:
-			menuAddBuddy();
-			break;
-		case 4:
-			if (Users.at(sessionPos)->car())
-				optionsMenuCar();
-			break;
-
-		case 5:
+	try {
+		while (option = mainMenu_User())
+			switch (option)
+			{
+			case 1:
+				optionsMenuAccount();
+				break;
+			case 2:
+				if (Users.at(sessionPos)->car())
+					menuCreateTrip();
+				else menuJoinTrip();
+				break;
+			case 3:
+				menuAddBuddy();
+				break;
+			case 4:
+				if (Users.at(sessionPos)->car())
+					optionsMenuCar();
+				break;
+			}
+			case 5:
 			if (Users.at(sessionPos)->car())
 				scheduledTrips();
 			break;
-		}
+	}
+	catch (const userGone &e)
+	{
+		cout << endl;
+		red(); cout << e; white();
+		Sleep(2000);
+		cin.clear();
+		cin.ignore(1000, '\n');
+	}
+>>>>>>> origin/master
 
 	return;
 }
@@ -1296,7 +1316,7 @@ int Agency::menuAccount()
 
 	blue(); cout << "-----------------------------------------------------------" << endl;  grey();
 	cout << setw(18) << "1. Deposit" << setw(32) << "3. Change Password\n";
-	cout << setw(27) << "2. Change Username\n"; white();
+	cout << setw(26) << "2. Change Username" << setw(23) << "4. Delete Account\n"; white();
 	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
 		<< "|~~~                                 ";  grey(); cout << "< 0. Return >";  white(); cout << "     ~~~|" << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl << endl;
@@ -1309,7 +1329,7 @@ int Agency::menuAccount()
 	cout << "Type your choice: ";
 	cin >> option;
 
-	while (cin.fail() || (option < 0) || ((option > 3)))
+	while (cin.fail() || (option < 0) || ((option > 4)))
 	{
 		if (cin.eof())
 		{
@@ -1339,6 +1359,9 @@ void Agency::optionsMenuAccount()
 			break;
 		case 3:
 			changePassword();
+			break;
+		case 4:
+			deleteAccount();
 			break;
 		}
 	return;
@@ -1468,6 +1491,7 @@ void Agency::saveData() {
 	saveRecord();
 	saveActive();
 	saveTree();
+	saveVehicles();
 	saveCandidatesQueues();
 	return;
 }
@@ -1893,22 +1917,32 @@ void Agency::extractVehicles() {
 		{
 
 			size_t pos1 = line.find(";"); //posicao 1
-			string str1 = line.substr(pos1 + 1); //brand+model+seats
+			string str1 = line.substr(pos1 + 1); //brand+model+seats+year+avai
 			size_t pos2 = str1.find(";"); //posicao 2
-			string str2 = str1.substr(pos2 + 1); //model+seats
+			string str2 = str1.substr(pos2 + 1); //model+seats+year+avai
 			size_t pos3 = str2.find(";"); //posicao 3
+			string str3 = str2.substr(pos3 + 1); //seats+year+avai
+			size_t pos4 = str3.find(";"); //posicao 4
+			string str4 = str3.substr(pos4 + 1); //year+avai
+			size_t pos5 = str4.find(";"); //posicao 5
 
 
 			string brand = line.substr(0, pos1);
 			string model = str1.substr(0, pos2);
 			string seats = str2.substr(0, pos3);
+			string year = str3.substr(0, pos4);
+			string numCars = str4.substr(0, pos5);
 
-			int num = stoi(seats, nullptr, 10);
+			int numSeats = stoi(seats, nullptr, 10);
+			int yr = stoi(year, nullptr, 10);
+			int available = stoi(numCars, nullptr, 10);
 
 			cars someCar;
 			someCar.brand = brand;
 			someCar.model = model;
-			someCar.seats = num;
+			someCar.seats = numSeats;
+			someCar.year = yr;
+			someCar.available = available;
 
 			Cars.push_back(someCar); //cria um novo elemento no vector
 			i++;
@@ -2179,7 +2213,7 @@ void Agency::addTrip() {
 
 			if (v1.getUser()->getID() == sessionID) {
 				if (hasCar() == 1) {
-					numSeats = getNumSeats(v1.getModel()) - 1;
+					numSeats = getNumSeats(v1.getModel(), v1.getYear()) - 1;
 				}
 				else {
 					cout << setw(15) << v1.getBrand() << setw(18) << v1.getModel() << setw(20) << v1.getYear() << endl;
@@ -2207,7 +2241,7 @@ void Agency::addTrip() {
 				Vehicle v1 = it.retrieve();
 
 				if (v1.getModel() == model && v1.getYear() == year && v1.getUser()->getID() == sessionID) {
-					numSeats = getNumSeats(v1.getModel()) - 1;
+					numSeats = getNumSeats(v1.getModel(), v1.getYear()) - 1;
 					flag = 1;
 					break;
 				}
@@ -3387,15 +3421,19 @@ void Agency::displayCar() {
 
 void Agency::displayCars() {
 	for (unsigned int i = 0; i < Cars.size(); i++) {
-		cout << setw(15) << Cars.at(i).brand << setw(18) << Cars.at(i).model << setw(20) << Cars.at(i).seats << endl;
+		if (Cars.at(i).available > 0)
+			cout << setw(12) << Cars.at(i).brand << setw(20) << Cars.at(i).model << setw(10) << Cars.at(i).seats << setw(11) << Cars.at(i).year << endl;
 	}
 	return;
 }
 
-bool Agency::carExists(string model) {
+bool Agency::carExists(string model, int year) {
 	for (unsigned int i = 0; i < Cars.size(); i++) {
-		if (model == Cars.at(i).model)
-			return true;
+		if (model == Cars.at(i).model && year == Cars.at(i).year) {
+			if (Cars.at(i).available > 0)
+				return true;
+			else return false;
+		}
 	}
 	return false;
 }
@@ -3422,38 +3460,50 @@ void Agency::rentCar() {
 	menuHeader();
 	cout << "|~~~                     ";  grey(); cout << "VEHICLES";  white(); cout << "                      ~~~|" << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-	grey(); cout << setw(15) << "Brand" << setw(18) << "Model" << setw(20) << "Seats" << endl;
+	grey(); cout << setw(12) << "Brand" << setw(18) << "Model" << setw(14) << "Seats" << setw(9) << "Year" << endl;
 	blue(); cout << "-----------------------------------------------------------" << endl;
 	white();  displayCars();
 	blue(); cout << "-----------------------------------------------------------" << endl << endl;
 
-	yellow(); cout << " > "; grey(); cout << "Please enter your vehicle's model: "; white();
+	yellow(); cout << " > "; grey(); cout << "Please enter vehicle's model: "; white();
 
 	string model;
 	cin.ignore(); getline(cin, model);
 
-	if (!carExists(model))
+	yellow(); cout << " > "; grey(); cout << "Please enter vehicle's year: "; white();
+	int year;
+	cin >> year;
+
+	BSTItrIn<Vehicle> it(vehicles);
+	int flag = 1;
+
+	while (!it.isAtEnd()) {
+		Vehicle v1 = it.retrieve();
+
+		if (v1.getUser()->getID() == sessionID && v1.getModel() == model && v1.getYear() == year) {
+			flag = 0;
+			break;
+		}
+		it.advance();
+	}
+
+	if (!carExists(model, year) || !flag)
 		throw NonexistentCar();
 	else {
-		yellow(); cout << " > "; grey(); cout << "Please enter your vehicle's year: "; white();
-		int year;
-		cin >> year;
 
-		if (!(year > 1900 && year <= 2017))
-			throw NonexistentCar();
-		else {
-			string brand;
+		string brand;
 
-			for (unsigned int i = 0; i < Cars.size(); i++) {
-				if (model == Cars.at(i).model)
-					brand = Cars.at(i).brand;
+		for (unsigned int i = 0; i < Cars.size(); i++) {
+			if (model == Cars.at(i).model && year == Cars.at(i).year) {
+				brand = Cars.at(i).brand;
+				Cars.at(i).available--;
 			}
-
-			Vehicle v1 = Vehicle(brand, model, year, Users.at(sessionPos));
-			addVehicle(v1);
-
-			yellow(); cout << "\n Success!\n"; white();
 		}
+
+		Vehicle v1 = Vehicle(brand, model, year, Users.at(sessionPos));
+		addVehicle(v1);
+
+		yellow(); cout << "\n Success!\n"; white();
 
 	}
 
@@ -3481,6 +3531,12 @@ void Agency::discardCar()
 
 		if (v1.getModel() == model && v1.getYear() == year) {
 			vehicles.remove(v1);
+
+			for (unsigned int i = 0; i < Cars.size(); i++) {
+				if (Cars.at(i).model == model && Cars.at(i).year == year)
+					Cars.at(i).available++;
+			}
+
 			flag = 1;
 			break;
 		}
@@ -3652,10 +3708,10 @@ void Agency::searchCar()
 	return;
 }
 
-int Agency::getNumSeats(string model)
+int Agency::getNumSeats(string model, int year)
 {
 	for (unsigned int i = 0; i < Cars.size(); i++) {
-		if (model == Cars.at(i).model)
+		if (model == Cars.at(i).model && year == Cars.at(i).year)
 			return Cars.at(i).seats;
 	}
 	return 0;
@@ -3729,6 +3785,23 @@ void Agency::saveTree() {
 	return;
 }
 
+void Agency::saveVehicles()
+{
+	ofstream File("Vehicles.txt", ios::trunc);
+
+	if (File.is_open())
+	{
+		for (unsigned int i = 0; i < Cars.size(); i++) {
+
+			File << Cars.at(i).brand << ";" << Cars.at(i).model << ";" << Cars.at(i).seats << ";" << Cars.at(i).year << ";" << Cars.at(i).available << endl;
+		}
+		File.close();
+	}
+	else { red(); cerr << "ERROR: unable to open file." << endl; white(); }
+
+	return;
+}
+
 void Agency::changeUsername()
 {
 	cin.clear();
@@ -3780,7 +3853,77 @@ void Agency::changePassword()
 	return;
 }
 
-//TODO: nao deixar criar viagens se nao tiver carro
+void Agency::deleteAccount()
+{
+	string type;
+
+	red(); cout << "\n WARNING: "; grey(); cout << "Do you really want to delete your account? (y/n)\n";
+	yellow(); cout << "    > "; white(); cin >> type;
+
+	while (cin.fail() || ((type != "y") && (type != "Y") && (type != "n") && (type != "N")))
+	{
+		if (cin.eof())
+		{
+			cin.clear();
+			return;
+		}
+		cin.clear();
+		cin.ignore(1000, '\n');
+		red(); cout << "> Invalid choice!" << endl;
+		white(); cout << "Please try again: ";
+		cin >> type; cout << endl;
+	}
+
+	if (type == "Y" || type == "y") {
+
+		//delete cars from data and free them
+		if (hasCar() > 0) {
+
+			BSTItrIn<Vehicle> it(vehicles);
+
+			while (!it.isAtEnd()) {
+				Vehicle v1 = it.retrieve();
+
+				if (v1.getUser()->getID() == sessionID) {
+
+					for (unsigned int i = 0; i < Cars.size(); i++) {
+						if (Cars.at(i).model == v1.getModel() && Cars.at(i).year == v1.getYear())
+							Cars.at(i).available++;
+					}
+
+					vehicles.remove(v1);
+					it = vehicles;
+				}
+				else
+					it.advance();
+			}
+		}
+
+		//delete as buddy
+		for (unsigned int i = 0; i < Users.size(); i++) {
+			Users.at(i)->removeBuddy(sessionID);
+		}
+
+		//TODO: ELIMINAR USER - tanto pode ser driver como nao - da candidates queue or wtv
+
+		//caso seja driver, elimina viagens ativas
+		if (Users.at(sessionPos)->car()) {
+			for (unsigned int i = 0; i < ActiveTrips.size(); i++) {
+				if (ActiveTrips.at(i).getDriver() == sessionID) {
+					ActiveTrips.erase(ActiveTrips.begin() + i);
+					i--;
+				}
+			}
+		}
+
+		//por fim, elimina user
+		Users.erase(Users.begin() + sessionPos);
+
+		throw userGone();
+	}
+
+	return;
+}
 
 
 void Agency::extractDistances() {
