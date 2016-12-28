@@ -49,11 +49,17 @@ struct cars {
 	int available;
 };
 
+/** @name  Distances Struct*/
+/**@{
+*
+* Struct that keeps info regarding the distance betweeen 2 stops
+*/
 struct distanceStruct {
 	string pnt1;
 	string pnt2;
 	float km;
 };
+/** @} end of Distance Struct */
 
 class Agency
 {
@@ -659,6 +665,9 @@ public:
 	void displayActiveTrips();
 	/** @} end of Display Functions */
 
+
+
+
 	BST<Vehicle> getVehicles() const {
 		return vehicles;
 	}
@@ -690,14 +699,67 @@ public:
 	void deleteAccount();
 
 
+
+
+	/** @name  Distances Data*/
+	/**@{
+	*
+	* Function that manage distances data in of the application
+	*/
 	void extractDistances();
+	/** @} end of User Data */
+
+
+	/** @name  Candidates Queue Data*/
+	/**@{
+	*
+	* Functions that manage Candidates Queue data in and out of the application
+	*/
 	void extractCandidatesQueues();
 	void saveCandidatesQueues();
+	/** @} end of Candidates Queue Data */
 
+
+	/**
+	* @brief distane between 2 stops
+	*
+	* @param pnt1 first stop
+	* @param pnt2 second stop
+	* @return float of the distance between those stops
+	*/
 	float distanceBetweenTwoPoints(string pnt1, string pnt2);
+
+
+	/**
+	* @brief distane between a stop and the first stop in the vector passing by the other stops in the vector
+	*
+	* @param v1 vector of stops that represents a ride
+	* @param pnt1 stop
+	* @return float of the distance between those stops
+	*/
 	float distanceRide(vector<string> v1, string pnt1);
 	
+	/**
+	* @brief Lets User candidate to a Trip displayed on screen separated by existence of buddies or not
+	*
+	* @param recTrips vector of recommended trips without buddies
+	* @param buddieTrips vector of recommended trips with buddies
+	* @param stopCodes vector containing the strings of the User's first and last stop
+	*/
 	void candidateTrip(vector<Trip> recTrips, vector<Trip> buddieTrips, vector<string> stopCodes);
+
+	/**
+	* @brief Lets a Guess candidate to a Trip displayed on screen
+	*
+	* @param recTrips vector of recommended trips without buddies
+	* @param stopCodes vector containing the strings of the User's first and last stop
+	*/
+	void candidateTripGuest(vector<Trip> recTrips, vector<string> stopCodes);
+	
+	/**
+	* @brief menu that shows all the trips of the driver, let him cancel or choose passengers of a trip
+	*
+	*/
 	void scheduledTripsMenu();
 
 };

@@ -1459,7 +1459,7 @@ void Agency::showRecTripsGuest(vector<Trip> recTrips, vector<string> stopCodes)
 		cout << recTrips.at(i);
 	}
 
-	chooseTripGuest(recTrips, stopCodes);
+	candidateTripGuest(recTrips, stopCodes);
 	return;
 }
 
@@ -4184,6 +4184,96 @@ void Agency::candidateTrip(vector<Trip> recTrips, vector<Trip> buddieTrips, vect
 	Sleep(2000);
 	cin.clear();
 	cin.ignore(1000, '\n');
+	return;
+
+}
+
+void Agency::candidateTripGuest(vector<Trip> recTrips, vector<string> stopCodes) {
+
+
+	int posI, posF, stopCounter;
+	int guestID = -1;
+	float payment;
+	//int idi, idf;
+	vector<int> allTrips; //vetor com ids de todas as trips disponiveis como opcao
+	int id;
+
+	string first = stopCodes.at(0); //origem pretendida
+	string last = stopCodes.at(1); //destino pretendido
+
+	yellow(); cout << "\n > "; grey(); cout << "Enter the id of the trip you would like to candidate: "; white(); cin >> id; cout << endl;
+
+	for (unsigned int i = 0; i < recTrips.size(); i++) {
+		allTrips.push_back(recTrips.at(i).getID());
+	}
+
+	while (cin.fail() || find(allTrips.begin(), allTrips.end(), id) == allTrips.end())
+	{
+		if (cin.eof())
+		{
+			cin.clear();
+			return;
+		}
+		cin.clear();
+		cin.ignore(1000, '\n');
+		red(); cout << "> Invalid choice!" << endl;
+		white(); cout << "Please try again: ";
+		cin >> id;
+	}
+
+	for (unsigned int i = 0; i < Users.size(); i++) {
+		if (Users.at(i)->getID() == sessionID) { //encontra passenger
+
+			for (unsigned int j = 0; j < ActiveTrips.size(); j++) {
+				if (ActiveTrips.at(j).getID() == id) { //encontra trip
+
+					for (unsigned int k = 0; k < Users.size(); k++) {
+						if (Users.at(k)->getID() == ActiveTrips.at(j).getDriver()) { //encontra driver
+
+							vector <string> v1;
+
+							for (unsigned int m = 0; m < ActiveTrips.at(j).getStops().size(); m++) {
+								v1.push_back(ActiveTrips.at(j).getStops().at(m).getCode());
+
+								if (first == ActiveTrips.at(i).getStops().at(m).getCode()) 
+									posI = m;
+								if (last == ActiveTrips.at(i).getStops().at(m).getCode())
+									posF = m;
+							}
+
+							stopCounter = posF - posI;
+
+							float dist = distanceRide(v1, first);
+
+							CandidateTrip ct1(Users.at(i), Users.at(k), dist, first, last);
+
+							ActiveTrips.at(j).addCandidate(ct1);
+
+						}
+					}
+				}
+			}
+		}
+	}
+
+	
+	//payment = stopCounter*(float)1.5;
+	payment = 6.5;
+	green(); cout << "\n You'll have to pay: "; white(); cout << payment << endl;
+	Sleep(2000);
+
+	//criar e adicionar transacao
+	Date currentDate;
+	currentDate.setCurrent();
+
+	Transaction trans(guestID, currentDate, payment);
+	Transactions.push_back(trans);
+
+	yellow(); cout << "\n Success! You were added to the trip candidates queue!\n"; white();
+	Sleep(2000);
+	cin.clear();
+	cin.ignore(1000, '\n');
+	clearScreen();
 	return;
 
 }
