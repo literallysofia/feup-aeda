@@ -29,10 +29,10 @@ private:
 	Date date;
 	Hour startTime;
 	Hour endTime;
-	/** @} end of Trip data-members */
+	
 
 	priority_queue<CandidateTrip> candidateQueue;
-
+	/** @} end of Trip data-members */
 
 public:
 
@@ -179,13 +179,20 @@ public:
 	* @param t object we want to compare this-> object with
 	*/
 	bool operator ==(const Trip t) const;
-	/** @} end of Trip Operators Functions */
+	
 
-
-
+	/**
+	* @brief Retrieves object's candidates priority queuu
+	*
+	* @return priority queue of all candidates to the trip
+	*/
 	priority_queue<CandidateTrip> getCandidateQueue() const;
-	void addCandidate(CandidateTrip ct);
-	void removeCandidate(int ID);
 
+	/**
+	* @brief adds elements to the priority queue
+	*/
+	void addCandidate(CandidateTrip ct);
+
+	/** @} end of Trip Operators Functions */
 };
 
