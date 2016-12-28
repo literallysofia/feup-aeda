@@ -7,7 +7,6 @@
 */
 #include <string>
 #include <vector>
-#include "Trip.h"
 #include "Transactions.h"
 
 using namespace std;
@@ -197,6 +196,10 @@ public:
 	* @return bool true if ID or Username between User u matches the object's
 	*/
 	bool operator ==(const User *u) const;
+
+	void setPassword(string password);
+
+	void removeBuddy(int ID);
 };
 
 class Driver :

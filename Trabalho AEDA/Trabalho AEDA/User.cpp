@@ -120,6 +120,23 @@ bool User::operator ==(const User *u) const {
 
 }
 
+void User::setPassword(string password)
+{
+	this->password = password;
+}
+
+void User::removeBuddy(int ID)
+{
+	for (unsigned int i = 0; i < buddies.size(); i++) {
+		if (buddies.at(i)->getID() == ID) {
+			buddies.erase(buddies.begin() + i);
+			i--;
+		}
+	}
+	return;
+}
+
+
 /*DRIVER CLASS*/
 Driver::Driver(int ID, string name, float balance, string username, string password, int nt) : User(ID, name, balance, username, password,nt) {
 }

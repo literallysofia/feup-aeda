@@ -8,9 +8,11 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <queue>
 #include "Stop.h"
 #include "Date.h"
 #include "Hour.h"
+#include "CandidateTrip.h"
 using namespace std;
 
 class Trip
@@ -27,6 +29,9 @@ private:
 	Date date;
 	Hour startTime;
 	Hour endTime;
+	
+
+	priority_queue<CandidateTrip> candidateQueue;
 	/** @} end of Trip data-members */
 
 public:
@@ -174,5 +179,20 @@ public:
 	* @param t object we want to compare this-> object with
 	*/
 	bool operator ==(const Trip t) const;
+	
+
+	/**
+	* @brief Retrieves object's candidates priority queuu
+	*
+	* @return priority queue of all candidates to the trip
+	*/
+	priority_queue<CandidateTrip> getCandidateQueue() const;
+
+	/**
+	* @brief adds elements to the priority queue
+	*/
+	void addCandidate(CandidateTrip ct);
+
 	/** @} end of Trip Operators Functions */
 };
+

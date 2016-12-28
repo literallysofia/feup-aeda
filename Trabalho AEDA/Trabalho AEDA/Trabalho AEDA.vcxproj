@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Agency.cpp" />
+    <ClCompile Include="CandidateTrip.cpp" />
     <ClCompile Include="Date.cpp" />
     <ClCompile Include="Hour.cpp" />
     <ClCompile Include="Source.cpp" />
@@ -29,9 +30,12 @@
     <ClCompile Include="Trip.cpp" />
     <ClCompile Include="User.cpp" />
     <ClCompile Include="Utilities.cpp" />
+    <ClCompile Include="Vehicle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Agency.h" />
+    <ClInclude Include="BST.h" />
+    <ClInclude Include="CandidateTrip.h" />
     <ClInclude Include="Date.h" />
     <ClInclude Include="Hour.h" />
     <ClInclude Include="SearchAndSort.h" />
@@ -41,14 +45,19 @@
     <ClInclude Include="Trip.h" />
     <ClInclude Include="User.h" />
     <ClInclude Include="Utilities.h" />
+    <ClInclude Include="Vehicle.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ActiveTrips.txt" />
     <Text Include="Buddies.txt" />
+    <Text Include="CandidatesQueues.txt" />
+    <Text Include="Distances.txt" />
     <Text Include="Record.txt" />
     <Text Include="Stops.txt" />
     <Text Include="Transactions.txt" />
     <Text Include="Users.txt" />
+    <Text Include="Vehicles.txt" />
+    <Text Include="VehiclesTree.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F8A05EB7-9F4C-44EC-B9AD-4C55343CA238}</ProjectGuid>
