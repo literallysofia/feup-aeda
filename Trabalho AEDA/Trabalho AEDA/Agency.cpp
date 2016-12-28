@@ -4145,6 +4145,20 @@ void Agency::candidateTrip(vector<Trip> recTrips, vector<Trip> buddieTrips, vect
 					for (unsigned int k = 0; k < Users.size(); k++) {
 						if (Users.at(k)->getID() == ActiveTrips.at(j).getDriver()) { //encontra driver
 
+							vector <int> IDqueue;
+							priority_queue <CandidateTrip> temp = ActiveTrips.at(j).getCandidateQueue();
+							while (!temp.empty()) {
+								IDqueue.push_back(temp.top().getPassanger()->getID());
+								temp.pop();
+							}
+							if (find(IDqueue.begin(), IDqueue.end(), sessionID) != IDqueue.end()) {
+								red(); cout << "> You have already candidated to this trip!" << endl; grey();
+								Sleep(2000);
+								cin.clear();
+								cin.ignore(1000, '\n');
+								return;
+							}
+
 							vector <string> v1;
 
 							for (unsigned int m = 0; m < ActiveTrips.at(j).getStops().size(); m++) {
@@ -4154,6 +4168,7 @@ void Agency::candidateTrip(vector<Trip> recTrips, vector<Trip> buddieTrips, vect
 							float dist = distanceRide(v1, first);
 
 							CandidateTrip ct1(Users.at(i), Users.at(k), dist, first, last);
+
 							ActiveTrips.at(j).addCandidate(ct1);
 
 						}
@@ -4163,7 +4178,7 @@ void Agency::candidateTrip(vector<Trip> recTrips, vector<Trip> buddieTrips, vect
 		}
 	}
 
-	yellow(); cout << "\n Success! You were added to the trip candidates!\n"; white();
+	yellow(); cout << "\n Success! You were added to the trip candidates queue!\n"; white();
 
 
 	Sleep(2000);
