@@ -27,6 +27,7 @@ protected:
 	static float maintenanceFee;
 	int ntrips;
 	vector <User *> buddies;
+	string address;
 	Date lastAccess;
 	/** @} end of User data-members */
 	
@@ -53,8 +54,10 @@ public:
 	* @param username of the User to set
 	* @param password of the User to set
 	* @param nt number of trips of the User to set
+	* @param ad addres of the User to set
+	* @param lastA date os last access of the User to set
 	*/
-	User(int ID, string name, float balance, string username, string password,int nt);
+	User(int ID, string name, float balance, string username, string password,int nt, string ad, Date lastA);
 
 	/**
 	* @brief User destructor
@@ -217,7 +220,7 @@ public:
 	* @param password of the User to set
 	* @param nt number of trips of the User to set
 	*/
-	Driver(int ID, string name, float balance, string username, string password,int nt);
+	Driver(int ID, string name, float balance, string username, string password, int nt, string ad, Date lastA);
 
 	/**
 	* @brief Retrieves object's payment based on monthly trips #
@@ -256,7 +259,7 @@ public:
 	* @param password of the User to set
 	* @param nt number of trips of the User to set
 	*/
-	Passenger(int ID, string name, float balance, string username, string password,int nt);
+	Passenger(int ID, string name, float balance, string username, string password, int nt, string ad, Date lastA);
 
 	/**
 	* @brief Retrieves object's payment based on monthly trips #

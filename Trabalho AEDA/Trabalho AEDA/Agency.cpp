@@ -140,7 +140,8 @@ MENUS
 void Agency::registerUser()
 {
 	clearScreen();
-	string type, name, username, password;
+	Date t; t.setCurrent();
+	string type, name, username, password, address;
 
 	menuHeader();
 	cout << "|                      ";  grey(); cout << "CREATE ACCOUNT";  white(); cout << "                     |" << endl;
@@ -209,14 +210,41 @@ void Agency::registerUser()
 		getline(cin, name);
 	}
 
+	yellow(); cout << "\n\n    > "; grey(); cout << "Enter address: "; white(); cin.ignore(); cin >> address;
+
+	while (1) {
+		while (cin.fail() || name.empty()) {
+
+			if (cin.eof())
+			{
+				cin.clear();
+				clearScreen();
+				return;
+			}
+			cin.clear();
+			red(); cout << "\n Not a valid input!" << endl;
+			white(); cout << " Please try again: ";
+			cin >> address;
+		}
+
+		if (checkStop(convertUpper(address))) break;
+		else {
+			cin.clear();
+			red(); cout << "\n Out of our operating zone!" << endl;
+			white(); cout << "\n PRESS ENTER TO CONTINUE ";
+			getEnter();
+			return;
+		}
+	}
+
 	int nID = getLastId() + 1;
 
 	if ((type == "y") || (type == "Y")) {
-		User *u1 = new Driver(nID, name, 0.00, username, password, 0);
+		User *u1 = new Driver(nID, name, 0.00, username, password, 0, address, t);
 		addUser(u1);
 	}
 	else {
-		User *u1 = new Passenger(nID, name, 0.00, username, password, 0);
+		User *u1 = new Passenger(nID, name, 0.00, username, password, 0, address, t);
 		addUser(u1);
 	}
 
@@ -1517,7 +1545,11 @@ void Agency::extractUsers()
 			string str4 = str3.substr(pos4 + 1); //user+pass+nt
 			size_t pos5 = str4.find(";"); //posi�ao 5
 			string str5 = str4.substr(pos5 + 1); //pass+nt
-			size_t pos6 = str5.find(";"); //posi�ao 5
+			size_t pos6 = str5.find(";"); //posi�ao 6
+			string str6 = str5.substr(pos6 + 1); //nt+morada+ultimoacesso
+			size_t pos7 = str6.find(";"); //posi?ao 7
+			string str7 = str6.substr(pos7 + 1); //morada+ultimoacesso
+			size_t pos8 = str7.find(";"); //posi?ao 8
 
 			string ids = line.substr(0, pos1); //string id
 			string nome = str1.substr(0, pos2);
@@ -1525,7 +1557,9 @@ void Agency::extractUsers()
 			string sbalance = str3.substr(0, pos4); //string balance
 			string user = str4.substr(0, pos5);
 			string pass = str5.substr(0, pos6);
-			string nt_s = str5.substr(pos6 + 1); //string nro de trips
+			string nt_s = str6.substr(0, pos7); //string nro de trips
+			string adress = str7.substr(0, pos8);	//string morada
+			string sdate = str7.substr(pos8 + 1);  //string ultimo acesso
 
 			int idi = stoi(ids, nullptr, 10); //passa o id de string para int
 			bool bcar;
@@ -1537,16 +1571,18 @@ void Agency::extractUsers()
 
 			int nt = stoi(nt_s, nullptr, 10); //passa o id de string para int
 
+			Date d(sdate); // passa a data de ultimo acesso de string para Date;
+
 			if (bcar)
 			{
 				//se o User tiver carro, adiciona um novo driver
-				User *d1 = new Driver(idi, nome, balancef, user, pass, nt);
+				User *d1 = new Driver(idi, nome, balancef, user, pass, nt, adress, sdate);
 				Users.push_back(d1);
 			}
 			else
 			{
 				//caso contrario adiciona um novo passenger
-				User *p1 = new Passenger(idi, nome, balancef, user, pass, nt);
+				User *p1 = new Passenger(idi, nome, balancef, user, pass, nt, adress, sdate);
 				Users.push_back(p1);
 			}
 		}
@@ -3312,7 +3348,7 @@ void Agency::displayRecord()
 		cout << Trips.at(i);
 	}
 }
-::displayActiveTrips()
+void Agency::displayActiveTrips()
 {
 	for (size_t i = 0; i < ActiveTrips.size(); i++)
 	{
@@ -3323,7 +3359,7 @@ void Agency::displayRecord()
 
 void Agency::displayInactiveUsers()
 {
-	for (auto it = inactiveUsers.begin() ; it != inactiveUsers.end(); it++)
+	for (auto it = inactiveUsers.begin(); it != inactiveUsers.end(); it++)
 	{
 		cout << setw(5) << it->user->getName();
 		cout << setw(10) << it->user->getUsername();
@@ -3334,6 +3370,7 @@ void Agency::displayInactiveUsers()
 			cout << setw(10) << "[X]" << endl;
 		else cout << setw(10) << "[ ]" << endl;
 	}
+}
 
 void Agency::optionsMenuCar()
 {
