@@ -689,15 +689,15 @@ public:
 	void changePassword();
 	void deleteAccount();
 
+
 	void extractDistances();
+	void extractCandidatesQueues();
+	void saveCandidatesQueues();
+
 	float distanceBetweenTwoPoints(string pnt1, string pnt2);
 	float distanceRide(vector<string> v1, string pnt1);
-
-	void saveCandidatesQueues();
-	void extractCandidatesQueues();
-
+	
 	void candidateTrip(vector<Trip> recTrips, vector<Trip> buddieTrips, vector<string> stopCodes);
-
-	void scheduledTrips();
+	void scheduledTripsMenu();
 
 };
