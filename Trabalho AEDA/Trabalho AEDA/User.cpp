@@ -10,11 +10,13 @@ User::User(string name) :name(name)
 {
 }
 
-User::User(int ID, string name, float balance, string username, string password, int nt) : ID(ID), name(name) {
+User::User(int ID, string name, float balance, string username, string password, int nt, string ad, Date lastA) : ID(ID), name(name) {
 	this->username = username;
 	this->password = password;
 	this->balance = balance;
 	ntrips = nt;
+	address = ad;
+	lastAccess = lastA;
 }
 
 User::~User()
@@ -76,16 +78,6 @@ void User::setNtrips()
 	ntrips++;
 }
 
-void User::setInactive()
-{
-	isInactive = true;
-}
-
-void User::setActive()
-{
-	isInactive = false;
-}
-
 void User::deposit(float value)
 {
 	balance += value;
@@ -138,7 +130,7 @@ void User::removeBuddy(int ID)
 
 
 /*DRIVER CLASS*/
-Driver::Driver(int ID, string name, float balance, string username, string password, int nt) : User(ID, name, balance, username, password,nt) {
+Driver::Driver(int ID, string name, float balance, string username, string password, int nt, string ad, Date lastA) : User(ID, name, balance, username, password,nt, ad, lastA) {
 }
 
 float Driver::payment()
@@ -159,7 +151,7 @@ bool Driver::car() const
 Passenger::Passenger(string name) : User(name) {
 }
 
-Passenger::Passenger(int ID, string name, float balance, string username, string password, int nt) : User(ID, name, balance, username, password, nt) {
+Passenger::Passenger(int ID, string name, float balance, string username, string password, int nt, string ad, Date lastA) : User(ID, name, balance, username, password, nt, ad, lastA) {
 }
 
 float Passenger::payment()
