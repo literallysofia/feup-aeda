@@ -49,7 +49,7 @@ struct stop {
 */
 struct inactivePtr {
 	int operator()(const userPtr & us1) const {
-		return us1.user->getName().size() % us1.user->getUsername().size();
+		return (int)us1.user->getName().size() % (int)us1.user->getUsername().size();
 	}
 	bool operator()(const userPtr & us1, const userPtr & us2) const {
 		return us1.user->getUsername() == us2.user->getUsername();
