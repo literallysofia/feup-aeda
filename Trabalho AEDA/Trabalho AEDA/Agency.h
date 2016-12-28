@@ -16,6 +16,7 @@
 #include <ctime>
 #include <Windows.h>
 #include <algorithm>
+#include <unordered_set>
 #include "Utilities.h"
 #include "Tools.h"
 #include "User.h"
@@ -41,6 +42,24 @@ struct stop {
 /** @} end of Stop Struct */
 
 
+/** @name  Hash Function Struct*/
+/**@{
+*
+* Struct that keeps the functions in use for the hash table
+*/
+struct inactivePtr {
+	int operator()(const userPtr & us1) const {
+		return us1.user->getName().size() % us1.user->getUsername().size();
+	}
+	bool operator()(const userPtr & us1, const userPtr & us2) const {
+		return us1.user->getUsername() == us2.user->getUsername();
+	}
+};
+/** @} end of Hash Function Struct */
+
+typedef unordered_set<userPtr, inactivePtr, inactivePtr> tabHInactive;
+
+
 struct cars {
 	string brand;
 	string model;
@@ -60,6 +79,7 @@ struct distanceStruct {
 	float km;
 };
 /** @} end of Distance Struct */
+
 
 class Agency
 {
@@ -111,11 +131,15 @@ private:
 	vector<stop> stopsAvailable;
 	/** @} end of Agency's Info Vectors */
 
+
+	tabHInactive inactiveUsers;
+
 	vector<cars> Cars;
 
 	BST<Vehicle> vehicles;
 
 	vector<distanceStruct> distancesVec;
+
 
 public:
 
@@ -663,6 +687,38 @@ public:
 	* @brief Displays all active trips on screen
 	*/
 	void displayActiveTrips();
+
+	/**
+	* @brief Displays all inactive users on screen (more than 5 days after last access)
+	*/
+	void displayInactiveUsers();
+	/** @} end of Display Functions */
+
+	/** @name  HashTable Functions*/
+	/**@{
+	*
+	* Functions that manage the hash table of inactive User
+	*/
+
+	/**
+	* @brief accesses the table of the inactive users
+	*
+	* @return table with the inactive Users
+	*/
+	tabHInactive getInactive() const;
+
+	/**
+	* @brief adds a new User to the inactive users table
+	*
+	* @param User that is to be added to the table
+	*/
+	void addInactive(User *us1);
+
+	/**
+	* @brief accesses the table of the inactive users
+	*/
+	void generateTable();
+
 	/** @} end of Display Functions */
 
 
