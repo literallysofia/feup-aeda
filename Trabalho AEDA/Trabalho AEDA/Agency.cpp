@@ -2247,7 +2247,7 @@ void Agency::addTrip() {
 
 			if (v1.getUser()->getID() == sessionID) {
 				if (hasCar() == 1) {
-					numSeats = getNumSeats(v1.getModel(), v1.getYear()) - 1;
+					numSeats = getNumSeats(v1.getModel(), v1.getYear());
 				}
 				else {
 					cout << setw(15) << v1.getBrand() << setw(18) << v1.getModel() << setw(20) << v1.getYear() << endl;
@@ -2275,7 +2275,7 @@ void Agency::addTrip() {
 				Vehicle v1 = it.retrieve();
 
 				if (v1.getModel() == model && v1.getYear() == year && v1.getUser()->getID() == sessionID) {
-					numSeats = getNumSeats(v1.getModel(), v1.getYear()) - 1;
+					numSeats = getNumSeats(v1.getModel(), v1.getYear());
 					flag = 1;
 					break;
 				}
@@ -3784,7 +3784,7 @@ int Agency::getNumSeats(string model, int year)
 {
 	for (unsigned int i = 0; i < Cars.size(); i++) {
 		if (model == Cars.at(i).model && year == Cars.at(i).year)
-			return Cars.at(i).seats;
+			return Cars.at(i).seats - 1;
 	}
 	return 0;
 }

@@ -59,7 +59,11 @@ struct inactivePtr {
 
 typedef unordered_set<userPtr, inactivePtr, inactivePtr> tabHInactive;
 
-
+/** @name  Cars Struct*/
+/**@{
+*
+* Struct that keeps info regarding the information of a car (brand, model, num of seats, year, num available)
+*/
 struct cars {
 	string brand;
 	string model;
@@ -67,6 +71,7 @@ struct cars {
 	int year;
 	int available;
 };
+/** @} end of Cars Struct */
 
 /** @name  Distances Struct*/
 /**@{
@@ -134,11 +139,24 @@ private:
 
 	tabHInactive inactiveUsers;
 
+	/**
+	* @brief vector with all available cars of the application
+	*/
 	vector<cars> Cars;
+	/** @} end of Agency's Info Vectors */
 
+	/**
+	* @brief binary search tree (BST) with all rented vehicles of the application
+	*/
 	BST<Vehicle> vehicles;
+	/** @} end of Agency's Info Vectors */
+	//TODO: nao é um vector, como chamo?
 
+	/**
+	* @brief vector with all distances between stops of the application
+	*/
 	vector<distanceStruct> distancesVec;
+	/** @} end of Agency's Info Vectors */
 
 
 public:
@@ -723,37 +741,142 @@ public:
 
 
 
+	/** @name  BST Functions*/
+	/**@{
+	*
+	* Functions that manage the binary search tree (BST) of rented vehicles
+	*/
 
+	/**
+	* @brief returns the BST of rented vehicles
+	*
+	* @return BST of rented vehicles
+	*/
 	BST<Vehicle> getVehicles() const {
 		return vehicles;
 	}
 
+	/**
+	* @brief adds new rented vehicle to BST
+	*
+	* @param v1 vehicle object
+	*/
 	void addVehicle(Vehicle &v1) {
 		vehicles.insert(v1);
 	}
 
-	void optionsMenuCar();
+	/**
+	* @brief Opens the menu Car Details
+	*/
 	int MenuCar();
 
-	void displayCar(); //display dos carros respetivos de um driver(user)
-	void displayCars(); //display de todos os carros que a agencia aluga
+	/**
+	* @brief Options in Cars Details menu
+	*/
+	void optionsMenuCar();
+
+	/**
+	* @brief displays vehicles of a certain user
+	*/
+	void displayCar();
+
+	/**
+	* @brief displays vehicles of the agency that can be rented
+	*/
+	void displayCars();
+
+	/**
+	* @brief verifies if a certain car of the agency is available for rent
+	*
+	* @param model of the vehicle
+	* @param year of the vehicle
+	*
+	* @return true or false
+	*/
 	bool carExists(string model, int year);
+
+	/**
+	* @brief to check how many vehicle a certain user has
+	*
+	* @return number of vehicles
+	*/
 	int hasCar();
+
+	/**
+	* @brief function that allows a user to rent a car
+	*/
 	void rentCar();
+
+	/**
+	* @brief function that allows a user to remove a car he had rented
+	*/
 	void discardCar();
+
+	/**
+	* @brief function that allows a user trade his car with another user
+	* @brief he selects a car he was to discard, and chooses a user who its going to be the new owner
+	*/
 	void tradeCar();
+
+	/**
+	* @brief function that allows a user to search a car by brand & model & year
+	*/
 	void searchCar();
+
+	/**
+	* @brief returns number of seats of a certain vehicle minus the driver seat
+	*
+	* @param model of the vehicle
+	* @param year of the vehicle
+	*
+	* @return number of seats
+	*/
 	int getNumSeats(string model, int year);
 
+	/**
+	* @brief function that extracts the agency's vehicles
+	*/
 	void extractVehicles();
+
+	/**
+	* @brief function that extracts rented vehicles to BST
+	*/
 	void extractVehiclesTree();
+
+	/**
+	* @brief function that saves the BST in a text file
+	*/
 	void saveTree();
+
+	/**
+	* @brief function that saves the vehicles vector in a text file
+	*/
 	void saveVehicles();
 
+	/** @} end of BST Functions */
+
+	/** @name  New User Functions*/
+	/**@{
+	*
+	* New functions that manage the account of a user
+	*/
+
+	/**
+	* @brief changes username of a user
+	*/
 	void changeUsername();
+
+	/**
+	* @brief changes password of a user
+	*/
 	void changePassword();
+
+	/**
+	* @brief deletes permanently the account of a user
+	*/
 	void deleteAccount();
 
+/** @} end of New User Functions */
 
 
 

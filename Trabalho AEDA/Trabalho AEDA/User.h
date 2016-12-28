@@ -200,8 +200,18 @@ public:
 	*/
 	bool operator ==(const User *u) const;
 
+	/**
+	* @brief sets password of a certain user
+	*
+	* @param password to set
+	*/
 	void setPassword(string password);
 
+	/**
+	* @brief removes user as buddy of all users
+	*
+	* @param ID of the user you want to remove
+	*/
 	void removeBuddy(int ID);
 };
 
