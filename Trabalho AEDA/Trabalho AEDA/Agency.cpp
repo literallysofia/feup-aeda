@@ -1275,11 +1275,11 @@ void Agency::optionsMainMenu_User() {
 				if (Users.at(sessionPos)->car())
 					optionsMenuCar();
 				break;
-			}
 			case 5:
 			if (Users.at(sessionPos)->car())
 				scheduledTripsMenu();
 			break;
+			}
 	}
 	catch (const userGone &e)
 	{
@@ -1289,7 +1289,6 @@ void Agency::optionsMainMenu_User() {
 		cin.clear();
 		cin.ignore(1000, '\n');
 	}
->>>>>>> origin/master
 
 	return;
 }
@@ -4327,7 +4326,7 @@ void Agency::scheduledTripsMenu() {
 		menuHeader();
 		cout << "|                       ";  grey(); cout << "CANDIDADE QUEUE";  white(); cout << "                   |" << endl
 			<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-		grey(); cout << setw(9) << "ID" << setw(15) << "Is Buddy" << setw(15) << "First Stop" << setw(15) << "Last Stop" << endl;
+		grey(); cout << setw(4) << "ID" << setw(12) << "Is Buddy" << setw(12) << "First Stop" << setw(12) << "Last Stop" << setw(15) << "Distance" << endl;
 		blue(); cout << "-----------------------------------------------------------" << endl;
 		white();
 
@@ -4348,13 +4347,13 @@ void Agency::scheduledTripsMenu() {
 					vectorQueue.push_back(coutQueue.top());
 
 
-					cout << setw(9) << coutQueue.top().getPassanger()->getID() << setw(12);
+					cout << setw(4) << coutQueue.top().getPassanger()->getID() << setw(9);
 
 					if (coutQueue.top().areBuddies())
 						cout << "[X]";
 					else cout << "[ ]";
 
-					cout << setw(15) << coutQueue.top().getInitStop() << setw(15) << coutQueue.top().getEndStop() << endl;
+					cout << setw(12) << coutQueue.top().getInitStop() << setw(12) << coutQueue.top().getEndStop() << setw(15) << coutQueue.top().getDistance()<< endl;
 
 					coutQueue.pop();
 
