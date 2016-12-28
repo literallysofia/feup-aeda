@@ -1276,9 +1276,9 @@ void Agency::optionsMainMenu_User() {
 					optionsMenuCar();
 				break;
 			case 5:
-			if (Users.at(sessionPos)->car())
-				scheduledTripsMenu();
-			break;
+				if (Users.at(sessionPos)->car())
+					scheduledTripsMenu();
+				break;
 			}
 	}
 	catch (const userGone &e)
@@ -4011,11 +4011,21 @@ void Agency::extractCandidatesQueues() {
 
 					if (Users.at(i)->getID() == iiddriver) { // encontra o driver
 
-						for (int k = 0; k < Users.size(); k++) {
+						if (idpass == -1) {
 
-							if (Users.at(k)->getID() == idpass) { // encontra o passenger
-								CandidateTrip ct1(Users.at(k), Users.at(i), dist, initS, endS);
-								v1.push_back(ct1);
+							CandidateTrip ct1(NULL, Users.at(i), dist, initS, endS);
+							v1.push_back(ct1);
+
+						}
+						else {
+
+							for (int k = 0; k < Users.size(); k++) {
+
+								if (Users.at(k)->getID() == idpass) { // encontra o passenger
+									CandidateTrip ct1(Users.at(k), Users.at(i), dist, initS, endS);
+									v1.push_back(ct1);
+
+								}
 							}
 						}
 					}
@@ -4051,12 +4061,18 @@ void Agency::saveCandidatesQueues() {
 
 			if (!temp.empty()) { //se nao está inicialmente vazia
 
+
 				Queuesfile << ActiveTrips.at(i).getID() << ";" << temp.top().getDriver()->getID();
 
 				while (!temp.empty()) {
 
-					Queuesfile << ";" << temp.top().getPassanger()->getID() << "," << temp.top().getDistance()
-						<< "," << temp.top().getInitStop() << "," << temp.top().getEndStop();
+					Queuesfile << ";";
+
+					if (temp.top().getPassanger() == NULL)
+						Queuesfile << "-1";
+					else Queuesfile << temp.top().getPassanger()->getID();
+
+					Queuesfile << "," << temp.top().getDistance()	<< "," << temp.top().getInitStop() << "," << temp.top().getEndStop();
 					temp.pop();
 				}
 				Queuesfile << endl;
@@ -4221,44 +4237,40 @@ void Agency::candidateTripGuest(vector<Trip> recTrips, vector<string> stopCodes)
 		cin >> id;
 	}
 
-	for (unsigned int i = 0; i < Users.size(); i++) {
-		if (Users.at(i)->getID() == sessionID) { //encontra passenger
 
-			for (unsigned int j = 0; j < ActiveTrips.size(); j++) {
-				if (ActiveTrips.at(j).getID() == id) { //encontra trip
+	for (unsigned int j = 0; j < ActiveTrips.size(); j++) {
+		if (ActiveTrips.at(j).getID() == id) { //encontra trip
 
-					for (unsigned int k = 0; k < Users.size(); k++) {
-						if (Users.at(k)->getID() == ActiveTrips.at(j).getDriver()) { //encontra driver
+			for (unsigned int k = 0; k < Users.size(); k++) {
+				if (Users.at(k)->getID() == ActiveTrips.at(j).getDriver()) { //encontra driver
 
-							vector <string> v1;
+					vector <string> v1;
 
-							for (unsigned int m = 0; m < ActiveTrips.at(j).getStops().size(); m++) {
-								v1.push_back(ActiveTrips.at(j).getStops().at(m).getCode());
+					for (unsigned int m = 0; m < ActiveTrips.at(j).getStops().size(); m++) {
+						v1.push_back(ActiveTrips.at(j).getStops().at(m).getCode());
 
-								if (first == ActiveTrips.at(i).getStops().at(m).getCode()) 
-									posI = m;
-								if (last == ActiveTrips.at(i).getStops().at(m).getCode())
-									posF = m;
-							}
-
-							stopCounter = posF - posI;
-
-							float dist = distanceRide(v1, first);
-
-							CandidateTrip ct1(Users.at(i), Users.at(k), dist, first, last);
-
-							ActiveTrips.at(j).addCandidate(ct1);
-
-						}
+						if (first == ActiveTrips.at(j).getStops().at(m).getCode())
+							posI = m;
+						if (last == ActiveTrips.at(j).getStops().at(m).getCode())
+							posF = m;
 					}
+
+					stopCounter = posF - posI;
+
+					float dist = distanceRide(v1, first);
+
+					CandidateTrip ct1(NULL, Users.at(k), dist, first, last);
+
+					ActiveTrips.at(j).addCandidate(ct1);
+
 				}
 			}
 		}
 	}
 
-	
-	//payment = stopCounter*(float)1.5;
-	payment = 6.5;
+
+	payment = stopCounter*(float)1.5;
+	//payment = 6.5;
 	green(); cout << "\n You'll have to pay: "; white(); cout << payment << endl;
 	Sleep(2000);
 
@@ -4448,17 +4460,26 @@ void Agency::scheduledTripsMenu() {
 
 				while (!coutQueue.empty()) {
 
-					candidatesIDs.push_back(coutQueue.top().getPassanger()->getID());
+					if (coutQueue.top().getPassanger() == NULL) {
+
+						candidatesIDs.push_back(-1);
+					}
+					else candidatesIDs.push_back(coutQueue.top().getPassanger()->getID());
+
 					vectorQueue.push_back(coutQueue.top());
 
+					if (coutQueue.top().getPassanger() == NULL) {
 
-					cout << setw(4) << coutQueue.top().getPassanger()->getID() << setw(9);
+						cout << setw(4) << "-1" << setw(9);
+					}
+
+					else cout << setw(4) << coutQueue.top().getPassanger()->getID() << setw(9);
 
 					if (coutQueue.top().areBuddies())
 						cout << "[X]";
 					else cout << "[ ]";
 
-					cout << setw(12) << coutQueue.top().getInitStop() << setw(12) << coutQueue.top().getEndStop() << setw(15) << coutQueue.top().getDistance()<< endl;
+					cout << setw(12) << coutQueue.top().getInitStop() << setw(12) << coutQueue.top().getEndStop() << setw(15) << coutQueue.top().getDistance() << endl;
 
 					coutQueue.pop();
 
@@ -4552,29 +4573,59 @@ void Agency::scheduledTripsMenu() {
 
 			for (int k = 0; k < candidatesIDS.size(); k++) {
 
-				for (int d = 0; d < vectorQueue.size(); d++) {
+				if (candidatesIDS.at(k) == -1) { //caso guest
 
-					if (vectorQueue.at(d).getPassanger()->getID() == candidatesIDS.at(k)) {
+					for (int d = 0; d < vectorQueue.size(); d++) {
 
-						for (unsigned int i = 0; i < ActiveTrips.size(); i++) {
+						if (vectorQueue.at(d).getPassanger() == NULL) {
 
-							if (idtrip == ActiveTrips.at(i).getID()) {
+							for (unsigned int i = 0; i < ActiveTrips.size(); i++) {
 
-								for (unsigned int j = 0; j < ActiveTrips.at(i).getStops().size(); j++) {
-									if (vectorQueue.at(d).getInitStop() == ActiveTrips.at(i).getStops().at(j).getCode()) //obtem id inicial ; idi
-										idi = j;
-									if (vectorQueue.at(d).getEndStop() == ActiveTrips.at(i).getStops().at(j).getCode()) //obtem id final ; idf
-										idf = j;
-								}
+								if (idtrip == ActiveTrips.at(i).getID()) {
 
-								for (idi; idi < idf; idi++) { //verifica se ha lugares disponiveis em cada paragem, menos na final, visto que user sai nessa
+									for (unsigned int j = 0; j < ActiveTrips.at(i).getStops().size(); j++) {
+										if (vectorQueue.at(d).getInitStop() == ActiveTrips.at(i).getStops().at(j).getCode()) //obtem id inicial ; idi
+											idi = j;
+										if (vectorQueue.at(d).getEndStop() == ActiveTrips.at(i).getStops().at(j).getCode()) //obtem id final ; idf
+											idf = j;
+									}
 
-									ActiveTrips.at(i).setStops(idi, candidatesIDS.at(k)); //decrementa e adiciona user a viagem nas stops
+									for (idi; idi < idf; idi++) { //verifica se ha lugares disponiveis em cada paragem, menos na final, visto que user sai nessa
+
+										ActiveTrips.at(i).setStops(idi, candidatesIDS.at(k)); //decrementa e adiciona user a viagem nas stops
+									}
 								}
 							}
-						}
 
-						vectorQueue.at(d).getPassanger()->setNtrips(); //adiciona uma viagem
+						}
+					}
+
+				}
+				else { //caso cliente registado
+					for (int d = 0; d < vectorQueue.size(); d++) {
+
+						if (vectorQueue.at(d).getPassanger()->getID() == candidatesIDS.at(k)) {
+
+							for (unsigned int i = 0; i < ActiveTrips.size(); i++) {
+
+								if (idtrip == ActiveTrips.at(i).getID()) {
+
+									for (unsigned int j = 0; j < ActiveTrips.at(i).getStops().size(); j++) {
+										if (vectorQueue.at(d).getInitStop() == ActiveTrips.at(i).getStops().at(j).getCode()) //obtem id inicial ; idi
+											idi = j;
+										if (vectorQueue.at(d).getEndStop() == ActiveTrips.at(i).getStops().at(j).getCode()) //obtem id final ; idf
+											idf = j;
+									}
+
+									for (idi; idi < idf; idi++) { //verifica se ha lugares disponiveis em cada paragem, menos na final, visto que user sai nessa
+
+										ActiveTrips.at(i).setStops(idi, candidatesIDS.at(k)); //decrementa e adiciona user a viagem nas stops
+									}
+								}
+							}
+
+							vectorQueue.at(d).getPassanger()->setNtrips(); //adiciona uma viagem
+						}
 					}
 				}
 			}
