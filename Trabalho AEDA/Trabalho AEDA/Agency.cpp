@@ -4606,7 +4606,7 @@ void Agency::scheduledTripsMenu() {
 		for (int i = 0; i < ActiveTrips.size(); i++) {
 
 			if (ActiveTrips.at(i).getID() == idtrip) {
-				availableSeats = ActiveTrips.at(i).getStops().at(0).getAvailableSeats() + ActiveTrips.at(i).getStops().at(0).getPassengers().size();
+				availableSeats = (int)ActiveTrips.at(i).getStops().at(0).getAvailableSeats() + (int)ActiveTrips.at(i).getStops().at(0).getPassengers().size();
 			}
 		}
 
