@@ -1,6 +1,6 @@
 #pragma once
 
-/** @defgroup Vehicle Transaction
+/** @defgroup Vehicle 
 * @{
 *
 * Vehicle class declaration
@@ -23,10 +23,10 @@ private:
 	string model;
 	int year;
 	User *driver;
-	/** @} end of Vehcile data-members */
+	/** @} end of Vehicle data-members */
 public:
 	/**
-	* @brief Vehcile constructor
+	* @brief Vehicle constructor
 	*
 	* @param brand of vehicle
 	* @param model of vehicle

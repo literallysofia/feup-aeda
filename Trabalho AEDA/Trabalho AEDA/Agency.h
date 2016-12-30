@@ -105,7 +105,7 @@ private:
 	*/
 	int sessionPos;
 
-	/** @name  Agency's Info Vectors*/
+	/** @name  Agency's Data Structures */
 	/**@{
 	*
 	*/
@@ -134,29 +134,27 @@ private:
 	* @brief vector with all available stops of the application 
 	*/
 	vector<stop> stopsAvailable;
-	/** @} end of Agency's Info Vectors */
 
-
+	/**
+	* @brief hash table with all inactive users of the application
+	*/
 	tabHInactive inactiveUsers;
 
 	/**
 	* @brief vector with all available cars of the application
 	*/
 	vector<cars> Cars;
-	/** @} end of Agency's Info Vectors */
 
 	/**
 	* @brief binary search tree (BST) with all rented vehicles of the application
 	*/
 	BST<Vehicle> vehicles;
-	/** @} end of Agency's Info Vectors */
-	//TODO: nao é um vector, como chamo?
 
 	/**
 	* @brief vector with all distances between stops of the application
 	*/
 	vector<distanceStruct> distancesVec;
-	/** @} end of Agency's Info Vectors */
+	/** @} end of Agency's Data Structures */
 
 
 public:
@@ -733,7 +731,7 @@ public:
 	*/
 	void generateTable();
 
-	/** @} end of Display Functions */
+	/** @} end of HashTable Functions */
 
 
 
@@ -877,7 +875,7 @@ public:
 	*/
 	void deleteAccount();
 
-/** @} end of New User Functions */
+	/** @} end of New User Functions */
 
 
 
@@ -887,21 +885,23 @@ public:
 	* Function that manage distances data in of the application
 	*/
 	void extractDistances();
-	/** @} end of User Data */
 
-
-	/** @name  Candidates Queue Data*/
-	/**@{
-	*
-	* Functions that manage Candidates Queue data in and out of the application
+	/**
+	* @brief Functions that manage Candidates Queue data in and out of the application
+	* 
 	*/
 	void extractCandidatesQueues();
 	void saveCandidatesQueues();
-	/** @} end of Candidates Queue Data */
+	/** @} end of Distances Data */
 
 
+	/** @name  Distance Functions*/
+	/**@{
+	*
+	* New functions that manage the account of a user
+	*/
 	/**
-	* @brief distane between 2 stops
+	* @brief distance between 2 stops
 	*
 	* @param pnt1 first stop
 	* @param pnt2 second stop
@@ -911,7 +911,7 @@ public:
 
 
 	/**
-	* @brief distane between a stop and the first stop in the vector passing by the other stops in the vector
+	* @brief distance between a stop and the first stop in the vector passing by the other stops in the vector
 	*
 	* @param v1 vector of stops that represents a ride
 	* @param pnt1 stop
@@ -941,5 +941,5 @@ public:
 	*
 	*/
 	void scheduledTripsMenu();
-
+	/** @} end of Distances Functions */
 };
