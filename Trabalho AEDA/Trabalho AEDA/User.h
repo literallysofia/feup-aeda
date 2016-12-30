@@ -160,6 +160,11 @@ public:
 	void setNtrips();
 
 	/**
+	* @brief Decrements object's # of trips
+	*/
+	void decNtrips();
+
+	/**
 	* @brief Deposits a value in User's account
 	*
 	* @param value to deposit

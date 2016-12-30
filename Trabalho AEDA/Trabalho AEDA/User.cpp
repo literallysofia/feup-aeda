@@ -88,6 +88,11 @@ void User::setNtrips()
 	ntrips++;
 }
 
+void User::decNtrips()
+{
+	ntrips--;
+}
+
 void User::deposit(float value)
 {
 	balance += value;

@@ -4519,6 +4519,9 @@ void Agency::scheduledTripsMenu() {
 					ActiveTrips.erase(ActiveTrips.begin() + i);
 				}
 			}
+
+			Users.at(sessionPos)->decNtrips();
+
 			yellow(); cout << "\n Trip canceled with success!\n"; white();
 			blue(); cout << "-----------------------------------------------------------" << endl;
 			red(); cout << "\n Press enter to go back."; white(); getEnter();
