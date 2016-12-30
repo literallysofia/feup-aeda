@@ -17,7 +17,6 @@ User::User(int ID, string name, float balance, string username, string password,
 	ntrips = nt;
 	address = ad;
 	lastAccess = lastA;
-	this->upToDate = 0;
 }
 
 User::~User()
@@ -37,11 +36,6 @@ void User::setID(int ID)
 int User::getID() const
 {
 	return ID;
-}
-
-int User::updated() const
-{
-	return this->upToDate;
 }
 
 void User::setLastAccess(Date dt)
