@@ -3905,6 +3905,10 @@ void Agency::changeAddress()
 		iteratorH it = res.first;
 		inactiveUsers.erase(it);
 	}
+	else {
+		iteratorH it = res.first;
+		inactiveUsers.erase(it);
+	}
 
 	Date t; t.setCurrent();
 	Users.at(sessionPos)->setLastAccess(t);
