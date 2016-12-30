@@ -29,6 +29,7 @@ protected:
 	vector <User *> buddies;
 	string address;
 	Date lastAccess;
+	int upToDate;
 	/** @} end of User data-members */
 	
 public:
@@ -92,9 +93,16 @@ public:
 	int getID() const;
 
 	/**
+	* @brief Retrieves object's bool for if statements
+	*
+	* @return int 
+	*/
+	int updated() const;
+
+	/**
 	* @brief Sets object's last access date
 	*
-	* @param Date date to set the last access to, read from file
+	* @param Date date to set the last access to
 	*/
 	void setLastAccess(Date dt);
 
@@ -118,6 +126,20 @@ public:
 	* @return string username of the object
 	*/
 	string getUsername() const;
+
+	/**
+	* @brief Sets object's address
+	*
+	* @param string address to set the address to
+	*/
+	void setAdress(string ad);
+
+	/**
+	* @brief Retrieves object's address
+	*
+	* @return string address of the object
+	*/
+	string getAddress() const;
 
 	/**
 	* @brief Retrieves object's password
@@ -200,6 +222,13 @@ public:
 	*/
 	bool operator ==(const User *u) const;
 
+	/**
+	* @brief Writes to ostream the information of a object of class User
+	*
+	* @param u object of which we want to print the information for
+	*/
+	friend ostream& operator<<(ostream & out, const User *u);
+
 	void setPassword(string password);
 
 	void removeBuddy(int ID);
@@ -281,5 +310,5 @@ public:
 * @brief struct used for hash insertion
 */
 struct userPtr {
-	User *user;
+	User* user;
 };

@@ -751,6 +751,7 @@ public:
 	void saveVehicles();
 
 	void changeUsername();
+	void changeAddress();
 	void changePassword();
 	void deleteAccount();
 

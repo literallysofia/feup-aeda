@@ -17,6 +17,7 @@ User::User(int ID, string name, float balance, string username, string password,
 	ntrips = nt;
 	address = ad;
 	lastAccess = lastA;
+	this->upToDate = 0;
 }
 
 User::~User()
@@ -38,6 +39,11 @@ int User::getID() const
 	return ID;
 }
 
+int User::updated() const
+{
+	return this->upToDate;
+}
+
 void User::setLastAccess(Date dt)
 {
 	lastAccess = dt;
@@ -56,6 +62,16 @@ string User::getName() const
 string User::getUsername() const
 {
 	return username;
+}
+
+void User::setAdress(string ad)
+{
+	address = ad;
+}
+
+string User::getAddress() const
+{
+	return address;
 }
 
 string User::getPassword() const
@@ -163,4 +179,19 @@ float Passenger::payment()
 bool Passenger::car() const
 {
 	return false;
+}
+
+ostream & operator<<(ostream & out, const User *u)
+{
+	out << u->getID() << ";" << u->getName() << ";";
+
+	if (u->car())
+		out << "1";
+	else out << "0";
+
+	out << ";" << u->getBalance() << ";" << u->getUsername() << ";" << u->getPassword() << ";" << u->getNtrips();
+
+	out << ";" << u->getAddress() << ";" << u->getLastAccess() << endl;
+
+	return out;
 }
