@@ -87,6 +87,7 @@ public:
 	* @param v1 object of vehicle
 	*/
 	bool operator<(const Vehicle& v1) const;
+	/** @} end of Basic Class Functions*/
 
 	/**
 	* @brief operator for display of a vehicle
