@@ -150,7 +150,7 @@ private:
 	*/
 	BST<Vehicle> vehicles;
 	/** @} end of Agency's Info Vectors */
-	//TODO: nao é um vector, como chamo?
+	//TODO: nao Ã© um vector, como chamo?
 
 	/**
 	* @brief vector with all distances between stops of the application
@@ -865,6 +865,8 @@ public:
 	* @brief changes username of a user
 	*/
 	void changeUsername();
+
+	void changeAddress();
 
 	/**
 	* @brief changes password of a user
