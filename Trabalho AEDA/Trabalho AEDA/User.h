@@ -223,14 +223,25 @@ public:
 	bool operator ==(const User *u) const;
 
 	/**
+
 	* @brief Writes to ostream the information of a object of class User
 	*
 	* @param u object of which we want to print the information for
 	*/
 	friend ostream& operator<<(ostream & out, const User *u);
 
+
+	* @brief sets password of a certain user
+	*
+	* @param password to set
+	*/
 	void setPassword(string password);
 
+	/**
+	* @brief removes user as buddy of all users
+	*
+	* @param ID of the user you want to remove
+	*/
 	void removeBuddy(int ID);
 };
 
