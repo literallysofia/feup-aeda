@@ -3765,7 +3765,7 @@ void Agency::generateTable()
 
 	for (size_t i = 0; i < Users.size(); i++)
 	{
-		if (Users[i]->getLastAccess().daysBetween(today) > 5)
+		if (Users[i]->getLastAccess().daysBetween(today) > 7)
 			addInactive(Users[i]);
 	}
 }
