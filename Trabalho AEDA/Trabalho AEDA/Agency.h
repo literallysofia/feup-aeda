@@ -706,10 +706,6 @@ public:
 	*/
 	void displayActiveTrips();
 
-	/**
-	* @brief Displays all inactive users on screen (more than 5 days after last access)
-	*/
-	void displayInactiveUsers();
 	/** @} end of Display Functions */
 
 	/** @name  HashTable Functions*/
@@ -866,6 +862,9 @@ public:
 	*/
 	void changeUsername();
 
+	/**
+	* @brief changes address of a user
+	*/
 	void changeAddress();
 
 	/**

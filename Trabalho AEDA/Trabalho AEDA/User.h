@@ -29,7 +29,6 @@ protected:
 	vector <User *> buddies;
 	string address;
 	Date lastAccess;
-	int upToDate;
 	/** @} end of User data-members */
 	
 public:
@@ -91,13 +90,6 @@ public:
 	* @return int id
 	*/
 	int getID() const;
-
-	/**
-	* @brief Retrieves object's bool for if statements
-	*
-	* @return int 
-	*/
-	int updated() const;
 
 	/**
 	* @brief Sets object's last access date
@@ -231,7 +223,7 @@ public:
 	friend ostream& operator<<(ostream & out, const User *u);
 
 
-	* @brief sets password of a certain user
+	/* @brief sets password of a certain user
 	*
 	* @param password to set
 	*/
