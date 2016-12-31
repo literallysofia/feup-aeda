@@ -159,7 +159,39 @@ priority_queue<CandidateTrip> Trip::getCandidateQueue() const
 	return candidateQueue;
 }
 
+bool Trip::isInQueue(int id)
+{
+	priority_queue <CandidateTrip> temp = candidateQueue;
+
+	while (!temp.empty()) {
+
+		if (temp.top().getPassanger()->getID() != id)
+			return true;
+
+		temp.pop();
+	}
+
+	return false;
+}
+
 void Trip::addCandidate(CandidateTrip ct)
 {
 	candidateQueue.push(ct);
+}
+
+void Trip::removeCandidate(int id)
+{
+	priority_queue <CandidateTrip> temp = candidateQueue;
+	priority_queue <CandidateTrip> temp2;
+
+	while (!temp.empty()) {
+		
+		if (temp.top().getPassanger()->getID() != id)
+			temp2.push(temp.top());
+
+		temp.pop();
+	}
+	
+	candidateQueue = temp2;
+
 }
