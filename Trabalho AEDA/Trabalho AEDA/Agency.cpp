@@ -1,3 +1,4 @@
+
 #include "Agency.h"
 
 /*/////////////////
@@ -140,7 +141,8 @@ MENUS
 void Agency::registerUser()
 {
 	clearScreen();
-	string type, name, username, password;
+	Date t; t.setCurrent();
+	string type, name, username, password, address;
 
 	menuHeader();
 	cout << "|                      ";  grey(); cout << "CREATE ACCOUNT";  white(); cout << "                     |" << endl;
@@ -164,7 +166,6 @@ void Agency::registerUser()
 		white(); cout << " Please try again: ";
 		cin >> type; cout << endl;
 	}
-
 	yellow(); cout << "    > "; grey(); cout << "Enter username: "; white(); cin >> username;
 
 	while (cin.fail() || validUser(username)) {
@@ -209,14 +210,39 @@ void Agency::registerUser()
 		getline(cin, name);
 	}
 
+	yellow(); cout << "\n    > "; grey(); cout << "Enter address: "; white(); cin >> address;
+
+	while (cin.fail() || address.empty()) {
+
+		if (cin.eof())
+		{
+			cin.clear();
+			clearScreen();
+			return;
+		}
+		cin.clear();
+		red(); cout << "\n Not a valid input!" << endl;
+		white(); cout << " Please try again: ";
+		cin >> address;
+	}
+	address = convertUpper(address);
+	if (!checkStop(address)) {
+		cin.clear();
+		red(); cout << "\n OUT OF OUR OPERATION ZONE!" << endl;
+		blue(); cout << "\n Press ENTER to continue ";
+		getEnter();
+		clearScreen();
+		return;
+	}
+
 	int nID = getLastId() + 1;
 
 	if ((type == "y") || (type == "Y")) {
-		User *u1 = new Driver(nID, name, 0.00, username, password, 0);
+		User *u1 = new Driver(nID, name, 0.00, username, password, 0, address, t);
 		addUser(u1);
 	}
 	else {
-		User *u1 = new Passenger(nID, name, 0.00, username, password, 0);
+		User *u1 = new Passenger(nID, name, 0.00, username, password, 0, address, t);
 		addUser(u1);
 	}
 
@@ -1219,7 +1245,7 @@ int Agency::mainMenu_User() {
 		cout << setw(26) << "5. Scheduled Trips" << endl;
 	}
 	else { // caso seja passenger
-		cout << setw(20) << "2. Join Trip\n";
+		cout << setw(21) << "2. Join Trip\n";
 
 	}
 
@@ -1314,14 +1340,30 @@ int Agency::menuAccount()
 	else cout << setw(10) << "[ ]" << endl;
 
 	blue(); cout << "-----------------------------------------------------------" << endl;  grey();
-	cout << setw(18) << "1. Deposit" << setw(32) << "3. Change Password\n";
-	cout << setw(26) << "2. Change Username" << setw(23) << "4. Delete Account\n"; white();
+	cout << setw(18) << "1. Deposit" << setw(32) << "4. Change Password\n";
+	cout << setw(26) << "2. Change Username" << setw(23) << "5. Delete Account\n";
+	cout << setw(26) << "3. Change address\n"; white();
 	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl
 		<< "|~~~                                 ";  grey(); cout << "< 0. Return >";  white(); cout << "     ~~~|" << endl
 		<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl << endl;
 
 	if (Users.at(getPos(sessionID))->getBalance() <= 0) {
 		red(); cout << "WARNING: You need to deposit in your account!\n\n\n"; white();
+	}
+
+	typedef
+		unordered_set<userPtr, inactivePtr, inactivePtr>::iterator iteratorH;
+
+	userPtr u1;
+	u1.user = Users.at(getPos(sessionID));
+	pair<iteratorH, bool> res = inactiveUsers.insert(u1);
+
+	if (!res.second) {	//nao inseriu, já existia
+		red(); cout << "WARNING: You need to update your address!\n\n\n"; white();
+	}
+	else {
+		iteratorH it = res.first;
+		inactiveUsers.erase(it);
 	}
 
 	unsigned short int option;
@@ -1357,9 +1399,12 @@ void Agency::optionsMenuAccount()
 			changeUsername();
 			break;
 		case 3:
-			changePassword();
+			changeAddress();
 			break;
 		case 4:
+			changePassword();
+			break;
+		case 5:
 			deleteAccount();
 			break;
 		}
@@ -1480,6 +1525,7 @@ void Agency::extractData() {
 	extractVehiclesTree();
 	extractDistances();
 	extractCandidatesQueues();
+	generateTable();
 }
 
 void Agency::saveData() {
@@ -1517,7 +1563,11 @@ void Agency::extractUsers()
 			string str4 = str3.substr(pos4 + 1); //user+pass+nt
 			size_t pos5 = str4.find(";"); //posi�ao 5
 			string str5 = str4.substr(pos5 + 1); //pass+nt
-			size_t pos6 = str5.find(";"); //posi�ao 5
+			size_t pos6 = str5.find(";"); //posi�ao 6
+			string str6 = str5.substr(pos6 + 1); //nt+morada+ultimoacesso
+			size_t pos7 = str6.find(";"); //posi?ao 7
+			string str7 = str6.substr(pos7 + 1); //morada+ultimoacesso
+			size_t pos8 = str7.find(";"); //posi?ao 8
 
 			string ids = line.substr(0, pos1); //string id
 			string nome = str1.substr(0, pos2);
@@ -1525,7 +1575,9 @@ void Agency::extractUsers()
 			string sbalance = str3.substr(0, pos4); //string balance
 			string user = str4.substr(0, pos5);
 			string pass = str5.substr(0, pos6);
-			string nt_s = str5.substr(pos6 + 1); //string nro de trips
+			string nt_s = str6.substr(0, pos7); //string nro de trips
+			string adress = str7.substr(0, pos8);	//string morada
+			string sdate = str7.substr(pos8 + 1);  //string ultimo acesso
 
 			int idi = stoi(ids, nullptr, 10); //passa o id de string para int
 			bool bcar;
@@ -1537,16 +1589,18 @@ void Agency::extractUsers()
 
 			int nt = stoi(nt_s, nullptr, 10); //passa o id de string para int
 
+			Date d(sdate); // passa a data de ultimo acesso de string para Date;
+
 			if (bcar)
 			{
 				//se o User tiver carro, adiciona um novo driver
-				User *d1 = new Driver(idi, nome, balancef, user, pass, nt);
+				User *d1 = new Driver(idi, nome, balancef, user, pass, nt, adress, sdate);
 				Users.push_back(d1);
 			}
 			else
 			{
 				//caso contrario adiciona um novo passenger
-				User *p1 = new Passenger(idi, nome, balancef, user, pass, nt);
+				User *p1 = new Passenger(idi, nome, balancef, user, pass, nt, adress, sdate);
 				Users.push_back(p1);
 			}
 		}
@@ -1563,13 +1617,7 @@ void Agency::saveUsers()
 	{
 		for (unsigned int i = 0; i < Users.size(); i++)
 		{
-			UserFile << Users.at(i)->getID() << ";" << Users.at(i)->getName() << ";";
-
-			if (Users.at(i)->car())
-				UserFile << "1";
-			else UserFile << "0";
-
-			UserFile << ";" << Users.at(i)->getBalance() << ";" << Users.at(i)->getUsername() << ";" << Users.at(i)->getPassword() << ";" << Users.at(i)->getNtrips() << endl;
+			UserFile << Users.at(i);
 		}
 		UserFile.close();
 	}
@@ -1992,15 +2040,13 @@ int Agency::getLastId()
 
 bool Agency::checkStop(string s) {
 
-	bool exists = false;
-
 	for (size_t i = 0; i < stopsAvailable.size(); i++)
 	{
 		if (stopsAvailable.at(i).code == s)
-			exists = true;
+			return true;
 	}
 
-	return exists;
+	return false;
 }
 
 bool Agency::notBuddy(string bUsername)
@@ -3312,7 +3358,6 @@ void Agency::displayRecord()
 		cout << Trips.at(i);
 	}
 }
-
 void Agency::displayActiveTrips()
 {
 	for (size_t i = 0; i < ActiveTrips.size(); i++)
@@ -3706,6 +3751,29 @@ void Agency::searchCar()
 	return;
 }
 
+
+void Agency::addInactive(User *us1)
+{
+	userPtr ptr1;
+	ptr1.user = us1;
+	inactiveUsers.insert(ptr1);
+}
+
+void Agency::generateTable()
+{
+	Date today; today.setCurrent();
+
+	for (size_t i = 0; i < Users.size(); i++)
+	{
+		if (Users[i]->getLastAccess().daysBetween(today) > 7)
+			addInactive(Users[i]);
+	}
+}
+
+tabHInactive Agency::getInactive() const
+{
+	return tabHInactive();
+}
 int Agency::getNumSeats(string model, int year)
 {
 	for (unsigned int i = 0; i < Cars.size(); i++) {
@@ -3797,6 +3865,56 @@ void Agency::saveVehicles()
 	}
 	else { red(); cerr << "ERROR: unable to open file." << endl; white(); }
 
+	return;
+}
+
+void Agency::changeAddress()
+{
+	yellow(); cout << "\n Current Address: "; grey(); cout << Users.at(getPos(sessionID))->getAddress() << endl;
+	cin.clear();
+	cin.ignore(1000, '\n');
+	string address;
+	yellow(); cout << "\n > "; grey(); cout << "Insert your new address: "; white();
+	cin >> address;
+	address = convertUpper(address);
+
+	while (cin.fail() || !checkStop(address)) {
+
+		if (cin.eof())
+		{
+			cin.clear();
+			clearScreen();
+			return;
+		}
+		cin.clear();
+		red(); cout << "\n Not valid for our operation zone!" << endl;
+		white(); cout << " Please type another one: ";
+		cin >> address;
+	}
+
+	Users.at(sessionPos)->setAdress(address);
+
+	typedef
+		unordered_set<userPtr, inactivePtr, inactivePtr>::iterator iteratorH;
+
+	userPtr u1;
+	u1.user = Users.at(getPos(sessionID));
+	pair<iteratorH, bool> res = inactiveUsers.insert(u1);
+
+	if (!res.second) {	//nao inseriu, já existia
+		iteratorH it = res.first;
+		inactiveUsers.erase(it);
+	}
+	else {
+		iteratorH it = res.first;
+		inactiveUsers.erase(it);
+	}
+
+	Date t; t.setCurrent();
+	Users.at(sessionPos)->setLastAccess(t);
+
+	yellow(); cout << "\n Success!\n"; white();
+	Sleep(2000);
 	return;
 }
 
@@ -4072,7 +4190,7 @@ void Agency::saveCandidatesQueues() {
 						Queuesfile << "-1";
 					else Queuesfile << temp.top().getPassanger()->getID();
 
-					Queuesfile << "," << temp.top().getDistance()	<< "," << temp.top().getInitStop() << "," << temp.top().getEndStop();
+					Queuesfile << "," << temp.top().getDistance() << "," << temp.top().getInitStop() << "," << temp.top().getEndStop();
 					temp.pop();
 				}
 				Queuesfile << endl;
@@ -4401,6 +4519,9 @@ void Agency::scheduledTripsMenu() {
 					ActiveTrips.erase(ActiveTrips.begin() + i);
 				}
 			}
+
+			Users.at(sessionPos)->decNtrips();
+
 			yellow(); cout << "\n Trip canceled with success!\n"; white();
 			blue(); cout << "-----------------------------------------------------------" << endl;
 			red(); cout << "\n Press enter to go back."; white(); getEnter();
@@ -4492,7 +4613,7 @@ void Agency::scheduledTripsMenu() {
 		for (int i = 0; i < ActiveTrips.size(); i++) {
 
 			if (ActiveTrips.at(i).getID() == idtrip) {
-				availableSeats = ActiveTrips.at(i).getStops().at(0).getAvailableSeats() + ActiveTrips.at(i).getStops().at(0).getPassengers().size();
+				availableSeats = (int)ActiveTrips.at(i).getStops().at(0).getAvailableSeats() + (int)ActiveTrips.at(i).getStops().at(0).getPassengers().size();
 			}
 		}
 
@@ -4630,8 +4751,6 @@ void Agency::scheduledTripsMenu() {
 				}
 			}
 
-
-
 			yellow(); cout << "\n Success! The passangers were added to the trip!\n"; white();
 		}
 
@@ -4641,5 +4760,6 @@ void Agency::scheduledTripsMenu() {
 	blue(); cout << "-----------------------------------------------------------" << endl;
 	red(); cout << "\n Press enter to go back."; white(); getEnter();
 	return;
+
 
 }

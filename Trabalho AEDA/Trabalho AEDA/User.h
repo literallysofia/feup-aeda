@@ -27,6 +27,8 @@ protected:
 	static float maintenanceFee;
 	int ntrips;
 	vector <User *> buddies;
+	string address;
+	Date lastAccess;
 	/** @} end of User data-members */
 	
 public:
@@ -52,8 +54,10 @@ public:
 	* @param username of the User to set
 	* @param password of the User to set
 	* @param nt number of trips of the User to set
+	* @param ad addres of the User to set
+	* @param lastA date os last access of the User to set
 	*/
-	User(int ID, string name, float balance, string username, string password,int nt);
+	User(int ID, string name, float balance, string username, string password,int nt, string ad, Date lastA);
 
 	/**
 	* @brief User destructor
@@ -88,6 +92,20 @@ public:
 	int getID() const;
 
 	/**
+	* @brief Sets object's last access date
+	*
+	* @param Date date to set the last access to
+	*/
+	void setLastAccess(Date dt);
+
+	/**
+	* @brief Retrieves object's last access date
+	*
+	* @return Date
+	*/
+	Date getLastAccess() const;
+
+	/**
 	* @brief Retrieves object's name
 	*
 	* @return string name of the object 
@@ -100,6 +118,20 @@ public:
 	* @return string username of the object
 	*/
 	string getUsername() const;
+
+	/**
+	* @brief Sets object's address
+	*
+	* @param string address to set the address to
+	*/
+	void setAdress(string ad);
+
+	/**
+	* @brief Retrieves object's address
+	*
+	* @return string address of the object
+	*/
+	string getAddress() const;
 
 	/**
 	* @brief Retrieves object's password
@@ -126,6 +158,11 @@ public:
 	* @brief Increments object's # of trips
 	*/
 	void setNtrips();
+
+	/**
+	* @brief Decrements object's # of trips
+	*/
+	void decNtrips();
 
 	/**
 	* @brief Deposits a value in User's account
@@ -182,8 +219,26 @@ public:
 	*/
 	bool operator ==(const User *u) const;
 
+	/**
+
+	* @brief Writes to ostream the information of a object of class User
+	*
+	* @param u object of which we want to print the information for
+	*/
+	friend ostream& operator<<(ostream & out, const User *u);
+
+
+	/* @brief sets password of a certain user
+	*
+	* @param password to set
+	*/
 	void setPassword(string password);
 
+	/**
+	* @brief removes user as buddy of all users
+	*
+	* @param ID of the user you want to remove
+	*/
 	void removeBuddy(int ID);
 };
 
@@ -202,7 +257,7 @@ public:
 	* @param password of the User to set
 	* @param nt number of trips of the User to set
 	*/
-	Driver(int ID, string name, float balance, string username, string password,int nt);
+	Driver(int ID, string name, float balance, string username, string password, int nt, string ad, Date lastA);
 
 	/**
 	* @brief Retrieves object's payment based on monthly trips #
@@ -241,7 +296,7 @@ public:
 	* @param password of the User to set
 	* @param nt number of trips of the User to set
 	*/
-	Passenger(int ID, string name, float balance, string username, string password,int nt);
+	Passenger(int ID, string name, float balance, string username, string password, int nt, string ad, Date lastA);
 
 	/**
 	* @brief Retrieves object's payment based on monthly trips #
@@ -251,9 +306,17 @@ public:
 	float payment();
 
 	/**
-	* @brief CHecks if object is a driver
+	* @brief Checks if object is a driver
 	*
 	* @return bool true if User has a car, false otherwise
 	*/
 	bool car() const;
+
+};
+
+/**
+* @brief struct used for hash insertion
+*/
+struct userPtr {
+	User* user;
 };

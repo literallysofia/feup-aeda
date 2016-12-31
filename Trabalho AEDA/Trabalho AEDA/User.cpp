@@ -10,11 +10,13 @@ User::User(string name) :name(name)
 {
 }
 
-User::User(int ID, string name, float balance, string username, string password, int nt) : ID(ID), name(name) {
+User::User(int ID, string name, float balance, string username, string password, int nt, string ad, Date lastA) : ID(ID), name(name) {
 	this->username = username;
 	this->password = password;
 	this->balance = balance;
 	ntrips = nt;
+	address = ad;
+	lastAccess = lastA;
 }
 
 User::~User()
@@ -36,6 +38,16 @@ int User::getID() const
 	return ID;
 }
 
+void User::setLastAccess(Date dt)
+{
+	lastAccess = dt;
+}
+
+Date User::getLastAccess() const
+{
+	return lastAccess;
+}
+
 string User::getName() const
 {
 	return name;
@@ -44,6 +56,16 @@ string User::getName() const
 string User::getUsername() const
 {
 	return username;
+}
+
+void User::setAdress(string ad)
+{
+	address = ad;
+}
+
+string User::getAddress() const
+{
+	return address;
 }
 
 string User::getPassword() const
@@ -64,6 +86,11 @@ int User::getNtrips() const
 void User::setNtrips()
 {
 	ntrips++;
+}
+
+void User::decNtrips()
+{
+	ntrips--;
 }
 
 void User::deposit(float value)
@@ -118,7 +145,7 @@ void User::removeBuddy(int ID)
 
 
 /*DRIVER CLASS*/
-Driver::Driver(int ID, string name, float balance, string username, string password, int nt) : User(ID, name, balance, username, password,nt) {
+Driver::Driver(int ID, string name, float balance, string username, string password, int nt, string ad, Date lastA) : User(ID, name, balance, username, password,nt, ad, lastA) {
 }
 
 float Driver::payment()
@@ -139,7 +166,7 @@ bool Driver::car() const
 Passenger::Passenger(string name) : User(name) {
 }
 
-Passenger::Passenger(int ID, string name, float balance, string username, string password, int nt) : User(ID, name, balance, username, password, nt) {
+Passenger::Passenger(int ID, string name, float balance, string username, string password, int nt, string ad, Date lastA) : User(ID, name, balance, username, password, nt, ad, lastA) {
 }
 
 float Passenger::payment()
@@ -151,4 +178,19 @@ float Passenger::payment()
 bool Passenger::car() const
 {
 	return false;
+}
+
+ostream & operator<<(ostream & out, const User *u)
+{
+	out << u->getID() << ";" << u->getName() << ";";
+
+	if (u->car())
+		out << "1";
+	else out << "0";
+
+	out << ";" << u->getBalance() << ";" << u->getUsername() << ";" << u->getPassword() << ";" << u->getNtrips();
+
+	out << ";" << u->getAddress() << ";" << u->getLastAccess() << endl;
+
+	return out;
 }

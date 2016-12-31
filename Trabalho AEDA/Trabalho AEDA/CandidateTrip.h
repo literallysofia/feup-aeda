@@ -26,7 +26,7 @@ private:
 	float distance; //distancia desde o inicio da viagem até onde o user entra
 	string initStop;
 	string endStop;
-	/** @} end of Trip data-members */
+	/** @} end of CandidateTrip data-members*/
 
 public:
 	/**
@@ -90,7 +90,7 @@ public:
 	*/
 	bool areBuddies() const;
 
-	/** @name Trip Operators Functions*/
+	/** @name CandidateTrip Operators Functions*/
 	/**@{
 	*
 	* Basic Operators of the class
@@ -105,7 +105,7 @@ public:
 	*/
 	bool operator<(const CandidateTrip & ct1) const; 
 
-	/** @} end of Trip Operators Functions */
+	/** @} end of CandidateTrip Operators Functions */
 };
 
 

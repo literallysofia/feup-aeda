@@ -86,7 +86,7 @@ public:
 	/**
 	* @brief Writes to ostream the information of a object of class Transaction
 	*
-	* @param date object of which we want to print the information for
+	* @param Transaction object of which we want to print the information for
 	*/
 	friend ostream& operator<<(ostream & out, const Transaction & t);
 	/** @} end of Transaction Operators Functions */
