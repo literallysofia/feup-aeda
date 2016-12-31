@@ -1370,7 +1370,7 @@ int Agency::menuAccount()
 	cout << "Type your choice: ";
 	cin >> option;
 
-	while (cin.fail() || (option < 0) || ((option > 4)))
+	while (cin.fail() || (option < 0) || ((option > 5)))
 	{
 		if (cin.eof())
 		{
@@ -4020,7 +4020,11 @@ void Agency::deleteAccount()
 			Users.at(i)->removeBuddy(sessionID);
 		}
 
-		//TODO: ELIMINAR USER - tanto pode ser driver como nao - da candidates queue or wtv
+		//eliminar das filas de candidatos onde esta
+		for (unsigned int i = 0; i < ActiveTrips.size(); i++) {
+			if (ActiveTrips.at(i).isInQueue(sessionID))
+				ActiveTrips.at(i).removeCandidate(sessionID);
+		}
 
 		//caso seja driver, elimina viagens ativas
 		if (Users.at(sessionPos)->car()) {
@@ -4388,7 +4392,6 @@ void Agency::candidateTripGuest(vector<Trip> recTrips, vector<string> stopCodes)
 
 
 	payment = stopCounter*(float)1.5;
-	//payment = 6.5;
 	green(); cout << "\n You'll have to pay: "; white(); cout << payment << endl;
 	Sleep(2000);
 
@@ -4514,13 +4517,43 @@ void Agency::scheduledTripsMenu() {
 
 		if (type == "Y" || type == "y") {
 
+			vector <int> passengerIDS; //vetor com ids de todos os passageiros na viagem
+
+			for (int i = 0; i < ActiveTrips.size(); i++) {
+				if (ActiveTrips.at(i).getID() == idtrip) {
+					for (int j = 0; j < ActiveTrips.at(i).getStops().size(); j++) {
+						for (int k = 0; k < ActiveTrips.at(i).getStops().at(j).getPassengers().size(); k++) {
+							if (find(passengerIDS.begin(), passengerIDS.end(), ActiveTrips.at(i).getStops().at(j).getPassengers().at(k)) == passengerIDS.end()) {
+								passengerIDS.push_back(ActiveTrips.at(i).getStops().at(j).getPassengers().at(k));
+							}
+						}
+					}
+				}
+			}
+
+
 			for (int i = 0; i < ActiveTrips.size(); i++) {
 				if (ActiveTrips.at(i).getID() == idtrip) {
 					ActiveTrips.erase(ActiveTrips.begin() + i);
 				}
 			}
 
+			for (int i = 0; i < Trips.size(); i++) {
+				if (Trips.at(i).getID() == idtrip) {
+					Trips.erase(Trips.begin() + i);
+				}
+			}
+			//decrementa nº de viagens ao driver
 			Users.at(sessionPos)->decNtrips();
+
+			//decrema nº de viagens a todos os passengers
+			for (int i = 0; i < passengerIDS.size(); i++) {
+				for (int j = 0; j < Users.size(); j++) {
+					if (Users.at(j)->getID() == passengerIDS.at(i)) {
+						Users.at(j)->decNtrips();
+					}
+				}
+			}
 
 			yellow(); cout << "\n Trip canceled with success!\n"; white();
 			blue(); cout << "-----------------------------------------------------------" << endl;

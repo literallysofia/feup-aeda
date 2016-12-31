@@ -188,10 +188,26 @@ public:
 	*/
 	priority_queue<CandidateTrip> getCandidateQueue() const;
 
+
+	/**
+	* @brief verifyes if the user is in this trip queue
+	* @param id of the user we want to know if is in the queue
+	* @return bool if the user is in the queue, false if it's not
+	*/
+	bool isInQueue(int id);
+
 	/**
 	* @brief adds elements to the priority queue
+	* @param ct candidate we want to add
 	*/
 	void addCandidate(CandidateTrip ct);
+
+	/**
+	* @brief removes user from the queue
+	* @param id of the user we want to remove
+	*/
+	void removeCandidate(int id);
+
 
 	/** @} end of Trip Operators Functions */
 };
