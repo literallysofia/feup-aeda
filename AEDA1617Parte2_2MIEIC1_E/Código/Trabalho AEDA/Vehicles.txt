@@ -1,0 +1,27 @@
+audi;a3;2;2011;5
+audi;a3;2;2014;3
+audi;a8;5;2010;2
+audi;q7;7;2011;3
+audi;q7;7;2015;2
+bmw;serie 1;5;2016;5
+bmw;x3;7;2010;3
+bmw;serie 3 cabrio;4;2016;6
+fiat;500;4;2014;3
+fiat;500;4;2016;5
+fiat;punto;5;2010;3
+fiat;freemont;7;2013;4
+honda;civic;5;2011;1
+honda;civic;5;2014;4
+jeep;wrangler;4;2014;3
+jeep;cherokee;7;2014;2
+jeep;cherokee;7;2016;1
+mazda;sedan;5;2014;4
+mercedes;class a;5;2011;3
+mercedes;class b;5;2009;2
+mini;cooper;4;2012;2
+mini;cooper;4;2015;5
+mini;countryman;5;2013;3
+renault;clio;5;2014;6
+renault;alaskan;5;2008;1
+renault;symbol;7;2010;3
+smart;fortwo;2;2016;5
