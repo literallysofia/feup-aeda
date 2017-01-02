@@ -12,6 +12,6 @@ var searchData=
   ['choosetrip',['chooseTrip',['../group___agency.html#gab93c48db5700b6d02bf81b3cd3af6711',1,'Agency']]],
   ['choosetripguest',['chooseTripGuest',['../group___agency.html#ga7e9a9bafaab57a8e9a5963302b7401ff',1,'Agency']]],
   ['clearscreen',['clearScreen',['../group___utilities.html#ga9d7e8af417b6d543da691e9c0e2f6f9f',1,'clearScreen():&#160;Utilities.cpp'],['../group___utilities.html#ga9d7e8af417b6d543da691e9c0e2f6f9f',1,'clearScreen():&#160;Utilities.cpp']]],
-  ['code',['code',['../group___date.html#ga5a0dddd108225fd437be86eed7b3a3ef',1,'Stop']]],
+  ['code',['code',['../group___stop.html#ga5a0dddd108225fd437be86eed7b3a3ef',1,'Stop']]],
   ['convertupper',['convertUpper',['../group___tools.html#ga42d49458b6886497d814c129b650826c',1,'convertUpper(string code):&#160;Tools.cpp'],['../group___tools.html#ga42d49458b6886497d814c129b650826c',1,'convertUpper(string code):&#160;Tools.cpp']]]
 ];

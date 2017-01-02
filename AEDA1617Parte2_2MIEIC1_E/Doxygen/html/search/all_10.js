@@ -32,6 +32,6 @@ var searchData=
   ['showrectrips',['showRecTrips',['../group___agency.html#gabc352c6cad4e22817e2a52a0e756e295',1,'Agency']]],
   ['showrectripsguest',['showRecTripsGuest',['../group___agency.html#ga7cde2e6cef7a7e4dbcb84af39a8caa34',1,'Agency']]],
   ['singleton_5finstance',['singleton_instance',['../group___agency.html#ga24c6ae11e29cdf5eefc6a5c94783b90e',1,'Agency']]],
-  ['stop',['stop',['../structstop.html',1,'stop'],['../class_stop.html',1,'Stop'],['../group___date.html#gab8870f949c69cda03c4055524ed13c31',1,'Stop::Stop()'],['../group___date.html#gaa89c250884ae1407ac8647a8a3a58995',1,'Stop::Stop(string code, int seats)'],['../group___date.html#ga843a7424de0129e7f6f066d2f8f1d1bc',1,'Stop::Stop(string code, int seats, vector&lt; int &gt; vpass)']]],
+  ['stop',['stop',['../structstop.html',1,'stop'],['../class_stop.html',1,'Stop'],['../group___stop.html#gab8870f949c69cda03c4055524ed13c31',1,'Stop::Stop()'],['../group___stop.html#gaa89c250884ae1407ac8647a8a3a58995',1,'Stop::Stop(string code, int seats)'],['../group___stop.html#ga843a7424de0129e7f6f066d2f8f1d1bc',1,'Stop::Stop(string code, int seats, vector&lt; int &gt; vpass)'],['../group___stop.html',1,'(Global Namespace)']]],
   ['stopsavailable',['stopsAvailable',['../group___agency.html#ga5d27f85795249e51708fdc5b913678f3',1,'Agency']]]
 ];

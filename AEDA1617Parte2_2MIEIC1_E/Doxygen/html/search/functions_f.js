@@ -29,5 +29,5 @@ var searchData=
   ['setyear',['setYear',['../group___date.html#ga895c4ae9868e43577cf59d9c679d7a71',1,'Date']]],
   ['showrectrips',['showRecTrips',['../group___agency.html#gabc352c6cad4e22817e2a52a0e756e295',1,'Agency']]],
   ['showrectripsguest',['showRecTripsGuest',['../group___agency.html#ga7cde2e6cef7a7e4dbcb84af39a8caa34',1,'Agency']]],
-  ['stop',['Stop',['../group___date.html#gab8870f949c69cda03c4055524ed13c31',1,'Stop::Stop()'],['../group___date.html#gaa89c250884ae1407ac8647a8a3a58995',1,'Stop::Stop(string code, int seats)'],['../group___date.html#ga843a7424de0129e7f6f066d2f8f1d1bc',1,'Stop::Stop(string code, int seats, vector&lt; int &gt; vpass)']]]
+  ['stop',['Stop',['../group___stop.html#gab8870f949c69cda03c4055524ed13c31',1,'Stop::Stop()'],['../group___stop.html#gaa89c250884ae1407ac8647a8a3a58995',1,'Stop::Stop(string code, int seats)'],['../group___stop.html#ga843a7424de0129e7f6f066d2f8f1d1bc',1,'Stop::Stop(string code, int seats, vector&lt; int &gt; vpass)']]]
 ];

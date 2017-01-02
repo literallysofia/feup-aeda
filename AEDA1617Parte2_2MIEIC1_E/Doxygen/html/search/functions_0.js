@@ -3,7 +3,7 @@ var searchData=
   ['addbuddy',['addBuddy',['../group___agency.html#ga56bbae6923a8e9414085ffb23e644d53',1,'Agency::addBuddy()'],['../group___user.html#ga72cde56f7a6c5abcf8a22dcd6fdc8449',1,'User::addBuddy()']]],
   ['addcandidate',['addCandidate',['../group___trip.html#ga6879d39109d9b024461c9edb58c8b1dd',1,'Trip']]],
   ['addinactive',['addInactive',['../group___agency.html#gaca43b6ff4d5b43aae73779cf271ac0fe',1,'Agency']]],
-  ['addpassenger',['addPassenger',['../group___date.html#gac636e3c0c1e2794575bd3db14b5ee363',1,'Stop']]],
+  ['addpassenger',['addPassenger',['../group___stop.html#gac636e3c0c1e2794575bd3db14b5ee363',1,'Stop']]],
   ['addtrip',['addTrip',['../group___agency.html#gaa0c7d82673ce6b573ccc46da3289634c',1,'Agency']]],
   ['adduser',['addUser',['../group___agency.html#ga9307d4ce4dd311f5744592248be6c9e5',1,'Agency']]],
   ['addvehicle',['addVehicle',['../group___agency.html#gab2a08b75fbe909173d539d27a06c7bc9',1,'Agency']]],

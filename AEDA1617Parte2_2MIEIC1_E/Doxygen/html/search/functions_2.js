@@ -2,7 +2,7 @@ var searchData=
 [
   ['date',['Date',['../group___date.html#ga4e59ed4ba66eec61c27460c5d09fa1bd',1,'Date::Date()'],['../group___date.html#ga5532efafed41fd5f8e013a61313200dc',1,'Date::Date(string date)'],['../group___date.html#gab1ad19969fa570605a6b0cd32b0da822',1,'Date::Date(int day, int month, int year)']]],
   ['daysbetween',['daysBetween',['../group___date.html#ga9168133cb290c4f378699037ef7b5d4a',1,'Date']]],
-  ['decavailableseats',['decAvailableSeats',['../group___date.html#ga491669933a1b091fa543591e9fd992aa',1,'Stop']]],
+  ['decavailableseats',['decAvailableSeats',['../group___stop.html#ga491669933a1b091fa543591e9fd992aa',1,'Stop']]],
   ['decntrips',['decNtrips',['../group___user.html#ga0b5d245f2e517c697493264e0a1e5642',1,'User']]],
   ['deleteaccount',['deleteAccount',['../group___agency.html#ga90711f8b569ac19ce052b59e79848df5',1,'Agency']]],
   ['deletebuddies',['deleteBuddies',['../group___user.html#gaaaa81787feebf8150cc2553e13edb8f7',1,'User']]],

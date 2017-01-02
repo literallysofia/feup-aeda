@@ -1,0 +1,142 @@
+\hypertarget{group___stop}{}\section{Stop}
+\label{group___stop}\index{Stop@{Stop}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_stop}{Stop}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___stop_gab8870f949c69cda03c4055524ed13c31}\label{group___stop_gab8870f949c69cda03c4055524ed13c31}} 
+\hyperlink{group___stop_gab8870f949c69cda03c4055524ed13c31}{Stop\+::\+Stop} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_stop}{Stop} default constructor. \end{DoxyCompactList}\item 
+\hyperlink{group___stop_gaa89c250884ae1407ac8647a8a3a58995}{Stop\+::\+Stop} (string \hyperlink{group___stop_ga5a0dddd108225fd437be86eed7b3a3ef}{code}, int seats)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_date}{Date} constructor from individual parameters. \end{DoxyCompactList}\item 
+\hyperlink{group___stop_ga843a7424de0129e7f6f066d2f8f1d1bc}{Stop\+::\+Stop} (string \hyperlink{group___stop_ga5a0dddd108225fd437be86eed7b3a3ef}{code}, int seats, vector$<$ int $>$ vpass)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_date}{Date} constructor from individual parameters. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___stop_ga24e85edfa98a7a0212136679b6fad6d2}\label{group___stop_ga24e85edfa98a7a0212136679b6fad6d2}} 
+\hyperlink{group___stop_ga24e85edfa98a7a0212136679b6fad6d2}{Stop\+::$\sim$\+Stop} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_stop}{Stop} default destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Stop data-\/members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___stop_ga5a0dddd108225fd437be86eed7b3a3ef}\label{group___stop_ga5a0dddd108225fd437be86eed7b3a3ef}} 
+string \hyperlink{group___stop_ga5a0dddd108225fd437be86eed7b3a3ef}{Stop\+::code}
+\begin{DoxyCompactList}\small\item\em string of 3 letters that represents the code of a stop \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___stop_ga459aba5bcfa17889d2f292f3f45528bc}\label{group___stop_ga459aba5bcfa17889d2f292f3f45528bc}} 
+int \hyperlink{group___stop_ga459aba5bcfa17889d2f292f3f45528bc}{Stop\+::available\+Seats}
+\begin{DoxyCompactList}\small\item\em Number of available seats at a stop. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___stop_ga2886c8f28932f3884ba3e4f741e7ec91}\label{group___stop_ga2886c8f28932f3884ba3e4f741e7ec91}} 
+vector$<$ int $>$ \hyperlink{group___stop_ga2886c8f28932f3884ba3e4f741e7ec91}{Stop\+::passengers}
+\begin{DoxyCompactList}\small\item\em vector containing the I\+Ds of the passengers present at that stop \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Basic Class Functions}
+\begin{DoxyCompactItemize}
+\item 
+string \hyperlink{group___stop_ga4c0a7bb72ca7a054a394d13fc8cd9bde}{Stop\+::get\+Code} () const
+\begin{DoxyCompactList}\small\item\em Retrieves the object\textquotesingle{}s code. \end{DoxyCompactList}\item 
+int \hyperlink{group___stop_ga41d42147d1210ce72f15e31a8414e0ad}{Stop\+::get\+Available\+Seats} () const
+\begin{DoxyCompactList}\small\item\em Retrieves the object\textquotesingle{}s number of available seats. \end{DoxyCompactList}\item 
+vector$<$ int $>$ \hyperlink{group___stop_gabd197ec53b1215bed050d879d463e987}{Stop\+::get\+Passengers} () const
+\begin{DoxyCompactList}\small\item\em Retrieves the object\textquotesingle{}s vector of passengers I\+Ds. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___stop_ga491669933a1b091fa543591e9fd992aa}\label{group___stop_ga491669933a1b091fa543591e9fd992aa}} 
+void \hyperlink{group___stop_ga491669933a1b091fa543591e9fd992aa}{Stop\+::dec\+Available\+Seats} ()
+\begin{DoxyCompactList}\small\item\em Decrements the object\textquotesingle{}s number of available seats by 1. \end{DoxyCompactList}\item 
+void \hyperlink{group___stop_gac636e3c0c1e2794575bd3db14b5ee363}{Stop\+::add\+Passenger} (int id)
+\begin{DoxyCompactList}\small\item\em Adds the ID of a passenger to the object\textquotesingle{}s vector of I\+Ds. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{class_stop}{Stop} class declaration 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group___stop_gac636e3c0c1e2794575bd3db14b5ee363}\label{group___stop_gac636e3c0c1e2794575bd3db14b5ee363}} 
+\index{Stop@{Stop}!add\+Passenger@{add\+Passenger}}
+\index{add\+Passenger@{add\+Passenger}!Stop@{Stop}}
+\subsubsection{\texorpdfstring{add\+Passenger()}{addPassenger()}}
+{\footnotesize\ttfamily void Stop\+::add\+Passenger (\begin{DoxyParamCaption}\item[{int}]{id }\end{DoxyParamCaption})}
+
+
+
+Adds the ID of a passenger to the object\textquotesingle{}s vector of I\+Ds. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & ID of the passenger to push\+\_\+back to the vector \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___stop_ga41d42147d1210ce72f15e31a8414e0ad}\label{group___stop_ga41d42147d1210ce72f15e31a8414e0ad}} 
+\index{Stop@{Stop}!get\+Available\+Seats@{get\+Available\+Seats}}
+\index{get\+Available\+Seats@{get\+Available\+Seats}!Stop@{Stop}}
+\subsubsection{\texorpdfstring{get\+Available\+Seats()}{getAvailableSeats()}}
+{\footnotesize\ttfamily int Stop\+::get\+Available\+Seats (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Retrieves the object\textquotesingle{}s number of available seats. 
+
+\begin{DoxyReturn}{Returns}
+int number of seats 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___stop_ga4c0a7bb72ca7a054a394d13fc8cd9bde}\label{group___stop_ga4c0a7bb72ca7a054a394d13fc8cd9bde}} 
+\index{Stop@{Stop}!get\+Code@{get\+Code}}
+\index{get\+Code@{get\+Code}!Stop@{Stop}}
+\subsubsection{\texorpdfstring{get\+Code()}{getCode()}}
+{\footnotesize\ttfamily string Stop\+::get\+Code (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Retrieves the object\textquotesingle{}s code. 
+
+Functions that perform basic class functionality \begin{DoxyReturn}{Returns}
+code of the object 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___stop_gabd197ec53b1215bed050d879d463e987}\label{group___stop_gabd197ec53b1215bed050d879d463e987}} 
+\index{Stop@{Stop}!get\+Passengers@{get\+Passengers}}
+\index{get\+Passengers@{get\+Passengers}!Stop@{Stop}}
+\subsubsection{\texorpdfstring{get\+Passengers()}{getPassengers()}}
+{\footnotesize\ttfamily vector$<$ int $>$ Stop\+::get\+Passengers (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Retrieves the object\textquotesingle{}s vector of passengers I\+Ds. 
+
+\begin{DoxyReturn}{Returns}
+vector of the passengers I\+Ds 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___stop_gaa89c250884ae1407ac8647a8a3a58995}\label{group___stop_gaa89c250884ae1407ac8647a8a3a58995}} 
+\index{Stop@{Stop}!Stop@{Stop}}
+\index{Stop@{Stop}!Stop@{Stop}}
+\subsubsection{\texorpdfstring{Stop()}{Stop()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Stop\+::\+Stop (\begin{DoxyParamCaption}\item[{string}]{code,  }\item[{int}]{seats }\end{DoxyParamCaption})}
+
+
+
+\hyperlink{class_date}{Date} constructor from individual parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em code} & to set \\
+\hline
+{\em seats} & to set \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___stop_ga843a7424de0129e7f6f066d2f8f1d1bc}\label{group___stop_ga843a7424de0129e7f6f066d2f8f1d1bc}} 
+\index{Stop@{Stop}!Stop@{Stop}}
+\index{Stop@{Stop}!Stop@{Stop}}
+\subsubsection{\texorpdfstring{Stop()}{Stop()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Stop\+::\+Stop (\begin{DoxyParamCaption}\item[{string}]{code,  }\item[{int}]{seats,  }\item[{vector$<$ int $>$}]{vpass }\end{DoxyParamCaption})}
+
+
+
+\hyperlink{class_date}{Date} constructor from individual parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em code} & to set \\
+\hline
+{\em seats} & to set \\
+\hline
+{\em vpass} & vector containing I\+Ds of passengers to set \\
+\hline
+\end{DoxyParams}

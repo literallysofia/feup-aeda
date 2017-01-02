@@ -1,9 +1,9 @@
 #pragma once
 
-/** @defgroup Date Date
+/** @defgroup Stop Stop
 * @{
 *
-* Date class declaration
+* Stop class declaration
 */
 #include <string>
 #include <vector>
