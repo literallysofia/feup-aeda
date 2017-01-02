@@ -6,9 +6,7 @@
 \hyperlink{group___agency_gaf6fc6c4dec00025fce567183f67edbaa}{Agency} ()
 \begin{DoxyCompactList}\small\item\em \hyperlink{class_agency}{Agency} constructor. \end{DoxyCompactList}\item 
 \hyperlink{group___agency_ga922750a7051987df9bb697769fdf0256}{$\sim$\+Agency} ()
-\begin{DoxyCompactList}\small\item\em \hyperlink{class_agency}{Agency} destructor. \end{DoxyCompactList}\item 
-void \hyperlink{group___agency_ga10184101969b3eeea8eea72cb058fbd4}{extract\+Stops} ()
-\begin{DoxyCompactList}\small\item\em Extracts stops available from file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_agency}{Agency} destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \begin{Indent}\textbf{ Login Options}\par
 \begin{DoxyCompactItemize}
 \item 
@@ -103,229 +101,182 @@ void \hyperlink{group___agency_ga7cde2e6cef7a7e4dbcb84af39a8caa34}{show\+Rec\+Tr
 void \hyperlink{group___agency_ga20bc20b90914b5e446b683dcd7f6d0ef}{extract\+Data} ()
 \begin{DoxyCompactList}\small\item\em Runs all data extraction functions. \end{DoxyCompactList}\item 
 void \hyperlink{group___agency_ga67c29f4711b1596630ae970e6a9027ac}{save\+Data} ()
-\begin{DoxyCompactList}\small\item\em Runs all data saving functions. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\end{Indent}
-\begin{Indent}\textbf{ User Data}\par
-\begin{DoxyCompactItemize}
-\item 
+\begin{DoxyCompactList}\small\item\em Runs all data saving functions. \end{DoxyCompactList}\item 
 void \hyperlink{group___agency_ga659e4c6df03779b524f37b1c8fb5221d}{extract\+Users} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Functions that manage \hyperlink{class_user}{User} data in and out of the application. \end{DoxyCompactList}\item 
 void {\bfseries save\+Users} ()
-\end{DoxyCompactItemize}
-\end{Indent}
-\begin{Indent}\textbf{ Buddies Data}\par
-\begin{DoxyCompactItemize}
 \item 
 void \hyperlink{group___agency_ga93c45528d2114a557a1e0b23498e178a}{extract\+Buddies} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Functions that manage Buddies data in and out of the application. \end{DoxyCompactList}\item 
 void {\bfseries save\+Buddies} ()
-\end{DoxyCompactItemize}
-\end{Indent}
-\begin{Indent}\textbf{ Transactions Data}\par
-\begin{DoxyCompactItemize}
 \item 
 void \hyperlink{group___agency_gadfda62c1a33db5f797098d0391e6ee87}{extract\+Transactions} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Functions that manage Transactions data in and out of the application. \end{DoxyCompactList}\item 
 void {\bfseries save\+Transactions} ()
-\end{DoxyCompactItemize}
-\end{Indent}
-\begin{Indent}\textbf{ Record Data}\par
-\begin{DoxyCompactItemize}
 \item 
+void \hyperlink{group___agency_ga10184101969b3eeea8eea72cb058fbd4}{extract\+Stops} ()
+\begin{DoxyCompactList}\small\item\em Extracts stops available from file. \end{DoxyCompactList}\item 
 void \hyperlink{group___agency_ga8cafe0f0410e881f1a0d7a1bdd502058}{extract\+Record} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Functions that manage Trips record data in and out of the application. \end{DoxyCompactList}\item 
 void {\bfseries save\+Record} ()
-\end{DoxyCompactItemize}
-\end{Indent}
-\begin{Indent}\textbf{ Active\+Trips Data}\par
-\begin{DoxyCompactItemize}
 \item 
 void \hyperlink{group___agency_ga82ad0980163a0e874b1ca165b7b9c91c}{extract\+Active} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Functions that manage active trips data in and out of the application. \end{DoxyCompactList}\item 
 void {\bfseries save\+Active} ()
 \end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Base Functions}\par
 \begin{DoxyCompactItemize}
 \item 
-bool \hyperlink{class_agency_a633274c6bc861317f03bf378e5286312}{valid\+User} (string username)
+bool \hyperlink{group___agency_ga633274c6bc861317f03bf378e5286312}{valid\+User} (string username)
 \begin{DoxyCompactList}\small\item\em Verifies if a \hyperlink{class_user}{User} of given username exists in the app. \end{DoxyCompactList}\item 
-bool \hyperlink{class_agency_a12c6a13fdeaaa5a2adab736313b3d180}{valid\+Password} (int pos, string password)
+bool \hyperlink{group___agency_ga12c6a13fdeaaa5a2adab736313b3d180}{valid\+Password} (int pos, string password)
 \begin{DoxyCompactList}\small\item\em Verifies the given password is correct for the user of given position in the vector of the \hyperlink{class_agency}{Agency}. \end{DoxyCompactList}\item 
-int \hyperlink{class_agency_ab129c30ae0ba6c735d0f600c1b00894d}{find\+ID} (string name)
+int \hyperlink{group___agency_gab129c30ae0ba6c735d0f600c1b00894d}{find\+ID} (string name)
 \begin{DoxyCompactList}\small\item\em Searchs for the ID of the \hyperlink{class_user}{User} of given name. \end{DoxyCompactList}\item 
-int \hyperlink{class_agency_a7ec884913bb5c9803cc5b71dc4a569d3}{get\+Pos} (int id)
+int \hyperlink{group___agency_ga7ec884913bb5c9803cc5b71dc4a569d3}{get\+Pos} (int id)
 \begin{DoxyCompactList}\small\item\em Searchs for the position of the \hyperlink{class_user}{User} of given ID, on the \hyperlink{class_agency}{Agency}\textquotesingle{}s vector of Users. \end{DoxyCompactList}\item 
-int \hyperlink{class_agency_a4f91eb604ad3eb3ea8142b8ab65b968d}{get\+Last\+Id} ()
+int \hyperlink{group___agency_ga4f91eb604ad3eb3ea8142b8ab65b968d}{get\+Last\+Id} ()
 \begin{DoxyCompactList}\small\item\em Returns last ID in use for Users. \end{DoxyCompactList}\item 
-bool \hyperlink{class_agency_a5de11a6e7a081abefea2560290d542b6}{check\+Stop} (string s)
+bool \hyperlink{group___agency_ga5de11a6e7a081abefea2560290d542b6}{check\+Stop} (string s)
 \begin{DoxyCompactList}\small\item\em Checks if a given stop code exists. \end{DoxyCompactList}\item 
-bool \hyperlink{class_agency_a9cbd4d4f5f20f6ec9e3d3088cf61f96a}{not\+Buddy} (string b\+Username)
+bool \hyperlink{group___agency_ga9cbd4d4f5f20f6ec9e3d3088cf61f96a}{not\+Buddy} (string b\+Username)
 \begin{DoxyCompactList}\small\item\em Checks if a given username is buddy of the user using the application. \end{DoxyCompactList}\item 
-void \hyperlink{class_agency_a9307d4ce4dd311f5744592248be6c9e5}{add\+User} (\hyperlink{class_user}{User} $\ast$u)
+void \hyperlink{group___agency_ga9307d4ce4dd311f5744592248be6c9e5}{add\+User} (\hyperlink{class_user}{User} $\ast$u)
 \begin{DoxyCompactList}\small\item\em Adds a new \hyperlink{class_user}{User} to the \hyperlink{class_agency}{Agency}. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_agency_a56bbae6923a8e9414085ffb23e644d53}\label{class_agency_a56bbae6923a8e9414085ffb23e644d53}} 
-void \hyperlink{class_agency_a56bbae6923a8e9414085ffb23e644d53}{add\+Buddy} ()
+void \hyperlink{group___agency_ga56bbae6923a8e9414085ffb23e644d53}{add\+Buddy} ()
 \begin{DoxyCompactList}\small\item\em Adds a new \hyperlink{class_user}{User} as a buddy to the \hyperlink{class_user}{User} using the application. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_agency_aa76bfa288699a10c82a04db205bc56d6}\label{class_agency_aa76bfa288699a10c82a04db205bc56d6}} 
-void \hyperlink{class_agency_aa76bfa288699a10c82a04db205bc56d6}{deposit} ()
+void \hyperlink{group___agency_gaa76bfa288699a10c82a04db205bc56d6}{deposit} ()
 \begin{DoxyCompactList}\small\item\em Deposits an amount to the \hyperlink{class_user}{User}\textquotesingle{}s account balance. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_agency_a69f9b0bc4960edabb2c3342586069da2}\label{class_agency_a69f9b0bc4960edabb2c3342586069da2}} 
-void \hyperlink{class_agency_a69f9b0bc4960edabb2c3342586069da2}{end\+Month} ()
+void \hyperlink{group___agency_ga69f9b0bc4960edabb2c3342586069da2}{end\+Month} ()
 \begin{DoxyCompactList}\small\item\em Collects payments from all the registered users adding the transactions to the \hyperlink{class_agency}{Agency}. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_agency_af0d57adbab935cd35d4e49f29e4abc0c}\label{class_agency_af0d57adbab935cd35d4e49f29e4abc0c}} 
-void \hyperlink{class_agency_af0d57adbab935cd35d4e49f29e4abc0c}{handle\+Input} ()
+void \hyperlink{group___agency_gaf0d57adbab935cd35d4e49f29e4abc0c}{handle\+Input} ()
 \begin{DoxyCompactList}\small\item\em Handles bad input from cin. \end{DoxyCompactList}\item 
-time\+\_\+t \hyperlink{class_agency_a00fdbd79de096b13dd0033478552164a}{get\+Unix\+Code} (\hyperlink{class_date}{Date} \&d, \hyperlink{class_hour}{Hour} \&h)
+time\+\_\+t \hyperlink{group___agency_ga00fdbd79de096b13dd0033478552164a}{get\+Unix\+Code} (\hyperlink{class_date}{Date} \&d, \hyperlink{class_hour}{Hour} \&h)
 \begin{DoxyCompactList}\small\item\em Adds a new \hyperlink{class_user}{User} as a buddy to the \hyperlink{class_user}{User} using the application. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Trip Related Functions}\par
 \begin{DoxyCompactItemize}
 \item 
-void \hyperlink{class_agency_aa0c7d82673ce6b573ccc46da3289634c}{add\+Trip} ()
+void \hyperlink{group___agency_gaa0c7d82673ce6b573ccc46da3289634c}{add\+Trip} ()
 \begin{DoxyCompactList}\small\item\em Adds a new \hyperlink{class_trip}{Trip} the to \hyperlink{class_agency}{Agency}. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_agency_ae2599882efc55adb7f295aeec65520d6}\label{class_agency_ae2599882efc55adb7f295aeec65520d6}} 
-void \hyperlink{class_agency_ae2599882efc55adb7f295aeec65520d6}{join\+Trip} ()
+void \hyperlink{group___agency_gae2599882efc55adb7f295aeec65520d6}{join\+Trip} ()
 \begin{DoxyCompactList}\small\item\em Lets a \hyperlink{class_user}{User} search for and join a \hyperlink{class_trip}{Trip}. \end{DoxyCompactList}\item 
-vector$<$ \hyperlink{class_trip}{Trip} $>$ \hyperlink{class_agency_a7ec6b058801f49850148979c1a41554a}{search\+Trip} (vector$<$ string $>$ stop\+Codes, \hyperlink{class_date}{Date} trip\+Date)
+vector$<$ \hyperlink{class_trip}{Trip} $>$ \hyperlink{group___agency_ga7ec6b058801f49850148979c1a41554a}{search\+Trip} (vector$<$ string $>$ stop\+Codes, \hyperlink{class_date}{Date} trip\+Date)
 \begin{DoxyCompactList}\small\item\em Searches for a trip that fits the parameters. \end{DoxyCompactList}\item 
-vector$<$ \hyperlink{class_trip}{Trip} $>$ \hyperlink{class_agency_a892474fd8930e8e78e743e2b185b35ac}{available\+Trips} (vector$<$ \hyperlink{class_trip}{Trip} $>$ possible\+Trips, vector$<$ string $>$ stop\+Codes)
+vector$<$ \hyperlink{class_trip}{Trip} $>$ \hyperlink{group___agency_ga892474fd8930e8e78e743e2b185b35ac}{available\+Trips} (vector$<$ \hyperlink{class_trip}{Trip} $>$ possible\+Trips, vector$<$ string $>$ stop\+Codes)
 \begin{DoxyCompactList}\small\item\em Searches for a trip from the given vector that has available seats in the required stops. \end{DoxyCompactList}\item 
-bool \hyperlink{class_agency_a9defb73f53ce32bc6382843dd46fc464}{available\+Space} (\hyperlink{class_trip}{Trip} possible\+Trip, vector$<$ string $>$ stop\+Codes)
+bool \hyperlink{group___agency_ga9defb73f53ce32bc6382843dd46fc464}{available\+Space} (\hyperlink{class_trip}{Trip} possible\+Trip, vector$<$ string $>$ stop\+Codes)
 \begin{DoxyCompactList}\small\item\em Checks if there are seats left to be able to join the trip between point A to point B. \end{DoxyCompactList}\item 
-bool \hyperlink{class_agency_aa7fe817661a5e46322db9e809ac54fe9}{has\+Buddies} (\hyperlink{class_trip}{Trip} rec\+Trip)
+bool \hyperlink{group___agency_gaa7fe817661a5e46322db9e809ac54fe9}{has\+Buddies} (\hyperlink{class_trip}{Trip} rec\+Trip)
 \begin{DoxyCompactList}\small\item\em Checks if there are buddies doing the same trip. \end{DoxyCompactList}\item 
-void \hyperlink{class_agency_ab93c48db5700b6d02bf81b3cd3af6711}{choose\+Trip} (vector$<$ \hyperlink{class_trip}{Trip} $>$ rec\+Trips, vector$<$ \hyperlink{class_trip}{Trip} $>$ buddie\+Trips, vector$<$ string $>$ stop\+Codes)
+void \hyperlink{group___agency_gab93c48db5700b6d02bf81b3cd3af6711}{choose\+Trip} (vector$<$ \hyperlink{class_trip}{Trip} $>$ rec\+Trips, vector$<$ \hyperlink{class_trip}{Trip} $>$ buddie\+Trips, vector$<$ string $>$ stop\+Codes)
 \begin{DoxyCompactList}\small\item\em Lets \hyperlink{class_user}{User} choose a \hyperlink{class_trip}{Trip} displayed on screen separated by existence of buddies or not. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_agency_a5a21d06cf7fd4cae84b69554555f229e}\label{class_agency_a5a21d06cf7fd4cae84b69554555f229e}} 
-void \hyperlink{class_agency_a5a21d06cf7fd4cae84b69554555f229e}{join\+Trip\+Guest} ()
+void \hyperlink{group___agency_ga5a21d06cf7fd4cae84b69554555f229e}{join\+Trip\+Guest} ()
 \begin{DoxyCompactList}\small\item\em Lets a Guest search for and join a \hyperlink{class_trip}{Trip}. \end{DoxyCompactList}\item 
-void \hyperlink{class_agency_a7e9a9bafaab57a8e9a5963302b7401ff}{choose\+Trip\+Guest} (vector$<$ \hyperlink{class_trip}{Trip} $>$ rec\+Trips, vector$<$ string $>$ stop\+Codes)
+void \hyperlink{group___agency_ga7e9a9bafaab57a8e9a5963302b7401ff}{choose\+Trip\+Guest} (vector$<$ \hyperlink{class_trip}{Trip} $>$ rec\+Trips, vector$<$ string $>$ stop\+Codes)
 \begin{DoxyCompactList}\small\item\em Lets Guest choose a \hyperlink{class_trip}{Trip} displayed on screen. \end{DoxyCompactList}\item 
-void \hyperlink{class_agency_a76d5990291e33a194a46c390986a668b}{run\+Trip} (int trip\+ID)
+void \hyperlink{group___agency_ga76d5990291e33a194a46c390986a668b}{run\+Trip} (int trip\+ID)
 \begin{DoxyCompactList}\small\item\em Run a select trip with follow-\/up information of passengers changes, stop by stop. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Display Functions}\par
 \begin{DoxyCompactItemize}
 \item 
-void \hyperlink{class_agency_a485882deafb4fc8d075c9cb096ebd35c}{display\+Users} ()
+void \hyperlink{group___agency_ga485882deafb4fc8d075c9cb096ebd35c}{display\+Users} ()
 \begin{DoxyCompactList}\small\item\em Displays all Users on screen. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_agency_a319cf67aaea58bc778455283a18fd2c0}\label{class_agency_a319cf67aaea58bc778455283a18fd2c0}} 
-void \hyperlink{class_agency_a319cf67aaea58bc778455283a18fd2c0}{display\+Buddies} ()
+void \hyperlink{group___agency_ga319cf67aaea58bc778455283a18fd2c0}{display\+Buddies} ()
 \begin{DoxyCompactList}\small\item\em Displays each \hyperlink{class_user}{User} and his buddies on screen. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_agency_ad3c880c51f35459cf189ffc4a43203ba}\label{class_agency_ad3c880c51f35459cf189ffc4a43203ba}} 
-void \hyperlink{class_agency_ad3c880c51f35459cf189ffc4a43203ba}{display\+Transactions} ()
+void \hyperlink{group___agency_gad3c880c51f35459cf189ffc4a43203ba}{display\+Transactions} ()
 \begin{DoxyCompactList}\small\item\em Displays all \hyperlink{class_agency}{Agency} transactions on screen. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_agency_aae86bb356ef4c2f1232d33408e5a3a22}\label{class_agency_aae86bb356ef4c2f1232d33408e5a3a22}} 
-void \hyperlink{class_agency_aae86bb356ef4c2f1232d33408e5a3a22}{display\+Stops} ()
+void \hyperlink{group___agency_gaae86bb356ef4c2f1232d33408e5a3a22}{display\+Stops} ()
 \begin{DoxyCompactList}\small\item\em Displays all available stops on screen. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_agency_abae4f41bfdd7c7965701afe34ad5aec4}\label{class_agency_abae4f41bfdd7c7965701afe34ad5aec4}} 
-void \hyperlink{class_agency_abae4f41bfdd7c7965701afe34ad5aec4}{display\+Record} ()
+void \hyperlink{group___agency_gabae4f41bfdd7c7965701afe34ad5aec4}{display\+Record} ()
 \begin{DoxyCompactList}\small\item\em Displays all agency trips record on screen. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_agency_a3ce9f0643c267083baa3145ddbfd72a4}\label{class_agency_a3ce9f0643c267083baa3145ddbfd72a4}} 
-void \hyperlink{class_agency_a3ce9f0643c267083baa3145ddbfd72a4}{display\+Active\+Trips} ()
+void \hyperlink{group___agency_ga3ce9f0643c267083baa3145ddbfd72a4}{display\+Active\+Trips} ()
 \begin{DoxyCompactList}\small\item\em Displays all active trips on screen. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Hash\+Table Functions}\par
 \begin{DoxyCompactItemize}
 \item 
-tab\+H\+Inactive \hyperlink{class_agency_a6e06b2cf396c6d41ed4d5e2f215a3035}{get\+Inactive} () const
+tab\+H\+Inactive \hyperlink{group___agency_ga6e06b2cf396c6d41ed4d5e2f215a3035}{get\+Inactive} () const
 \begin{DoxyCompactList}\small\item\em accesses the table of the inactive users \end{DoxyCompactList}\item 
-void \hyperlink{class_agency_aca43b6ff4d5b43aae73779cf271ac0fe}{add\+Inactive} (\hyperlink{class_user}{User} $\ast$us1)
+void \hyperlink{group___agency_gaca43b6ff4d5b43aae73779cf271ac0fe}{add\+Inactive} (\hyperlink{class_user}{User} $\ast$us1)
 \begin{DoxyCompactList}\small\item\em adds a new \hyperlink{class_user}{User} to the inactive users table \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_agency_a4ef49242ff8030eddb766972f7555437}\label{class_agency_a4ef49242ff8030eddb766972f7555437}} 
-void \hyperlink{class_agency_a4ef49242ff8030eddb766972f7555437}{generate\+Table} ()
+void \hyperlink{group___agency_ga4ef49242ff8030eddb766972f7555437}{generate\+Table} ()
 \begin{DoxyCompactList}\small\item\em accesses the table of the inactive users \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ B\+ST Functions}\par
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{class_b_s_t}{B\+ST}$<$ \hyperlink{class_vehicle}{Vehicle} $>$ \hyperlink{class_agency_af7b06f6c289c6c6a7acf09dda8a6f7d5}{get\+Vehicles} () const
+\hyperlink{class_b_s_t}{B\+ST}$<$ \hyperlink{class_vehicle}{Vehicle} $>$ \hyperlink{group___agency_gaf7b06f6c289c6c6a7acf09dda8a6f7d5}{get\+Vehicles} () const
 \begin{DoxyCompactList}\small\item\em returns the \hyperlink{class_b_s_t}{B\+ST} of rented vehicles \end{DoxyCompactList}\item 
-void \hyperlink{class_agency_ab2a08b75fbe909173d539d27a06c7bc9}{add\+Vehicle} (\hyperlink{class_vehicle}{Vehicle} \&v1)
+void \hyperlink{group___agency_gab2a08b75fbe909173d539d27a06c7bc9}{add\+Vehicle} (\hyperlink{class_vehicle}{Vehicle} \&v1)
 \begin{DoxyCompactList}\small\item\em adds new rented vehicle to \hyperlink{class_b_s_t}{B\+ST} \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_agency_a1273a762d40c0519e9382238341fa579}\label{class_agency_a1273a762d40c0519e9382238341fa579}} 
-int \hyperlink{class_agency_a1273a762d40c0519e9382238341fa579}{Menu\+Car} ()
+int \hyperlink{group___agency_ga1273a762d40c0519e9382238341fa579}{Menu\+Car} ()
 \begin{DoxyCompactList}\small\item\em Opens the menu Car Details. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_agency_aba16b0f3b2db9c70e5a54eef91e0765d}\label{class_agency_aba16b0f3b2db9c70e5a54eef91e0765d}} 
-void \hyperlink{class_agency_aba16b0f3b2db9c70e5a54eef91e0765d}{options\+Menu\+Car} ()
+void \hyperlink{group___agency_gaba16b0f3b2db9c70e5a54eef91e0765d}{options\+Menu\+Car} ()
 \begin{DoxyCompactList}\small\item\em Options in Cars Details menu. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_agency_a9416585f65eeab4b7ac1071d5d4de036}\label{class_agency_a9416585f65eeab4b7ac1071d5d4de036}} 
-void \hyperlink{class_agency_a9416585f65eeab4b7ac1071d5d4de036}{display\+Car} ()
+void \hyperlink{group___agency_ga9416585f65eeab4b7ac1071d5d4de036}{display\+Car} ()
 \begin{DoxyCompactList}\small\item\em displays vehicles of a certain user \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_agency_ac6f2e6884260af2dfedb7cd6f3360996}\label{class_agency_ac6f2e6884260af2dfedb7cd6f3360996}} 
-void \hyperlink{class_agency_ac6f2e6884260af2dfedb7cd6f3360996}{display\+Cars} ()
+void \hyperlink{group___agency_gac6f2e6884260af2dfedb7cd6f3360996}{display\+Cars} ()
 \begin{DoxyCompactList}\small\item\em displays vehicles of the agency that can be rented \end{DoxyCompactList}\item 
-bool \hyperlink{class_agency_a3332e859279fb7f7ff27916c4b6b6ca3}{car\+Exists} (string model, int year)
+bool \hyperlink{group___agency_ga3332e859279fb7f7ff27916c4b6b6ca3}{car\+Exists} (string model, int year)
 \begin{DoxyCompactList}\small\item\em verifies if a certain car of the agency is available for rent \end{DoxyCompactList}\item 
-int \hyperlink{class_agency_a7b37fecbc7cf1524b841ac82be7a7d29}{has\+Car} ()
+int \hyperlink{group___agency_ga7b37fecbc7cf1524b841ac82be7a7d29}{has\+Car} ()
 \begin{DoxyCompactList}\small\item\em to check how many vehicle a certain user has \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_agency_ab797bb2fa8351c1a5d1946e5be796df7}\label{class_agency_ab797bb2fa8351c1a5d1946e5be796df7}} 
-void \hyperlink{class_agency_ab797bb2fa8351c1a5d1946e5be796df7}{rent\+Car} ()
+void \hyperlink{group___agency_gab797bb2fa8351c1a5d1946e5be796df7}{rent\+Car} ()
 \begin{DoxyCompactList}\small\item\em function that allows a user to rent a car \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_agency_ade564b2cc678fce19a24db37ba3ad956}\label{class_agency_ade564b2cc678fce19a24db37ba3ad956}} 
-void \hyperlink{class_agency_ade564b2cc678fce19a24db37ba3ad956}{discard\+Car} ()
+void \hyperlink{group___agency_gade564b2cc678fce19a24db37ba3ad956}{discard\+Car} ()
 \begin{DoxyCompactList}\small\item\em function that allows a user to remove a car he had rented \end{DoxyCompactList}\item 
-void \hyperlink{class_agency_a1f58c5179d80187fc0b53a6da93dee90}{trade\+Car} ()
+void \hyperlink{group___agency_ga1f58c5179d80187fc0b53a6da93dee90}{trade\+Car} ()
 \begin{DoxyCompactList}\small\item\em function that allows a user trade his car with another user \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_agency_aae7bafe5a3a5231ace9a73b9835c4c79}\label{class_agency_aae7bafe5a3a5231ace9a73b9835c4c79}} 
-void \hyperlink{class_agency_aae7bafe5a3a5231ace9a73b9835c4c79}{search\+Car} ()
+void \hyperlink{group___agency_gaae7bafe5a3a5231ace9a73b9835c4c79}{search\+Car} ()
 \begin{DoxyCompactList}\small\item\em function that allows a user to search a car by brand \& model \& year \end{DoxyCompactList}\item 
-int \hyperlink{class_agency_a55fd7b63ca65ffdb6dfe8694301af29c}{get\+Num\+Seats} (string model, int year)
+int \hyperlink{group___agency_ga55fd7b63ca65ffdb6dfe8694301af29c}{get\+Num\+Seats} (string model, int year)
 \begin{DoxyCompactList}\small\item\em returns number of seats of a certain vehicle minus the driver seat \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_agency_aa9a66ffb449986839a0089fc7239ac54}\label{class_agency_aa9a66ffb449986839a0089fc7239ac54}} 
-void \hyperlink{class_agency_aa9a66ffb449986839a0089fc7239ac54}{extract\+Vehicles} ()
+void \hyperlink{group___agency_gaa9a66ffb449986839a0089fc7239ac54}{extract\+Vehicles} ()
 \begin{DoxyCompactList}\small\item\em function that extracts the agency\textquotesingle{}s vehicles \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_agency_aa88930db176fb321347b28e279699d4f}\label{class_agency_aa88930db176fb321347b28e279699d4f}} 
-void \hyperlink{class_agency_aa88930db176fb321347b28e279699d4f}{extract\+Vehicles\+Tree} ()
+void \hyperlink{group___agency_gaa88930db176fb321347b28e279699d4f}{extract\+Vehicles\+Tree} ()
 \begin{DoxyCompactList}\small\item\em function that extracts rented vehicles to \hyperlink{class_b_s_t}{B\+ST} \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_agency_a33c07400077f762e86f9e5cf1292ef17}\label{class_agency_a33c07400077f762e86f9e5cf1292ef17}} 
-void \hyperlink{class_agency_a33c07400077f762e86f9e5cf1292ef17}{save\+Tree} ()
+void \hyperlink{group___agency_ga33c07400077f762e86f9e5cf1292ef17}{save\+Tree} ()
 \begin{DoxyCompactList}\small\item\em function that saves the \hyperlink{class_b_s_t}{B\+ST} in a text file \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_agency_a7d290600e2b02d64db22c5bfcb61c94b}\label{class_agency_a7d290600e2b02d64db22c5bfcb61c94b}} 
-void \hyperlink{class_agency_a7d290600e2b02d64db22c5bfcb61c94b}{save\+Vehicles} ()
+void \hyperlink{group___agency_ga7d290600e2b02d64db22c5bfcb61c94b}{save\+Vehicles} ()
 \begin{DoxyCompactList}\small\item\em function that saves the vehicles vector in a text file \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ New User Functions}\par
 \begin{DoxyCompactItemize}
 \item 
-void \hyperlink{class_agency_a8a2b0d746484213d43f722c0a0766a66}{change\+Username} ()
+void \hyperlink{group___agency_ga8a2b0d746484213d43f722c0a0766a66}{change\+Username} ()
 \begin{DoxyCompactList}\small\item\em changes username of a user \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_agency_a9902ae22a9a351479e2b017bc7d32d37}\label{class_agency_a9902ae22a9a351479e2b017bc7d32d37}} 
-void \hyperlink{class_agency_a9902ae22a9a351479e2b017bc7d32d37}{change\+Address} ()
+void \hyperlink{group___agency_ga9902ae22a9a351479e2b017bc7d32d37}{change\+Address} ()
 \begin{DoxyCompactList}\small\item\em changes address of a user \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_agency_a580f891506db1463b17f1076ccadfe4c}\label{class_agency_a580f891506db1463b17f1076ccadfe4c}} 
-void \hyperlink{class_agency_a580f891506db1463b17f1076ccadfe4c}{change\+Password} ()
+void \hyperlink{group___agency_ga580f891506db1463b17f1076ccadfe4c}{change\+Password} ()
 \begin{DoxyCompactList}\small\item\em changes password of a user \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_agency_a90711f8b569ac19ce052b59e79848df5}\label{class_agency_a90711f8b569ac19ce052b59e79848df5}} 
-void \hyperlink{class_agency_a90711f8b569ac19ce052b59e79848df5}{delete\+Account} ()
+void \hyperlink{group___agency_ga90711f8b569ac19ce052b59e79848df5}{delete\+Account} ()
 \begin{DoxyCompactList}\small\item\em deletes permanently the account of a user \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Distances Data}\par
 \begin{DoxyCompactItemize}
 \item 
-void \hyperlink{class_agency_ab893f05c69379631019010af71052595}{extract\+Distances} ()
+void \hyperlink{group___agency_gab893f05c69379631019010af71052595}{extract\+Distances} ()
 \item 
-\mbox{\Hypertarget{class_agency_af587ae52b7b80696bbc7bba02b8238af}\label{class_agency_af587ae52b7b80696bbc7bba02b8238af}} 
-void \hyperlink{class_agency_af587ae52b7b80696bbc7bba02b8238af}{extract\+Candidates\+Queues} ()
+void \hyperlink{group___agency_gaf587ae52b7b80696bbc7bba02b8238af}{extract\+Candidates\+Queues} ()
 \begin{DoxyCompactList}\small\item\em Functions that manage Candidates Queue data in and out of the application. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_agency_a75cbaedb476597df320ed4e53b278f84}\label{class_agency_a75cbaedb476597df320ed4e53b278f84}} 
 void {\bfseries save\+Candidates\+Queues} ()
 \end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Distance Functions}\par
 \begin{DoxyCompactItemize}
 \item 
-float \hyperlink{class_agency_a4efd6041c1293f0366b76356c05e3520}{distance\+Between\+Two\+Points} (string pnt1, string pnt2)
+float \hyperlink{group___agency_ga4efd6041c1293f0366b76356c05e3520}{distance\+Between\+Two\+Points} (string pnt1, string pnt2)
 \begin{DoxyCompactList}\small\item\em distance between 2 stops \end{DoxyCompactList}\item 
-float \hyperlink{class_agency_a4a3c0e75130deeba5f9fe8dc4cec0468}{distance\+Ride} (vector$<$ string $>$ v1, string pnt1)
+float \hyperlink{group___agency_ga4a3c0e75130deeba5f9fe8dc4cec0468}{distance\+Ride} (vector$<$ string $>$ v1, string pnt1)
 \begin{DoxyCompactList}\small\item\em distance between a stop and the first stop in the vector passing by the other stops in the vector \end{DoxyCompactList}\item 
-void \hyperlink{class_agency_a51d72590b842d0df300cd39846353f00}{candidate\+Trip} (vector$<$ \hyperlink{class_trip}{Trip} $>$ rec\+Trips, vector$<$ \hyperlink{class_trip}{Trip} $>$ buddie\+Trips, vector$<$ string $>$ stop\+Codes)
+void \hyperlink{group___agency_ga51d72590b842d0df300cd39846353f00}{candidate\+Trip} (vector$<$ \hyperlink{class_trip}{Trip} $>$ rec\+Trips, vector$<$ \hyperlink{class_trip}{Trip} $>$ buddie\+Trips, vector$<$ string $>$ stop\+Codes)
 \begin{DoxyCompactList}\small\item\em Lets \hyperlink{class_user}{User} candidate to a \hyperlink{class_trip}{Trip} displayed on screen separated by existence of buddies or not. \end{DoxyCompactList}\item 
-void \hyperlink{class_agency_a55ae3f0e58a987ab17bd7dd358add125}{candidate\+Trip\+Guest} (vector$<$ \hyperlink{class_trip}{Trip} $>$ rec\+Trips, vector$<$ string $>$ stop\+Codes)
+void \hyperlink{group___agency_ga55ae3f0e58a987ab17bd7dd358add125}{candidate\+Trip\+Guest} (vector$<$ \hyperlink{class_trip}{Trip} $>$ rec\+Trips, vector$<$ string $>$ stop\+Codes)
 \begin{DoxyCompactList}\small\item\em Lets a Guess candidate to a \hyperlink{class_trip}{Trip} displayed on screen. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_agency_a83b9652dad153b729c19f3413620908a}\label{class_agency_a83b9652dad153b729c19f3413620908a}} 
-void \hyperlink{class_agency_a83b9652dad153b729c19f3413620908a}{scheduled\+Trips\+Menu} ()
+void \hyperlink{group___agency_ga83b9652dad153b729c19f3413620908a}{scheduled\+Trips\+Menu} ()
 \begin{DoxyCompactList}\small\item\em menu that shows all the trips of the driver, let him cancel or choose passengers of a trip \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \subsection*{Static Public Member Functions}
@@ -367,527 +318,6 @@ vector$<$ \hyperlink{structdistance_struct}{distance\+Struct} $>$ \hyperlink{gro
 \item 
 static \hyperlink{class_agency}{Agency} $\ast$ \hyperlink{group___agency_ga24c6ae11e29cdf5eefc6a5c94783b90e}{singleton\+\_\+instance} = 0
 \begin{DoxyCompactList}\small\item\em \hyperlink{class_agency}{Agency} instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
-
-
-\subsection{Member Function Documentation}
-\mbox{\Hypertarget{class_agency_aca43b6ff4d5b43aae73779cf271ac0fe}\label{class_agency_aca43b6ff4d5b43aae73779cf271ac0fe}} 
-\index{Agency@{Agency}!add\+Inactive@{add\+Inactive}}
-\index{add\+Inactive@{add\+Inactive}!Agency@{Agency}}
-\subsubsection{\texorpdfstring{add\+Inactive()}{addInactive()}}
-{\footnotesize\ttfamily void Agency\+::add\+Inactive (\begin{DoxyParamCaption}\item[{\hyperlink{class_user}{User} $\ast$}]{us1 }\end{DoxyParamCaption})}
-
-
-
-adds a new \hyperlink{class_user}{User} to the inactive users table 
-
-
-\begin{DoxyParams}{Parameters}
-{\em \hyperlink{class_user}{User}} & that is to be added to the table \\
-\hline
-\end{DoxyParams}
-\mbox{\Hypertarget{class_agency_aa0c7d82673ce6b573ccc46da3289634c}\label{class_agency_aa0c7d82673ce6b573ccc46da3289634c}} 
-\index{Agency@{Agency}!add\+Trip@{add\+Trip}}
-\index{add\+Trip@{add\+Trip}!Agency@{Agency}}
-\subsubsection{\texorpdfstring{add\+Trip()}{addTrip()}}
-{\footnotesize\ttfamily void Agency\+::add\+Trip (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-
-
-Adds a new \hyperlink{class_trip}{Trip} the to \hyperlink{class_agency}{Agency}. 
-
-Functions regarding trips creation, search and join by Users and Guests \mbox{\Hypertarget{class_agency_a9307d4ce4dd311f5744592248be6c9e5}\label{class_agency_a9307d4ce4dd311f5744592248be6c9e5}} 
-\index{Agency@{Agency}!add\+User@{add\+User}}
-\index{add\+User@{add\+User}!Agency@{Agency}}
-\subsubsection{\texorpdfstring{add\+User()}{addUser()}}
-{\footnotesize\ttfamily void Agency\+::add\+User (\begin{DoxyParamCaption}\item[{\hyperlink{class_user}{User} $\ast$}]{u }\end{DoxyParamCaption})}
-
-
-
-Adds a new \hyperlink{class_user}{User} to the \hyperlink{class_agency}{Agency}. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em u} & \hyperlink{class_user}{User} pointer to be added \\
-\hline
-\end{DoxyParams}
-\mbox{\Hypertarget{class_agency_ab2a08b75fbe909173d539d27a06c7bc9}\label{class_agency_ab2a08b75fbe909173d539d27a06c7bc9}} 
-\index{Agency@{Agency}!add\+Vehicle@{add\+Vehicle}}
-\index{add\+Vehicle@{add\+Vehicle}!Agency@{Agency}}
-\subsubsection{\texorpdfstring{add\+Vehicle()}{addVehicle()}}
-{\footnotesize\ttfamily void Agency\+::add\+Vehicle (\begin{DoxyParamCaption}\item[{\hyperlink{class_vehicle}{Vehicle} \&}]{v1 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-adds new rented vehicle to \hyperlink{class_b_s_t}{B\+ST} 
-
-
-\begin{DoxyParams}{Parameters}
-{\em v1} & vehicle object \\
-\hline
-\end{DoxyParams}
-\mbox{\Hypertarget{class_agency_a9defb73f53ce32bc6382843dd46fc464}\label{class_agency_a9defb73f53ce32bc6382843dd46fc464}} 
-\index{Agency@{Agency}!available\+Space@{available\+Space}}
-\index{available\+Space@{available\+Space}!Agency@{Agency}}
-\subsubsection{\texorpdfstring{available\+Space()}{availableSpace()}}
-{\footnotesize\ttfamily bool Agency\+::available\+Space (\begin{DoxyParamCaption}\item[{\hyperlink{class_trip}{Trip}}]{possible\+Trip,  }\item[{vector$<$ string $>$}]{stop\+Codes }\end{DoxyParamCaption})}
-
-
-
-Checks if there are seats left to be able to join the trip between point A to point B. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em possible\+Trip} & \hyperlink{class_trip}{Trip} to check for seats between the given stops \\
-\hline
-{\em stop\+Codes} & codes for the first and last stop to search possible\+Trip for\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-bool true if there are available seats, false otherwise 
-\end{DoxyReturn}
-\mbox{\Hypertarget{class_agency_a892474fd8930e8e78e743e2b185b35ac}\label{class_agency_a892474fd8930e8e78e743e2b185b35ac}} 
-\index{Agency@{Agency}!available\+Trips@{available\+Trips}}
-\index{available\+Trips@{available\+Trips}!Agency@{Agency}}
-\subsubsection{\texorpdfstring{available\+Trips()}{availableTrips()}}
-{\footnotesize\ttfamily vector$<$ \hyperlink{class_trip}{Trip} $>$ Agency\+::available\+Trips (\begin{DoxyParamCaption}\item[{vector$<$ \hyperlink{class_trip}{Trip} $>$}]{possible\+Trips,  }\item[{vector$<$ string $>$}]{stop\+Codes }\end{DoxyParamCaption})}
-
-
-
-Searches for a trip from the given vector that has available seats in the required stops. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em stop\+Codes} & codes for the first and last stop to search possible\+Trips for \\
-\hline
-{\em possible\+Trips} & vector containing all the \hyperlink{class_trip}{Trip} that are a possible match, obtained from a previous function\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-vector containg all the trips with available seat for passenger 
-\end{DoxyReturn}
-\mbox{\Hypertarget{class_agency_a51d72590b842d0df300cd39846353f00}\label{class_agency_a51d72590b842d0df300cd39846353f00}} 
-\index{Agency@{Agency}!candidate\+Trip@{candidate\+Trip}}
-\index{candidate\+Trip@{candidate\+Trip}!Agency@{Agency}}
-\subsubsection{\texorpdfstring{candidate\+Trip()}{candidateTrip()}}
-{\footnotesize\ttfamily void Agency\+::candidate\+Trip (\begin{DoxyParamCaption}\item[{vector$<$ \hyperlink{class_trip}{Trip} $>$}]{rec\+Trips,  }\item[{vector$<$ \hyperlink{class_trip}{Trip} $>$}]{buddie\+Trips,  }\item[{vector$<$ string $>$}]{stop\+Codes }\end{DoxyParamCaption})}
-
-
-
-Lets \hyperlink{class_user}{User} candidate to a \hyperlink{class_trip}{Trip} displayed on screen separated by existence of buddies or not. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em rec\+Trips} & vector of recommended trips without buddies \\
-\hline
-{\em buddie\+Trips} & vector of recommended trips with buddies \\
-\hline
-{\em stop\+Codes} & vector containing the strings of the \hyperlink{class_user}{User}\textquotesingle{}s first and last stop \\
-\hline
-\end{DoxyParams}
-\mbox{\Hypertarget{class_agency_a55ae3f0e58a987ab17bd7dd358add125}\label{class_agency_a55ae3f0e58a987ab17bd7dd358add125}} 
-\index{Agency@{Agency}!candidate\+Trip\+Guest@{candidate\+Trip\+Guest}}
-\index{candidate\+Trip\+Guest@{candidate\+Trip\+Guest}!Agency@{Agency}}
-\subsubsection{\texorpdfstring{candidate\+Trip\+Guest()}{candidateTripGuest()}}
-{\footnotesize\ttfamily void Agency\+::candidate\+Trip\+Guest (\begin{DoxyParamCaption}\item[{vector$<$ \hyperlink{class_trip}{Trip} $>$}]{rec\+Trips,  }\item[{vector$<$ string $>$}]{stop\+Codes }\end{DoxyParamCaption})}
-
-
-
-Lets a Guess candidate to a \hyperlink{class_trip}{Trip} displayed on screen. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em rec\+Trips} & vector of recommended trips without buddies \\
-\hline
-{\em stop\+Codes} & vector containing the strings of the \hyperlink{class_user}{User}\textquotesingle{}s first and last stop \\
-\hline
-\end{DoxyParams}
-\mbox{\Hypertarget{class_agency_a3332e859279fb7f7ff27916c4b6b6ca3}\label{class_agency_a3332e859279fb7f7ff27916c4b6b6ca3}} 
-\index{Agency@{Agency}!car\+Exists@{car\+Exists}}
-\index{car\+Exists@{car\+Exists}!Agency@{Agency}}
-\subsubsection{\texorpdfstring{car\+Exists()}{carExists()}}
-{\footnotesize\ttfamily bool Agency\+::car\+Exists (\begin{DoxyParamCaption}\item[{string}]{model,  }\item[{int}]{year }\end{DoxyParamCaption})}
-
-
-
-verifies if a certain car of the agency is available for rent 
-
-
-\begin{DoxyParams}{Parameters}
-{\em model} & of the vehicle \\
-\hline
-{\em year} & of the vehicle\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-true or false 
-\end{DoxyReturn}
-\mbox{\Hypertarget{class_agency_a8a2b0d746484213d43f722c0a0766a66}\label{class_agency_a8a2b0d746484213d43f722c0a0766a66}} 
-\index{Agency@{Agency}!change\+Username@{change\+Username}}
-\index{change\+Username@{change\+Username}!Agency@{Agency}}
-\subsubsection{\texorpdfstring{change\+Username()}{changeUsername()}}
-{\footnotesize\ttfamily void Agency\+::change\+Username (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-
-
-changes username of a user 
-
-New functions that manage the account of a user \mbox{\Hypertarget{class_agency_a5de11a6e7a081abefea2560290d542b6}\label{class_agency_a5de11a6e7a081abefea2560290d542b6}} 
-\index{Agency@{Agency}!check\+Stop@{check\+Stop}}
-\index{check\+Stop@{check\+Stop}!Agency@{Agency}}
-\subsubsection{\texorpdfstring{check\+Stop()}{checkStop()}}
-{\footnotesize\ttfamily bool Agency\+::check\+Stop (\begin{DoxyParamCaption}\item[{string}]{s }\end{DoxyParamCaption})}
-
-
-
-Checks if a given stop code exists. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em s} & string containing the code to search for\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-bool true if such stop exists, false otherwise 
-\end{DoxyReturn}
-\mbox{\Hypertarget{class_agency_ab93c48db5700b6d02bf81b3cd3af6711}\label{class_agency_ab93c48db5700b6d02bf81b3cd3af6711}} 
-\index{Agency@{Agency}!choose\+Trip@{choose\+Trip}}
-\index{choose\+Trip@{choose\+Trip}!Agency@{Agency}}
-\subsubsection{\texorpdfstring{choose\+Trip()}{chooseTrip()}}
-{\footnotesize\ttfamily void Agency\+::choose\+Trip (\begin{DoxyParamCaption}\item[{vector$<$ \hyperlink{class_trip}{Trip} $>$}]{rec\+Trips,  }\item[{vector$<$ \hyperlink{class_trip}{Trip} $>$}]{buddie\+Trips,  }\item[{vector$<$ string $>$}]{stop\+Codes }\end{DoxyParamCaption})}
-
-
-
-Lets \hyperlink{class_user}{User} choose a \hyperlink{class_trip}{Trip} displayed on screen separated by existence of buddies or not. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em rec\+Trips} & vector of recommended trips without buddies \\
-\hline
-{\em buddie\+Trips} & vector of recommended trips with buddies \\
-\hline
-{\em stop\+Codes} & vector containing the strings of the \hyperlink{class_user}{User}\textquotesingle{}s first and last stop \\
-\hline
-\end{DoxyParams}
-\mbox{\Hypertarget{class_agency_a7e9a9bafaab57a8e9a5963302b7401ff}\label{class_agency_a7e9a9bafaab57a8e9a5963302b7401ff}} 
-\index{Agency@{Agency}!choose\+Trip\+Guest@{choose\+Trip\+Guest}}
-\index{choose\+Trip\+Guest@{choose\+Trip\+Guest}!Agency@{Agency}}
-\subsubsection{\texorpdfstring{choose\+Trip\+Guest()}{chooseTripGuest()}}
-{\footnotesize\ttfamily void Agency\+::choose\+Trip\+Guest (\begin{DoxyParamCaption}\item[{vector$<$ \hyperlink{class_trip}{Trip} $>$}]{rec\+Trips,  }\item[{vector$<$ string $>$}]{stop\+Codes }\end{DoxyParamCaption})}
-
-
-
-Lets Guest choose a \hyperlink{class_trip}{Trip} displayed on screen. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em rec\+Trips} & vector of recommended trips \\
-\hline
-{\em stop\+Codes} & vector containing the strings of the Guest\textquotesingle{}s first and last stop \\
-\hline
-\end{DoxyParams}
-\mbox{\Hypertarget{class_agency_a485882deafb4fc8d075c9cb096ebd35c}\label{class_agency_a485882deafb4fc8d075c9cb096ebd35c}} 
-\index{Agency@{Agency}!display\+Users@{display\+Users}}
-\index{display\+Users@{display\+Users}!Agency@{Agency}}
-\subsubsection{\texorpdfstring{display\+Users()}{displayUsers()}}
-{\footnotesize\ttfamily void Agency\+::display\+Users (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-
-
-Displays all Users on screen. 
-
-Functions that manage basic functionalities \mbox{\Hypertarget{class_agency_a4efd6041c1293f0366b76356c05e3520}\label{class_agency_a4efd6041c1293f0366b76356c05e3520}} 
-\index{Agency@{Agency}!distance\+Between\+Two\+Points@{distance\+Between\+Two\+Points}}
-\index{distance\+Between\+Two\+Points@{distance\+Between\+Two\+Points}!Agency@{Agency}}
-\subsubsection{\texorpdfstring{distance\+Between\+Two\+Points()}{distanceBetweenTwoPoints()}}
-{\footnotesize\ttfamily float Agency\+::distance\+Between\+Two\+Points (\begin{DoxyParamCaption}\item[{string}]{pnt1,  }\item[{string}]{pnt2 }\end{DoxyParamCaption})}
-
-
-
-distance between 2 stops 
-
-New functions that manage the account of a user 
-\begin{DoxyParams}{Parameters}
-{\em pnt1} & first stop \\
-\hline
-{\em pnt2} & second stop \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-float of the distance between those stops 
-\end{DoxyReturn}
-\mbox{\Hypertarget{class_agency_a4a3c0e75130deeba5f9fe8dc4cec0468}\label{class_agency_a4a3c0e75130deeba5f9fe8dc4cec0468}} 
-\index{Agency@{Agency}!distance\+Ride@{distance\+Ride}}
-\index{distance\+Ride@{distance\+Ride}!Agency@{Agency}}
-\subsubsection{\texorpdfstring{distance\+Ride()}{distanceRide()}}
-{\footnotesize\ttfamily float Agency\+::distance\+Ride (\begin{DoxyParamCaption}\item[{vector$<$ string $>$}]{v1,  }\item[{string}]{pnt1 }\end{DoxyParamCaption})}
-
-
-
-distance between a stop and the first stop in the vector passing by the other stops in the vector 
-
-
-\begin{DoxyParams}{Parameters}
-{\em v1} & vector of stops that represents a ride \\
-\hline
-{\em pnt1} & stop \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-float of the distance between those stops 
-\end{DoxyReturn}
-\mbox{\Hypertarget{class_agency_ab893f05c69379631019010af71052595}\label{class_agency_ab893f05c69379631019010af71052595}} 
-\index{Agency@{Agency}!extract\+Distances@{extract\+Distances}}
-\index{extract\+Distances@{extract\+Distances}!Agency@{Agency}}
-\subsubsection{\texorpdfstring{extract\+Distances()}{extractDistances()}}
-{\footnotesize\ttfamily void Agency\+::extract\+Distances (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-Function that manage distances data in of the application \mbox{\Hypertarget{class_agency_ab129c30ae0ba6c735d0f600c1b00894d}\label{class_agency_ab129c30ae0ba6c735d0f600c1b00894d}} 
-\index{Agency@{Agency}!find\+ID@{find\+ID}}
-\index{find\+ID@{find\+ID}!Agency@{Agency}}
-\subsubsection{\texorpdfstring{find\+I\+D()}{findID()}}
-{\footnotesize\ttfamily int Agency\+::find\+ID (\begin{DoxyParamCaption}\item[{string}]{name }\end{DoxyParamCaption})}
-
-
-
-Searchs for the ID of the \hyperlink{class_user}{User} of given name. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em name} & string containing the name to search for\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-ID of the \hyperlink{class_user}{User}, -\/1 otherwise 
-\end{DoxyReturn}
-\mbox{\Hypertarget{class_agency_a6e06b2cf396c6d41ed4d5e2f215a3035}\label{class_agency_a6e06b2cf396c6d41ed4d5e2f215a3035}} 
-\index{Agency@{Agency}!get\+Inactive@{get\+Inactive}}
-\index{get\+Inactive@{get\+Inactive}!Agency@{Agency}}
-\subsubsection{\texorpdfstring{get\+Inactive()}{getInactive()}}
-{\footnotesize\ttfamily tab\+H\+Inactive Agency\+::get\+Inactive (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
-
-
-
-accesses the table of the inactive users 
-
-Functions that manage the hash table of inactive \hyperlink{class_user}{User} \begin{DoxyReturn}{Returns}
-table with the inactive Users 
-\end{DoxyReturn}
-\mbox{\Hypertarget{class_agency_a4f91eb604ad3eb3ea8142b8ab65b968d}\label{class_agency_a4f91eb604ad3eb3ea8142b8ab65b968d}} 
-\index{Agency@{Agency}!get\+Last\+Id@{get\+Last\+Id}}
-\index{get\+Last\+Id@{get\+Last\+Id}!Agency@{Agency}}
-\subsubsection{\texorpdfstring{get\+Last\+Id()}{getLastId()}}
-{\footnotesize\ttfamily int Agency\+::get\+Last\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-
-
-Returns last ID in use for Users. 
-
-\begin{DoxyReturn}{Returns}
-last ID in use in the application 
-\end{DoxyReturn}
-\mbox{\Hypertarget{class_agency_a55fd7b63ca65ffdb6dfe8694301af29c}\label{class_agency_a55fd7b63ca65ffdb6dfe8694301af29c}} 
-\index{Agency@{Agency}!get\+Num\+Seats@{get\+Num\+Seats}}
-\index{get\+Num\+Seats@{get\+Num\+Seats}!Agency@{Agency}}
-\subsubsection{\texorpdfstring{get\+Num\+Seats()}{getNumSeats()}}
-{\footnotesize\ttfamily int Agency\+::get\+Num\+Seats (\begin{DoxyParamCaption}\item[{string}]{model,  }\item[{int}]{year }\end{DoxyParamCaption})}
-
-
-
-returns number of seats of a certain vehicle minus the driver seat 
-
-
-\begin{DoxyParams}{Parameters}
-{\em model} & of the vehicle \\
-\hline
-{\em year} & of the vehicle\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-number of seats 
-\end{DoxyReturn}
-\mbox{\Hypertarget{class_agency_a7ec884913bb5c9803cc5b71dc4a569d3}\label{class_agency_a7ec884913bb5c9803cc5b71dc4a569d3}} 
-\index{Agency@{Agency}!get\+Pos@{get\+Pos}}
-\index{get\+Pos@{get\+Pos}!Agency@{Agency}}
-\subsubsection{\texorpdfstring{get\+Pos()}{getPos()}}
-{\footnotesize\ttfamily int Agency\+::get\+Pos (\begin{DoxyParamCaption}\item[{int}]{id }\end{DoxyParamCaption})}
-
-
-
-Searchs for the position of the \hyperlink{class_user}{User} of given ID, on the \hyperlink{class_agency}{Agency}\textquotesingle{}s vector of Users. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em id} & int containing the id to search for\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-position of the \hyperlink{class_user}{User}, -\/1 if it does not exist 
-\end{DoxyReturn}
-\mbox{\Hypertarget{class_agency_a00fdbd79de096b13dd0033478552164a}\label{class_agency_a00fdbd79de096b13dd0033478552164a}} 
-\index{Agency@{Agency}!get\+Unix\+Code@{get\+Unix\+Code}}
-\index{get\+Unix\+Code@{get\+Unix\+Code}!Agency@{Agency}}
-\subsubsection{\texorpdfstring{get\+Unix\+Code()}{getUnixCode()}}
-{\footnotesize\ttfamily time\+\_\+t Agency\+::get\+Unix\+Code (\begin{DoxyParamCaption}\item[{\hyperlink{class_date}{Date} \&}]{d,  }\item[{\hyperlink{class_hour}{Hour} \&}]{h }\end{DoxyParamCaption})}
-
-
-
-Adds a new \hyperlink{class_user}{User} as a buddy to the \hyperlink{class_user}{User} using the application. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em d} & object of type \hyperlink{class_date}{Date} to convert to Unix timestamp \\
-\hline
-{\em h} & object of type \hyperlink{class_hour}{Hour} to convert to Unix timestamp\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-time\+\_\+t variable representing the Unix timestamp of the given date and hour combined 
-\end{DoxyReturn}
-\mbox{\Hypertarget{class_agency_af7b06f6c289c6c6a7acf09dda8a6f7d5}\label{class_agency_af7b06f6c289c6c6a7acf09dda8a6f7d5}} 
-\index{Agency@{Agency}!get\+Vehicles@{get\+Vehicles}}
-\index{get\+Vehicles@{get\+Vehicles}!Agency@{Agency}}
-\subsubsection{\texorpdfstring{get\+Vehicles()}{getVehicles()}}
-{\footnotesize\ttfamily \hyperlink{class_b_s_t}{B\+ST}$<$\hyperlink{class_vehicle}{Vehicle}$>$ Agency\+::get\+Vehicles (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-returns the \hyperlink{class_b_s_t}{B\+ST} of rented vehicles 
-
-Functions that manage the binary search tree (\hyperlink{class_b_s_t}{B\+ST}) of rented vehicles \begin{DoxyReturn}{Returns}
-\hyperlink{class_b_s_t}{B\+ST} of rented vehicles 
-\end{DoxyReturn}
-\mbox{\Hypertarget{class_agency_aa7fe817661a5e46322db9e809ac54fe9}\label{class_agency_aa7fe817661a5e46322db9e809ac54fe9}} 
-\index{Agency@{Agency}!has\+Buddies@{has\+Buddies}}
-\index{has\+Buddies@{has\+Buddies}!Agency@{Agency}}
-\subsubsection{\texorpdfstring{has\+Buddies()}{hasBuddies()}}
-{\footnotesize\ttfamily bool Agency\+::has\+Buddies (\begin{DoxyParamCaption}\item[{\hyperlink{class_trip}{Trip}}]{rec\+Trip }\end{DoxyParamCaption})}
-
-
-
-Checks if there are buddies doing the same trip. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em rec\+Trip} & \hyperlink{class_trip}{Trip} to check for buddies\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-bool true if there are buddies on given trip, false otherwise 
-\end{DoxyReturn}
-\mbox{\Hypertarget{class_agency_a7b37fecbc7cf1524b841ac82be7a7d29}\label{class_agency_a7b37fecbc7cf1524b841ac82be7a7d29}} 
-\index{Agency@{Agency}!has\+Car@{has\+Car}}
-\index{has\+Car@{has\+Car}!Agency@{Agency}}
-\subsubsection{\texorpdfstring{has\+Car()}{hasCar()}}
-{\footnotesize\ttfamily int Agency\+::has\+Car (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-
-
-to check how many vehicle a certain user has 
-
-\begin{DoxyReturn}{Returns}
-number of vehicles 
-\end{DoxyReturn}
-\mbox{\Hypertarget{class_agency_a9cbd4d4f5f20f6ec9e3d3088cf61f96a}\label{class_agency_a9cbd4d4f5f20f6ec9e3d3088cf61f96a}} 
-\index{Agency@{Agency}!not\+Buddy@{not\+Buddy}}
-\index{not\+Buddy@{not\+Buddy}!Agency@{Agency}}
-\subsubsection{\texorpdfstring{not\+Buddy()}{notBuddy()}}
-{\footnotesize\ttfamily bool Agency\+::not\+Buddy (\begin{DoxyParamCaption}\item[{string}]{b\+Username }\end{DoxyParamCaption})}
-
-
-
-Checks if a given username is buddy of the user using the application. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em b\+Username} & string containing the buddy username\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-bool true if the \hyperlink{class_user}{User} with that username is not a buddy, false otherwise 
-\end{DoxyReturn}
-\mbox{\Hypertarget{class_agency_a76d5990291e33a194a46c390986a668b}\label{class_agency_a76d5990291e33a194a46c390986a668b}} 
-\index{Agency@{Agency}!run\+Trip@{run\+Trip}}
-\index{run\+Trip@{run\+Trip}!Agency@{Agency}}
-\subsubsection{\texorpdfstring{run\+Trip()}{runTrip()}}
-{\footnotesize\ttfamily void Agency\+::run\+Trip (\begin{DoxyParamCaption}\item[{int}]{trip\+ID }\end{DoxyParamCaption})}
-
-
-
-Run a select trip with follow-\/up information of passengers changes, stop by stop. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em trip\+ID} & ID of the trip to run in \char`\"{}real-\/time\char`\"{} \\
-\hline
-\end{DoxyParams}
-entrada de passageiros/// \mbox{\Hypertarget{class_agency_a7ec6b058801f49850148979c1a41554a}\label{class_agency_a7ec6b058801f49850148979c1a41554a}} 
-\index{Agency@{Agency}!search\+Trip@{search\+Trip}}
-\index{search\+Trip@{search\+Trip}!Agency@{Agency}}
-\subsubsection{\texorpdfstring{search\+Trip()}{searchTrip()}}
-{\footnotesize\ttfamily vector$<$ \hyperlink{class_trip}{Trip} $>$ Agency\+::search\+Trip (\begin{DoxyParamCaption}\item[{vector$<$ string $>$}]{stop\+Codes,  }\item[{\hyperlink{class_date}{Date}}]{trip\+Date }\end{DoxyParamCaption})}
-
-
-
-Searches for a trip that fits the parameters. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em stop\+Codes} & codes for the first and last stop to search Trips for \\
-\hline
-{\em trip\+Date} & date of the requested trip\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-vector containg all the trips that satisfy the prerequesits 
-\end{DoxyReturn}
-\mbox{\Hypertarget{class_agency_a1f58c5179d80187fc0b53a6da93dee90}\label{class_agency_a1f58c5179d80187fc0b53a6da93dee90}} 
-\index{Agency@{Agency}!trade\+Car@{trade\+Car}}
-\index{trade\+Car@{trade\+Car}!Agency@{Agency}}
-\subsubsection{\texorpdfstring{trade\+Car()}{tradeCar()}}
-{\footnotesize\ttfamily void Agency\+::trade\+Car (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-
-
-function that allows a user trade his car with another user 
-
-he selects a car he was to discard, and chooses a user who its going to be the new owner \mbox{\Hypertarget{class_agency_a12c6a13fdeaaa5a2adab736313b3d180}\label{class_agency_a12c6a13fdeaaa5a2adab736313b3d180}} 
-\index{Agency@{Agency}!valid\+Password@{valid\+Password}}
-\index{valid\+Password@{valid\+Password}!Agency@{Agency}}
-\subsubsection{\texorpdfstring{valid\+Password()}{validPassword()}}
-{\footnotesize\ttfamily bool Agency\+::valid\+Password (\begin{DoxyParamCaption}\item[{int}]{pos,  }\item[{string}]{password }\end{DoxyParamCaption})}
-
-
-
-Verifies the given password is correct for the user of given position in the vector of the \hyperlink{class_agency}{Agency}. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em password} & string containing the password to verify \\
-\hline
-{\em pos} & position on the global vector of the \hyperlink{class_user}{User} trying to login\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-bool true if the password is correct, false otherwise 
-\end{DoxyReturn}
-\mbox{\Hypertarget{class_agency_a633274c6bc861317f03bf378e5286312}\label{class_agency_a633274c6bc861317f03bf378e5286312}} 
-\index{Agency@{Agency}!valid\+User@{valid\+User}}
-\index{valid\+User@{valid\+User}!Agency@{Agency}}
-\subsubsection{\texorpdfstring{valid\+User()}{validUser()}}
-{\footnotesize\ttfamily bool Agency\+::valid\+User (\begin{DoxyParamCaption}\item[{string}]{username }\end{DoxyParamCaption})}
-
-
-
-Verifies if a \hyperlink{class_user}{User} of given username exists in the app. 
-
-Functions that manage basic functionalities 
-\begin{DoxyParams}{Parameters}
-{\em username} & string containing the username to search for\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-bool true if such username exists, false otherwise 
-\end{DoxyReturn}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

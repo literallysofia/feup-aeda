@@ -5,7 +5,7 @@ var searchData=
   ['makeempty',['makeEmpty',['../class_b_s_t.html#a5582f1066a084181d6a79ec0a6e9f9f2',1,'BST']]],
   ['menuaccount',['menuAccount',['../group___agency.html#ga108fc523a3e0545820e63741982e9327',1,'Agency']]],
   ['menuaddbuddy',['menuAddBuddy',['../group___agency.html#gabbb862b2f97a318773851b4ebeb3de8a',1,'Agency']]],
-  ['menucar',['MenuCar',['../class_agency.html#a1273a762d40c0519e9382238341fa579',1,'Agency']]],
+  ['menucar',['MenuCar',['../group___agency.html#ga1273a762d40c0519e9382238341fa579',1,'Agency']]],
   ['menucreatetrip',['menuCreateTrip',['../group___agency.html#ga07c72d02ed02eac58a0624feb7fccea8',1,'Agency']]],
   ['menudisplaybuddies',['menuDisplayBuddies',['../group___agency.html#ga6ff3272c35880d3a599fe3ebb6ef3280',1,'Agency']]],
   ['menudisplayrecord',['menuDisplayRecord',['../group___agency.html#gae4890fb51527fa95db0e22780f867ecf',1,'Agency']]],

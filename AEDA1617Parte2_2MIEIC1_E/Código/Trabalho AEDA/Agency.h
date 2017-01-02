@@ -420,60 +420,45 @@ public:
 	*/
 	void saveData();
 
-	/** @name  User Data*/
-	/**@{
-	*
-	* Functions that manage User data in and out of the application
+	/**
+	* @brief Functions that manage User data in and out of the application
 	*/
 
 	void extractUsers();
 	void saveUsers();
-	/** @} end of User Data */
 
-	/** @name  Buddies Data*/
-	/**@{
-	*
-	* Functions that manage Buddies data in and out of the application
+	/**
+	* @brief Functions that manage Buddies data in and out of the application
 	*/
 
 	void extractBuddies();
 	void saveBuddies();
-	/** @} end of Buddies Data */
 
-	/** @name  Transactions Data*/
-	/**@{
-	*
-	* Functions that manage Transactions data in and out of the application
+	/**
+	* @brief Functions that manage Transactions data in and out of the application
 	*/
 
 	void extractTransactions();
 	void saveTransactions();
-	/** @} end of Transactions Data */
 
 	/**
 	* @brief Extracts stops available from file
 	*/
 	void extractStops();
 
-	/** @name  Record Data*/
-	/**@{
-	*
-	* Functions that manage Trips record data in and out of the application
+	/**
+	* @brief Functions that manage Trips record data in and out of the application
 	*/
 
 	void extractRecord();
 	void saveRecord();
-	/** @} end of Record Data */
-
-	/** @name  ActiveTrips Data*/
-	/**@{
-	*
-	* Functions that manage active trips data in and out of the application
+	
+	/**
+	* @brief Functions that manage active trips data in and out of the application
 	*/
 
 	void extractActive();
 	void saveActive();
-	/** @} end of ActiveTrips Data */
 
 	/** @} end of Data Management functions */
 
@@ -703,7 +688,6 @@ public:
 	* @brief Displays all active trips on screen
 	*/
 	void displayActiveTrips();
-
 	/** @} end of Display Functions */
 
 	/** @name  HashTable Functions*/
