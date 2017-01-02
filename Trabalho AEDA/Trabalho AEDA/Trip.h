@@ -1,6 +1,6 @@
 #pragma once
 
-/** @defgroup Trip Transaction
+/** @defgroup Trip Trip
 * @{
 *
 * Trip class declaration

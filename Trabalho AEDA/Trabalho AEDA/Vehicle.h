@@ -1,6 +1,6 @@
 #pragma once
 
-/** @defgroup Vehicle 
+/** @defgroup Vehicle Vehicle
 * @{
 *
 * Vehicle class declaration

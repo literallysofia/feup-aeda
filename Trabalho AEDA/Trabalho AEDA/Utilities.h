@@ -1,6 +1,6 @@
 #pragma once
 
-/** @defgroup Utilities Transaction
+/** @defgroup Utilities Utilities
 * @{
 *
 * Utilities class declaration

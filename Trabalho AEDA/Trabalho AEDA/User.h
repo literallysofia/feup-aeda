@@ -1,6 +1,6 @@
 #pragma once
 
-/** @defgroup User Transaction
+/** @defgroup User User
 * @{
 *
 * User class declaration
