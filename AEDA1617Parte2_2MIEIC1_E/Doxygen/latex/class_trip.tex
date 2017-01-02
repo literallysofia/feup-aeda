@@ -1,0 +1,81 @@
+\hypertarget{class_trip}{}\section{Trip Class Reference}
+\label{class_trip}\index{Trip@{Trip}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group___trip_gaa67b77d0d2de622ed5eb9e9cad34db8f}{Trip} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_trip}{Trip} default constructor. \end{DoxyCompactList}\item 
+\hyperlink{group___trip_gaadf8ba70a9d5aa210149b5162e402512}{Trip} (int ID, int driver, vector$<$ \hyperlink{class_stop}{Stop} $>$ stops, \hyperlink{class_date}{Date} date, \hyperlink{class_hour}{Hour} start, \hyperlink{class_hour}{Hour} end)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_trip}{Trip} constructor from individual parameters. \end{DoxyCompactList}\item 
+\hyperlink{group___trip_ga2376daed3b03469163782ef0d0533d52}{$\sim$\+Trip} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_trip}{Trip} destructor. \end{DoxyCompactList}\item 
+void \hyperlink{group___trip_ga6ae6134652b644fa63bf267b956f1e75}{save} (ofstream \&out) const
+\begin{DoxyCompactList}\small\item\em Writes object\textquotesingle{}s information into file. \end{DoxyCompactList}\item 
+void \hyperlink{group___trip_gafcf569c0a9d6e5a47134f7e9dd62334a}{save\+AT} (ofstream \&out) const
+\begin{DoxyCompactList}\small\item\em Writes object\textquotesingle{}s information into file (only for active trips, to remain in the program for next use) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{Indent}\textbf{ Basic Class Functions}\par
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{group___trip_gabc996cddbc65b41987dd8d4d9776c729}{get\+Driver} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s driver. \end{DoxyCompactList}\item 
+int \hyperlink{group___trip_ga61fea247b075bfac3f6115da4bd56ef5}{get\+ID} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s ID. \end{DoxyCompactList}\item 
+vector$<$ \hyperlink{class_stop}{Stop} $>$ \hyperlink{group___trip_gae081fb958af544c9cad9002d5696fb33}{get\+Stops} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s vector of stops. \end{DoxyCompactList}\item 
+\hyperlink{class_date}{Date} \hyperlink{group___trip_ga322346fb52d53fb0a94819059916d0fe}{get\+Date} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s \hyperlink{class_date}{Date}. \end{DoxyCompactList}\item 
+\hyperlink{class_hour}{Hour} \hyperlink{group___trip_ga447efbf91bd4842daadac85d2bac4b9e}{get\+Start} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s starting hour. \end{DoxyCompactList}\item 
+\hyperlink{class_hour}{Hour} \hyperlink{group___trip_ga6ed6b87b4206efe21fe2c6744c73061b}{get\+End} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s estimated finishing hour. \end{DoxyCompactList}\item 
+string \hyperlink{group___trip_gaf63e96a9b31ad6def658944bc6a9f327}{get\+Origin} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s origin stop. \end{DoxyCompactList}\item 
+string \hyperlink{group___trip_ga576ad0d4c7a723aa4b2d12ebdd4eec99}{get\+Destination} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s destination stop. \end{DoxyCompactList}\item 
+void \hyperlink{group___trip_ga2c5c0c0315b210154ba190a5470ec110}{set\+Driver} (int id)
+\begin{DoxyCompactList}\small\item\em Sets object\textquotesingle{}s driver id. \end{DoxyCompactList}\item 
+void \hyperlink{group___trip_ga26abc8edc0cb1f5c2eb1b6e292152701}{set\+Date} (\hyperlink{class_date}{Date} d)
+\begin{DoxyCompactList}\small\item\em Sets object\textquotesingle{}s \hyperlink{class_date}{Date}. \end{DoxyCompactList}\item 
+void \hyperlink{group___trip_gaa294f1f8844c2b47676e0e985d81b2a0}{set\+Stops} (int pos, int user\+ID)
+\begin{DoxyCompactList}\small\item\em Changes object\textquotesingle{}s stops ir order to add a passenger. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Private Attributes}
+\begin{Indent}\textbf{ Trip data-\/members}\par
+\begin{DoxyCompactItemize}
+\item 
+int {\bfseries ID}
+\item 
+int {\bfseries driver}
+\item 
+vector$<$ \hyperlink{class_stop}{Stop} $>$ {\bfseries stops}
+\item 
+\hyperlink{class_date}{Date} {\bfseries date}
+\item 
+\hyperlink{class_hour}{Hour} {\bfseries start\+Time}
+\item 
+\hyperlink{class_hour}{Hour} {\bfseries end\+Time}
+\item 
+priority\+\_\+queue$<$ \hyperlink{class_candidate_trip}{Candidate\+Trip} $>$ {\bfseries candidate\+Queue}
+\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Trip Operators Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{group___trip_ga1462791c70b237e595244b16e086850f}{operator==} (const \hyperlink{class_trip}{Trip} t) const
+\begin{DoxyCompactList}\small\item\em Basi operator that verifies if two diferent objects of the class \hyperlink{class_trip}{Trip} have equal data members. \end{DoxyCompactList}\item 
+priority\+\_\+queue$<$ \hyperlink{class_candidate_trip}{Candidate\+Trip} $>$ \hyperlink{group___trip_ga1c016b992e17387a25ec9f7e545a6594}{get\+Candidate\+Queue} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s candidates priority queuu. \end{DoxyCompactList}\item 
+bool \hyperlink{group___trip_gaa704cf099858e8de479f6fdd6229008f}{is\+In\+Queue} (int id)
+\begin{DoxyCompactList}\small\item\em verifyes if the user is in this trip queue \end{DoxyCompactList}\item 
+void \hyperlink{group___trip_ga6879d39109d9b024461c9edb58c8b1dd}{add\+Candidate} (\hyperlink{class_candidate_trip}{Candidate\+Trip} ct)
+\begin{DoxyCompactList}\small\item\em adds elements to the priority queue \end{DoxyCompactList}\item 
+void \hyperlink{group___trip_ga5c0fbf9c2320dc4799896295788eff9e}{remove\+Candidate} (int id)
+\begin{DoxyCompactList}\small\item\em removes user from the queue \end{DoxyCompactList}\item 
+ostream \& \hyperlink{group___trip_gaeae00f4e739b064d8261c91d62cde34a}{operator$<$$<$} (ostream \&out, const \hyperlink{class_trip}{Trip} \&t)
+\begin{DoxyCompactList}\small\item\em Writes to ostream the information of a object of class \hyperlink{class_trip}{Trip}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+E\+:/feup-\/aeda/\+A\+E\+D\+A1617\+Parte2\+\_\+2\+M\+I\+E\+I\+C1\+\_\+\+E/\+Código/\+Trabalho A\+E\+D\+A/Trip.\+h\item 
+E\+:/feup-\/aeda/\+A\+E\+D\+A1617\+Parte2\+\_\+2\+M\+I\+E\+I\+C1\+\_\+\+E/\+Código/\+Trabalho A\+E\+D\+A/Trip.\+cpp\end{DoxyCompactItemize}

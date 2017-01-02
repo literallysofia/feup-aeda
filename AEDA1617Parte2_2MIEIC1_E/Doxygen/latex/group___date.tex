@@ -1,0 +1,438 @@
+\hypertarget{group___date}{}\section{Date}
+\label{group___date}\index{Date@{Date}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_date}{Date}
+\item 
+class \hyperlink{class_stop}{Stop}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___date_ga4e59ed4ba66eec61c27460c5d09fa1bd}\label{group___date_ga4e59ed4ba66eec61c27460c5d09fa1bd}} 
+\hyperlink{group___date_ga4e59ed4ba66eec61c27460c5d09fa1bd}{Date\+::\+Date} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_date}{Date} default constructor. \end{DoxyCompactList}\item 
+\hyperlink{group___date_ga5532efafed41fd5f8e013a61313200dc}{Date\+::\+Date} (string date)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_date}{Date} constructor from string. \end{DoxyCompactList}\item 
+\hyperlink{group___date_gab1ad19969fa570605a6b0cd32b0da822}{Date\+::\+Date} (int day, int month, int year)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_date}{Date} constructor from individual integers. \end{DoxyCompactList}\item 
+int \hyperlink{group___date_ga9168133cb290c4f378699037ef7b5d4a}{Date\+::days\+Between} (\hyperlink{class_date}{Date} \&other)
+\begin{DoxyCompactList}\small\item\em Calculates the number of days between the object calling the function and other of same class type \hyperlink{class_date}{Date}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___date_gac47ebbacb1a76c4e7c1f55ca9072a640}\label{group___date_gac47ebbacb1a76c4e7c1f55ca9072a640}} 
+void \hyperlink{group___date_gac47ebbacb1a76c4e7c1f55ca9072a640}{Date\+::set\+Current} ()
+\begin{DoxyCompactList}\small\item\em Sets object to be the current system\textquotesingle{}s date. \end{DoxyCompactList}\item 
+bool \hyperlink{group___date_gac7a8c7b77f99b162a931199464c1bedc}{Date\+::valid} () const
+\begin{DoxyCompactList}\small\item\em Checks if the object of class \hyperlink{class_date}{Date} is valid by evaluating it\textquotesingle{}s private data on logical validity in the real-\/world. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___date_gab8870f949c69cda03c4055524ed13c31}\label{group___date_gab8870f949c69cda03c4055524ed13c31}} 
+\hyperlink{group___date_gab8870f949c69cda03c4055524ed13c31}{Stop\+::\+Stop} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_stop}{Stop} default constructor. \end{DoxyCompactList}\item 
+\hyperlink{group___date_gaa89c250884ae1407ac8647a8a3a58995}{Stop\+::\+Stop} (string \hyperlink{group___date_ga5a0dddd108225fd437be86eed7b3a3ef}{code}, int seats)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_date}{Date} constructor from individual parameters. \end{DoxyCompactList}\item 
+\hyperlink{group___date_ga843a7424de0129e7f6f066d2f8f1d1bc}{Stop\+::\+Stop} (string \hyperlink{group___date_ga5a0dddd108225fd437be86eed7b3a3ef}{code}, int seats, vector$<$ int $>$ vpass)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_date}{Date} constructor from individual parameters. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___date_ga24e85edfa98a7a0212136679b6fad6d2}\label{group___date_ga24e85edfa98a7a0212136679b6fad6d2}} 
+\hyperlink{group___date_ga24e85edfa98a7a0212136679b6fad6d2}{Stop\+::$\sim$\+Stop} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_stop}{Stop} default destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Date data-\/members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___date_ga5b192adcabf2b2871e3f0b76c1ec1601}\label{group___date_ga5b192adcabf2b2871e3f0b76c1ec1601}} 
+int {\bfseries Date\+::day}
+\item 
+\mbox{\Hypertarget{group___date_ga533843e07c6ac8d19fee9b16f5336ba2}\label{group___date_ga533843e07c6ac8d19fee9b16f5336ba2}} 
+int {\bfseries Date\+::month}
+\item 
+\mbox{\Hypertarget{group___date_ga3eeced2ed56bc95d56782b9e738db8ea}\label{group___date_ga3eeced2ed56bc95d56782b9e738db8ea}} 
+int {\bfseries Date\+::year}
+\end{DoxyCompactItemize}
+\subsection*{Basic Class Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{group___date_ga0f253815240e70f4c39cb93cc68bd3f4}{Date\+::get\+Day} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s day. \end{DoxyCompactList}\item 
+int \hyperlink{group___date_ga332f6e3a2f6a40d73742b6dab7be0f64}{Date\+::get\+Month} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s month. \end{DoxyCompactList}\item 
+int \hyperlink{group___date_ga8b0869f34c2b38d108ab83ee2e770e5d}{Date\+::get\+Year} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s year. \end{DoxyCompactList}\item 
+void \hyperlink{group___date_ga2f97b9d1ac5ef0ef6b6cab3335c5303d}{Date\+::set\+Day} (int day)
+\begin{DoxyCompactList}\small\item\em Sets object\textquotesingle{}s day. \end{DoxyCompactList}\item 
+void \hyperlink{group___date_ga23aa56014dd581d691607df5d4474f64}{Date\+::set\+Month} (int month)
+\begin{DoxyCompactList}\small\item\em Sets object\textquotesingle{}s month. \end{DoxyCompactList}\item 
+void \hyperlink{group___date_ga895c4ae9868e43577cf59d9c679d7a71}{Date\+::set\+Year} (int year)
+\begin{DoxyCompactList}\small\item\em Sets object\textquotesingle{}s year. \end{DoxyCompactList}\item 
+string \hyperlink{group___date_gadebdb45904dc2fbfacc66aa7528e0c04}{Date\+::to\+String} ()
+\begin{DoxyCompactList}\small\item\em Converts object of type \hyperlink{class_date}{Date} to string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Date Operators Functions}
+\begin{DoxyCompactItemize}
+\item 
+ostream \& \hyperlink{group___date_ga277b4ff7a5bea855f71b2b7f941fbc2f}{Date\+::operator$<$$<$} (ostream \&out, \hyperlink{class_date}{Date} \&date)
+\begin{DoxyCompactList}\small\item\em Writes to ostream the information of a object of class \hyperlink{class_date}{Date}. \end{DoxyCompactList}\item 
+bool \hyperlink{group___date_ga532ae38442ee586783b532725767634a}{Date\+::operator$<$} (\hyperlink{class_date}{Date} \&d1, \hyperlink{class_date}{Date} \&d2)
+\begin{DoxyCompactList}\small\item\em Compares two objects of the class to check if one date if previous to the other. \end{DoxyCompactList}\item 
+bool \hyperlink{group___date_ga3d72003c210f3adc692715148aa7cf26}{Date\+::operator$>$} (\hyperlink{class_date}{Date} \&d1, \hyperlink{class_date}{Date} \&d2)
+\begin{DoxyCompactList}\small\item\em Compares two objects of the class to check if one date if after the other. \end{DoxyCompactList}\item 
+bool \hyperlink{group___date_gaa932959bdd56052bc683d29b8748898f}{Date\+::operator==} (\hyperlink{class_date}{Date} \&d1, \hyperlink{class_date}{Date} \&d2)
+\begin{DoxyCompactList}\small\item\em Compares two objects of the class to check if they are the same date. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Stop data-\/members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___date_ga5a0dddd108225fd437be86eed7b3a3ef}\label{group___date_ga5a0dddd108225fd437be86eed7b3a3ef}} 
+string \hyperlink{group___date_ga5a0dddd108225fd437be86eed7b3a3ef}{Stop\+::code}
+\begin{DoxyCompactList}\small\item\em string of 3 letters that represents the code of a stop \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___date_ga459aba5bcfa17889d2f292f3f45528bc}\label{group___date_ga459aba5bcfa17889d2f292f3f45528bc}} 
+int \hyperlink{group___date_ga459aba5bcfa17889d2f292f3f45528bc}{Stop\+::available\+Seats}
+\begin{DoxyCompactList}\small\item\em Number of available seats at a stop. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___date_ga2886c8f28932f3884ba3e4f741e7ec91}\label{group___date_ga2886c8f28932f3884ba3e4f741e7ec91}} 
+vector$<$ int $>$ \hyperlink{group___date_ga2886c8f28932f3884ba3e4f741e7ec91}{Stop\+::passengers}
+\begin{DoxyCompactList}\small\item\em vector containing the I\+Ds of the passengers present at that stop \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Basic Class Functions}
+\begin{DoxyCompactItemize}
+\item 
+string \hyperlink{group___date_ga4c0a7bb72ca7a054a394d13fc8cd9bde}{Stop\+::get\+Code} () const
+\begin{DoxyCompactList}\small\item\em Retrieves the object\textquotesingle{}s code. \end{DoxyCompactList}\item 
+int \hyperlink{group___date_ga41d42147d1210ce72f15e31a8414e0ad}{Stop\+::get\+Available\+Seats} () const
+\begin{DoxyCompactList}\small\item\em Retrieves the object\textquotesingle{}s number of available seats. \end{DoxyCompactList}\item 
+vector$<$ int $>$ \hyperlink{group___date_gabd197ec53b1215bed050d879d463e987}{Stop\+::get\+Passengers} () const
+\begin{DoxyCompactList}\small\item\em Retrieves the object\textquotesingle{}s vector of passengers I\+Ds. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___date_ga491669933a1b091fa543591e9fd992aa}\label{group___date_ga491669933a1b091fa543591e9fd992aa}} 
+void \hyperlink{group___date_ga491669933a1b091fa543591e9fd992aa}{Stop\+::dec\+Available\+Seats} ()
+\begin{DoxyCompactList}\small\item\em Decrements the object\textquotesingle{}s number of available seats by 1. \end{DoxyCompactList}\item 
+void \hyperlink{group___date_gac636e3c0c1e2794575bd3db14b5ee363}{Stop\+::add\+Passenger} (int id)
+\begin{DoxyCompactList}\small\item\em Adds the ID of a passenger to the object\textquotesingle{}s vector of I\+Ds. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{class_date}{Date} class declaration 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group___date_gac636e3c0c1e2794575bd3db14b5ee363}\label{group___date_gac636e3c0c1e2794575bd3db14b5ee363}} 
+\index{Date@{Date}!add\+Passenger@{add\+Passenger}}
+\index{add\+Passenger@{add\+Passenger}!Date@{Date}}
+\subsubsection{\texorpdfstring{add\+Passenger()}{addPassenger()}}
+{\footnotesize\ttfamily void Stop\+::add\+Passenger (\begin{DoxyParamCaption}\item[{int}]{id }\end{DoxyParamCaption})}
+
+
+
+Adds the ID of a passenger to the object\textquotesingle{}s vector of I\+Ds. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & ID of the passenger to push\+\_\+back to the vector \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___date_ga5532efafed41fd5f8e013a61313200dc}\label{group___date_ga5532efafed41fd5f8e013a61313200dc}} 
+\index{Date@{Date}!Date@{Date}}
+\index{Date@{Date}!Date@{Date}}
+\subsubsection{\texorpdfstring{Date()}{Date()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Date\+::\+Date (\begin{DoxyParamCaption}\item[{string}]{date }\end{DoxyParamCaption})}
+
+
+
+\hyperlink{class_date}{Date} constructor from string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em date} & string in the dd/mm/yyyy format \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___date_gab1ad19969fa570605a6b0cd32b0da822}\label{group___date_gab1ad19969fa570605a6b0cd32b0da822}} 
+\index{Date@{Date}!Date@{Date}}
+\index{Date@{Date}!Date@{Date}}
+\subsubsection{\texorpdfstring{Date()}{Date()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Date\+::\+Date (\begin{DoxyParamCaption}\item[{int}]{day,  }\item[{int}]{month,  }\item[{int}]{year }\end{DoxyParamCaption})}
+
+
+
+\hyperlink{class_date}{Date} constructor from individual integers. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em day} & day to set \\
+\hline
+{\em month} & month to set \\
+\hline
+{\em year} & year to set \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___date_ga9168133cb290c4f378699037ef7b5d4a}\label{group___date_ga9168133cb290c4f378699037ef7b5d4a}} 
+\index{Date@{Date}!days\+Between@{days\+Between}}
+\index{days\+Between@{days\+Between}!Date@{Date}}
+\subsubsection{\texorpdfstring{days\+Between()}{daysBetween()}}
+{\footnotesize\ttfamily int Date\+::days\+Between (\begin{DoxyParamCaption}\item[{\hyperlink{class_date}{Date} \&}]{other }\end{DoxyParamCaption})}
+
+
+
+Calculates the number of days between the object calling the function and other of same class type \hyperlink{class_date}{Date}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & object to calculate numbers of days between\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+number of days between the dates 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___date_ga41d42147d1210ce72f15e31a8414e0ad}\label{group___date_ga41d42147d1210ce72f15e31a8414e0ad}} 
+\index{Date@{Date}!get\+Available\+Seats@{get\+Available\+Seats}}
+\index{get\+Available\+Seats@{get\+Available\+Seats}!Date@{Date}}
+\subsubsection{\texorpdfstring{get\+Available\+Seats()}{getAvailableSeats()}}
+{\footnotesize\ttfamily int Stop\+::get\+Available\+Seats (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Retrieves the object\textquotesingle{}s number of available seats. 
+
+\begin{DoxyReturn}{Returns}
+int number of seats 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___date_ga4c0a7bb72ca7a054a394d13fc8cd9bde}\label{group___date_ga4c0a7bb72ca7a054a394d13fc8cd9bde}} 
+\index{Date@{Date}!get\+Code@{get\+Code}}
+\index{get\+Code@{get\+Code}!Date@{Date}}
+\subsubsection{\texorpdfstring{get\+Code()}{getCode()}}
+{\footnotesize\ttfamily string Stop\+::get\+Code (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Retrieves the object\textquotesingle{}s code. 
+
+Functions that perform basic class functionality \begin{DoxyReturn}{Returns}
+code of the object 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___date_ga0f253815240e70f4c39cb93cc68bd3f4}\label{group___date_ga0f253815240e70f4c39cb93cc68bd3f4}} 
+\index{Date@{Date}!get\+Day@{get\+Day}}
+\index{get\+Day@{get\+Day}!Date@{Date}}
+\subsubsection{\texorpdfstring{get\+Day()}{getDay()}}
+{\footnotesize\ttfamily int Date\+::get\+Day (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Retrieves object\textquotesingle{}s day. 
+
+Functions that perform basic class functionality \begin{DoxyReturn}{Returns}
+int day 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___date_ga332f6e3a2f6a40d73742b6dab7be0f64}\label{group___date_ga332f6e3a2f6a40d73742b6dab7be0f64}} 
+\index{Date@{Date}!get\+Month@{get\+Month}}
+\index{get\+Month@{get\+Month}!Date@{Date}}
+\subsubsection{\texorpdfstring{get\+Month()}{getMonth()}}
+{\footnotesize\ttfamily int Date\+::get\+Month (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Retrieves object\textquotesingle{}s month. 
+
+\begin{DoxyReturn}{Returns}
+int month 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___date_gabd197ec53b1215bed050d879d463e987}\label{group___date_gabd197ec53b1215bed050d879d463e987}} 
+\index{Date@{Date}!get\+Passengers@{get\+Passengers}}
+\index{get\+Passengers@{get\+Passengers}!Date@{Date}}
+\subsubsection{\texorpdfstring{get\+Passengers()}{getPassengers()}}
+{\footnotesize\ttfamily vector$<$ int $>$ Stop\+::get\+Passengers (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Retrieves the object\textquotesingle{}s vector of passengers I\+Ds. 
+
+\begin{DoxyReturn}{Returns}
+vector of the passengers I\+Ds 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___date_ga8b0869f34c2b38d108ab83ee2e770e5d}\label{group___date_ga8b0869f34c2b38d108ab83ee2e770e5d}} 
+\index{Date@{Date}!get\+Year@{get\+Year}}
+\index{get\+Year@{get\+Year}!Date@{Date}}
+\subsubsection{\texorpdfstring{get\+Year()}{getYear()}}
+{\footnotesize\ttfamily int Date\+::get\+Year (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Retrieves object\textquotesingle{}s year. 
+
+\begin{DoxyReturn}{Returns}
+int year 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___date_ga2f97b9d1ac5ef0ef6b6cab3335c5303d}\label{group___date_ga2f97b9d1ac5ef0ef6b6cab3335c5303d}} 
+\index{Date@{Date}!set\+Day@{set\+Day}}
+\index{set\+Day@{set\+Day}!Date@{Date}}
+\subsubsection{\texorpdfstring{set\+Day()}{setDay()}}
+{\footnotesize\ttfamily void Date\+::set\+Day (\begin{DoxyParamCaption}\item[{int}]{day }\end{DoxyParamCaption})}
+
+
+
+Sets object\textquotesingle{}s day. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em day} & to set to \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___date_ga23aa56014dd581d691607df5d4474f64}\label{group___date_ga23aa56014dd581d691607df5d4474f64}} 
+\index{Date@{Date}!set\+Month@{set\+Month}}
+\index{set\+Month@{set\+Month}!Date@{Date}}
+\subsubsection{\texorpdfstring{set\+Month()}{setMonth()}}
+{\footnotesize\ttfamily void Date\+::set\+Month (\begin{DoxyParamCaption}\item[{int}]{month }\end{DoxyParamCaption})}
+
+
+
+Sets object\textquotesingle{}s month. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em month} & to set to \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___date_ga895c4ae9868e43577cf59d9c679d7a71}\label{group___date_ga895c4ae9868e43577cf59d9c679d7a71}} 
+\index{Date@{Date}!set\+Year@{set\+Year}}
+\index{set\+Year@{set\+Year}!Date@{Date}}
+\subsubsection{\texorpdfstring{set\+Year()}{setYear()}}
+{\footnotesize\ttfamily void Date\+::set\+Year (\begin{DoxyParamCaption}\item[{int}]{year }\end{DoxyParamCaption})}
+
+
+
+Sets object\textquotesingle{}s year. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em year} & to set to \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___date_gaa89c250884ae1407ac8647a8a3a58995}\label{group___date_gaa89c250884ae1407ac8647a8a3a58995}} 
+\index{Date@{Date}!Stop@{Stop}}
+\index{Stop@{Stop}!Date@{Date}}
+\subsubsection{\texorpdfstring{Stop()}{Stop()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Stop\+::\+Stop (\begin{DoxyParamCaption}\item[{string}]{code,  }\item[{int}]{seats }\end{DoxyParamCaption})}
+
+
+
+\hyperlink{class_date}{Date} constructor from individual parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em code} & to set \\
+\hline
+{\em seats} & to set \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___date_ga843a7424de0129e7f6f066d2f8f1d1bc}\label{group___date_ga843a7424de0129e7f6f066d2f8f1d1bc}} 
+\index{Date@{Date}!Stop@{Stop}}
+\index{Stop@{Stop}!Date@{Date}}
+\subsubsection{\texorpdfstring{Stop()}{Stop()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Stop\+::\+Stop (\begin{DoxyParamCaption}\item[{string}]{code,  }\item[{int}]{seats,  }\item[{vector$<$ int $>$}]{vpass }\end{DoxyParamCaption})}
+
+
+
+\hyperlink{class_date}{Date} constructor from individual parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em code} & to set \\
+\hline
+{\em seats} & to set \\
+\hline
+{\em vpass} & vector containing I\+Ds of passengers to set \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___date_gadebdb45904dc2fbfacc66aa7528e0c04}\label{group___date_gadebdb45904dc2fbfacc66aa7528e0c04}} 
+\index{Date@{Date}!to\+String@{to\+String}}
+\index{to\+String@{to\+String}!Date@{Date}}
+\subsubsection{\texorpdfstring{to\+String()}{toString()}}
+{\footnotesize\ttfamily string Date\+::to\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Converts object of type \hyperlink{class_date}{Date} to string. 
+
+\begin{DoxyReturn}{Returns}
+string in the format dd/mm/yyyy 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___date_gac7a8c7b77f99b162a931199464c1bedc}\label{group___date_gac7a8c7b77f99b162a931199464c1bedc}} 
+\index{Date@{Date}!valid@{valid}}
+\index{valid@{valid}!Date@{Date}}
+\subsubsection{\texorpdfstring{valid()}{valid()}}
+{\footnotesize\ttfamily bool Date\+::valid (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Checks if the object of class \hyperlink{class_date}{Date} is valid by evaluating it\textquotesingle{}s private data on logical validity in the real-\/world. 
+
+\begin{DoxyReturn}{Returns}
+bool true if valid members, false otherwise 
+\end{DoxyReturn}
+
+
+\subsection{Friends}
+\mbox{\Hypertarget{group___date_ga532ae38442ee586783b532725767634a}\label{group___date_ga532ae38442ee586783b532725767634a}} 
+\index{Date@{Date}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!Date@{Date}}
+\subsubsection{\texorpdfstring{operator$<$}{operator<}}
+{\footnotesize\ttfamily bool operator$<$ (\begin{DoxyParamCaption}\item[{\hyperlink{class_date}{Date} \&}]{d1,  }\item[{\hyperlink{class_date}{Date} \&}]{d2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Compares two objects of the class to check if one date if previous to the other. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em d1} & object we want to check if is previous to the other \\
+\hline
+{\em d2} & object for comparison\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true first object is previous, false otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___date_ga277b4ff7a5bea855f71b2b7f941fbc2f}\label{group___date_ga277b4ff7a5bea855f71b2b7f941fbc2f}} 
+\index{Date@{Date}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!Date@{Date}}
+\subsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{ostream \&}]{out,  }\item[{\hyperlink{class_date}{Date} \&}]{date }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Writes to ostream the information of a object of class \hyperlink{class_date}{Date}. 
+
+Basic Operators of the class 
+\begin{DoxyParams}{Parameters}
+{\em date} & object of which we want to print the information for \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___date_gaa932959bdd56052bc683d29b8748898f}\label{group___date_gaa932959bdd56052bc683d29b8748898f}} 
+\index{Date@{Date}!operator==@{operator==}}
+\index{operator==@{operator==}!Date@{Date}}
+\subsubsection{\texorpdfstring{operator==}{operator==}}
+{\footnotesize\ttfamily bool operator== (\begin{DoxyParamCaption}\item[{\hyperlink{class_date}{Date} \&}]{d1,  }\item[{\hyperlink{class_date}{Date} \&}]{d2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Compares two objects of the class to check if they are the same date. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em d1} & object for comparison \\
+\hline
+{\em d2} & object for comparison\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true objects are equal, false otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___date_ga3d72003c210f3adc692715148aa7cf26}\label{group___date_ga3d72003c210f3adc692715148aa7cf26}} 
+\index{Date@{Date}!operator$>$@{operator$>$}}
+\index{operator$>$@{operator$>$}!Date@{Date}}
+\subsubsection{\texorpdfstring{operator$>$}{operator>}}
+{\footnotesize\ttfamily bool operator$>$ (\begin{DoxyParamCaption}\item[{\hyperlink{class_date}{Date} \&}]{d1,  }\item[{\hyperlink{class_date}{Date} \&}]{d2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Compares two objects of the class to check if one date if after the other. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em d1} & object we want to check if is after the other \\
+\hline
+{\em d2} & object for comparison\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true first object is after, false otherwise 
+\end{DoxyReturn}

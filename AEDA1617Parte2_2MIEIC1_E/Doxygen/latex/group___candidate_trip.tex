@@ -1,0 +1,175 @@
+\hypertarget{group___candidate_trip}{}\section{Candidate\+Trip}
+\label{group___candidate_trip}\index{Candidate\+Trip@{Candidate\+Trip}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_candidate_trip}{Candidate\+Trip}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group___candidate_trip_gad9ecdfcf0d01c7d88a92a132a7f3bc67}{Candidate\+Trip\+::\+Candidate\+Trip} (\hyperlink{class_user}{User} $\ast$u, \hyperlink{class_user}{User} $\ast$d, float dist, string IS, string ES)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_candidate_trip}{Candidate\+Trip} constructor from individual parameters. \end{DoxyCompactList}\item 
+bool \hyperlink{group___candidate_trip_ga5857725c938706a05eddef0102bf9456}{Candidate\+Trip\+::are\+Buddies} () const
+\begin{DoxyCompactList}\small\item\em Verifies if the driver and the passenger in this object are buddies. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Candidate\+Trip data-\/members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___candidate_trip_ga077aa0bd535c7d0f9b3a75128e532d9f}\label{group___candidate_trip_ga077aa0bd535c7d0f9b3a75128e532d9f}} 
+\hyperlink{class_user}{User} $\ast$ {\bfseries Candidate\+Trip\+::passanger}
+\item 
+\mbox{\Hypertarget{group___candidate_trip_ga9ab3832a411c7521a0ca2d13addd2c73}\label{group___candidate_trip_ga9ab3832a411c7521a0ca2d13addd2c73}} 
+\hyperlink{class_user}{User} $\ast$ {\bfseries Candidate\+Trip\+::driver}
+\item 
+\mbox{\Hypertarget{group___candidate_trip_ga25c418f6847fffb3172af3e08a1f9ffb}\label{group___candidate_trip_ga25c418f6847fffb3172af3e08a1f9ffb}} 
+float {\bfseries Candidate\+Trip\+::distance}
+\item 
+\mbox{\Hypertarget{group___candidate_trip_gabe433e5b373a047b9e8e25e76735faf9}\label{group___candidate_trip_gabe433e5b373a047b9e8e25e76735faf9}} 
+string {\bfseries Candidate\+Trip\+::init\+Stop}
+\item 
+\mbox{\Hypertarget{group___candidate_trip_ga3b4924a6a48b125dcdaf430e94944efb}\label{group___candidate_trip_ga3b4924a6a48b125dcdaf430e94944efb}} 
+string {\bfseries Candidate\+Trip\+::end\+Stop}
+\end{DoxyCompactItemize}
+\subsection*{Basic Class Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_user}{User} $\ast$ \hyperlink{group___candidate_trip_gad205286835f81da2cd236be0b413cbcb}{Candidate\+Trip\+::get\+Passanger} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s passenger. \end{DoxyCompactList}\item 
+\hyperlink{class_user}{User} $\ast$ \hyperlink{group___candidate_trip_ga0e97bd4bb576b9d891d69b3d4899387d}{Candidate\+Trip\+::get\+Driver} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s driver. \end{DoxyCompactList}\item 
+float \hyperlink{group___candidate_trip_ga383245eac8a45bbea1ff7b6eb4b8c2bd}{Candidate\+Trip\+::get\+Distance} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s distance. \end{DoxyCompactList}\item 
+string \hyperlink{group___candidate_trip_ga1fd998715e8a0c2ee6d28ab10c3fc3bf}{Candidate\+Trip\+::get\+Init\+Stop} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s first stop. \end{DoxyCompactList}\item 
+string \hyperlink{group___candidate_trip_ga927733e7848429732fa14994cc837f2d}{Candidate\+Trip\+::get\+End\+Stop} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s last stop. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Candidate\+Trip Operators Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{group___candidate_trip_gafa6782199d3dbf1f72509bd201516889}{Candidate\+Trip\+::operator$<$} (const \hyperlink{class_candidate_trip}{Candidate\+Trip} \&ct1) const
+\begin{DoxyCompactList}\small\item\em Compares two objects of the class to check if one is less than the other comparing if buddies and the distance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{class_candidate_trip}{Candidate\+Trip} class declaration 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group___candidate_trip_ga5857725c938706a05eddef0102bf9456}\label{group___candidate_trip_ga5857725c938706a05eddef0102bf9456}} 
+\index{Candidate\+Trip@{Candidate\+Trip}!are\+Buddies@{are\+Buddies}}
+\index{are\+Buddies@{are\+Buddies}!Candidate\+Trip@{Candidate\+Trip}}
+\subsubsection{\texorpdfstring{are\+Buddies()}{areBuddies()}}
+{\footnotesize\ttfamily bool Candidate\+Trip\+::are\+Buddies (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Verifies if the driver and the passenger in this object are buddies. 
+
+\begin{DoxyReturn}{Returns}
+bool true if the password they are buddies, false if they aren\textquotesingle{}t 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___candidate_trip_gad9ecdfcf0d01c7d88a92a132a7f3bc67}\label{group___candidate_trip_gad9ecdfcf0d01c7d88a92a132a7f3bc67}} 
+\index{Candidate\+Trip@{Candidate\+Trip}!Candidate\+Trip@{Candidate\+Trip}}
+\index{Candidate\+Trip@{Candidate\+Trip}!Candidate\+Trip@{Candidate\+Trip}}
+\subsubsection{\texorpdfstring{Candidate\+Trip()}{CandidateTrip()}}
+{\footnotesize\ttfamily Candidate\+Trip\+::\+Candidate\+Trip (\begin{DoxyParamCaption}\item[{\hyperlink{class_user}{User} $\ast$}]{u,  }\item[{\hyperlink{class_user}{User} $\ast$}]{d,  }\item[{float}]{dist,  }\item[{string}]{IS,  }\item[{string}]{ES }\end{DoxyParamCaption})}
+
+
+
+\hyperlink{class_candidate_trip}{Candidate\+Trip} constructor from individual parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em passenger} & pointer \\
+\hline
+{\em driver} & pointer \\
+\hline
+{\em distance} & from the first stop of the passenger to the first stop of the driver \\
+\hline
+{\em code} & of the first stop of the passneger \\
+\hline
+{\em code} & of the last stop of the passenger \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___candidate_trip_ga383245eac8a45bbea1ff7b6eb4b8c2bd}\label{group___candidate_trip_ga383245eac8a45bbea1ff7b6eb4b8c2bd}} 
+\index{Candidate\+Trip@{Candidate\+Trip}!get\+Distance@{get\+Distance}}
+\index{get\+Distance@{get\+Distance}!Candidate\+Trip@{Candidate\+Trip}}
+\subsubsection{\texorpdfstring{get\+Distance()}{getDistance()}}
+{\footnotesize\ttfamily float Candidate\+Trip\+::get\+Distance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Retrieves object\textquotesingle{}s distance. 
+
+\begin{DoxyReturn}{Returns}
+float distance in km 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___candidate_trip_ga0e97bd4bb576b9d891d69b3d4899387d}\label{group___candidate_trip_ga0e97bd4bb576b9d891d69b3d4899387d}} 
+\index{Candidate\+Trip@{Candidate\+Trip}!get\+Driver@{get\+Driver}}
+\index{get\+Driver@{get\+Driver}!Candidate\+Trip@{Candidate\+Trip}}
+\subsubsection{\texorpdfstring{get\+Driver()}{getDriver()}}
+{\footnotesize\ttfamily \hyperlink{class_user}{User} $\ast$ Candidate\+Trip\+::get\+Driver (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Retrieves object\textquotesingle{}s driver. 
+
+\begin{DoxyReturn}{Returns}
+pointer to the driver 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___candidate_trip_ga927733e7848429732fa14994cc837f2d}\label{group___candidate_trip_ga927733e7848429732fa14994cc837f2d}} 
+\index{Candidate\+Trip@{Candidate\+Trip}!get\+End\+Stop@{get\+End\+Stop}}
+\index{get\+End\+Stop@{get\+End\+Stop}!Candidate\+Trip@{Candidate\+Trip}}
+\subsubsection{\texorpdfstring{get\+End\+Stop()}{getEndStop()}}
+{\footnotesize\ttfamily string Candidate\+Trip\+::get\+End\+Stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Retrieves object\textquotesingle{}s last stop. 
+
+\begin{DoxyReturn}{Returns}
+string of the code of the last stop 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___candidate_trip_ga1fd998715e8a0c2ee6d28ab10c3fc3bf}\label{group___candidate_trip_ga1fd998715e8a0c2ee6d28ab10c3fc3bf}} 
+\index{Candidate\+Trip@{Candidate\+Trip}!get\+Init\+Stop@{get\+Init\+Stop}}
+\index{get\+Init\+Stop@{get\+Init\+Stop}!Candidate\+Trip@{Candidate\+Trip}}
+\subsubsection{\texorpdfstring{get\+Init\+Stop()}{getInitStop()}}
+{\footnotesize\ttfamily string Candidate\+Trip\+::get\+Init\+Stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Retrieves object\textquotesingle{}s first stop. 
+
+\begin{DoxyReturn}{Returns}
+string of the code of the first stop 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___candidate_trip_gad205286835f81da2cd236be0b413cbcb}\label{group___candidate_trip_gad205286835f81da2cd236be0b413cbcb}} 
+\index{Candidate\+Trip@{Candidate\+Trip}!get\+Passanger@{get\+Passanger}}
+\index{get\+Passanger@{get\+Passanger}!Candidate\+Trip@{Candidate\+Trip}}
+\subsubsection{\texorpdfstring{get\+Passanger()}{getPassanger()}}
+{\footnotesize\ttfamily \hyperlink{class_user}{User} $\ast$ Candidate\+Trip\+::get\+Passanger (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Retrieves object\textquotesingle{}s passenger. 
+
+Functions that perform basic class functionality \begin{DoxyReturn}{Returns}
+pointer to the passenger 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___candidate_trip_gafa6782199d3dbf1f72509bd201516889}\label{group___candidate_trip_gafa6782199d3dbf1f72509bd201516889}} 
+\index{Candidate\+Trip@{Candidate\+Trip}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!Candidate\+Trip@{Candidate\+Trip}}
+\subsubsection{\texorpdfstring{operator$<$()}{operator<()}}
+{\footnotesize\ttfamily bool Candidate\+Trip\+::operator$<$ (\begin{DoxyParamCaption}\item[{const \hyperlink{class_candidate_trip}{Candidate\+Trip} \&}]{ct1 }\end{DoxyParamCaption}) const}
+
+
+
+Compares two objects of the class to check if one is less than the other comparing if buddies and the distance. 
+
+Basic Operators of the class 
+\begin{DoxyParams}{Parameters}
+{\em ct1} & object for comparison\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if object is not buddy and the distance is smaller 
+\end{DoxyReturn}

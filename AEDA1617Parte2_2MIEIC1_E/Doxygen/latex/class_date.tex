@@ -1,0 +1,65 @@
+\hypertarget{class_date}{}\section{Date Class Reference}
+\label{class_date}\index{Date@{Date}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group___date_ga4e59ed4ba66eec61c27460c5d09fa1bd}{Date} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_date}{Date} default constructor. \end{DoxyCompactList}\item 
+\hyperlink{group___date_ga5532efafed41fd5f8e013a61313200dc}{Date} (string date)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_date}{Date} constructor from string. \end{DoxyCompactList}\item 
+\hyperlink{group___date_gab1ad19969fa570605a6b0cd32b0da822}{Date} (int day, int month, int year)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_date}{Date} constructor from individual integers. \end{DoxyCompactList}\item 
+int \hyperlink{group___date_ga9168133cb290c4f378699037ef7b5d4a}{days\+Between} (\hyperlink{class_date}{Date} \&other)
+\begin{DoxyCompactList}\small\item\em Calculates the number of days between the object calling the function and other of same class type \hyperlink{class_date}{Date}. \end{DoxyCompactList}\item 
+void \hyperlink{group___date_gac47ebbacb1a76c4e7c1f55ca9072a640}{set\+Current} ()
+\begin{DoxyCompactList}\small\item\em Sets object to be the current system\textquotesingle{}s date. \end{DoxyCompactList}\item 
+bool \hyperlink{group___date_gac7a8c7b77f99b162a931199464c1bedc}{valid} () const
+\begin{DoxyCompactList}\small\item\em Checks if the object of class \hyperlink{class_date}{Date} is valid by evaluating it\textquotesingle{}s private data on logical validity in the real-\/world. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{Indent}\textbf{ Basic Class Functions}\par
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{group___date_ga0f253815240e70f4c39cb93cc68bd3f4}{get\+Day} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s day. \end{DoxyCompactList}\item 
+int \hyperlink{group___date_ga332f6e3a2f6a40d73742b6dab7be0f64}{get\+Month} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s month. \end{DoxyCompactList}\item 
+int \hyperlink{group___date_ga8b0869f34c2b38d108ab83ee2e770e5d}{get\+Year} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s year. \end{DoxyCompactList}\item 
+void \hyperlink{group___date_ga2f97b9d1ac5ef0ef6b6cab3335c5303d}{set\+Day} (int day)
+\begin{DoxyCompactList}\small\item\em Sets object\textquotesingle{}s day. \end{DoxyCompactList}\item 
+void \hyperlink{group___date_ga23aa56014dd581d691607df5d4474f64}{set\+Month} (int month)
+\begin{DoxyCompactList}\small\item\em Sets object\textquotesingle{}s month. \end{DoxyCompactList}\item 
+void \hyperlink{group___date_ga895c4ae9868e43577cf59d9c679d7a71}{set\+Year} (int year)
+\begin{DoxyCompactList}\small\item\em Sets object\textquotesingle{}s year. \end{DoxyCompactList}\item 
+string \hyperlink{group___date_gadebdb45904dc2fbfacc66aa7528e0c04}{to\+String} ()
+\begin{DoxyCompactList}\small\item\em Converts object of type \hyperlink{class_date}{Date} to string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Private Attributes}
+\begin{Indent}\textbf{ Date data-\/members}\par
+\begin{DoxyCompactItemize}
+\item 
+int {\bfseries day}
+\item 
+int {\bfseries month}
+\item 
+int {\bfseries year}
+\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Friends}
+\begin{Indent}\textbf{ Date Operators Functions}\par
+\begin{DoxyCompactItemize}
+\item 
+ostream \& \hyperlink{group___date_ga277b4ff7a5bea855f71b2b7f941fbc2f}{operator$<$$<$} (ostream \&out, \hyperlink{class_date}{Date} \&date)
+\begin{DoxyCompactList}\small\item\em Writes to ostream the information of a object of class \hyperlink{class_date}{Date}. \end{DoxyCompactList}\item 
+bool \hyperlink{group___date_ga532ae38442ee586783b532725767634a}{operator$<$} (\hyperlink{class_date}{Date} \&d1, \hyperlink{class_date}{Date} \&d2)
+\begin{DoxyCompactList}\small\item\em Compares two objects of the class to check if one date if previous to the other. \end{DoxyCompactList}\item 
+bool \hyperlink{group___date_ga3d72003c210f3adc692715148aa7cf26}{operator$>$} (\hyperlink{class_date}{Date} \&d1, \hyperlink{class_date}{Date} \&d2)
+\begin{DoxyCompactList}\small\item\em Compares two objects of the class to check if one date if after the other. \end{DoxyCompactList}\item 
+bool \hyperlink{group___date_gaa932959bdd56052bc683d29b8748898f}{operator==} (\hyperlink{class_date}{Date} \&d1, \hyperlink{class_date}{Date} \&d2)
+\begin{DoxyCompactList}\small\item\em Compares two objects of the class to check if they are the same date. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+E\+:/feup-\/aeda/\+A\+E\+D\+A1617\+Parte2\+\_\+2\+M\+I\+E\+I\+C1\+\_\+\+E/\+Código/\+Trabalho A\+E\+D\+A/Date.\+h\item 
+E\+:/feup-\/aeda/\+A\+E\+D\+A1617\+Parte2\+\_\+2\+M\+I\+E\+I\+C1\+\_\+\+E/\+Código/\+Trabalho A\+E\+D\+A/Date.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,50 @@
+\hypertarget{class_candidate_trip}{}\section{Candidate\+Trip Class Reference}
+\label{class_candidate_trip}\index{Candidate\+Trip@{Candidate\+Trip}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group___candidate_trip_gad9ecdfcf0d01c7d88a92a132a7f3bc67}{Candidate\+Trip} (\hyperlink{class_user}{User} $\ast$u, \hyperlink{class_user}{User} $\ast$d, float dist, string IS, string ES)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_candidate_trip}{Candidate\+Trip} constructor from individual parameters. \end{DoxyCompactList}\item 
+bool \hyperlink{group___candidate_trip_ga5857725c938706a05eddef0102bf9456}{are\+Buddies} () const
+\begin{DoxyCompactList}\small\item\em Verifies if the driver and the passenger in this object are buddies. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{Indent}\textbf{ Basic Class Functions}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_user}{User} $\ast$ \hyperlink{group___candidate_trip_gad205286835f81da2cd236be0b413cbcb}{get\+Passanger} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s passenger. \end{DoxyCompactList}\item 
+\hyperlink{class_user}{User} $\ast$ \hyperlink{group___candidate_trip_ga0e97bd4bb576b9d891d69b3d4899387d}{get\+Driver} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s driver. \end{DoxyCompactList}\item 
+float \hyperlink{group___candidate_trip_ga383245eac8a45bbea1ff7b6eb4b8c2bd}{get\+Distance} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s distance. \end{DoxyCompactList}\item 
+string \hyperlink{group___candidate_trip_ga1fd998715e8a0c2ee6d28ab10c3fc3bf}{get\+Init\+Stop} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s first stop. \end{DoxyCompactList}\item 
+string \hyperlink{group___candidate_trip_ga927733e7848429732fa14994cc837f2d}{get\+End\+Stop} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s last stop. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Candidate\+Trip Operators Functions}\par
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{group___candidate_trip_gafa6782199d3dbf1f72509bd201516889}{operator$<$} (const \hyperlink{class_candidate_trip}{Candidate\+Trip} \&ct1) const
+\begin{DoxyCompactList}\small\item\em Compares two objects of the class to check if one is less than the other comparing if buddies and the distance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Private Attributes}
+\begin{Indent}\textbf{ Candidate\+Trip data-\/members}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_user}{User} $\ast$ {\bfseries passanger}
+\item 
+\hyperlink{class_user}{User} $\ast$ {\bfseries driver}
+\item 
+float {\bfseries distance}
+\item 
+string {\bfseries init\+Stop}
+\item 
+string {\bfseries end\+Stop}
+\end{DoxyCompactItemize}
+\end{Indent}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+E\+:/feup-\/aeda/\+A\+E\+D\+A1617\+Parte2\+\_\+2\+M\+I\+E\+I\+C1\+\_\+\+E/\+Código/\+Trabalho A\+E\+D\+A/Candidate\+Trip.\+h\item 
+E\+:/feup-\/aeda/\+A\+E\+D\+A1617\+Parte2\+\_\+2\+M\+I\+E\+I\+C1\+\_\+\+E/\+Código/\+Trabalho A\+E\+D\+A/Candidate\+Trip.\+cpp\end{DoxyCompactItemize}

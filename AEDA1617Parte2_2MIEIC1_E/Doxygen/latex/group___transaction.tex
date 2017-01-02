@@ -1,0 +1,140 @@
+\hypertarget{group___transaction}{}\section{Transaction}
+\label{group___transaction}\index{Transaction@{Transaction}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_transaction}{Transaction}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___transaction_gab47005b855d38bc324bb79fd023baa13}\label{group___transaction_gab47005b855d38bc324bb79fd023baa13}} 
+\hyperlink{group___transaction_gab47005b855d38bc324bb79fd023baa13}{Transaction\+::\+Transaction} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_transaction}{Transaction} default constructor. \end{DoxyCompactList}\item 
+\hyperlink{group___transaction_ga6bba02c02aace16e90745fecd2e4697d}{Transaction\+::\+Transaction} (int id, \hyperlink{class_date}{Date} date, float value)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_transaction}{Transaction} constructor from individual parameters. \end{DoxyCompactList}\item 
+void \hyperlink{group___transaction_ga56b1bd622e55266bf795fb01e04e8a21}{Transaction\+::save} (ofstream \&out) const
+\begin{DoxyCompactList}\small\item\em Writes object\textquotesingle{}s information into file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Transaction data-\/members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___transaction_ga8e43580c2afbd59f46bafbd7dccb2ad0}\label{group___transaction_ga8e43580c2afbd59f46bafbd7dccb2ad0}} 
+int {\bfseries Transaction\+::id}
+\item 
+\mbox{\Hypertarget{group___transaction_ga58870d949a7719c687e350624e4f1b12}\label{group___transaction_ga58870d949a7719c687e350624e4f1b12}} 
+\hyperlink{class_date}{Date} {\bfseries Transaction\+::date}
+\item 
+\mbox{\Hypertarget{group___transaction_ga52a88fab74bd40bb7e8c9fec9cad2f4a}\label{group___transaction_ga52a88fab74bd40bb7e8c9fec9cad2f4a}} 
+float {\bfseries Transaction\+::value}
+\end{DoxyCompactItemize}
+\subsection*{Basic Class Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{group___transaction_ga73ff525f9baae732b1256533736e5052}{Transaction\+::\+Get\+Id} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s ID. \end{DoxyCompactList}\item 
+\hyperlink{class_date}{Date} \hyperlink{group___transaction_ga05b17fe71d38937648b77f964df4de5d}{Transaction\+::\+Get\+Date} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s \hyperlink{class_date}{Date}. \end{DoxyCompactList}\item 
+float \hyperlink{group___transaction_ga3dca9a51e64e6fcb07f501eb2724676d}{Transaction\+::\+Get\+Value} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Transaction Operators Functions}
+\begin{DoxyCompactItemize}
+\item 
+ostream \& \hyperlink{group___transaction_ga75af23fbc3b593013d411cf50c5a3a7a}{Transaction\+::operator$<$$<$} (ostream \&out, const \hyperlink{class_transaction}{Transaction} \&t)
+\begin{DoxyCompactList}\small\item\em Writes to ostream the information of a object of class \hyperlink{class_transaction}{Transaction}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{class_transaction}{Transaction} class declaration 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group___transaction_ga05b17fe71d38937648b77f964df4de5d}\label{group___transaction_ga05b17fe71d38937648b77f964df4de5d}} 
+\index{Transaction@{Transaction}!Get\+Date@{Get\+Date}}
+\index{Get\+Date@{Get\+Date}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{Get\+Date()}{GetDate()}}
+{\footnotesize\ttfamily \hyperlink{class_date}{Date} Transaction\+::\+Get\+Date (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Retrieves object\textquotesingle{}s \hyperlink{class_date}{Date}. 
+
+\begin{DoxyReturn}{Returns}
+\hyperlink{class_date}{Date} date 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___transaction_ga73ff525f9baae732b1256533736e5052}\label{group___transaction_ga73ff525f9baae732b1256533736e5052}} 
+\index{Transaction@{Transaction}!Get\+Id@{Get\+Id}}
+\index{Get\+Id@{Get\+Id}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{Get\+Id()}{GetId()}}
+{\footnotesize\ttfamily int Transaction\+::\+Get\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Retrieves object\textquotesingle{}s ID. 
+
+Functions that perform basic class functionality \begin{DoxyReturn}{Returns}
+int id 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___transaction_ga3dca9a51e64e6fcb07f501eb2724676d}\label{group___transaction_ga3dca9a51e64e6fcb07f501eb2724676d}} 
+\index{Transaction@{Transaction}!Get\+Value@{Get\+Value}}
+\index{Get\+Value@{Get\+Value}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{Get\+Value()}{GetValue()}}
+{\footnotesize\ttfamily float Transaction\+::\+Get\+Value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Retrieves object\textquotesingle{}s value. 
+
+\begin{DoxyReturn}{Returns}
+float value 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___transaction_ga56b1bd622e55266bf795fb01e04e8a21}\label{group___transaction_ga56b1bd622e55266bf795fb01e04e8a21}} 
+\index{Transaction@{Transaction}!save@{save}}
+\index{save@{save}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{save()}{save()}}
+{\footnotesize\ttfamily void Transaction\+::save (\begin{DoxyParamCaption}\item[{ofstream \&}]{out }\end{DoxyParamCaption}) const}
+
+
+
+Writes object\textquotesingle{}s information into file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em out} & ofstream type variable initialized to the location of the file to be written too \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___transaction_ga6bba02c02aace16e90745fecd2e4697d}\label{group___transaction_ga6bba02c02aace16e90745fecd2e4697d}} 
+\index{Transaction@{Transaction}!Transaction@{Transaction}}
+\index{Transaction@{Transaction}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{Transaction()}{Transaction()}}
+{\footnotesize\ttfamily Transaction\+::\+Transaction (\begin{DoxyParamCaption}\item[{int}]{id,  }\item[{\hyperlink{class_date}{Date}}]{date,  }\item[{float}]{value }\end{DoxyParamCaption})}
+
+
+
+\hyperlink{class_transaction}{Transaction} constructor from individual parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & to set \\
+\hline
+{\em \hyperlink{class_date}{Date}} & to set \\
+\hline
+{\em value} & year to set \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Friends}
+\mbox{\Hypertarget{group___transaction_ga75af23fbc3b593013d411cf50c5a3a7a}\label{group___transaction_ga75af23fbc3b593013d411cf50c5a3a7a}} 
+\index{Transaction@{Transaction}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{ostream \&}]{out,  }\item[{const \hyperlink{class_transaction}{Transaction} \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Writes to ostream the information of a object of class \hyperlink{class_transaction}{Transaction}. 
+
+Basic Operators of the class 
+\begin{DoxyParams}{Parameters}
+{\em \hyperlink{class_transaction}{Transaction}} & object of which we want to print the information for \\
+\hline
+\end{DoxyParams}

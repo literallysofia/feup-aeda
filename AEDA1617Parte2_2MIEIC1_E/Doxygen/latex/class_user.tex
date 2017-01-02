@@ -1,0 +1,105 @@
+\hypertarget{class_user}{}\section{User Class Reference}
+\label{class_user}\index{User@{User}}
+Inheritance diagram for User\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_user}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group___user_ga4a0137053e591fbb79d9057dd7d2283d}{User} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_user}{User} default constructor. \end{DoxyCompactList}\item 
+\hyperlink{group___user_gab4d18a829f31eae091669ac36782a396}{User} (string name)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_user}{User} constructor from individual parameter. \end{DoxyCompactList}\item 
+\hyperlink{group___user_ga4cad036bd4872821fa6c2585c8778461}{User} (int ID, string name, float balance, string username, string password, int nt, string ad, \hyperlink{class_date}{Date} lastA)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_user}{User} constructor from individual parameters. \end{DoxyCompactList}\item 
+\hyperlink{group___user_gac00b72ad64eb4149f7b21b9f5468c2b2}{$\sim$\+User} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_user}{User} destructor. \end{DoxyCompactList}\item 
+virtual float \hyperlink{group___user_gac8563338d1d8086cd5485ad8c1ed4499}{payment} ()
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s payment based on monthly trips \#. \end{DoxyCompactList}\item 
+void \hyperlink{group___user_ga72cde56f7a6c5abcf8a22dcd6fdc8449}{add\+Buddy} (\hyperlink{class_user}{User} $\ast$user)
+\begin{DoxyCompactList}\small\item\em Adds \hyperlink{class_user}{User} to vector of Buddies of the object. \end{DoxyCompactList}\item 
+void \hyperlink{group___user_gaaaa81787feebf8150cc2553e13edb8f7}{delete\+Buddies} ()
+\begin{DoxyCompactList}\small\item\em Resets object\textquotesingle{}s vector of buddies. \end{DoxyCompactList}\item 
+vector$<$ \hyperlink{class_user}{User} $\ast$ $>$ \hyperlink{group___user_ga47d6c3dccd2b1c3050fbd0f572bac6f8}{get\+Buddies} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s vector of Buddies. \end{DoxyCompactList}\item 
+bool \hyperlink{group___user_gab403e4acde558a3f968aa13b74960da5}{operator==} (const \hyperlink{class_user}{User} $\ast$u) const
+\begin{DoxyCompactList}\small\item\em Compares two objects of the class \hyperlink{class_user}{User}. \end{DoxyCompactList}\item 
+void {\bfseries set\+Password} (string password)
+\item 
+void \hyperlink{group___user_ga280617ba3ac500d59e6eb8af09dc3487}{remove\+Buddy} (int ID)
+\begin{DoxyCompactList}\small\item\em removes user as buddy of all users \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{Indent}\textbf{ Basic Class Functions}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group___user_ga0fed77d10cd142ee4112d650ec564e6b}{set\+Username} (string username)
+\begin{DoxyCompactList}\small\item\em Sets object\textquotesingle{}s username. \end{DoxyCompactList}\item 
+void \hyperlink{group___user_ga95feef2641a3141ef514a0bd52c3aaa2}{set\+ID} (int ID)
+\begin{DoxyCompactList}\small\item\em Sets object\textquotesingle{}s ID. \end{DoxyCompactList}\item 
+int \hyperlink{group___user_ga986c6f30aeac167bb5d311dd412cf604}{get\+ID} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s ID. \end{DoxyCompactList}\item 
+void \hyperlink{group___user_ga5578e73f0915b2ebf38eff4434fc340d}{set\+Last\+Access} (\hyperlink{class_date}{Date} dt)
+\begin{DoxyCompactList}\small\item\em Sets object\textquotesingle{}s last access date. \end{DoxyCompactList}\item 
+\hyperlink{class_date}{Date} \hyperlink{group___user_ga9399e8ad03d939281357fe2e1d2a0f71}{get\+Last\+Access} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s last access date. \end{DoxyCompactList}\item 
+string \hyperlink{group___user_gab9b2b5feb6bdd1582696eb6d44cee384}{get\+Name} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s name. \end{DoxyCompactList}\item 
+string \hyperlink{group___user_ga82e034043e04b2d750c654c8b2f2ce78}{get\+Username} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s username. \end{DoxyCompactList}\item 
+void \hyperlink{group___user_ga02324144fd363369f11b7aca8f117865}{set\+Adress} (string ad)
+\begin{DoxyCompactList}\small\item\em Sets object\textquotesingle{}s address. \end{DoxyCompactList}\item 
+string \hyperlink{group___user_gaef1759300db1bca3c84af6af79f00365}{get\+Address} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s address. \end{DoxyCompactList}\item 
+string \hyperlink{group___user_ga33429bdd1253091697a9c5c5e1448bee}{get\+Password} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s password. \end{DoxyCompactList}\item 
+float \hyperlink{group___user_ga713b20a844b9e70630a50dd5f1357d95}{get\+Balance} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s balance. \end{DoxyCompactList}\item 
+int \hyperlink{group___user_gadfbbdc7ea72e051b7b7b8d41c14eb846}{get\+Ntrips} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s \# of trips. \end{DoxyCompactList}\item 
+void \hyperlink{group___user_ga738dab753a5a3ba6e1315caaf4765a24}{set\+Ntrips} ()
+\begin{DoxyCompactList}\small\item\em Increments object\textquotesingle{}s \# of trips. \end{DoxyCompactList}\item 
+void \hyperlink{group___user_ga0b5d245f2e517c697493264e0a1e5642}{dec\+Ntrips} ()
+\begin{DoxyCompactList}\small\item\em Decrements object\textquotesingle{}s \# of trips. \end{DoxyCompactList}\item 
+void \hyperlink{group___user_gafe73f0b48d4aa29e9205f706a21b7068}{deposit} (float value)
+\begin{DoxyCompactList}\small\item\em Deposits a value in \hyperlink{class_user}{User}\textquotesingle{}s account. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{group___user_ga86635e817828c81ee5e18b2e802e3218}{car} () const
+\begin{DoxyCompactList}\small\item\em C\+Hecks if object is a driver. \end{DoxyCompactList}\item 
+void \hyperlink{group___user_ga6eb1d321c02d84e4bb839bc49d4ac074}{reset\+Trips} ()
+\begin{DoxyCompactList}\small\item\em Resets object\textquotesingle{}s number of monthly trips. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+ostream \& \hyperlink{group___user_ga2bb61cca08fd63cdf2841686040958b1}{operator$<$$<$} (ostream \&out, const \hyperlink{class_user}{User} $\ast$u)
+\begin{DoxyCompactList}\small\item\em Writes to ostream the information of a object of class \hyperlink{class_user}{User}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{User data-\/members}
+\begin{DoxyCompactItemize}
+\item 
+int {\bfseries ID}
+\item 
+const string {\bfseries name}
+\item 
+string {\bfseries username}
+\item 
+string {\bfseries password}
+\item 
+float {\bfseries balance}
+\item 
+int {\bfseries ntrips}
+\item 
+vector$<$ \hyperlink{class_user}{User} $\ast$ $>$ {\bfseries buddies}
+\item 
+string {\bfseries address}
+\item 
+\hyperlink{class_date}{Date} {\bfseries last\+Access}
+\item 
+static float {\bfseries maintenance\+Fee} = 10
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+E\+:/feup-\/aeda/\+A\+E\+D\+A1617\+Parte2\+\_\+2\+M\+I\+E\+I\+C1\+\_\+\+E/\+Código/\+Trabalho A\+E\+D\+A/User.\+h\item 
+E\+:/feup-\/aeda/\+A\+E\+D\+A1617\+Parte2\+\_\+2\+M\+I\+E\+I\+C1\+\_\+\+E/\+Código/\+Trabalho A\+E\+D\+A/User.\+cpp\end{DoxyCompactItemize}

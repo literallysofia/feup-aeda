@@ -1,0 +1,49 @@
+\hypertarget{class_vehicle}{}\section{Vehicle Class Reference}
+\label{class_vehicle}\index{Vehicle@{Vehicle}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group___vehicle_ga9e9c39065cec28140e97259a324f6d5a}{Vehicle} (string brand, string model, int year, \hyperlink{class_user}{User} $\ast$driver)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_vehicle}{Vehicle} constructor. \end{DoxyCompactList}\item 
+\hyperlink{group___vehicle_ga61ab140c755b8e0e824d54117cf4546f}{$\sim$\+Vehicle} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_vehicle}{Vehicle} destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{Indent}\textbf{ Basic Class Functions}\par
+\begin{DoxyCompactItemize}
+\item 
+string \hyperlink{group___vehicle_ga6d5f105e83177b3738a639e4e613218f}{get\+Brand} () const
+\begin{DoxyCompactList}\small\item\em returns the vehicle\textquotesingle{}s brand \end{DoxyCompactList}\item 
+string \hyperlink{group___vehicle_ga42379788d946d27ab81851461cb56a49}{get\+Model} () const
+\begin{DoxyCompactList}\small\item\em returns the vehicle\textquotesingle{}s model \end{DoxyCompactList}\item 
+int \hyperlink{group___vehicle_gaa3933383210a75d4c37b66d918ab1526}{get\+Year} () const
+\begin{DoxyCompactList}\small\item\em returns the vehicle\textquotesingle{}s year \end{DoxyCompactList}\item 
+\hyperlink{class_user}{User} $\ast$ \hyperlink{group___vehicle_ga8ca5c5a020a718d9c320bd4b5c034cfe}{get\+User} () const
+\begin{DoxyCompactList}\small\item\em returns the vehicle\textquotesingle{}s owner \end{DoxyCompactList}\item 
+void \hyperlink{group___vehicle_gaeea0b2b24f03a98cc6d1c5ad1c9ece73}{set\+User} (\hyperlink{class_user}{User} $\ast$d1)
+\begin{DoxyCompactList}\small\item\em Sets object\textquotesingle{}s owner. \end{DoxyCompactList}\item 
+bool \hyperlink{group___vehicle_ga3e144f33207edd2cdbabcbefea1f3269}{operator$<$} (const \hyperlink{class_vehicle}{Vehicle} \&v1) const
+\begin{DoxyCompactList}\small\item\em operator for organization of the \hyperlink{class_b_s_t}{B\+ST} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Private Attributes}
+\begin{Indent}\textbf{ Vehicle data-\/members}\par
+\begin{DoxyCompactItemize}
+\item 
+string {\bfseries brand}
+\item 
+string {\bfseries model}
+\item 
+int {\bfseries year}
+\item 
+\hyperlink{class_user}{User} $\ast$ {\bfseries driver}
+\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+ostream \& \hyperlink{group___vehicle_ga854e861646772cea9bb6222c5b03b1d4}{operator$<$$<$} (ostream \&os, const \hyperlink{class_vehicle}{Vehicle} \&v1)
+\begin{DoxyCompactList}\small\item\em operator for display of a vehicle \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+E\+:/feup-\/aeda/\+A\+E\+D\+A1617\+Parte2\+\_\+2\+M\+I\+E\+I\+C1\+\_\+\+E/\+Código/\+Trabalho A\+E\+D\+A/Vehicle.\+h\item 
+E\+:/feup-\/aeda/\+A\+E\+D\+A1617\+Parte2\+\_\+2\+M\+I\+E\+I\+C1\+\_\+\+E/\+Código/\+Trabalho A\+E\+D\+A/Vehicle.\+cpp\end{DoxyCompactItemize}

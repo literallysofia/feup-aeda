@@ -1,0 +1,106 @@
+\hypertarget{class_b_s_t}{}\section{B\+ST$<$ Comparable $>$ Class Template Reference}
+\label{class_b_s_t}\index{B\+S\+T$<$ Comparable $>$@{B\+S\+T$<$ Comparable $>$}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_b_s_t_a3185a79cf472271f122a97d0f59022d1}\label{class_b_s_t_a3185a79cf472271f122a97d0f59022d1}} 
+{\bfseries B\+ST} (const Comparable \&not\+Found)
+\item 
+\mbox{\Hypertarget{class_b_s_t_a163232cc6ffcbd1a51707efcc3fa36ca}\label{class_b_s_t_a163232cc6ffcbd1a51707efcc3fa36ca}} 
+{\bfseries B\+ST} (const \hyperlink{class_b_s_t}{B\+ST} \&rhs)
+\item 
+\mbox{\Hypertarget{class_b_s_t_aa52491ff35aec517961937a17a9fa493}\label{class_b_s_t_aa52491ff35aec517961937a17a9fa493}} 
+const Comparable \& {\bfseries find\+Min} () const
+\item 
+\mbox{\Hypertarget{class_b_s_t_a03485f3b0b150f1e69a12c28d26d8092}\label{class_b_s_t_a03485f3b0b150f1e69a12c28d26d8092}} 
+const Comparable \& {\bfseries find\+Max} () const
+\item 
+\mbox{\Hypertarget{class_b_s_t_aaf4eb6869f68db0069534f7b2dfbe53b}\label{class_b_s_t_aaf4eb6869f68db0069534f7b2dfbe53b}} 
+const Comparable \& {\bfseries find} (const Comparable \&x) const
+\item 
+\mbox{\Hypertarget{class_b_s_t_a10fd737b2be62437023407fdc123f728}\label{class_b_s_t_a10fd737b2be62437023407fdc123f728}} 
+bool {\bfseries is\+Empty} () const
+\item 
+\mbox{\Hypertarget{class_b_s_t_a91e830925c48040d4c4dbb7d971c3bfe}\label{class_b_s_t_a91e830925c48040d4c4dbb7d971c3bfe}} 
+void {\bfseries print\+Tree} () const
+\item 
+\mbox{\Hypertarget{class_b_s_t_a050d829503a88714c4ad0773cf6d3af6}\label{class_b_s_t_a050d829503a88714c4ad0773cf6d3af6}} 
+void {\bfseries make\+Empty} ()
+\item 
+\mbox{\Hypertarget{class_b_s_t_a2b117df6521c7d61dac75ff2c938bae7}\label{class_b_s_t_a2b117df6521c7d61dac75ff2c938bae7}} 
+void {\bfseries insert} (const Comparable \&x)
+\item 
+\mbox{\Hypertarget{class_b_s_t_a6f01a0b44daf82a42022b6eb4c0df7a2}\label{class_b_s_t_a6f01a0b44daf82a42022b6eb4c0df7a2}} 
+void {\bfseries remove} (const Comparable \&x)
+\item 
+\mbox{\Hypertarget{class_b_s_t_aa80c39f454c89d4a202be3d1445823f3}\label{class_b_s_t_aa80c39f454c89d4a202be3d1445823f3}} 
+const \hyperlink{class_b_s_t}{B\+ST} \& {\bfseries operator=} (const \hyperlink{class_b_s_t}{B\+ST} \&rhs)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_b_s_t_adb7d0e1197c30ff79cb0fb05fcd67249}\label{class_b_s_t_adb7d0e1197c30ff79cb0fb05fcd67249}} 
+const Comparable \& {\bfseries element\+At} (\hyperlink{class_binary_node}{Binary\+Node}$<$ Comparable $>$ $\ast$t) const
+\item 
+\mbox{\Hypertarget{class_b_s_t_a4d885d655c4a4e29c2d40f2b48baf7d3}\label{class_b_s_t_a4d885d655c4a4e29c2d40f2b48baf7d3}} 
+void {\bfseries insert} (const Comparable \&x, \hyperlink{class_binary_node}{Binary\+Node}$<$ Comparable $>$ $\ast$\&t) const
+\item 
+\mbox{\Hypertarget{class_b_s_t_afe360f55921ac51ac78ddde6556fe946}\label{class_b_s_t_afe360f55921ac51ac78ddde6556fe946}} 
+void {\bfseries remove} (const Comparable \&x, \hyperlink{class_binary_node}{Binary\+Node}$<$ Comparable $>$ $\ast$\&t) const
+\item 
+\mbox{\Hypertarget{class_b_s_t_a1b79bb91ccef69398a80bf508a2a6097}\label{class_b_s_t_a1b79bb91ccef69398a80bf508a2a6097}} 
+\hyperlink{class_binary_node}{Binary\+Node}$<$ Comparable $>$ $\ast$ {\bfseries find\+Min} (\hyperlink{class_binary_node}{Binary\+Node}$<$ Comparable $>$ $\ast$t) const
+\item 
+\mbox{\Hypertarget{class_b_s_t_a922e4c2dfbd460db9e31531d8d20282b}\label{class_b_s_t_a922e4c2dfbd460db9e31531d8d20282b}} 
+\hyperlink{class_binary_node}{Binary\+Node}$<$ Comparable $>$ $\ast$ {\bfseries find\+Max} (\hyperlink{class_binary_node}{Binary\+Node}$<$ Comparable $>$ $\ast$t) const
+\item 
+\mbox{\Hypertarget{class_b_s_t_a858dd15e9d15affeb88785d0c5a65ae3}\label{class_b_s_t_a858dd15e9d15affeb88785d0c5a65ae3}} 
+\hyperlink{class_binary_node}{Binary\+Node}$<$ Comparable $>$ $\ast$ {\bfseries find} (const Comparable \&x, \hyperlink{class_binary_node}{Binary\+Node}$<$ Comparable $>$ $\ast$t) const
+\item 
+void \hyperlink{class_b_s_t_a5582f1066a084181d6a79ec0a6e9f9f2}{make\+Empty} (\hyperlink{class_binary_node}{Binary\+Node}$<$ Comparable $>$ $\ast$\&t) const
+\item 
+\mbox{\Hypertarget{class_b_s_t_a76247d69325065d2485349148d7940e7}\label{class_b_s_t_a76247d69325065d2485349148d7940e7}} 
+void {\bfseries print\+Tree} (\hyperlink{class_binary_node}{Binary\+Node}$<$ Comparable $>$ $\ast$t) const
+\item 
+\mbox{\Hypertarget{class_b_s_t_acefda5ede0b55cbb1f7deab580bd8fd9}\label{class_b_s_t_acefda5ede0b55cbb1f7deab580bd8fd9}} 
+\hyperlink{class_binary_node}{Binary\+Node}$<$ Comparable $>$ $\ast$ {\bfseries clone} (\hyperlink{class_binary_node}{Binary\+Node}$<$ Comparable $>$ $\ast$t) const
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_b_s_t_a48d08a19c48c0c260a7d5db37149ad0f}\label{class_b_s_t_a48d08a19c48c0c260a7d5db37149ad0f}} 
+\hyperlink{class_binary_node}{Binary\+Node}$<$ Comparable $>$ $\ast$ {\bfseries root}
+\item 
+\mbox{\Hypertarget{class_b_s_t_a93811f042c4201e993fe39638c15f251}\label{class_b_s_t_a93811f042c4201e993fe39638c15f251}} 
+const Comparable {\bfseries I\+T\+E\+M\+\_\+\+N\+O\+T\+\_\+\+F\+O\+U\+ND}
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_b_s_t_aab3993acac2ab24a0b59edb0c3acc775}\label{class_b_s_t_aab3993acac2ab24a0b59edb0c3acc775}} 
+class {\bfseries B\+S\+T\+Itr\+In$<$ Comparable $>$}
+\item 
+\mbox{\Hypertarget{class_b_s_t_a45a55df6f11541416d4ea7684c575c1a}\label{class_b_s_t_a45a55df6f11541416d4ea7684c575c1a}} 
+class {\bfseries B\+S\+T\+Itr\+Pre$<$ Comparable $>$}
+\item 
+\mbox{\Hypertarget{class_b_s_t_a5dc153694be266f6e772659486219da7}\label{class_b_s_t_a5dc153694be266f6e772659486219da7}} 
+class {\bfseries B\+S\+T\+Itr\+Post$<$ Comparable $>$}
+\item 
+\mbox{\Hypertarget{class_b_s_t_a26ff00bc0d87069aed877f10fd3c80a8}\label{class_b_s_t_a26ff00bc0d87069aed877f10fd3c80a8}} 
+class {\bfseries B\+S\+T\+Itr\+Level$<$ Comparable $>$}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_b_s_t_a5582f1066a084181d6a79ec0a6e9f9f2}\label{class_b_s_t_a5582f1066a084181d6a79ec0a6e9f9f2}} 
+\index{B\+ST@{B\+ST}!make\+Empty@{make\+Empty}}
+\index{make\+Empty@{make\+Empty}!B\+ST@{B\+ST}}
+\subsubsection{\texorpdfstring{make\+Empty()}{makeEmpty()}}
+{\footnotesize\ttfamily template$<$class Comparable$>$ \\
+void \hyperlink{class_b_s_t}{B\+ST}$<$ Comparable $>$\+::make\+Empty (\begin{DoxyParamCaption}\item[{\hyperlink{class_binary_node}{Binary\+Node}$<$ Comparable $>$ $\ast$\&}]{t }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+Internal method to make subtree empty. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+E\+:/feup-\/aeda/\+A\+E\+D\+A1617\+Parte2\+\_\+2\+M\+I\+E\+I\+C1\+\_\+\+E/\+Código/\+Trabalho A\+E\+D\+A/B\+S\+T.\+h\end{DoxyCompactItemize}

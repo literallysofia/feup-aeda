@@ -1,0 +1,403 @@
+\hypertarget{group___agency}{}\section{Agency}
+\label{group___agency}\index{Agency@{Agency}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structstop}{stop}
+\item 
+struct \hyperlink{structinactive_ptr}{inactive\+Ptr}
+\item 
+struct \hyperlink{structcars}{cars}
+\item 
+struct \hyperlink{structdistance_struct}{distance\+Struct}
+\item 
+class \hyperlink{class_agency}{Agency}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___agency_gac4e50fb3eb9c87ffa6e32341378b4af6}\label{group___agency_gac4e50fb3eb9c87ffa6e32341378b4af6}} 
+typedef unordered\+\_\+set$<$ \hyperlink{structuser_ptr}{user\+Ptr}, \hyperlink{structinactive_ptr}{inactive\+Ptr}, \hyperlink{structinactive_ptr}{inactive\+Ptr} $>$ {\bfseries tab\+H\+Inactive}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___agency_ga165eb4b729955163f0c52852aa554af1}\label{group___agency_ga165eb4b729955163f0c52852aa554af1}} 
+int {\bfseries inactive\+Ptr\+::operator()} (const \hyperlink{structuser_ptr}{user\+Ptr} \&us1) const
+\item 
+\mbox{\Hypertarget{group___agency_gadc40c7d895103613550bb1c415f849f0}\label{group___agency_gadc40c7d895103613550bb1c415f849f0}} 
+bool {\bfseries inactive\+Ptr\+::operator()} (const \hyperlink{structuser_ptr}{user\+Ptr} \&us1, const \hyperlink{structuser_ptr}{user\+Ptr} \&us2) const
+\item 
+\mbox{\Hypertarget{group___agency_gaf6fc6c4dec00025fce567183f67edbaa}\label{group___agency_gaf6fc6c4dec00025fce567183f67edbaa}} 
+\hyperlink{group___agency_gaf6fc6c4dec00025fce567183f67edbaa}{Agency\+::\+Agency} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_agency}{Agency} constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___agency_ga922750a7051987df9bb697769fdf0256}\label{group___agency_ga922750a7051987df9bb697769fdf0256}} 
+\hyperlink{group___agency_ga922750a7051987df9bb697769fdf0256}{Agency\+::$\sim$\+Agency} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_agency}{Agency} destructor. \end{DoxyCompactList}\item 
+static \hyperlink{class_agency}{Agency} $\ast$ \hyperlink{group___agency_ga573fab41076b962289fad1f14031b68c}{Agency\+::instance} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_agency}{Agency} instance creator. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___agency_ga10184101969b3eeea8eea72cb058fbd4}\label{group___agency_ga10184101969b3eeea8eea72cb058fbd4}} 
+void \hyperlink{group___agency_ga10184101969b3eeea8eea72cb058fbd4}{Agency\+::extract\+Stops} ()
+\begin{DoxyCompactList}\small\item\em Extracts stops available from file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___agency_ga79f9fc915ad09783ec07b876d6eed865}\label{group___agency_ga79f9fc915ad09783ec07b876d6eed865}} 
+string {\bfseries stop\+::code}
+\item 
+\mbox{\Hypertarget{group___agency_ga91bd51eb4e3994056d52465dda3a6ca4}\label{group___agency_ga91bd51eb4e3994056d52465dda3a6ca4}} 
+string {\bfseries stop\+::name}
+\item 
+\mbox{\Hypertarget{group___agency_ga604acdb12b949ce28b76c2e0cb29ad81}\label{group___agency_ga604acdb12b949ce28b76c2e0cb29ad81}} 
+string {\bfseries cars\+::brand}
+\item 
+\mbox{\Hypertarget{group___agency_gaf0c7084b7a4fb4ceb5e74330e88d78bb}\label{group___agency_gaf0c7084b7a4fb4ceb5e74330e88d78bb}} 
+string {\bfseries cars\+::model}
+\item 
+\mbox{\Hypertarget{group___agency_gab4158f666bb1f7a8a1ca31f2942ba629}\label{group___agency_gab4158f666bb1f7a8a1ca31f2942ba629}} 
+int {\bfseries cars\+::seats}
+\item 
+\mbox{\Hypertarget{group___agency_gacf7d9670242fa6da94168421f0317c08}\label{group___agency_gacf7d9670242fa6da94168421f0317c08}} 
+int {\bfseries cars\+::year}
+\item 
+\mbox{\Hypertarget{group___agency_ga5fcd18c58d5dd4b65ffb25c6b3f5f088}\label{group___agency_ga5fcd18c58d5dd4b65ffb25c6b3f5f088}} 
+int {\bfseries cars\+::available}
+\item 
+\mbox{\Hypertarget{group___agency_ga2e71e97640f5cc04c32d21c2d3104e06}\label{group___agency_ga2e71e97640f5cc04c32d21c2d3104e06}} 
+string {\bfseries distance\+Struct\+::pnt1}
+\item 
+\mbox{\Hypertarget{group___agency_ga20809a497514156c21cac416a8714971}\label{group___agency_ga20809a497514156c21cac416a8714971}} 
+string {\bfseries distance\+Struct\+::pnt2}
+\item 
+\mbox{\Hypertarget{group___agency_ga41ee5fe344f1b745d3da6986449faa4f}\label{group___agency_ga41ee5fe344f1b745d3da6986449faa4f}} 
+float {\bfseries distance\+Struct\+::km}
+\item 
+\mbox{\Hypertarget{group___agency_ga24c6ae11e29cdf5eefc6a5c94783b90e}\label{group___agency_ga24c6ae11e29cdf5eefc6a5c94783b90e}} 
+static \hyperlink{class_agency}{Agency} $\ast$ \hyperlink{group___agency_ga24c6ae11e29cdf5eefc6a5c94783b90e}{Agency\+::singleton\+\_\+instance} = 0
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_agency}{Agency} instance. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___agency_gadd64fcf15e317225aab8d7e66a113cdd}\label{group___agency_gadd64fcf15e317225aab8d7e66a113cdd}} 
+int \hyperlink{group___agency_gadd64fcf15e317225aab8d7e66a113cdd}{Agency\+::session\+ID}
+\begin{DoxyCompactList}\small\item\em Int ID of who is logged in the application for global use. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___agency_ga07004d662bede4bad0f673a0f93a9858}\label{group___agency_ga07004d662bede4bad0f673a0f93a9858}} 
+int \hyperlink{group___agency_ga07004d662bede4bad0f673a0f93a9858}{Agency\+::session\+Pos}
+\begin{DoxyCompactList}\small\item\em Int Position of logged in \hyperlink{class_user}{User} in the Users vector for global use. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Agency\textquotesingle{}s Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___agency_gabb9747ae5d2295ed8bbbc6a8a5e999c4}\label{group___agency_gabb9747ae5d2295ed8bbbc6a8a5e999c4}} 
+vector$<$ \hyperlink{class_user}{User} $\ast$ $>$ \hyperlink{group___agency_gabb9747ae5d2295ed8bbbc6a8a5e999c4}{Agency\+::\+Users}
+\begin{DoxyCompactList}\small\item\em vector with all users of the application \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___agency_gabf415574ea1affe9c8d956d414d8ae2f}\label{group___agency_gabf415574ea1affe9c8d956d414d8ae2f}} 
+vector$<$ \hyperlink{class_trip}{Trip} $>$ \hyperlink{group___agency_gabf415574ea1affe9c8d956d414d8ae2f}{Agency\+::\+Trips}
+\begin{DoxyCompactList}\small\item\em vector with all trips of the application \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___agency_gaa139f4e94c0d903fe15541b17286f1ab}\label{group___agency_gaa139f4e94c0d903fe15541b17286f1ab}} 
+vector$<$ \hyperlink{class_trip}{Trip} $>$ \hyperlink{group___agency_gaa139f4e94c0d903fe15541b17286f1ab}{Agency\+::\+Active\+Trips}
+\begin{DoxyCompactList}\small\item\em vector with all active trips of the application \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___agency_ga238bb9d83a344aab5b299ee39cb592fa}\label{group___agency_ga238bb9d83a344aab5b299ee39cb592fa}} 
+vector$<$ \hyperlink{class_transaction}{Transaction} $>$ \hyperlink{group___agency_ga238bb9d83a344aab5b299ee39cb592fa}{Agency\+::\+Transactions}
+\begin{DoxyCompactList}\small\item\em vector with all transactions of the application \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___agency_ga5d27f85795249e51708fdc5b913678f3}\label{group___agency_ga5d27f85795249e51708fdc5b913678f3}} 
+vector$<$ \hyperlink{structstop}{stop} $>$ \hyperlink{group___agency_ga5d27f85795249e51708fdc5b913678f3}{Agency\+::stops\+Available}
+\begin{DoxyCompactList}\small\item\em vector with all available stops of the application \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___agency_ga4057f2249af0d7929b717f626c962aee}\label{group___agency_ga4057f2249af0d7929b717f626c962aee}} 
+tab\+H\+Inactive \hyperlink{group___agency_ga4057f2249af0d7929b717f626c962aee}{Agency\+::inactive\+Users}
+\begin{DoxyCompactList}\small\item\em hash table with all inactive users of the application \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___agency_ga2fc5f0f3c78faed2a20b3dbcf276a730}\label{group___agency_ga2fc5f0f3c78faed2a20b3dbcf276a730}} 
+vector$<$ \hyperlink{structcars}{cars} $>$ \hyperlink{group___agency_ga2fc5f0f3c78faed2a20b3dbcf276a730}{Agency\+::\+Cars}
+\begin{DoxyCompactList}\small\item\em vector with all available cars of the application \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___agency_gaacec2af5f5b458ab7103225e07b780cf}\label{group___agency_gaacec2af5f5b458ab7103225e07b780cf}} 
+\hyperlink{class_b_s_t}{B\+ST}$<$ \hyperlink{class_vehicle}{Vehicle} $>$ \hyperlink{group___agency_gaacec2af5f5b458ab7103225e07b780cf}{Agency\+::vehicles}
+\begin{DoxyCompactList}\small\item\em binary search tree (\hyperlink{class_b_s_t}{B\+ST}) with all rented vehicles of the application \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___agency_ga53eb5336f6197d5643f9489f2efc0467}\label{group___agency_ga53eb5336f6197d5643f9489f2efc0467}} 
+vector$<$ \hyperlink{structdistance_struct}{distance\+Struct} $>$ \hyperlink{group___agency_ga53eb5336f6197d5643f9489f2efc0467}{Agency\+::distances\+Vec}
+\begin{DoxyCompactList}\small\item\em vector with all distances between stops of the application \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Login Options}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group___agency_ga75a16a58bcbc705df50e89531f513c49}{Agency\+::register\+User} ()
+\begin{DoxyCompactList}\small\item\em Register a new \hyperlink{class_user}{User} to use the application. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___agency_gae4523bdce3f7af3a2be444c4a2ae0630}\label{group___agency_gae4523bdce3f7af3a2be444c4a2ae0630}} 
+void \hyperlink{group___agency_gae4523bdce3f7af3a2be444c4a2ae0630}{Agency\+::login\+User} ()
+\begin{DoxyCompactList}\small\item\em Runs prompt for valid login credentials. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___agency_gaddfd587d88999314b59aab8be6438271}\label{group___agency_gaddfd587d88999314b59aab8be6438271}} 
+void \hyperlink{group___agency_gaddfd587d88999314b59aab8be6438271}{Agency\+::login\+Guest} ()
+\begin{DoxyCompactList}\small\item\em Runs application with an ID = -\/1 for Guest type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Admin Options}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{group___agency_ga1c4e64231b979f1a1bc4881ebf3e3aed}{Agency\+::main\+Menu\+\_\+\+Admin} ()
+\begin{DoxyCompactList}\small\item\em Opens main menu after Admin login. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___agency_ga624b23c124d1002f6937b2a006c46834}\label{group___agency_ga624b23c124d1002f6937b2a006c46834}} 
+void \hyperlink{group___agency_ga624b23c124d1002f6937b2a006c46834}{Agency\+::options\+Main\+Menu\+\_\+\+Admin} ()
+\begin{DoxyCompactList}\small\item\em Options in \hyperlink{class_user}{User} main menu. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___agency_gabe52082b4fcaed078b3505f627e6bbbf}\label{group___agency_gabe52082b4fcaed078b3505f627e6bbbf}} 
+int \hyperlink{group___agency_gabe52082b4fcaed078b3505f627e6bbbf}{Agency\+::menu\+Display\+Users} ()
+\begin{DoxyCompactList}\small\item\em Opens Admin menu to display Users. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___agency_gacea7e0ae6d04651406786f966cf10cab}\label{group___agency_gacea7e0ae6d04651406786f966cf10cab}} 
+void \hyperlink{group___agency_gacea7e0ae6d04651406786f966cf10cab}{Agency\+::options\+Display\+Users} ()
+\begin{DoxyCompactList}\small\item\em Options in Admin \hyperlink{class_user}{User} display menu. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___agency_gad1043b390ee14a047d4f8a65a0a87851}\label{group___agency_gad1043b390ee14a047d4f8a65a0a87851}} 
+void \hyperlink{group___agency_gad1043b390ee14a047d4f8a65a0a87851}{Agency\+::menu\+Display\+Users\+By\+Username} ()
+\begin{DoxyCompactList}\small\item\em Displays application Users sorted by username. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___agency_ga6d95d9219a22e771f77306eca2970f7f}\label{group___agency_ga6d95d9219a22e771f77306eca2970f7f}} 
+void \hyperlink{group___agency_ga6d95d9219a22e771f77306eca2970f7f}{Agency\+::menu\+Display\+Users\+By\+Name} ()
+\begin{DoxyCompactList}\small\item\em Displays application Users sorted by name. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___agency_gacdf25fd2da688fccf730ffb5d63f8ea2}\label{group___agency_gacdf25fd2da688fccf730ffb5d63f8ea2}} 
+int \hyperlink{group___agency_gacdf25fd2da688fccf730ffb5d63f8ea2}{Agency\+::menu\+Search} ()
+\begin{DoxyCompactList}\small\item\em Opens Admin menu to search information. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___agency_ga4b51dfec7cdca417730d613ef5ec1d42}\label{group___agency_ga4b51dfec7cdca417730d613ef5ec1d42}} 
+void \hyperlink{group___agency_ga4b51dfec7cdca417730d613ef5ec1d42}{Agency\+::options\+Menu\+Search} ()
+\begin{DoxyCompactList}\small\item\em Options in Admin search menu. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___agency_ga6ff3272c35880d3a599fe3ebb6ef3280}\label{group___agency_ga6ff3272c35880d3a599fe3ebb6ef3280}} 
+void \hyperlink{group___agency_ga6ff3272c35880d3a599fe3ebb6ef3280}{Agency\+::menu\+Display\+Buddies} ()
+\begin{DoxyCompactList}\small\item\em Displays Users and their buddies. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___agency_ga5551ae0256b60e7279a8673c7f1b6121}\label{group___agency_ga5551ae0256b60e7279a8673c7f1b6121}} 
+void \hyperlink{group___agency_ga5551ae0256b60e7279a8673c7f1b6121}{Agency\+::menu\+Display\+Stops} ()
+\begin{DoxyCompactList}\small\item\em Displays available stop in the application. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___agency_gae4890fb51527fa95db0e22780f867ecf}\label{group___agency_gae4890fb51527fa95db0e22780f867ecf}} 
+void \hyperlink{group___agency_gae4890fb51527fa95db0e22780f867ecf}{Agency\+::menu\+Display\+Record} ()
+\begin{DoxyCompactList}\small\item\em Displays the record of all \hyperlink{class_agency}{Agency}\textquotesingle{}s Trips. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___agency_ga2c99075b9ec8cb23e2e7974dba44161d}\label{group___agency_ga2c99075b9ec8cb23e2e7974dba44161d}} 
+int \hyperlink{group___agency_ga2c99075b9ec8cb23e2e7974dba44161d}{Agency\+::menu\+Display\+Transactions} ()
+\begin{DoxyCompactList}\small\item\em Displays all \hyperlink{class_agency}{Agency}\textquotesingle{}s transactions. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___agency_gae7adf6319525f61d71e1ec46c2fb3659}\label{group___agency_gae7adf6319525f61d71e1ec46c2fb3659}} 
+void \hyperlink{group___agency_gae7adf6319525f61d71e1ec46c2fb3659}{Agency\+::options\+Menu\+D\+Trans} ()
+\begin{DoxyCompactList}\small\item\em Options in Admin transactions menu. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___agency_gac3966e479d0ff814b7811edcaa6ea449}\label{group___agency_gac3966e479d0ff814b7811edcaa6ea449}} 
+int \hyperlink{group___agency_gac3966e479d0ff814b7811edcaa6ea449}{Agency\+::menu\+Search\+User} ()
+\begin{DoxyCompactList}\small\item\em Opens Admin menu to search Users. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___agency_ga15abca6e47057fac90682e8b0317322c}\label{group___agency_ga15abca6e47057fac90682e8b0317322c}} 
+void \hyperlink{group___agency_ga15abca6e47057fac90682e8b0317322c}{Agency\+::options\+Menu\+Search\+User} ()
+\begin{DoxyCompactList}\small\item\em Options in Admin information search menu. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___agency_gaf2c7b19ae6f03a1454b5a36c2343119a}\label{group___agency_gaf2c7b19ae6f03a1454b5a36c2343119a}} 
+void \hyperlink{group___agency_gaf2c7b19ae6f03a1454b5a36c2343119a}{Agency\+::menu\+Search\+User\+By\+ID} ()
+\begin{DoxyCompactList}\small\item\em Prompts for \hyperlink{class_user}{User} ID to search for. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___agency_ga4fae1609fafeba4ba99e64a46ffa497b}\label{group___agency_ga4fae1609fafeba4ba99e64a46ffa497b}} 
+void \hyperlink{group___agency_ga4fae1609fafeba4ba99e64a46ffa497b}{Agency\+::menu\+Search\+User\+By\+Username} ()
+\begin{DoxyCompactList}\small\item\em Prompts for \hyperlink{class_user}{User} username to search for. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___agency_ga486a2028ecfb5d9e07cb2c2082c8f4d1}\label{group___agency_ga486a2028ecfb5d9e07cb2c2082c8f4d1}} 
+int \hyperlink{group___agency_ga486a2028ecfb5d9e07cb2c2082c8f4d1}{Agency\+::menu\+Search\+Trip} ()
+\begin{DoxyCompactList}\small\item\em Opens Admin menu to search \hyperlink{class_trip}{Trip}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___agency_ga6ef362edc162c9e2d6d659d2ef6ace96}\label{group___agency_ga6ef362edc162c9e2d6d659d2ef6ace96}} 
+void \hyperlink{group___agency_ga6ef362edc162c9e2d6d659d2ef6ace96}{Agency\+::options\+Menu\+Search\+Trip} ()
+\begin{DoxyCompactList}\small\item\em Options in Admin Trips search menu. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___agency_ga67eab1c222c93d13d3db69a3a3d1ea2f}\label{group___agency_ga67eab1c222c93d13d3db69a3a3d1ea2f}} 
+void \hyperlink{group___agency_ga67eab1c222c93d13d3db69a3a3d1ea2f}{Agency\+::menu\+Search\+Trip\+By\+Driver} ()
+\begin{DoxyCompactList}\small\item\em Prompts for driver ID to search Trips for. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___agency_ga2bd31a81607ba5d8f0c6deebf9c05681}\label{group___agency_ga2bd31a81607ba5d8f0c6deebf9c05681}} 
+void \hyperlink{group___agency_ga2bd31a81607ba5d8f0c6deebf9c05681}{Agency\+::menu\+Search\+Trip\+By\+Month} ()
+\begin{DoxyCompactList}\small\item\em Prompts for month to search Trips for. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___agency_ga8190f01535be829647cdb79e65bd6dbc}\label{group___agency_ga8190f01535be829647cdb79e65bd6dbc}} 
+int \hyperlink{group___agency_ga8190f01535be829647cdb79e65bd6dbc}{Agency\+::menu\+Search\+Transaction} ()
+\begin{DoxyCompactList}\small\item\em Opens Admin menu to search transactions. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___agency_ga766926448390b8388cd1633c5c221318}\label{group___agency_ga766926448390b8388cd1633c5c221318}} 
+void \hyperlink{group___agency_ga766926448390b8388cd1633c5c221318}{Agency\+::options\+Menu\+Search\+Transaction} ()
+\begin{DoxyCompactList}\small\item\em Options in Admin transaction search menu. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___agency_ga24e634ecf44a266d90758022ae516032}\label{group___agency_ga24e634ecf44a266d90758022ae516032}} 
+void \hyperlink{group___agency_ga24e634ecf44a266d90758022ae516032}{Agency\+::menu\+Search\+Transaction\+By\+User} ()
+\begin{DoxyCompactList}\small\item\em Prompts for \hyperlink{class_user}{User} to search transactions for. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___agency_gaba8bea8c53bffa9e4eef2289267907bd}\label{group___agency_gaba8bea8c53bffa9e4eef2289267907bd}} 
+void \hyperlink{group___agency_gaba8bea8c53bffa9e4eef2289267907bd}{Agency\+::menu\+Search\+Transaction\+By\+Month} ()
+\begin{DoxyCompactList}\small\item\em Prompts for month to search transactions for. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___agency_ga4e0dc0a2296c122cf7769600abc06223}\label{group___agency_ga4e0dc0a2296c122cf7769600abc06223}} 
+void \hyperlink{group___agency_ga4e0dc0a2296c122cf7769600abc06223}{Agency\+::menu\+Run\+Trip} ()
+\begin{DoxyCompactList}\small\item\em Opens menu for Admin to select a displayed \hyperlink{class_trip}{Trip} to run. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{User Options}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{group___agency_gaef1bbd6021ec5639b2503d8bd8ec4244}{Agency\+::main\+Menu\+\_\+\+User} ()
+\begin{DoxyCompactList}\small\item\em Opens main menu after \hyperlink{class_user}{User} login. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___agency_ga2199b59e94702baecd1589a7bf03ebcb}\label{group___agency_ga2199b59e94702baecd1589a7bf03ebcb}} 
+void \hyperlink{group___agency_ga2199b59e94702baecd1589a7bf03ebcb}{Agency\+::options\+Main\+Menu\+\_\+\+User} ()
+\begin{DoxyCompactList}\small\item\em Options in \hyperlink{class_user}{User} main menu. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___agency_ga108fc523a3e0545820e63741982e9327}\label{group___agency_ga108fc523a3e0545820e63741982e9327}} 
+int \hyperlink{group___agency_ga108fc523a3e0545820e63741982e9327}{Agency\+::menu\+Account} ()
+\begin{DoxyCompactList}\small\item\em Opens account info for \hyperlink{class_user}{User}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___agency_ga580e845616f281e993d39e6a87b9725e}\label{group___agency_ga580e845616f281e993d39e6a87b9725e}} 
+void \hyperlink{group___agency_ga580e845616f281e993d39e6a87b9725e}{Agency\+::options\+Menu\+Account} ()
+\begin{DoxyCompactList}\small\item\em Options in \hyperlink{class_user}{User} account info menu. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___agency_gabbb862b2f97a318773851b4ebeb3de8a}\label{group___agency_gabbb862b2f97a318773851b4ebeb3de8a}} 
+void \hyperlink{group___agency_gabbb862b2f97a318773851b4ebeb3de8a}{Agency\+::menu\+Add\+Buddy} ()
+\begin{DoxyCompactList}\small\item\em Opens menu for \hyperlink{class_user}{User} to add a buddy to his account. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___agency_ga07c72d02ed02eac58a0624feb7fccea8}\label{group___agency_ga07c72d02ed02eac58a0624feb7fccea8}} 
+void \hyperlink{group___agency_ga07c72d02ed02eac58a0624feb7fccea8}{Agency\+::menu\+Create\+Trip} ()
+\begin{DoxyCompactList}\small\item\em Opens menu for \hyperlink{class_user}{User} to create a \hyperlink{class_trip}{Trip}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___agency_gab83663afe4fceea7def561cbf3a85c84}\label{group___agency_gab83663afe4fceea7def561cbf3a85c84}} 
+void \hyperlink{group___agency_gab83663afe4fceea7def561cbf3a85c84}{Agency\+::menu\+Join\+Trip} ()
+\begin{DoxyCompactList}\small\item\em Opens menu for \hyperlink{class_user}{User} to join a \hyperlink{class_trip}{Trip}. \end{DoxyCompactList}\item 
+void \hyperlink{group___agency_gabc352c6cad4e22817e2a52a0e756e295}{Agency\+::show\+Rec\+Trips} (vector$<$ \hyperlink{class_trip}{Trip} $>$ rec\+Trips, vector$<$ \hyperlink{class_trip}{Trip} $>$ buddie\+Trips, vector$<$ string $>$ stop\+Codes)
+\begin{DoxyCompactList}\small\item\em Shows recommended trips to a \hyperlink{class_user}{User} on screen. \end{DoxyCompactList}\item 
+void \hyperlink{group___agency_ga7cde2e6cef7a7e4dbcb84af39a8caa34}{Agency\+::show\+Rec\+Trips\+Guest} (vector$<$ \hyperlink{class_trip}{Trip} $>$ rec\+Trips, vector$<$ string $>$ stop\+Codes)
+\begin{DoxyCompactList}\small\item\em Shows recommended trips to a Guest on screen. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Data Management functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group___agency_ga20bc20b90914b5e446b683dcd7f6d0ef}{Agency\+::extract\+Data} ()
+\begin{DoxyCompactList}\small\item\em Runs all data extraction functions. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___agency_ga67c29f4711b1596630ae970e6a9027ac}\label{group___agency_ga67c29f4711b1596630ae970e6a9027ac}} 
+void \hyperlink{group___agency_ga67c29f4711b1596630ae970e6a9027ac}{Agency\+::save\+Data} ()
+\begin{DoxyCompactList}\small\item\em Runs all data saving functions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{User Data}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group___agency_ga659e4c6df03779b524f37b1c8fb5221d}{Agency\+::extract\+Users} ()
+\item 
+\mbox{\Hypertarget{group___agency_gaf253026d4b2a377822d4e3c1ef680e6c}\label{group___agency_gaf253026d4b2a377822d4e3c1ef680e6c}} 
+void {\bfseries Agency\+::save\+Users} ()
+\end{DoxyCompactItemize}
+\subsection*{Buddies Data}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group___agency_ga93c45528d2114a557a1e0b23498e178a}{Agency\+::extract\+Buddies} ()
+\item 
+\mbox{\Hypertarget{group___agency_ga6dc773d5c105563da2019dd062eb7918}\label{group___agency_ga6dc773d5c105563da2019dd062eb7918}} 
+void {\bfseries Agency\+::save\+Buddies} ()
+\end{DoxyCompactItemize}
+\subsection*{Transactions Data}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group___agency_gadfda62c1a33db5f797098d0391e6ee87}{Agency\+::extract\+Transactions} ()
+\item 
+\mbox{\Hypertarget{group___agency_gae72ab0970ba685c5a57360047f8a38e7}\label{group___agency_gae72ab0970ba685c5a57360047f8a38e7}} 
+void {\bfseries Agency\+::save\+Transactions} ()
+\end{DoxyCompactItemize}
+\subsection*{Record Data}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group___agency_ga8cafe0f0410e881f1a0d7a1bdd502058}{Agency\+::extract\+Record} ()
+\item 
+\mbox{\Hypertarget{group___agency_gaa66b3d72d32473933366c4c4beefdb7e}\label{group___agency_gaa66b3d72d32473933366c4c4beefdb7e}} 
+void {\bfseries Agency\+::save\+Record} ()
+\end{DoxyCompactItemize}
+\subsection*{Active\+Trips Data}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group___agency_ga82ad0980163a0e874b1ca165b7b9c91c}{Agency\+::extract\+Active} ()
+\item 
+\mbox{\Hypertarget{group___agency_ga4ca6cbd58c07be755c1f872e8faa8719}\label{group___agency_ga4ca6cbd58c07be755c1f872e8faa8719}} 
+void {\bfseries Agency\+::save\+Active} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{class_agency}{Agency} class declaration 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group___agency_ga82ad0980163a0e874b1ca165b7b9c91c}\label{group___agency_ga82ad0980163a0e874b1ca165b7b9c91c}} 
+\index{Agency@{Agency}!extract\+Active@{extract\+Active}}
+\index{extract\+Active@{extract\+Active}!Agency@{Agency}}
+\subsubsection{\texorpdfstring{extract\+Active()}{extractActive()}}
+{\footnotesize\ttfamily void Agency\+::extract\+Active (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Functions that manage active trips data in and out of the application \mbox{\Hypertarget{group___agency_ga93c45528d2114a557a1e0b23498e178a}\label{group___agency_ga93c45528d2114a557a1e0b23498e178a}} 
+\index{Agency@{Agency}!extract\+Buddies@{extract\+Buddies}}
+\index{extract\+Buddies@{extract\+Buddies}!Agency@{Agency}}
+\subsubsection{\texorpdfstring{extract\+Buddies()}{extractBuddies()}}
+{\footnotesize\ttfamily void Agency\+::extract\+Buddies (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Functions that manage Buddies data in and out of the application \mbox{\Hypertarget{group___agency_ga20bc20b90914b5e446b683dcd7f6d0ef}\label{group___agency_ga20bc20b90914b5e446b683dcd7f6d0ef}} 
+\index{Agency@{Agency}!extract\+Data@{extract\+Data}}
+\index{extract\+Data@{extract\+Data}!Agency@{Agency}}
+\subsubsection{\texorpdfstring{extract\+Data()}{extractData()}}
+{\footnotesize\ttfamily void Agency\+::extract\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Runs all data extraction functions. 
+
+Functions to read from and write to files
+
+Reads and writes for\+: Users, Buddies, Transactions, Available Stops, Trips Record, Active Trips \mbox{\Hypertarget{group___agency_ga8cafe0f0410e881f1a0d7a1bdd502058}\label{group___agency_ga8cafe0f0410e881f1a0d7a1bdd502058}} 
+\index{Agency@{Agency}!extract\+Record@{extract\+Record}}
+\index{extract\+Record@{extract\+Record}!Agency@{Agency}}
+\subsubsection{\texorpdfstring{extract\+Record()}{extractRecord()}}
+{\footnotesize\ttfamily void Agency\+::extract\+Record (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Functions that manage Trips record data in and out of the application \mbox{\Hypertarget{group___agency_gadfda62c1a33db5f797098d0391e6ee87}\label{group___agency_gadfda62c1a33db5f797098d0391e6ee87}} 
+\index{Agency@{Agency}!extract\+Transactions@{extract\+Transactions}}
+\index{extract\+Transactions@{extract\+Transactions}!Agency@{Agency}}
+\subsubsection{\texorpdfstring{extract\+Transactions()}{extractTransactions()}}
+{\footnotesize\ttfamily void Agency\+::extract\+Transactions (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Functions that manage Transactions data in and out of the application \mbox{\Hypertarget{group___agency_ga659e4c6df03779b524f37b1c8fb5221d}\label{group___agency_ga659e4c6df03779b524f37b1c8fb5221d}} 
+\index{Agency@{Agency}!extract\+Users@{extract\+Users}}
+\index{extract\+Users@{extract\+Users}!Agency@{Agency}}
+\subsubsection{\texorpdfstring{extract\+Users()}{extractUsers()}}
+{\footnotesize\ttfamily void Agency\+::extract\+Users (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Functions that manage \hyperlink{class_user}{User} data in and out of the application \mbox{\Hypertarget{group___agency_ga573fab41076b962289fad1f14031b68c}\label{group___agency_ga573fab41076b962289fad1f14031b68c}} 
+\index{Agency@{Agency}!instance@{instance}}
+\index{instance@{instance}!Agency@{Agency}}
+\subsubsection{\texorpdfstring{instance()}{instance()}}
+{\footnotesize\ttfamily static \hyperlink{class_agency}{Agency}$\ast$ Agency\+::instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+\hyperlink{class_agency}{Agency} instance creator. 
+
+Function that creates a single instance of the class \hyperlink{class_agency}{Agency} \mbox{\Hypertarget{group___agency_ga1c4e64231b979f1a1bc4881ebf3e3aed}\label{group___agency_ga1c4e64231b979f1a1bc4881ebf3e3aed}} 
+\index{Agency@{Agency}!main\+Menu\+\_\+\+Admin@{main\+Menu\+\_\+\+Admin}}
+\index{main\+Menu\+\_\+\+Admin@{main\+Menu\+\_\+\+Admin}!Agency@{Agency}}
+\subsubsection{\texorpdfstring{main\+Menu\+\_\+\+Admin()}{mainMenu\_Admin()}}
+{\footnotesize\ttfamily int Agency\+::main\+Menu\+\_\+\+Admin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Opens main menu after Admin login. 
+
+Previleged functions for Admin use only and menus displays \mbox{\Hypertarget{group___agency_gaef1bbd6021ec5639b2503d8bd8ec4244}\label{group___agency_gaef1bbd6021ec5639b2503d8bd8ec4244}} 
+\index{Agency@{Agency}!main\+Menu\+\_\+\+User@{main\+Menu\+\_\+\+User}}
+\index{main\+Menu\+\_\+\+User@{main\+Menu\+\_\+\+User}!Agency@{Agency}}
+\subsubsection{\texorpdfstring{main\+Menu\+\_\+\+User()}{mainMenu\_User()}}
+{\footnotesize\ttfamily int Agency\+::main\+Menu\+\_\+\+User (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Opens main menu after \hyperlink{class_user}{User} login. 
+
+\hyperlink{class_user}{User}\textquotesingle{}s functions and menus \mbox{\Hypertarget{group___agency_ga75a16a58bcbc705df50e89531f513c49}\label{group___agency_ga75a16a58bcbc705df50e89531f513c49}} 
+\index{Agency@{Agency}!register\+User@{register\+User}}
+\index{register\+User@{register\+User}!Agency@{Agency}}
+\subsubsection{\texorpdfstring{register\+User()}{registerUser()}}
+{\footnotesize\ttfamily void Agency\+::register\+User (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Register a new \hyperlink{class_user}{User} to use the application. 
+
+Functions that appear on program execution to login or register users \mbox{\Hypertarget{group___agency_gabc352c6cad4e22817e2a52a0e756e295}\label{group___agency_gabc352c6cad4e22817e2a52a0e756e295}} 
+\index{Agency@{Agency}!show\+Rec\+Trips@{show\+Rec\+Trips}}
+\index{show\+Rec\+Trips@{show\+Rec\+Trips}!Agency@{Agency}}
+\subsubsection{\texorpdfstring{show\+Rec\+Trips()}{showRecTrips()}}
+{\footnotesize\ttfamily void Agency\+::show\+Rec\+Trips (\begin{DoxyParamCaption}\item[{vector$<$ \hyperlink{class_trip}{Trip} $>$}]{rec\+Trips,  }\item[{vector$<$ \hyperlink{class_trip}{Trip} $>$}]{buddie\+Trips,  }\item[{vector$<$ string $>$}]{stop\+Codes }\end{DoxyParamCaption})}
+
+
+
+Shows recommended trips to a \hyperlink{class_user}{User} on screen. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rec\+Trips} & vector containing the recommended trips without buddies onboard \\
+\hline
+{\em buddie\+Trips} & vector containing the recommended trips with buddies onboard \\
+\hline
+{\em stop\+Codes} & vector containing only the initial and final stop of the \hyperlink{class_user}{User} \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___agency_ga7cde2e6cef7a7e4dbcb84af39a8caa34}\label{group___agency_ga7cde2e6cef7a7e4dbcb84af39a8caa34}} 
+\index{Agency@{Agency}!show\+Rec\+Trips\+Guest@{show\+Rec\+Trips\+Guest}}
+\index{show\+Rec\+Trips\+Guest@{show\+Rec\+Trips\+Guest}!Agency@{Agency}}
+\subsubsection{\texorpdfstring{show\+Rec\+Trips\+Guest()}{showRecTripsGuest()}}
+{\footnotesize\ttfamily void Agency\+::show\+Rec\+Trips\+Guest (\begin{DoxyParamCaption}\item[{vector$<$ \hyperlink{class_trip}{Trip} $>$}]{rec\+Trips,  }\item[{vector$<$ string $>$}]{stop\+Codes }\end{DoxyParamCaption})}
+
+
+
+Shows recommended trips to a Guest on screen. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rec\+Trips} & vector containing the recommended trips \\
+\hline
+{\em stop\+Codes} & vector containing only the initial and final stop of the Guest \\
+\hline
+\end{DoxyParams}

@@ -1,0 +1,75 @@
+\hypertarget{group___template}{}\section{Functions}
+\label{group___template}\index{Functions@{Functions}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class Comparable $>$ }\\int \hyperlink{group___template_gacd555ad1f1fc3b2011aab63641f98151}{sequential\+Search} (const vector$<$ Comparable $>$ \&v, Comparable x)
+\begin{DoxyCompactList}\small\item\em Searches for an object of class Comparable in a vector of pointers to objects of the same class. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Comparable $>$ }\\int \hyperlink{group___template_gada542f6ca0126d949ac4f038116a57dd}{sequential\+Search\+No\+Pointer} (const vector$<$ Comparable $>$ \&v, Comparable x)
+\begin{DoxyCompactList}\small\item\em Searches for an object of class Comparable in a vector of objects of the same class. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Comparable $>$ }\\void \hyperlink{group___template_ga2d750432a373f9dab8039bef160b71a0}{insertion\+Sort} (vector$<$ Comparable $>$ \&v)
+\begin{DoxyCompactList}\small\item\em Classic insertion sort template function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Template Functions declaration 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group___template_ga2d750432a373f9dab8039bef160b71a0}\label{group___template_ga2d750432a373f9dab8039bef160b71a0}} 
+\index{Functions@{Functions}!insertion\+Sort@{insertion\+Sort}}
+\index{insertion\+Sort@{insertion\+Sort}!Functions@{Functions}}
+\subsubsection{\texorpdfstring{insertion\+Sort()}{insertionSort()}}
+{\footnotesize\ttfamily template$<$class Comparable $>$ \\
+void insertion\+Sort (\begin{DoxyParamCaption}\item[{vector$<$ Comparable $>$ \&}]{v }\end{DoxyParamCaption})}
+
+
+
+Classic insertion sort template function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & vector of objets to sort \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___template_gacd555ad1f1fc3b2011aab63641f98151}\label{group___template_gacd555ad1f1fc3b2011aab63641f98151}} 
+\index{Functions@{Functions}!sequential\+Search@{sequential\+Search}}
+\index{sequential\+Search@{sequential\+Search}!Functions@{Functions}}
+\subsubsection{\texorpdfstring{sequential\+Search()}{sequentialSearch()}}
+{\footnotesize\ttfamily template$<$class Comparable $>$ \\
+int sequential\+Search (\begin{DoxyParamCaption}\item[{const vector$<$ Comparable $>$ \&}]{v,  }\item[{Comparable}]{x }\end{DoxyParamCaption})}
+
+
+
+Searches for an object of class Comparable in a vector of pointers to objects of the same class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & vector of pointers to objets to search for \\
+\hline
+{\em x} & object to search for\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+object\textquotesingle{}s index on vector, -\/1 if it does not exist 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___template_gada542f6ca0126d949ac4f038116a57dd}\label{group___template_gada542f6ca0126d949ac4f038116a57dd}} 
+\index{Functions@{Functions}!sequential\+Search\+No\+Pointer@{sequential\+Search\+No\+Pointer}}
+\index{sequential\+Search\+No\+Pointer@{sequential\+Search\+No\+Pointer}!Functions@{Functions}}
+\subsubsection{\texorpdfstring{sequential\+Search\+No\+Pointer()}{sequentialSearchNoPointer()}}
+{\footnotesize\ttfamily template$<$class Comparable $>$ \\
+int sequential\+Search\+No\+Pointer (\begin{DoxyParamCaption}\item[{const vector$<$ Comparable $>$ \&}]{v,  }\item[{Comparable}]{x }\end{DoxyParamCaption})}
+
+
+
+Searches for an object of class Comparable in a vector of objects of the same class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & vector containing the objets to search for \\
+\hline
+{\em x} & object to search for\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+object\textquotesingle{}s index on vector, -\/1 if it does not exist 
+\end{DoxyReturn}

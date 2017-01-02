@@ -1,0 +1,615 @@
+\hypertarget{group___user}{}\section{Transaction}
+\label{group___user}\index{Transaction@{Transaction}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_user}{User}
+\item 
+class \hyperlink{class_driver}{Driver}
+\item 
+class \hyperlink{class_passenger}{Passenger}
+\item 
+struct \hyperlink{structuser_ptr}{user\+Ptr}
+\begin{DoxyCompactList}\small\item\em struct used for hash insertion \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___user_ga4a0137053e591fbb79d9057dd7d2283d}\label{group___user_ga4a0137053e591fbb79d9057dd7d2283d}} 
+\hyperlink{group___user_ga4a0137053e591fbb79d9057dd7d2283d}{User\+::\+User} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_user}{User} default constructor. \end{DoxyCompactList}\item 
+\hyperlink{group___user_gab4d18a829f31eae091669ac36782a396}{User\+::\+User} (string name)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_user}{User} constructor from individual parameter. \end{DoxyCompactList}\item 
+\hyperlink{group___user_ga4cad036bd4872821fa6c2585c8778461}{User\+::\+User} (int ID, string name, float balance, string username, string password, int nt, string ad, \hyperlink{class_date}{Date} lastA)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_user}{User} constructor from individual parameters. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___user_gac00b72ad64eb4149f7b21b9f5468c2b2}\label{group___user_gac00b72ad64eb4149f7b21b9f5468c2b2}} 
+\hyperlink{group___user_gac00b72ad64eb4149f7b21b9f5468c2b2}{User\+::$\sim$\+User} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_user}{User} destructor. \end{DoxyCompactList}\item 
+virtual float \hyperlink{group___user_gac8563338d1d8086cd5485ad8c1ed4499}{User\+::payment} ()
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s payment based on monthly trips \#. \end{DoxyCompactList}\item 
+void \hyperlink{group___user_ga72cde56f7a6c5abcf8a22dcd6fdc8449}{User\+::add\+Buddy} (\hyperlink{class_user}{User} $\ast$user)
+\begin{DoxyCompactList}\small\item\em Adds \hyperlink{class_user}{User} to vector of Buddies of the object. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___user_gaaaa81787feebf8150cc2553e13edb8f7}\label{group___user_gaaaa81787feebf8150cc2553e13edb8f7}} 
+void \hyperlink{group___user_gaaaa81787feebf8150cc2553e13edb8f7}{User\+::delete\+Buddies} ()
+\begin{DoxyCompactList}\small\item\em Resets object\textquotesingle{}s vector of buddies. \end{DoxyCompactList}\item 
+vector$<$ \hyperlink{class_user}{User} $\ast$ $>$ \hyperlink{group___user_ga47d6c3dccd2b1c3050fbd0f572bac6f8}{User\+::get\+Buddies} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s vector of Buddies. \end{DoxyCompactList}\item 
+bool \hyperlink{group___user_gab403e4acde558a3f968aa13b74960da5}{User\+::operator==} (const \hyperlink{class_user}{User} $\ast$u) const
+\begin{DoxyCompactList}\small\item\em Compares two objects of the class \hyperlink{class_user}{User}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___user_gab9645a2f4dc87343f9e9aeb408be41ad}\label{group___user_gab9645a2f4dc87343f9e9aeb408be41ad}} 
+void {\bfseries User\+::set\+Password} (string password)
+\item 
+void \hyperlink{group___user_ga280617ba3ac500d59e6eb8af09dc3487}{User\+::remove\+Buddy} (int ID)
+\begin{DoxyCompactList}\small\item\em removes user as buddy of all users \end{DoxyCompactList}\item 
+\hyperlink{group___user_ga781d40c6af9f399284149602ead32171}{Driver\+::\+Driver} (int ID, string name, float balance, string username, string password, int nt, string ad, \hyperlink{class_date}{Date} lastA)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_driver}{Driver} constructor from individual parameters. \end{DoxyCompactList}\item 
+float \hyperlink{group___user_ga3e6ec3270b94d43b3865b326e5bcd381}{Driver\+::payment} ()
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s payment based on monthly trips \#. \end{DoxyCompactList}\item 
+bool \hyperlink{group___user_gaf8b79bce2879830b12e6f3ec954192a2}{Driver\+::car} () const
+\begin{DoxyCompactList}\small\item\em C\+Hecks if object is a driver. \end{DoxyCompactList}\item 
+\hyperlink{group___user_ga00628e580d270e68278cc76994c841b1}{Passenger\+::\+Passenger} (string name)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_user}{User} constructor from individual parameter. \end{DoxyCompactList}\item 
+\hyperlink{group___user_ga0c1aecc465a9e8887f2b9bd3e784438a}{Passenger\+::\+Passenger} (int ID, string name, float balance, string username, string password, int nt, string ad, \hyperlink{class_date}{Date} lastA)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_passenger}{Passenger} constructor from individual parameters. \end{DoxyCompactList}\item 
+float \hyperlink{group___user_ga9535b6486d1f33f055d6c7385780ec68}{Passenger\+::payment} ()
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s payment based on monthly trips \#. \end{DoxyCompactList}\item 
+bool \hyperlink{group___user_gaeb69b29d53079577e41f070da1f442dd}{Passenger\+::car} () const
+\begin{DoxyCompactList}\small\item\em Checks if object is a driver. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___user_gaf4eccff4aa6f642f1d6ab972abae9c21}\label{group___user_gaf4eccff4aa6f642f1d6ab972abae9c21}} 
+\hyperlink{class_user}{User} $\ast$ {\bfseries user\+Ptr\+::user}
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+ostream \& \hyperlink{group___user_ga2bb61cca08fd63cdf2841686040958b1}{User\+::operator$<$$<$} (ostream \&out, const \hyperlink{class_user}{User} $\ast$u)
+\begin{DoxyCompactList}\small\item\em Writes to ostream the information of a object of class \hyperlink{class_user}{User}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{User data-\/members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___user_ga1b2591d51a155bb956f95e3cb13d8144}\label{group___user_ga1b2591d51a155bb956f95e3cb13d8144}} 
+int {\bfseries User\+::\+ID}
+\item 
+\mbox{\Hypertarget{group___user_gad4d1cdd5859bbb9c06e000ddc05d7fa5}\label{group___user_gad4d1cdd5859bbb9c06e000ddc05d7fa5}} 
+const string {\bfseries User\+::name}
+\item 
+\mbox{\Hypertarget{group___user_gad1f3276105af51c570f5434e516ee30f}\label{group___user_gad1f3276105af51c570f5434e516ee30f}} 
+string {\bfseries User\+::username}
+\item 
+\mbox{\Hypertarget{group___user_gab537b9a55bc7d7fcafcdf8e53d085e67}\label{group___user_gab537b9a55bc7d7fcafcdf8e53d085e67}} 
+string {\bfseries User\+::password}
+\item 
+\mbox{\Hypertarget{group___user_ga8f20f8d72f79f19c3ffcafc9512288e6}\label{group___user_ga8f20f8d72f79f19c3ffcafc9512288e6}} 
+float {\bfseries User\+::balance}
+\item 
+\mbox{\Hypertarget{group___user_ga35129029ac9d5ec5efc3beba1a87badd}\label{group___user_ga35129029ac9d5ec5efc3beba1a87badd}} 
+static float {\bfseries User\+::maintenance\+Fee} = 10
+\item 
+\mbox{\Hypertarget{group___user_ga1d65ff6715bf3baa285332e43121f6f7}\label{group___user_ga1d65ff6715bf3baa285332e43121f6f7}} 
+int {\bfseries User\+::ntrips}
+\item 
+\mbox{\Hypertarget{group___user_ga6907943158018cb20f19773c89cf9e2d}\label{group___user_ga6907943158018cb20f19773c89cf9e2d}} 
+vector$<$ \hyperlink{class_user}{User} $\ast$ $>$ {\bfseries User\+::buddies}
+\item 
+\mbox{\Hypertarget{group___user_gae7e91b2df59f5a6a2c8d46f532cb035e}\label{group___user_gae7e91b2df59f5a6a2c8d46f532cb035e}} 
+string {\bfseries User\+::address}
+\item 
+\mbox{\Hypertarget{group___user_ga230c91b4de8dc58223956c39dc458671}\label{group___user_ga230c91b4de8dc58223956c39dc458671}} 
+\hyperlink{class_date}{Date} {\bfseries User\+::last\+Access}
+\end{DoxyCompactItemize}
+\subsection*{Basic Class Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group___user_ga0fed77d10cd142ee4112d650ec564e6b}{User\+::set\+Username} (string username)
+\begin{DoxyCompactList}\small\item\em Sets object\textquotesingle{}s username. \end{DoxyCompactList}\item 
+void \hyperlink{group___user_ga95feef2641a3141ef514a0bd52c3aaa2}{User\+::set\+ID} (int ID)
+\begin{DoxyCompactList}\small\item\em Sets object\textquotesingle{}s ID. \end{DoxyCompactList}\item 
+int \hyperlink{group___user_ga986c6f30aeac167bb5d311dd412cf604}{User\+::get\+ID} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s ID. \end{DoxyCompactList}\item 
+void \hyperlink{group___user_ga5578e73f0915b2ebf38eff4434fc340d}{User\+::set\+Last\+Access} (\hyperlink{class_date}{Date} dt)
+\begin{DoxyCompactList}\small\item\em Sets object\textquotesingle{}s last access date. \end{DoxyCompactList}\item 
+\hyperlink{class_date}{Date} \hyperlink{group___user_ga9399e8ad03d939281357fe2e1d2a0f71}{User\+::get\+Last\+Access} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s last access date. \end{DoxyCompactList}\item 
+string \hyperlink{group___user_gab9b2b5feb6bdd1582696eb6d44cee384}{User\+::get\+Name} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s name. \end{DoxyCompactList}\item 
+string \hyperlink{group___user_ga82e034043e04b2d750c654c8b2f2ce78}{User\+::get\+Username} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s username. \end{DoxyCompactList}\item 
+void \hyperlink{group___user_ga02324144fd363369f11b7aca8f117865}{User\+::set\+Adress} (string ad)
+\begin{DoxyCompactList}\small\item\em Sets object\textquotesingle{}s address. \end{DoxyCompactList}\item 
+string \hyperlink{group___user_gaef1759300db1bca3c84af6af79f00365}{User\+::get\+Address} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s address. \end{DoxyCompactList}\item 
+string \hyperlink{group___user_ga33429bdd1253091697a9c5c5e1448bee}{User\+::get\+Password} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s password. \end{DoxyCompactList}\item 
+float \hyperlink{group___user_ga713b20a844b9e70630a50dd5f1357d95}{User\+::get\+Balance} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s balance. \end{DoxyCompactList}\item 
+int \hyperlink{group___user_gadfbbdc7ea72e051b7b7b8d41c14eb846}{User\+::get\+Ntrips} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s \# of trips. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___user_ga738dab753a5a3ba6e1315caaf4765a24}\label{group___user_ga738dab753a5a3ba6e1315caaf4765a24}} 
+void \hyperlink{group___user_ga738dab753a5a3ba6e1315caaf4765a24}{User\+::set\+Ntrips} ()
+\begin{DoxyCompactList}\small\item\em Increments object\textquotesingle{}s \# of trips. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___user_ga0b5d245f2e517c697493264e0a1e5642}\label{group___user_ga0b5d245f2e517c697493264e0a1e5642}} 
+void \hyperlink{group___user_ga0b5d245f2e517c697493264e0a1e5642}{User\+::dec\+Ntrips} ()
+\begin{DoxyCompactList}\small\item\em Decrements object\textquotesingle{}s \# of trips. \end{DoxyCompactList}\item 
+void \hyperlink{group___user_gafe73f0b48d4aa29e9205f706a21b7068}{User\+::deposit} (float value)
+\begin{DoxyCompactList}\small\item\em Deposits a value in \hyperlink{class_user}{User}\textquotesingle{}s account. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{group___user_ga86635e817828c81ee5e18b2e802e3218}{User\+::car} () const
+\begin{DoxyCompactList}\small\item\em C\+Hecks if object is a driver. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___user_ga6eb1d321c02d84e4bb839bc49d4ac074}\label{group___user_ga6eb1d321c02d84e4bb839bc49d4ac074}} 
+void \hyperlink{group___user_ga6eb1d321c02d84e4bb839bc49d4ac074}{User\+::reset\+Trips} ()
+\begin{DoxyCompactList}\small\item\em Resets object\textquotesingle{}s number of monthly trips. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{class_user}{User} class declaration 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group___user_ga72cde56f7a6c5abcf8a22dcd6fdc8449}\label{group___user_ga72cde56f7a6c5abcf8a22dcd6fdc8449}} 
+\index{Transaction@{Transaction}!add\+Buddy@{add\+Buddy}}
+\index{add\+Buddy@{add\+Buddy}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{add\+Buddy()}{addBuddy()}}
+{\footnotesize\ttfamily void User\+::add\+Buddy (\begin{DoxyParamCaption}\item[{\hyperlink{class_user}{User} $\ast$}]{user }\end{DoxyParamCaption})}
+
+
+
+Adds \hyperlink{class_user}{User} to vector of Buddies of the object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em user} & pointer to the \hyperlink{class_user}{User} to be added \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___user_ga86635e817828c81ee5e18b2e802e3218}\label{group___user_ga86635e817828c81ee5e18b2e802e3218}} 
+\index{Transaction@{Transaction}!car@{car}}
+\index{car@{car}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{car()}{car()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily bool User\+::car (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+C\+Hecks if object is a driver. 
+
+\begin{DoxyReturn}{Returns}
+bool true if \hyperlink{class_user}{User} has a car, false otherwise 
+\end{DoxyReturn}
+
+
+Reimplemented in \hyperlink{group___user_gaeb69b29d53079577e41f070da1f442dd}{Passenger}, and \hyperlink{group___user_gaf8b79bce2879830b12e6f3ec954192a2}{Driver}.
+
+\mbox{\Hypertarget{group___user_gaf8b79bce2879830b12e6f3ec954192a2}\label{group___user_gaf8b79bce2879830b12e6f3ec954192a2}} 
+\index{Transaction@{Transaction}!car@{car}}
+\index{car@{car}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{car()}{car()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily bool Driver\+::car (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+C\+Hecks if object is a driver. 
+
+\begin{DoxyReturn}{Returns}
+bool true if \hyperlink{class_user}{User} has a car, false otherwise 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{group___user_ga86635e817828c81ee5e18b2e802e3218}{User}.
+
+\mbox{\Hypertarget{group___user_gaeb69b29d53079577e41f070da1f442dd}\label{group___user_gaeb69b29d53079577e41f070da1f442dd}} 
+\index{Transaction@{Transaction}!car@{car}}
+\index{car@{car}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{car()}{car()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily bool Passenger\+::car (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Checks if object is a driver. 
+
+\begin{DoxyReturn}{Returns}
+bool true if \hyperlink{class_user}{User} has a car, false otherwise 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{group___user_ga86635e817828c81ee5e18b2e802e3218}{User}.
+
+\mbox{\Hypertarget{group___user_gafe73f0b48d4aa29e9205f706a21b7068}\label{group___user_gafe73f0b48d4aa29e9205f706a21b7068}} 
+\index{Transaction@{Transaction}!deposit@{deposit}}
+\index{deposit@{deposit}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{deposit()}{deposit()}}
+{\footnotesize\ttfamily void User\+::deposit (\begin{DoxyParamCaption}\item[{float}]{value }\end{DoxyParamCaption})}
+
+
+
+Deposits a value in \hyperlink{class_user}{User}\textquotesingle{}s account. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & to deposit \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___user_ga781d40c6af9f399284149602ead32171}\label{group___user_ga781d40c6af9f399284149602ead32171}} 
+\index{Transaction@{Transaction}!Driver@{Driver}}
+\index{Driver@{Driver}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{Driver()}{Driver()}}
+{\footnotesize\ttfamily Driver\+::\+Driver (\begin{DoxyParamCaption}\item[{int}]{ID,  }\item[{string}]{name,  }\item[{float}]{balance,  }\item[{string}]{username,  }\item[{string}]{password,  }\item[{int}]{nt,  }\item[{string}]{ad,  }\item[{\hyperlink{class_date}{Date}}]{lastA }\end{DoxyParamCaption})}
+
+
+
+\hyperlink{class_driver}{Driver} constructor from individual parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & of the \hyperlink{class_user}{User} to set \\
+\hline
+{\em name} & of the \hyperlink{class_user}{User} to set \\
+\hline
+{\em balance} & of the \hyperlink{class_user}{User} to set \\
+\hline
+{\em username} & of the \hyperlink{class_user}{User} to set \\
+\hline
+{\em password} & of the \hyperlink{class_user}{User} to set \\
+\hline
+{\em nt} & number of trips of the \hyperlink{class_user}{User} to set \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___user_gaef1759300db1bca3c84af6af79f00365}\label{group___user_gaef1759300db1bca3c84af6af79f00365}} 
+\index{Transaction@{Transaction}!get\+Address@{get\+Address}}
+\index{get\+Address@{get\+Address}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{get\+Address()}{getAddress()}}
+{\footnotesize\ttfamily string User\+::get\+Address (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Retrieves object\textquotesingle{}s address. 
+
+\begin{DoxyReturn}{Returns}
+string address of the object 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___user_ga713b20a844b9e70630a50dd5f1357d95}\label{group___user_ga713b20a844b9e70630a50dd5f1357d95}} 
+\index{Transaction@{Transaction}!get\+Balance@{get\+Balance}}
+\index{get\+Balance@{get\+Balance}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{get\+Balance()}{getBalance()}}
+{\footnotesize\ttfamily float User\+::get\+Balance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Retrieves object\textquotesingle{}s balance. 
+
+\begin{DoxyReturn}{Returns}
+float account balance of the \hyperlink{class_user}{User} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___user_ga47d6c3dccd2b1c3050fbd0f572bac6f8}\label{group___user_ga47d6c3dccd2b1c3050fbd0f572bac6f8}} 
+\index{Transaction@{Transaction}!get\+Buddies@{get\+Buddies}}
+\index{get\+Buddies@{get\+Buddies}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{get\+Buddies()}{getBuddies()}}
+{\footnotesize\ttfamily vector$<$\hyperlink{class_user}{User} $\ast$$>$ User\+::get\+Buddies (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Retrieves object\textquotesingle{}s vector of Buddies. 
+
+\begin{DoxyReturn}{Returns}
+vector vector of pointers to the Users who are the object\textquotesingle{}s Buddies 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___user_ga986c6f30aeac167bb5d311dd412cf604}\label{group___user_ga986c6f30aeac167bb5d311dd412cf604}} 
+\index{Transaction@{Transaction}!get\+ID@{get\+ID}}
+\index{get\+ID@{get\+ID}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{get\+I\+D()}{getID()}}
+{\footnotesize\ttfamily int User\+::get\+ID (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Retrieves object\textquotesingle{}s ID. 
+
+\begin{DoxyReturn}{Returns}
+int id 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___user_ga9399e8ad03d939281357fe2e1d2a0f71}\label{group___user_ga9399e8ad03d939281357fe2e1d2a0f71}} 
+\index{Transaction@{Transaction}!get\+Last\+Access@{get\+Last\+Access}}
+\index{get\+Last\+Access@{get\+Last\+Access}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{get\+Last\+Access()}{getLastAccess()}}
+{\footnotesize\ttfamily \hyperlink{class_date}{Date} User\+::get\+Last\+Access (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Retrieves object\textquotesingle{}s last access date. 
+
+\begin{DoxyReturn}{Returns}
+\hyperlink{class_date}{Date} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___user_gab9b2b5feb6bdd1582696eb6d44cee384}\label{group___user_gab9b2b5feb6bdd1582696eb6d44cee384}} 
+\index{Transaction@{Transaction}!get\+Name@{get\+Name}}
+\index{get\+Name@{get\+Name}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{get\+Name()}{getName()}}
+{\footnotesize\ttfamily string User\+::get\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Retrieves object\textquotesingle{}s name. 
+
+\begin{DoxyReturn}{Returns}
+string name of the object 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___user_gadfbbdc7ea72e051b7b7b8d41c14eb846}\label{group___user_gadfbbdc7ea72e051b7b7b8d41c14eb846}} 
+\index{Transaction@{Transaction}!get\+Ntrips@{get\+Ntrips}}
+\index{get\+Ntrips@{get\+Ntrips}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{get\+Ntrips()}{getNtrips()}}
+{\footnotesize\ttfamily int User\+::get\+Ntrips (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Retrieves object\textquotesingle{}s \# of trips. 
+
+\begin{DoxyReturn}{Returns}
+int number of total month\textquotesingle{}s trips 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___user_ga33429bdd1253091697a9c5c5e1448bee}\label{group___user_ga33429bdd1253091697a9c5c5e1448bee}} 
+\index{Transaction@{Transaction}!get\+Password@{get\+Password}}
+\index{get\+Password@{get\+Password}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{get\+Password()}{getPassword()}}
+{\footnotesize\ttfamily string User\+::get\+Password (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Retrieves object\textquotesingle{}s password. 
+
+\begin{DoxyReturn}{Returns}
+string password of the \hyperlink{class_user}{User} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___user_ga82e034043e04b2d750c654c8b2f2ce78}\label{group___user_ga82e034043e04b2d750c654c8b2f2ce78}} 
+\index{Transaction@{Transaction}!get\+Username@{get\+Username}}
+\index{get\+Username@{get\+Username}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{get\+Username()}{getUsername()}}
+{\footnotesize\ttfamily string User\+::get\+Username (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Retrieves object\textquotesingle{}s username. 
+
+\begin{DoxyReturn}{Returns}
+string username of the object 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___user_gab403e4acde558a3f968aa13b74960da5}\label{group___user_gab403e4acde558a3f968aa13b74960da5}} 
+\index{Transaction@{Transaction}!operator==@{operator==}}
+\index{operator==@{operator==}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool User\+::operator== (\begin{DoxyParamCaption}\item[{const \hyperlink{class_user}{User} $\ast$}]{u }\end{DoxyParamCaption}) const}
+
+
+
+Compares two objects of the class \hyperlink{class_user}{User}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em u} & pointer to the \hyperlink{class_user}{User} to execute the comparison with\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool true if ID or Username between \hyperlink{class_user}{User} u matches the object\textquotesingle{}s 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___user_ga00628e580d270e68278cc76994c841b1}\label{group___user_ga00628e580d270e68278cc76994c841b1}} 
+\index{Transaction@{Transaction}!Passenger@{Passenger}}
+\index{Passenger@{Passenger}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{Passenger()}{Passenger()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Passenger\+::\+Passenger (\begin{DoxyParamCaption}\item[{string}]{name }\end{DoxyParamCaption})}
+
+
+
+\hyperlink{class_user}{User} constructor from individual parameter. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & to set has object\textquotesingle{}s name \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___user_ga0c1aecc465a9e8887f2b9bd3e784438a}\label{group___user_ga0c1aecc465a9e8887f2b9bd3e784438a}} 
+\index{Transaction@{Transaction}!Passenger@{Passenger}}
+\index{Passenger@{Passenger}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{Passenger()}{Passenger()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Passenger\+::\+Passenger (\begin{DoxyParamCaption}\item[{int}]{ID,  }\item[{string}]{name,  }\item[{float}]{balance,  }\item[{string}]{username,  }\item[{string}]{password,  }\item[{int}]{nt,  }\item[{string}]{ad,  }\item[{\hyperlink{class_date}{Date}}]{lastA }\end{DoxyParamCaption})}
+
+
+
+\hyperlink{class_passenger}{Passenger} constructor from individual parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & of the \hyperlink{class_user}{User} to set \\
+\hline
+{\em name} & of the \hyperlink{class_user}{User} to set \\
+\hline
+{\em balance} & of the \hyperlink{class_user}{User} to set \\
+\hline
+{\em username} & of the \hyperlink{class_user}{User} to set \\
+\hline
+{\em password} & of the \hyperlink{class_user}{User} to set \\
+\hline
+{\em nt} & number of trips of the \hyperlink{class_user}{User} to set \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___user_gac8563338d1d8086cd5485ad8c1ed4499}\label{group___user_gac8563338d1d8086cd5485ad8c1ed4499}} 
+\index{Transaction@{Transaction}!payment@{payment}}
+\index{payment@{payment}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{payment()}{payment()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily float User\+::payment (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Retrieves object\textquotesingle{}s payment based on monthly trips \#. 
+
+\begin{DoxyReturn}{Returns}
+float total in euros 
+\end{DoxyReturn}
+
+
+Reimplemented in \hyperlink{group___user_ga9535b6486d1f33f055d6c7385780ec68}{Passenger}, and \hyperlink{group___user_ga3e6ec3270b94d43b3865b326e5bcd381}{Driver}.
+
+\mbox{\Hypertarget{group___user_ga3e6ec3270b94d43b3865b326e5bcd381}\label{group___user_ga3e6ec3270b94d43b3865b326e5bcd381}} 
+\index{Transaction@{Transaction}!payment@{payment}}
+\index{payment@{payment}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{payment()}{payment()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily float Driver\+::payment (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Retrieves object\textquotesingle{}s payment based on monthly trips \#. 
+
+\begin{DoxyReturn}{Returns}
+float total in euros 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{group___user_gac8563338d1d8086cd5485ad8c1ed4499}{User}.
+
+\mbox{\Hypertarget{group___user_ga9535b6486d1f33f055d6c7385780ec68}\label{group___user_ga9535b6486d1f33f055d6c7385780ec68}} 
+\index{Transaction@{Transaction}!payment@{payment}}
+\index{payment@{payment}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{payment()}{payment()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily float Passenger\+::payment (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Retrieves object\textquotesingle{}s payment based on monthly trips \#. 
+
+\begin{DoxyReturn}{Returns}
+float total in euros 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{group___user_gac8563338d1d8086cd5485ad8c1ed4499}{User}.
+
+\mbox{\Hypertarget{group___user_ga280617ba3ac500d59e6eb8af09dc3487}\label{group___user_ga280617ba3ac500d59e6eb8af09dc3487}} 
+\index{Transaction@{Transaction}!remove\+Buddy@{remove\+Buddy}}
+\index{remove\+Buddy@{remove\+Buddy}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{remove\+Buddy()}{removeBuddy()}}
+{\footnotesize\ttfamily void User\+::remove\+Buddy (\begin{DoxyParamCaption}\item[{int}]{ID }\end{DoxyParamCaption})}
+
+
+
+removes user as buddy of all users 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ID} & of the user you want to remove \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___user_ga02324144fd363369f11b7aca8f117865}\label{group___user_ga02324144fd363369f11b7aca8f117865}} 
+\index{Transaction@{Transaction}!set\+Adress@{set\+Adress}}
+\index{set\+Adress@{set\+Adress}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{set\+Adress()}{setAdress()}}
+{\footnotesize\ttfamily void User\+::set\+Adress (\begin{DoxyParamCaption}\item[{string}]{ad }\end{DoxyParamCaption})}
+
+
+
+Sets object\textquotesingle{}s address. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em string} & address to set the address to \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___user_ga95feef2641a3141ef514a0bd52c3aaa2}\label{group___user_ga95feef2641a3141ef514a0bd52c3aaa2}} 
+\index{Transaction@{Transaction}!set\+ID@{set\+ID}}
+\index{set\+ID@{set\+ID}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{set\+I\+D()}{setID()}}
+{\footnotesize\ttfamily void User\+::set\+ID (\begin{DoxyParamCaption}\item[{int}]{ID }\end{DoxyParamCaption})}
+
+
+
+Sets object\textquotesingle{}s ID. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ID} & id to set \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___user_ga5578e73f0915b2ebf38eff4434fc340d}\label{group___user_ga5578e73f0915b2ebf38eff4434fc340d}} 
+\index{Transaction@{Transaction}!set\+Last\+Access@{set\+Last\+Access}}
+\index{set\+Last\+Access@{set\+Last\+Access}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{set\+Last\+Access()}{setLastAccess()}}
+{\footnotesize\ttfamily void User\+::set\+Last\+Access (\begin{DoxyParamCaption}\item[{\hyperlink{class_date}{Date}}]{dt }\end{DoxyParamCaption})}
+
+
+
+Sets object\textquotesingle{}s last access date. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \hyperlink{class_date}{Date}} & date to set the last access to \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___user_ga0fed77d10cd142ee4112d650ec564e6b}\label{group___user_ga0fed77d10cd142ee4112d650ec564e6b}} 
+\index{Transaction@{Transaction}!set\+Username@{set\+Username}}
+\index{set\+Username@{set\+Username}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{set\+Username()}{setUsername()}}
+{\footnotesize\ttfamily void User\+::set\+Username (\begin{DoxyParamCaption}\item[{string}]{username }\end{DoxyParamCaption})}
+
+
+
+Sets object\textquotesingle{}s username. 
+
+Functions that perform basic class functionality 
+\begin{DoxyParams}{Parameters}
+{\em username} & to set \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___user_gab4d18a829f31eae091669ac36782a396}\label{group___user_gab4d18a829f31eae091669ac36782a396}} 
+\index{Transaction@{Transaction}!User@{User}}
+\index{User@{User}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{User()}{User()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily User\+::\+User (\begin{DoxyParamCaption}\item[{string}]{name }\end{DoxyParamCaption})}
+
+
+
+\hyperlink{class_user}{User} constructor from individual parameter. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & name of the new \hyperlink{class_user}{User} to set \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___user_ga4cad036bd4872821fa6c2585c8778461}\label{group___user_ga4cad036bd4872821fa6c2585c8778461}} 
+\index{Transaction@{Transaction}!User@{User}}
+\index{User@{User}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{User()}{User()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily User\+::\+User (\begin{DoxyParamCaption}\item[{int}]{ID,  }\item[{string}]{name,  }\item[{float}]{balance,  }\item[{string}]{username,  }\item[{string}]{password,  }\item[{int}]{nt,  }\item[{string}]{ad,  }\item[{\hyperlink{class_date}{Date}}]{lastA }\end{DoxyParamCaption})}
+
+
+
+\hyperlink{class_user}{User} constructor from individual parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & of the \hyperlink{class_user}{User} to set \\
+\hline
+{\em name} & of the \hyperlink{class_user}{User} to set \\
+\hline
+{\em balance} & of the \hyperlink{class_user}{User} to set \\
+\hline
+{\em username} & of the \hyperlink{class_user}{User} to set \\
+\hline
+{\em password} & of the \hyperlink{class_user}{User} to set \\
+\hline
+{\em nt} & number of trips of the \hyperlink{class_user}{User} to set \\
+\hline
+{\em ad} & addres of the \hyperlink{class_user}{User} to set \\
+\hline
+{\em lastA} & date os last access of the \hyperlink{class_user}{User} to set \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Friends}
+\mbox{\Hypertarget{group___user_ga2bb61cca08fd63cdf2841686040958b1}\label{group___user_ga2bb61cca08fd63cdf2841686040958b1}} 
+\index{Transaction@{Transaction}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{ostream \&}]{out,  }\item[{const \hyperlink{class_user}{User} $\ast$}]{u }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Writes to ostream the information of a object of class \hyperlink{class_user}{User}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em u} & object of which we want to print the information for \\
+\hline
+\end{DoxyParams}

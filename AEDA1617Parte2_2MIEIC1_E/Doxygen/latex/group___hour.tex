@@ -1,0 +1,192 @@
+\hypertarget{group___hour}{}\section{Hour}
+\label{group___hour}\index{Hour@{Hour}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_hour}{Hour}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___hour_ga57b604e71195671d96ef6b8e7b819a71}\label{group___hour_ga57b604e71195671d96ef6b8e7b819a71}} 
+\hyperlink{group___hour_ga57b604e71195671d96ef6b8e7b819a71}{Hour\+::\+Hour} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_hour}{Hour} default constructor. \end{DoxyCompactList}\item 
+\hyperlink{group___hour_ga77024d0dee349bc56162428af7c60f8c}{Hour\+::\+Hour} (string hour)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_hour}{Hour} constructor from string. \end{DoxyCompactList}\item 
+\hyperlink{group___hour_gaedd062589c21da403d9490a9706c3005}{Hour\+::\+Hour} (int hour, int minutes)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_hour}{Hour} constructor from individual integers. \end{DoxyCompactList}\item 
+bool \hyperlink{group___hour_ga1643bbcd2a1b14cd49f45955c62e8ce1}{Hour\+::valid\+Hour} ()
+\begin{DoxyCompactList}\small\item\em Checks if the object of class \hyperlink{class_hour}{Hour} is valid by evaluating it\textquotesingle{}s private data on logical validity in the real-\/world. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___hour_ga641c0cf6dd5156a61d5f7f829891b42f}\label{group___hour_ga641c0cf6dd5156a61d5f7f829891b42f}} 
+void \hyperlink{group___hour_ga641c0cf6dd5156a61d5f7f829891b42f}{Hour\+::set\+Current} ()
+\begin{DoxyCompactList}\small\item\em Sets object to be the current system\textquotesingle{}s hour. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Hour data-\/members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___hour_gac9509fa4f6fe9d9c6dc5794c2bd634ea}\label{group___hour_gac9509fa4f6fe9d9c6dc5794c2bd634ea}} 
+int {\bfseries Hour\+::hour}
+\item 
+\mbox{\Hypertarget{group___hour_ga9e4fb5ad4ded246b72c909981860cefe}\label{group___hour_ga9e4fb5ad4ded246b72c909981860cefe}} 
+int {\bfseries Hour\+::minutes}
+\end{DoxyCompactItemize}
+\subsection*{Basic Class Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{group___hour_ga44859e9acda4578bc3cfcad5d2f25585}{Hour\+::get\+Hour} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s hour. \end{DoxyCompactList}\item 
+int \hyperlink{group___hour_gaccf1de7229b52b59d2119e9802fa3eee}{Hour\+::get\+Minutes} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s minutes. \end{DoxyCompactList}\item 
+void \hyperlink{group___hour_ga62d4e3da6eeefecab589a63160493835}{Hour\+::set\+Hour} (int hour)
+\begin{DoxyCompactList}\small\item\em Sets object\textquotesingle{}s hour. \end{DoxyCompactList}\item 
+void \hyperlink{group___hour_gab3606a7c5dd8679a44e79536a491923e}{Hour\+::set\+Minutes} (int mimnutes)
+\begin{DoxyCompactList}\small\item\em Sets object\textquotesingle{}s minutes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Hour Operators Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{group___hour_ga998bef44d3ea319e70f9d88ad053563b}{Hour\+::operator$<$} (const \hyperlink{class_hour}{Hour} \&h2) const
+\begin{DoxyCompactList}\small\item\em Compares two objects of the class to check if one hour if previous to the other. \end{DoxyCompactList}\item 
+ostream \& \hyperlink{group___hour_gac58157e808c8f449b403949cbd1b2737}{Hour\+::operator$<$$<$} (ostream \&out, \hyperlink{class_hour}{Hour} \&hour)
+\begin{DoxyCompactList}\small\item\em Writes to ostream the information of a object of class \hyperlink{class_hour}{Hour}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{class_hour}{Hour} class declaration 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group___hour_ga44859e9acda4578bc3cfcad5d2f25585}\label{group___hour_ga44859e9acda4578bc3cfcad5d2f25585}} 
+\index{Hour@{Hour}!get\+Hour@{get\+Hour}}
+\index{get\+Hour@{get\+Hour}!Hour@{Hour}}
+\subsubsection{\texorpdfstring{get\+Hour()}{getHour()}}
+{\footnotesize\ttfamily int Hour\+::get\+Hour (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Retrieves object\textquotesingle{}s hour. 
+
+Functions that perform basic class functionality \begin{DoxyReturn}{Returns}
+int hour 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___hour_gaccf1de7229b52b59d2119e9802fa3eee}\label{group___hour_gaccf1de7229b52b59d2119e9802fa3eee}} 
+\index{Hour@{Hour}!get\+Minutes@{get\+Minutes}}
+\index{get\+Minutes@{get\+Minutes}!Hour@{Hour}}
+\subsubsection{\texorpdfstring{get\+Minutes()}{getMinutes()}}
+{\footnotesize\ttfamily int Hour\+::get\+Minutes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Retrieves object\textquotesingle{}s minutes. 
+
+\begin{DoxyReturn}{Returns}
+int minutes 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___hour_ga77024d0dee349bc56162428af7c60f8c}\label{group___hour_ga77024d0dee349bc56162428af7c60f8c}} 
+\index{Hour@{Hour}!Hour@{Hour}}
+\index{Hour@{Hour}!Hour@{Hour}}
+\subsubsection{\texorpdfstring{Hour()}{Hour()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Hour\+::\+Hour (\begin{DoxyParamCaption}\item[{string}]{hour }\end{DoxyParamCaption})}
+
+
+
+\hyperlink{class_hour}{Hour} constructor from string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hour} & string in the hh\+:mm format \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___hour_gaedd062589c21da403d9490a9706c3005}\label{group___hour_gaedd062589c21da403d9490a9706c3005}} 
+\index{Hour@{Hour}!Hour@{Hour}}
+\index{Hour@{Hour}!Hour@{Hour}}
+\subsubsection{\texorpdfstring{Hour()}{Hour()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Hour\+::\+Hour (\begin{DoxyParamCaption}\item[{int}]{hour,  }\item[{int}]{minutes }\end{DoxyParamCaption})}
+
+
+
+\hyperlink{class_hour}{Hour} constructor from individual integers. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hour} & hour to set \\
+\hline
+{\em minutes} & minutes to set \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___hour_ga998bef44d3ea319e70f9d88ad053563b}\label{group___hour_ga998bef44d3ea319e70f9d88ad053563b}} 
+\index{Hour@{Hour}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!Hour@{Hour}}
+\subsubsection{\texorpdfstring{operator$<$()}{operator<()}}
+{\footnotesize\ttfamily bool Hour\+::operator$<$ (\begin{DoxyParamCaption}\item[{const \hyperlink{class_hour}{Hour} \&}]{h2 }\end{DoxyParamCaption}) const}
+
+
+
+Compares two objects of the class to check if one hour if previous to the other. 
+
+Basic Operators of the class 
+\begin{DoxyParams}{Parameters}
+{\em h2} & object for comparison\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true first object is before, false otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___hour_ga62d4e3da6eeefecab589a63160493835}\label{group___hour_ga62d4e3da6eeefecab589a63160493835}} 
+\index{Hour@{Hour}!set\+Hour@{set\+Hour}}
+\index{set\+Hour@{set\+Hour}!Hour@{Hour}}
+\subsubsection{\texorpdfstring{set\+Hour()}{setHour()}}
+{\footnotesize\ttfamily void Hour\+::set\+Hour (\begin{DoxyParamCaption}\item[{int}]{hour }\end{DoxyParamCaption})}
+
+
+
+Sets object\textquotesingle{}s hour. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hour} & to set to \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___hour_gab3606a7c5dd8679a44e79536a491923e}\label{group___hour_gab3606a7c5dd8679a44e79536a491923e}} 
+\index{Hour@{Hour}!set\+Minutes@{set\+Minutes}}
+\index{set\+Minutes@{set\+Minutes}!Hour@{Hour}}
+\subsubsection{\texorpdfstring{set\+Minutes()}{setMinutes()}}
+{\footnotesize\ttfamily void Hour\+::set\+Minutes (\begin{DoxyParamCaption}\item[{int}]{mimnutes }\end{DoxyParamCaption})}
+
+
+
+Sets object\textquotesingle{}s minutes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em minutes} & to set to \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___hour_ga1643bbcd2a1b14cd49f45955c62e8ce1}\label{group___hour_ga1643bbcd2a1b14cd49f45955c62e8ce1}} 
+\index{Hour@{Hour}!valid\+Hour@{valid\+Hour}}
+\index{valid\+Hour@{valid\+Hour}!Hour@{Hour}}
+\subsubsection{\texorpdfstring{valid\+Hour()}{validHour()}}
+{\footnotesize\ttfamily bool Hour\+::valid\+Hour (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Checks if the object of class \hyperlink{class_hour}{Hour} is valid by evaluating it\textquotesingle{}s private data on logical validity in the real-\/world. 
+
+\begin{DoxyReturn}{Returns}
+bool true if valid members, false otherwise 
+\end{DoxyReturn}
+
+
+\subsection{Friends}
+\mbox{\Hypertarget{group___hour_gac58157e808c8f449b403949cbd1b2737}\label{group___hour_gac58157e808c8f449b403949cbd1b2737}} 
+\index{Hour@{Hour}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!Hour@{Hour}}
+\subsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{ostream \&}]{out,  }\item[{\hyperlink{class_hour}{Hour} \&}]{hour }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Writes to ostream the information of a object of class \hyperlink{class_hour}{Hour}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hour} & object of which we want to print the information for \\
+\hline
+\end{DoxyParams}

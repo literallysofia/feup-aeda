@@ -1,0 +1,394 @@
+\hypertarget{group___trip}{}\section{Transaction}
+\label{group___trip}\index{Transaction@{Transaction}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_trip}{Trip}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___trip_gaa67b77d0d2de622ed5eb9e9cad34db8f}\label{group___trip_gaa67b77d0d2de622ed5eb9e9cad34db8f}} 
+\hyperlink{group___trip_gaa67b77d0d2de622ed5eb9e9cad34db8f}{Trip\+::\+Trip} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_trip}{Trip} default constructor. \end{DoxyCompactList}\item 
+\hyperlink{group___trip_gaadf8ba70a9d5aa210149b5162e402512}{Trip\+::\+Trip} (int ID, int driver, vector$<$ \hyperlink{class_stop}{Stop} $>$ stops, \hyperlink{class_date}{Date} date, \hyperlink{class_hour}{Hour} start, \hyperlink{class_hour}{Hour} end)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_trip}{Trip} constructor from individual parameters. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___trip_ga2376daed3b03469163782ef0d0533d52}\label{group___trip_ga2376daed3b03469163782ef0d0533d52}} 
+\hyperlink{group___trip_ga2376daed3b03469163782ef0d0533d52}{Trip\+::$\sim$\+Trip} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_trip}{Trip} destructor. \end{DoxyCompactList}\item 
+void \hyperlink{group___trip_ga6ae6134652b644fa63bf267b956f1e75}{Trip\+::save} (ofstream \&out) const
+\begin{DoxyCompactList}\small\item\em Writes object\textquotesingle{}s information into file. \end{DoxyCompactList}\item 
+void \hyperlink{group___trip_gafcf569c0a9d6e5a47134f7e9dd62334a}{Trip\+::save\+AT} (ofstream \&out) const
+\begin{DoxyCompactList}\small\item\em Writes object\textquotesingle{}s information into file (only for active trips, to remain in the program for next use) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Trip data-\/members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___trip_gabe6972fc612a3749b72c1c12661cc8ad}\label{group___trip_gabe6972fc612a3749b72c1c12661cc8ad}} 
+int {\bfseries Trip\+::\+ID}
+\item 
+\mbox{\Hypertarget{group___trip_ga0831cd90eafbce7ec6b41bdab153b075}\label{group___trip_ga0831cd90eafbce7ec6b41bdab153b075}} 
+int {\bfseries Trip\+::driver}
+\item 
+\mbox{\Hypertarget{group___trip_gab432b59947852031ad55e2584991589d}\label{group___trip_gab432b59947852031ad55e2584991589d}} 
+vector$<$ \hyperlink{class_stop}{Stop} $>$ {\bfseries Trip\+::stops}
+\item 
+\mbox{\Hypertarget{group___trip_ga1acd0b851878b6f356b9e20d4ad50591}\label{group___trip_ga1acd0b851878b6f356b9e20d4ad50591}} 
+\hyperlink{class_date}{Date} {\bfseries Trip\+::date}
+\item 
+\mbox{\Hypertarget{group___trip_ga1e3a66bc72bdf9807a0c02fd7057f22c}\label{group___trip_ga1e3a66bc72bdf9807a0c02fd7057f22c}} 
+\hyperlink{class_hour}{Hour} {\bfseries Trip\+::start\+Time}
+\item 
+\mbox{\Hypertarget{group___trip_ga09127f70cc8475615bd0ed3afd8adf2f}\label{group___trip_ga09127f70cc8475615bd0ed3afd8adf2f}} 
+\hyperlink{class_hour}{Hour} {\bfseries Trip\+::end\+Time}
+\item 
+\mbox{\Hypertarget{group___trip_gab38e11eda78c40f8572e0f80f5201a90}\label{group___trip_gab38e11eda78c40f8572e0f80f5201a90}} 
+priority\+\_\+queue$<$ \hyperlink{class_candidate_trip}{Candidate\+Trip} $>$ {\bfseries Trip\+::candidate\+Queue}
+\end{DoxyCompactItemize}
+\subsection*{Basic Class Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{group___trip_gabc996cddbc65b41987dd8d4d9776c729}{Trip\+::get\+Driver} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s driver. \end{DoxyCompactList}\item 
+int \hyperlink{group___trip_ga61fea247b075bfac3f6115da4bd56ef5}{Trip\+::get\+ID} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s ID. \end{DoxyCompactList}\item 
+vector$<$ \hyperlink{class_stop}{Stop} $>$ \hyperlink{group___trip_gae081fb958af544c9cad9002d5696fb33}{Trip\+::get\+Stops} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s vector of stops. \end{DoxyCompactList}\item 
+\hyperlink{class_date}{Date} \hyperlink{group___trip_ga322346fb52d53fb0a94819059916d0fe}{Trip\+::get\+Date} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s \hyperlink{class_date}{Date}. \end{DoxyCompactList}\item 
+\hyperlink{class_hour}{Hour} \hyperlink{group___trip_ga447efbf91bd4842daadac85d2bac4b9e}{Trip\+::get\+Start} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s starting hour. \end{DoxyCompactList}\item 
+\hyperlink{class_hour}{Hour} \hyperlink{group___trip_ga6ed6b87b4206efe21fe2c6744c73061b}{Trip\+::get\+End} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s estimated finishing hour. \end{DoxyCompactList}\item 
+string \hyperlink{group___trip_gaf63e96a9b31ad6def658944bc6a9f327}{Trip\+::get\+Origin} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s origin stop. \end{DoxyCompactList}\item 
+string \hyperlink{group___trip_ga576ad0d4c7a723aa4b2d12ebdd4eec99}{Trip\+::get\+Destination} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s destination stop. \end{DoxyCompactList}\item 
+void \hyperlink{group___trip_ga2c5c0c0315b210154ba190a5470ec110}{Trip\+::set\+Driver} (int id)
+\begin{DoxyCompactList}\small\item\em Sets object\textquotesingle{}s driver id. \end{DoxyCompactList}\item 
+void \hyperlink{group___trip_ga26abc8edc0cb1f5c2eb1b6e292152701}{Trip\+::set\+Date} (\hyperlink{class_date}{Date} d)
+\begin{DoxyCompactList}\small\item\em Sets object\textquotesingle{}s \hyperlink{class_date}{Date}. \end{DoxyCompactList}\item 
+void \hyperlink{group___trip_gaa294f1f8844c2b47676e0e985d81b2a0}{Trip\+::set\+Stops} (int pos, int user\+ID)
+\begin{DoxyCompactList}\small\item\em Changes object\textquotesingle{}s stops ir order to add a passenger. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Trip Operators Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{group___trip_ga1462791c70b237e595244b16e086850f}{Trip\+::operator==} (const \hyperlink{class_trip}{Trip} t) const
+\begin{DoxyCompactList}\small\item\em Basi operator that verifies if two diferent objects of the class \hyperlink{class_trip}{Trip} have equal data members. \end{DoxyCompactList}\item 
+priority\+\_\+queue$<$ \hyperlink{class_candidate_trip}{Candidate\+Trip} $>$ \hyperlink{group___trip_ga1c016b992e17387a25ec9f7e545a6594}{Trip\+::get\+Candidate\+Queue} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s candidates priority queuu. \end{DoxyCompactList}\item 
+bool \hyperlink{group___trip_gaa704cf099858e8de479f6fdd6229008f}{Trip\+::is\+In\+Queue} (int id)
+\begin{DoxyCompactList}\small\item\em verifyes if the user is in this trip queue \end{DoxyCompactList}\item 
+void \hyperlink{group___trip_ga6879d39109d9b024461c9edb58c8b1dd}{Trip\+::add\+Candidate} (\hyperlink{class_candidate_trip}{Candidate\+Trip} ct)
+\begin{DoxyCompactList}\small\item\em adds elements to the priority queue \end{DoxyCompactList}\item 
+void \hyperlink{group___trip_ga5c0fbf9c2320dc4799896295788eff9e}{Trip\+::remove\+Candidate} (int id)
+\begin{DoxyCompactList}\small\item\em removes user from the queue \end{DoxyCompactList}\item 
+ostream \& \hyperlink{group___trip_gaeae00f4e739b064d8261c91d62cde34a}{Trip\+::operator$<$$<$} (ostream \&out, const \hyperlink{class_trip}{Trip} \&t)
+\begin{DoxyCompactList}\small\item\em Writes to ostream the information of a object of class \hyperlink{class_trip}{Trip}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{class_trip}{Trip} class declaration 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group___trip_ga6879d39109d9b024461c9edb58c8b1dd}\label{group___trip_ga6879d39109d9b024461c9edb58c8b1dd}} 
+\index{Transaction@{Transaction}!add\+Candidate@{add\+Candidate}}
+\index{add\+Candidate@{add\+Candidate}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{add\+Candidate()}{addCandidate()}}
+{\footnotesize\ttfamily void Trip\+::add\+Candidate (\begin{DoxyParamCaption}\item[{\hyperlink{class_candidate_trip}{Candidate\+Trip}}]{ct }\end{DoxyParamCaption})}
+
+
+
+adds elements to the priority queue 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ct} & candidate we want to add \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___trip_ga1c016b992e17387a25ec9f7e545a6594}\label{group___trip_ga1c016b992e17387a25ec9f7e545a6594}} 
+\index{Transaction@{Transaction}!get\+Candidate\+Queue@{get\+Candidate\+Queue}}
+\index{get\+Candidate\+Queue@{get\+Candidate\+Queue}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{get\+Candidate\+Queue()}{getCandidateQueue()}}
+{\footnotesize\ttfamily priority\+\_\+queue$<$ \hyperlink{class_candidate_trip}{Candidate\+Trip} $>$ Trip\+::get\+Candidate\+Queue (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Retrieves object\textquotesingle{}s candidates priority queuu. 
+
+\begin{DoxyReturn}{Returns}
+priority queue of all candidates to the trip 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___trip_ga322346fb52d53fb0a94819059916d0fe}\label{group___trip_ga322346fb52d53fb0a94819059916d0fe}} 
+\index{Transaction@{Transaction}!get\+Date@{get\+Date}}
+\index{get\+Date@{get\+Date}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{get\+Date()}{getDate()}}
+{\footnotesize\ttfamily \hyperlink{class_date}{Date} Trip\+::get\+Date (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Retrieves object\textquotesingle{}s \hyperlink{class_date}{Date}. 
+
+\begin{DoxyReturn}{Returns}
+object of class \hyperlink{class_date}{Date} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___trip_ga576ad0d4c7a723aa4b2d12ebdd4eec99}\label{group___trip_ga576ad0d4c7a723aa4b2d12ebdd4eec99}} 
+\index{Transaction@{Transaction}!get\+Destination@{get\+Destination}}
+\index{get\+Destination@{get\+Destination}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{get\+Destination()}{getDestination()}}
+{\footnotesize\ttfamily string Trip\+::get\+Destination (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Retrieves object\textquotesingle{}s destination stop. 
+
+\begin{DoxyReturn}{Returns}
+string containing the code of the stop 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___trip_gabc996cddbc65b41987dd8d4d9776c729}\label{group___trip_gabc996cddbc65b41987dd8d4d9776c729}} 
+\index{Transaction@{Transaction}!get\+Driver@{get\+Driver}}
+\index{get\+Driver@{get\+Driver}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{get\+Driver()}{getDriver()}}
+{\footnotesize\ttfamily int Trip\+::get\+Driver (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Retrieves object\textquotesingle{}s driver. 
+
+Functions that perform basic class functionality \begin{DoxyReturn}{Returns}
+int idof the driver 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___trip_ga6ed6b87b4206efe21fe2c6744c73061b}\label{group___trip_ga6ed6b87b4206efe21fe2c6744c73061b}} 
+\index{Transaction@{Transaction}!get\+End@{get\+End}}
+\index{get\+End@{get\+End}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{get\+End()}{getEnd()}}
+{\footnotesize\ttfamily \hyperlink{class_hour}{Hour} Trip\+::get\+End (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Retrieves object\textquotesingle{}s estimated finishing hour. 
+
+\begin{DoxyReturn}{Returns}
+object of class \hyperlink{class_hour}{Hour} which is the estimated finishing hour of the trip 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___trip_ga61fea247b075bfac3f6115da4bd56ef5}\label{group___trip_ga61fea247b075bfac3f6115da4bd56ef5}} 
+\index{Transaction@{Transaction}!get\+ID@{get\+ID}}
+\index{get\+ID@{get\+ID}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{get\+I\+D()}{getID()}}
+{\footnotesize\ttfamily int Trip\+::get\+ID (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Retrieves object\textquotesingle{}s ID. 
+
+\begin{DoxyReturn}{Returns}
+int id 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___trip_gaf63e96a9b31ad6def658944bc6a9f327}\label{group___trip_gaf63e96a9b31ad6def658944bc6a9f327}} 
+\index{Transaction@{Transaction}!get\+Origin@{get\+Origin}}
+\index{get\+Origin@{get\+Origin}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{get\+Origin()}{getOrigin()}}
+{\footnotesize\ttfamily string Trip\+::get\+Origin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Retrieves object\textquotesingle{}s origin stop. 
+
+\begin{DoxyReturn}{Returns}
+string containing the code of the stop 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___trip_ga447efbf91bd4842daadac85d2bac4b9e}\label{group___trip_ga447efbf91bd4842daadac85d2bac4b9e}} 
+\index{Transaction@{Transaction}!get\+Start@{get\+Start}}
+\index{get\+Start@{get\+Start}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{get\+Start()}{getStart()}}
+{\footnotesize\ttfamily \hyperlink{class_hour}{Hour} Trip\+::get\+Start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Retrieves object\textquotesingle{}s starting hour. 
+
+\begin{DoxyReturn}{Returns}
+object of class \hyperlink{class_hour}{Hour} which is the starting hour of the trip 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___trip_gae081fb958af544c9cad9002d5696fb33}\label{group___trip_gae081fb958af544c9cad9002d5696fb33}} 
+\index{Transaction@{Transaction}!get\+Stops@{get\+Stops}}
+\index{get\+Stops@{get\+Stops}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{get\+Stops()}{getStops()}}
+{\footnotesize\ttfamily vector$<$ \hyperlink{class_stop}{Stop} $>$ Trip\+::get\+Stops (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Retrieves object\textquotesingle{}s vector of stops. 
+
+\begin{DoxyReturn}{Returns}
+vector of objects of class \hyperlink{class_stop}{Stop} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___trip_gaa704cf099858e8de479f6fdd6229008f}\label{group___trip_gaa704cf099858e8de479f6fdd6229008f}} 
+\index{Transaction@{Transaction}!is\+In\+Queue@{is\+In\+Queue}}
+\index{is\+In\+Queue@{is\+In\+Queue}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{is\+In\+Queue()}{isInQueue()}}
+{\footnotesize\ttfamily bool Trip\+::is\+In\+Queue (\begin{DoxyParamCaption}\item[{int}]{id }\end{DoxyParamCaption})}
+
+
+
+verifyes if the user is in this trip queue 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & of the user we want to know if is in the queue \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool if the user is in the queue, false if it\textquotesingle{}s not 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___trip_ga1462791c70b237e595244b16e086850f}\label{group___trip_ga1462791c70b237e595244b16e086850f}} 
+\index{Transaction@{Transaction}!operator==@{operator==}}
+\index{operator==@{operator==}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool Trip\+::operator== (\begin{DoxyParamCaption}\item[{const \hyperlink{class_trip}{Trip}}]{t }\end{DoxyParamCaption}) const}
+
+
+
+Basi operator that verifies if two diferent objects of the class \hyperlink{class_trip}{Trip} have equal data members. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & object we want to compare this-\/$>$ object with \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___trip_ga5c0fbf9c2320dc4799896295788eff9e}\label{group___trip_ga5c0fbf9c2320dc4799896295788eff9e}} 
+\index{Transaction@{Transaction}!remove\+Candidate@{remove\+Candidate}}
+\index{remove\+Candidate@{remove\+Candidate}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{remove\+Candidate()}{removeCandidate()}}
+{\footnotesize\ttfamily void Trip\+::remove\+Candidate (\begin{DoxyParamCaption}\item[{int}]{id }\end{DoxyParamCaption})}
+
+
+
+removes user from the queue 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & of the user we want to remove \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___trip_ga6ae6134652b644fa63bf267b956f1e75}\label{group___trip_ga6ae6134652b644fa63bf267b956f1e75}} 
+\index{Transaction@{Transaction}!save@{save}}
+\index{save@{save}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{save()}{save()}}
+{\footnotesize\ttfamily void Trip\+::save (\begin{DoxyParamCaption}\item[{ofstream \&}]{out }\end{DoxyParamCaption}) const}
+
+
+
+Writes object\textquotesingle{}s information into file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em out} & ofstream type variable initialized to the location of the file to be written too \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___trip_gafcf569c0a9d6e5a47134f7e9dd62334a}\label{group___trip_gafcf569c0a9d6e5a47134f7e9dd62334a}} 
+\index{Transaction@{Transaction}!save\+AT@{save\+AT}}
+\index{save\+AT@{save\+AT}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{save\+A\+T()}{saveAT()}}
+{\footnotesize\ttfamily void Trip\+::save\+AT (\begin{DoxyParamCaption}\item[{ofstream \&}]{out }\end{DoxyParamCaption}) const}
+
+
+
+Writes object\textquotesingle{}s information into file (only for active trips, to remain in the program for next use) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em out} & ofstream type variable initialized to the location of the file to be written too \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___trip_ga26abc8edc0cb1f5c2eb1b6e292152701}\label{group___trip_ga26abc8edc0cb1f5c2eb1b6e292152701}} 
+\index{Transaction@{Transaction}!set\+Date@{set\+Date}}
+\index{set\+Date@{set\+Date}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{set\+Date()}{setDate()}}
+{\footnotesize\ttfamily void Trip\+::set\+Date (\begin{DoxyParamCaption}\item[{\hyperlink{class_date}{Date}}]{d }\end{DoxyParamCaption})}
+
+
+
+Sets object\textquotesingle{}s \hyperlink{class_date}{Date}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em object} & of class date to set to \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___trip_ga2c5c0c0315b210154ba190a5470ec110}\label{group___trip_ga2c5c0c0315b210154ba190a5470ec110}} 
+\index{Transaction@{Transaction}!set\+Driver@{set\+Driver}}
+\index{set\+Driver@{set\+Driver}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{set\+Driver()}{setDriver()}}
+{\footnotesize\ttfamily void Trip\+::set\+Driver (\begin{DoxyParamCaption}\item[{int}]{id }\end{DoxyParamCaption})}
+
+
+
+Sets object\textquotesingle{}s driver id. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & to set to \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___trip_gaa294f1f8844c2b47676e0e985d81b2a0}\label{group___trip_gaa294f1f8844c2b47676e0e985d81b2a0}} 
+\index{Transaction@{Transaction}!set\+Stops@{set\+Stops}}
+\index{set\+Stops@{set\+Stops}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{set\+Stops()}{setStops()}}
+{\footnotesize\ttfamily void Trip\+::set\+Stops (\begin{DoxyParamCaption}\item[{int}]{pos,  }\item[{int}]{user\+ID }\end{DoxyParamCaption})}
+
+
+
+Changes object\textquotesingle{}s stops ir order to add a passenger. 
+
+Decreses the number of available seats in the stops between \hyperlink{class_user}{User}\textquotesingle{}s desired stops and adds its user\+ID to each one
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & index of which stop is going to be changed, in object\textquotesingle{}s vector of stops \\
+\hline
+{\em user\+ID} & id of the \hyperlink{class_user}{User} to be added to each stop he is riding \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___trip_gaadf8ba70a9d5aa210149b5162e402512}\label{group___trip_gaadf8ba70a9d5aa210149b5162e402512}} 
+\index{Transaction@{Transaction}!Trip@{Trip}}
+\index{Trip@{Trip}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{Trip()}{Trip()}}
+{\footnotesize\ttfamily Trip\+::\+Trip (\begin{DoxyParamCaption}\item[{int}]{ID,  }\item[{int}]{driver,  }\item[{vector$<$ \hyperlink{class_stop}{Stop} $>$}]{stops,  }\item[{\hyperlink{class_date}{Date}}]{date,  }\item[{\hyperlink{class_hour}{Hour}}]{start,  }\item[{\hyperlink{class_hour}{Hour}}]{end }\end{DoxyParamCaption})}
+
+
+
+\hyperlink{class_trip}{Trip} constructor from individual parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & of the trip to set \\
+\hline
+{\em driver} & of the trip to set \\
+\hline
+{\em vector} & stops of the trip to set \\
+\hline
+{\em date} & of the \hyperlink{class_trip}{Trip} to set \\
+\hline
+{\em start} & starting hour of the trip \\
+\hline
+{\em end} & estimated ending hour of the trip \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Friends}
+\mbox{\Hypertarget{group___trip_gaeae00f4e739b064d8261c91d62cde34a}\label{group___trip_gaeae00f4e739b064d8261c91d62cde34a}} 
+\index{Transaction@{Transaction}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!Transaction@{Transaction}}
+\subsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{ostream \&}]{out,  }\item[{const \hyperlink{class_trip}{Trip} \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Writes to ostream the information of a object of class \hyperlink{class_trip}{Trip}. 
+
+Basic Operators of the class 
+\begin{DoxyParams}{Parameters}
+{\em t} & object of which we want to print the information for \\
+\hline
+\end{DoxyParams}

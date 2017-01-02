@@ -1,0 +1,45 @@
+\hypertarget{class_transaction}{}\section{Transaction Class Reference}
+\label{class_transaction}\index{Transaction@{Transaction}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group___transaction_gab47005b855d38bc324bb79fd023baa13}{Transaction} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_transaction}{Transaction} default constructor. \end{DoxyCompactList}\item 
+\hyperlink{group___transaction_ga6bba02c02aace16e90745fecd2e4697d}{Transaction} (int id, \hyperlink{class_date}{Date} date, float value)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_transaction}{Transaction} constructor from individual parameters. \end{DoxyCompactList}\item 
+void \hyperlink{group___transaction_ga56b1bd622e55266bf795fb01e04e8a21}{save} (ofstream \&out) const
+\begin{DoxyCompactList}\small\item\em Writes object\textquotesingle{}s information into file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{Indent}\textbf{ Basic Class Functions}\par
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{group___transaction_ga73ff525f9baae732b1256533736e5052}{Get\+Id} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s ID. \end{DoxyCompactList}\item 
+\hyperlink{class_date}{Date} \hyperlink{group___transaction_ga05b17fe71d38937648b77f964df4de5d}{Get\+Date} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s \hyperlink{class_date}{Date}. \end{DoxyCompactList}\item 
+float \hyperlink{group___transaction_ga3dca9a51e64e6fcb07f501eb2724676d}{Get\+Value} () const
+\begin{DoxyCompactList}\small\item\em Retrieves object\textquotesingle{}s value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Private Attributes}
+\begin{Indent}\textbf{ Transaction data-\/members}\par
+\begin{DoxyCompactItemize}
+\item 
+int {\bfseries id}
+\item 
+\hyperlink{class_date}{Date} {\bfseries date}
+\item 
+float {\bfseries value}
+\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Friends}
+\begin{Indent}\textbf{ Transaction Operators Functions}\par
+\begin{DoxyCompactItemize}
+\item 
+ostream \& \hyperlink{group___transaction_ga75af23fbc3b593013d411cf50c5a3a7a}{operator$<$$<$} (ostream \&out, const \hyperlink{class_transaction}{Transaction} \&t)
+\begin{DoxyCompactList}\small\item\em Writes to ostream the information of a object of class \hyperlink{class_transaction}{Transaction}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+E\+:/feup-\/aeda/\+A\+E\+D\+A1617\+Parte2\+\_\+2\+M\+I\+E\+I\+C1\+\_\+\+E/\+Código/\+Trabalho A\+E\+D\+A/Transactions.\+h\item 
+E\+:/feup-\/aeda/\+A\+E\+D\+A1617\+Parte2\+\_\+2\+M\+I\+E\+I\+C1\+\_\+\+E/\+Código/\+Trabalho A\+E\+D\+A/Transactions.\+cpp\end{DoxyCompactItemize}

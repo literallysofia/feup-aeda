@@ -1,0 +1,175 @@
+\hypertarget{group___vehicle}{}\section{Vehicle}
+\label{group___vehicle}\index{Vehicle@{Vehicle}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_vehicle}{Vehicle}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group___vehicle_ga9e9c39065cec28140e97259a324f6d5a}{Vehicle\+::\+Vehicle} (string brand, string model, int year, \hyperlink{class_user}{User} $\ast$driver)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_vehicle}{Vehicle} constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___vehicle_ga61ab140c755b8e0e824d54117cf4546f}\label{group___vehicle_ga61ab140c755b8e0e824d54117cf4546f}} 
+\hyperlink{group___vehicle_ga61ab140c755b8e0e824d54117cf4546f}{Vehicle\+::$\sim$\+Vehicle} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_vehicle}{Vehicle} destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+ostream \& \hyperlink{group___vehicle_ga854e861646772cea9bb6222c5b03b1d4}{Vehicle\+::operator$<$$<$} (ostream \&os, const \hyperlink{class_vehicle}{Vehicle} \&v1)
+\begin{DoxyCompactList}\small\item\em operator for display of a vehicle \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Vehicle data-\/members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___vehicle_ga64ce936b4a102f38f34abb809caa5f09}\label{group___vehicle_ga64ce936b4a102f38f34abb809caa5f09}} 
+string {\bfseries Vehicle\+::brand}
+\item 
+\mbox{\Hypertarget{group___vehicle_ga61799a3b07bd7ad2a07d61af510f91f0}\label{group___vehicle_ga61799a3b07bd7ad2a07d61af510f91f0}} 
+string {\bfseries Vehicle\+::model}
+\item 
+\mbox{\Hypertarget{group___vehicle_gad612fe1e00e266a5d740bb67920211d4}\label{group___vehicle_gad612fe1e00e266a5d740bb67920211d4}} 
+int {\bfseries Vehicle\+::year}
+\item 
+\mbox{\Hypertarget{group___vehicle_ga69e17e185432f5514c3e9e20e000a678}\label{group___vehicle_ga69e17e185432f5514c3e9e20e000a678}} 
+\hyperlink{class_user}{User} $\ast$ {\bfseries Vehicle\+::driver}
+\end{DoxyCompactItemize}
+\subsection*{Basic Class Functions}
+\begin{DoxyCompactItemize}
+\item 
+string \hyperlink{group___vehicle_ga6d5f105e83177b3738a639e4e613218f}{Vehicle\+::get\+Brand} () const
+\begin{DoxyCompactList}\small\item\em returns the vehicle\textquotesingle{}s brand \end{DoxyCompactList}\item 
+string \hyperlink{group___vehicle_ga42379788d946d27ab81851461cb56a49}{Vehicle\+::get\+Model} () const
+\begin{DoxyCompactList}\small\item\em returns the vehicle\textquotesingle{}s model \end{DoxyCompactList}\item 
+int \hyperlink{group___vehicle_gaa3933383210a75d4c37b66d918ab1526}{Vehicle\+::get\+Year} () const
+\begin{DoxyCompactList}\small\item\em returns the vehicle\textquotesingle{}s year \end{DoxyCompactList}\item 
+\hyperlink{class_user}{User} $\ast$ \hyperlink{group___vehicle_ga8ca5c5a020a718d9c320bd4b5c034cfe}{Vehicle\+::get\+User} () const
+\begin{DoxyCompactList}\small\item\em returns the vehicle\textquotesingle{}s owner \end{DoxyCompactList}\item 
+void \hyperlink{group___vehicle_gaeea0b2b24f03a98cc6d1c5ad1c9ece73}{Vehicle\+::set\+User} (\hyperlink{class_user}{User} $\ast$d1)
+\begin{DoxyCompactList}\small\item\em Sets object\textquotesingle{}s owner. \end{DoxyCompactList}\item 
+bool \hyperlink{group___vehicle_ga3e144f33207edd2cdbabcbefea1f3269}{Vehicle\+::operator$<$} (const \hyperlink{class_vehicle}{Vehicle} \&v1) const
+\begin{DoxyCompactList}\small\item\em operator for organization of the \hyperlink{class_b_s_t}{B\+ST} \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{class_vehicle}{Vehicle} class declaration 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group___vehicle_ga6d5f105e83177b3738a639e4e613218f}\label{group___vehicle_ga6d5f105e83177b3738a639e4e613218f}} 
+\index{Vehicle@{Vehicle}!get\+Brand@{get\+Brand}}
+\index{get\+Brand@{get\+Brand}!Vehicle@{Vehicle}}
+\subsubsection{\texorpdfstring{get\+Brand()}{getBrand()}}
+{\footnotesize\ttfamily string Vehicle\+::get\+Brand (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+returns the vehicle\textquotesingle{}s brand 
+
+Functions that perform basic class functionality \begin{DoxyReturn}{Returns}
+brand of vehicle 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___vehicle_ga42379788d946d27ab81851461cb56a49}\label{group___vehicle_ga42379788d946d27ab81851461cb56a49}} 
+\index{Vehicle@{Vehicle}!get\+Model@{get\+Model}}
+\index{get\+Model@{get\+Model}!Vehicle@{Vehicle}}
+\subsubsection{\texorpdfstring{get\+Model()}{getModel()}}
+{\footnotesize\ttfamily string Vehicle\+::get\+Model (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+returns the vehicle\textquotesingle{}s model 
+
+\begin{DoxyReturn}{Returns}
+model of vehicle 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___vehicle_ga8ca5c5a020a718d9c320bd4b5c034cfe}\label{group___vehicle_ga8ca5c5a020a718d9c320bd4b5c034cfe}} 
+\index{Vehicle@{Vehicle}!get\+User@{get\+User}}
+\index{get\+User@{get\+User}!Vehicle@{Vehicle}}
+\subsubsection{\texorpdfstring{get\+User()}{getUser()}}
+{\footnotesize\ttfamily \hyperlink{class_user}{User} $\ast$ Vehicle\+::get\+User (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+returns the vehicle\textquotesingle{}s owner 
+
+\begin{DoxyReturn}{Returns}
+owner of vehicle 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___vehicle_gaa3933383210a75d4c37b66d918ab1526}\label{group___vehicle_gaa3933383210a75d4c37b66d918ab1526}} 
+\index{Vehicle@{Vehicle}!get\+Year@{get\+Year}}
+\index{get\+Year@{get\+Year}!Vehicle@{Vehicle}}
+\subsubsection{\texorpdfstring{get\+Year()}{getYear()}}
+{\footnotesize\ttfamily int Vehicle\+::get\+Year (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+returns the vehicle\textquotesingle{}s year 
+
+\begin{DoxyReturn}{Returns}
+year of vehicle 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___vehicle_ga3e144f33207edd2cdbabcbefea1f3269}\label{group___vehicle_ga3e144f33207edd2cdbabcbefea1f3269}} 
+\index{Vehicle@{Vehicle}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!Vehicle@{Vehicle}}
+\subsubsection{\texorpdfstring{operator$<$()}{operator<()}}
+{\footnotesize\ttfamily bool Vehicle\+::operator$<$ (\begin{DoxyParamCaption}\item[{const \hyperlink{class_vehicle}{Vehicle} \&}]{v1 }\end{DoxyParamCaption}) const}
+
+
+
+operator for organization of the \hyperlink{class_b_s_t}{B\+ST} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em v1} & object of vehicle \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___vehicle_gaeea0b2b24f03a98cc6d1c5ad1c9ece73}\label{group___vehicle_gaeea0b2b24f03a98cc6d1c5ad1c9ece73}} 
+\index{Vehicle@{Vehicle}!set\+User@{set\+User}}
+\index{set\+User@{set\+User}!Vehicle@{Vehicle}}
+\subsubsection{\texorpdfstring{set\+User()}{setUser()}}
+{\footnotesize\ttfamily void Vehicle\+::set\+User (\begin{DoxyParamCaption}\item[{\hyperlink{class_user}{User} $\ast$}]{d1 }\end{DoxyParamCaption})}
+
+
+
+Sets object\textquotesingle{}s owner. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em owner} & (user) to set \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___vehicle_ga9e9c39065cec28140e97259a324f6d5a}\label{group___vehicle_ga9e9c39065cec28140e97259a324f6d5a}} 
+\index{Vehicle@{Vehicle}!Vehicle@{Vehicle}}
+\index{Vehicle@{Vehicle}!Vehicle@{Vehicle}}
+\subsubsection{\texorpdfstring{Vehicle()}{Vehicle()}}
+{\footnotesize\ttfamily Vehicle\+::\+Vehicle (\begin{DoxyParamCaption}\item[{string}]{brand,  }\item[{string}]{model,  }\item[{int}]{year,  }\item[{\hyperlink{class_user}{User} $\ast$}]{driver }\end{DoxyParamCaption})}
+
+
+
+\hyperlink{class_vehicle}{Vehicle} constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em brand} & of vehicle \\
+\hline
+{\em model} & of vehicle \\
+\hline
+{\em year} & of vehicle \\
+\hline
+{\em pointer} & to owner of vehicle (user) \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Friends}
+\mbox{\Hypertarget{group___vehicle_ga854e861646772cea9bb6222c5b03b1d4}\label{group___vehicle_ga854e861646772cea9bb6222c5b03b1d4}} 
+\index{Vehicle@{Vehicle}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!Vehicle@{Vehicle}}
+\subsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{ostream \&}]{os,  }\item[{const \hyperlink{class_vehicle}{Vehicle} \&}]{v1 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+operator for display of a vehicle 
+
+\begin{DoxyReturn}{Returns}
+display string 
+\end{DoxyReturn}
