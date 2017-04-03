@@ -15,3 +15,6 @@
 *.PDF	 diff=astextplain
 *.rtf	 diff=astextplain
 *.RTF	 diff=astextplain
+
+AEDA1617_1_E/documentacao/* linguist-vendored
+AEDA1617Parte2_2MIEIC1_E/Documentação/* linguist-vendored
